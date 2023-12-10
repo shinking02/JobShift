@@ -7,9 +7,11 @@
 
 import SwiftUI
 import SwiftData
+import GoogleSignIn
 
 @main
 struct JobShiftApp: App {
+    @StateObject private var userState = UserState()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,7 +28,28 @@ struct JobShiftApp: App {
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
+                .onAppear {
+                    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                        if user != nil {
+                            userState.email = user?.profile?.email ?? ""
+                            userState.imageURL = user?.profile?.imageURL(withDimension: 60)?.absoluteString ?? ""
+                            userState.isLoggedIn = true
+                        } else {
+                            userState.isLoggedIn = false
+                        }
+                    }
+                }
+                .environmentObject(userState)
         }
         .modelContainer(sharedModelContainer)
     }
+}
+
+class UserState: ObservableObject {
+    @Published var email: String = ""
+    @Published var imageURL: String = ""
+    @Published var isLoggedIn: Bool = false
 }

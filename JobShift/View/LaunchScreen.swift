@@ -1,4 +1,5 @@
 import SwiftUI
+import GoogleSignIn
 
 struct LaunchScreen: View {
     @State private var isLoading = true
@@ -8,7 +9,7 @@ struct LaunchScreen: View {
             ZStack {
                 Color(UIColor.systemBackground)
                     .ignoresSafeArea() // fill all screen
-                Image(colorScheme == .dark ? "icon_darkMode" : "icon_whiteMode")
+                Image(colorScheme == .dark ? "icon_dark" : "icon_light")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding()
