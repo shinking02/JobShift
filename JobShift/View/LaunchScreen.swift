@@ -2,13 +2,13 @@ import SwiftUI
 
 struct LaunchScreen: View {
     @State private var isLoading = true
-    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if isLoading {
             ZStack {
-                Color("Primary")
+                Color(UIColor.systemBackground)
                     .ignoresSafeArea() // fill all screen
-                Image(systemName: "person.2")
+                Image(colorScheme == .dark ? "icon_darkMode" : "icon_whiteMode")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding()
