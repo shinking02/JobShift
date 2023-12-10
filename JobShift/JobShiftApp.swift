@@ -25,7 +25,7 @@ struct JobShiftApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LaunchScreen()
         }
         .modelContainer(sharedModelContainer)
     }
