@@ -12,18 +12,6 @@ import GoogleSignIn
 @main
 struct JobShiftApp: App {
     @StateObject private var userState = UserState()
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
 
     var body: some Scene {
         WindowGroup {
@@ -35,7 +23,7 @@ struct JobShiftApp: App {
                     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
                         if user != nil {
                             userState.email = user?.profile?.email ?? ""
-                            userState.imageURL = user?.profile?.imageURL(withDimension: 60)?.absoluteString ?? ""
+                            userState.imageURL = user?.profile?.imageURL(withDimension: 50)?.absoluteString ?? ""
                             userState.isLoggedIn = true
                         } else {
                             userState.isLoggedIn = false
@@ -44,12 +32,5 @@ struct JobShiftApp: App {
                 }
                 .environmentObject(userState)
         }
-        .modelContainer(sharedModelContainer)
     }
-}
-
-class UserState: ObservableObject {
-    @Published var email: String = ""
-    @Published var imageURL: String = ""
-    @Published var isLoggedIn: Bool = false
 }

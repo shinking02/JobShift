@@ -1,8 +1,7 @@
-//
-//  UserState.swift
-//  JobShift
-//
-//  Created by 川上真 on 2023/12/10.
-//
-
 import Foundation
+
+class UserState: ObservableObject {
+    @Published var email: String = ""
+    @Published var imageURL: String = ""
+    @Published var isLoggedIn: Bool = false
+}

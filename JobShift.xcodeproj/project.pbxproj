@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */; };
+		541ECF5C2B25F67D00A8E091 /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* CalendarStore.swift */; };
+		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
-		54E393252B25B0D80002D4EB /* GLSignin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393242B25B0D80002D4EB /* GLSignin.swift */; };
+		54E393272B25B62C0002D4EB /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* UserState.swift */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
 		54F7378E2B259702004A4975 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378D2B259702004A4975 /* ContentView.swift */; };
-		54F737902B259702004A4975 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378F2B259702004A4975 /* Item.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
 		54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737942B259703004A4975 /* Preview Assets.xcassets */; };
 		54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7379B2B259970004A4975 /* LaunchScreen.swift */; };
@@ -21,13 +22,14 @@
 /* Begin PBXFileReference section */
 		233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JobShift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.debug.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.debug.xcconfig"; sourceTree = "<group>"; };
+		541ECF5B2B25F67D00A8E091 /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
+		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		54E393242B25B0D80002D4EB /* GLSignin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLSignin.swift; sourceTree = "<group>"; };
+		54E393262B25B62C0002D4EB /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		54F737882B259702004A4975 /* JobShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F7378B2B259702004A4975 /* JobShiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobShiftApp.swift; sourceTree = "<group>"; };
 		54F7378D2B259702004A4975 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		54F7378F2B259702004A4975 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		54F737912B259703004A4975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F737942B259703004A4975 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		54F7379B2B259970004A4975 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -46,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541ECF5F2B25F74700A8E091 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				541ECF5D2B25F74000A8E091 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		54F7377F2B259701004A4975 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +102,7 @@
 			children = (
 				54F7378D2B259702004A4975 /* ContentView.swift */,
 				54F7379B2B259970004A4975 /* LaunchScreen.swift */,
+				541ECF5F2B25F74700A8E091 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,8 +110,7 @@
 		54F7379E2B259A9B004A4975 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				54F7378F2B259702004A4975 /* Item.swift */,
-				54E393242B25B0D80002D4EB /* GLSignin.swift */,
+				54E393262B25B62C0002D4EB /* UserState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -108,6 +118,7 @@
 		54F7379F2B25A1D4004A4975 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				541ECF5B2B25F67D00A8E091 /* CalendarStore.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -244,10 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54E393272B25B62C0002D4EB /* UserState.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
-				54E393252B25B0D80002D4EB /* GLSignin.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
-				54F737902B259702004A4975 /* Item.swift in Sources */,
+				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
+				541ECF5C2B25F67D00A8E091 /* CalendarStore.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,7 +409,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -429,7 +441,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
