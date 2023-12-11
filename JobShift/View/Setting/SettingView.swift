@@ -5,6 +5,8 @@ import GoogleSignIn
 struct SettingView: View {
     @State private var logoutAlert = false
     @EnvironmentObject var userState: UserState
+    @Environment(\.colorScheme) var colorScheme
+    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
     var body: some View {
         NavigationView {
@@ -20,6 +22,14 @@ struct SettingView: View {
                             .clipShape(Circle())
                         Text(userState.email)
                             .padding(.horizontal)
+                    }
+                }
+                Section {
+                    NavigationLink(destination: EmptyView()) {
+                        Text("カレンダー")
+                    }
+                    NavigationLink(destination: EmptyView()) {
+                        Text("バイト")
                     }
                 }
                 Section {
@@ -43,6 +53,27 @@ struct SettingView: View {
                         }
                         .foregroundColor(.red)
                         Spacer()
+                    }
+                }
+                Section(
+                    footer:
+                        HStack{
+                            Spacer()
+                            Image(colorScheme == .dark ? "github_dark" : "github_light")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 18, height: 18, alignment: .center)
+
+                            Link("Github Repository",
+                                 destination: URL(string: "https://github.com/shinking02/JobShift")!)
+                            Spacer()
+                        }
+                ) {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(version)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
