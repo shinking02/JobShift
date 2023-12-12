@@ -75,7 +75,6 @@ struct LaunchScreen: View {
                 withAnimation {
                     fetchingEvents = true
                 }
-                
                 calManager.fetchCalendarIds(completion: { calendarIds in
                     let dispatchGroup = DispatchGroup()
                     
@@ -83,6 +82,9 @@ struct LaunchScreen: View {
                         dispatchGroup.enter()
                         
                         calManager.fetchEventsFromCalendarId(calId: id, completion: { events in
+                            if let ev = events {
+                                CalendarStore.shared.addEvents(events: ev)
+                            }
                             withAnimation {
                                 progressValue += 1.0 / Double(calendarIds.count)
                             }
