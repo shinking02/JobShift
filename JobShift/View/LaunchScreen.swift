@@ -1,5 +1,6 @@
 import SwiftUI
 import GoogleSignIn
+import GoogleAPIClientForREST
 
 struct LaunchScreen: View {
     @State private var isLoading = true
@@ -76,6 +77,7 @@ struct LaunchScreen: View {
                     fetchingEvents = true
                     progressValue += 0.1
                 }
+                var receivedEvents: [GTLRCalendar_Event] = []
                 calManager.fetchCalendarIds(completion: { calendarIds in
                     let dispatchGroup = DispatchGroup()
                     
@@ -83,8 +85,8 @@ struct LaunchScreen: View {
                         dispatchGroup.enter()
                         
                         calManager.fetchEventsFromCalendarId(calId: id, completion: { events in
-                            if let ev = events {
-                                EventStore.shared.addEvents(events: ev)
+                            if let events = events {
+                                receivedEvents.append(contentsOf: events)
                             }
                             withAnimation {
                                 progressValue += 0.9 / Double(calendarIds.count)
@@ -95,6 +97,7 @@ struct LaunchScreen: View {
                     }
                     
                     dispatchGroup.notify(queue: .main) {
+                        EventStore.shared.addEvents(events: receivedEvents)
                         withAnimation {
                             progressValue = 1
                             isLoading = false

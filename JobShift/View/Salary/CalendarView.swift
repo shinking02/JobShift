@@ -3,7 +3,7 @@ import SwiftUI
 struct CalendarView: UIViewRepresentable {
     let didSelectDate: (_ dateComponents: DateComponents) -> Void
     
-    final public class Coordinator: NSObject, UICalendarSelectionSingleDateDelegate {
+    final public class Coordinator: NSObject, UICalendarSelectionSingleDateDelegate, UICalendarViewDelegate {
         let didSelectDate: (_ dateComponents: DateComponents) -> Void
         
         init(
@@ -18,6 +18,16 @@ struct CalendarView: UIViewRepresentable {
             }
             didSelectDate(dateComponents)
         }
+        
+        public func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+            let dateEvents = EventStore.shared.getEventsFromDate(dateComponents: dateComponents)
+            // FIXME: Job対応
+            if dateEvents.isEmpty {
+                return nil
+            } else {
+                return .default(color: UIColor(Color.secondary))
+            }
+        }
     }
     
     
@@ -30,6 +40,7 @@ struct CalendarView: UIViewRepresentable {
         let selection = UICalendarSelectionSingleDate(delegate: context.coordinator)
         let calendarView = UICalendarView()
         calendarView.selectionBehavior = selection
+        calendarView.delegate = context.coordinator
         calendarView.locale = Locale(identifier: "ja_JP")
         calendarView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return calendarView

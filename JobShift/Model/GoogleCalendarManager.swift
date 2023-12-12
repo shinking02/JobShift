@@ -18,8 +18,8 @@ final class GoogleCalendarManager {
         self.service.shouldFetchNextPages = true
     }
     func fetchCalendarIds(completion: @escaping (_ calendarIds: [String]) -> Void) {
-        let calendarList = GTLRCalendarQuery_CalendarListList.query()
-        service.executeQuery(calendarList) { (ticket, response, error) in
+        let calendarListQuery = GTLRCalendarQuery_CalendarListList.query()
+        service.executeQuery(calendarListQuery) { (ticket, response, error) in
             do {
                 if let error = error {
                     throw GoogleCalendarManagerError.errorWithText(text: error.localizedDescription)
@@ -47,7 +47,7 @@ final class GoogleCalendarManager {
     
     func fetchEventsFromCalendarId(calId: String, completion: @escaping (_ events: [GTLRCalendar_Event]?) -> Void) {
         let eventsQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: calId)
-        
+        eventsQuery.singleEvents = true
         service.executeQuery(eventsQuery) { (ticket, response, error) in
             do {
                 if let error = error {
