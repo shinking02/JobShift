@@ -42,8 +42,10 @@ struct SettingView: View {
                             Button("キャンセル", role: .cancel) {}
                             Button("ログアウト", role: .destructive) {
                                 GIDSignIn.sharedInstance.signOut()
+                                EventStore.shared.clearCalendarStore()
                                 userState.imageURL = ""
                                 userState.email = ""
+                                
                                 withAnimation {
                                     userState.isLoggedIn = false
                                 }

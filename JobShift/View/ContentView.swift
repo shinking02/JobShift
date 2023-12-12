@@ -6,12 +6,12 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            Text("シフト")
+            ShiftView()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("シフト")
                 }
-            Text("給与")
+            SalaryView()
                 .tabItem {
                     Image(systemName: "yensign")
                     Text("給与")

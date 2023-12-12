@@ -61,7 +61,6 @@ final class GoogleCalendarManager {
                 }
                 completion(events)
             } catch {
-                print(error)
                 print("GoogleCalendarManager - fetchEventsFromCalendarId - \(error.localizedDescription)")
                 completion(nil)
             }
