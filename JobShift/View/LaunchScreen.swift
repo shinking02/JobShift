@@ -64,10 +64,13 @@ struct LaunchScreen: View {
     }
     private func loadCalendar() {
         progressValue = 0.0
-        let calManager = GoogleCalendarManager()
+        let calManager = GoogleCalendarManager.shared
         showLoginBtn = false
         fetchingEvents = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // ログインの復元後(1秒以内には終わる)、認証情報をシングルトンインスタンスにセット
+            if let user = GIDSignIn.sharedInstance.currentUser {
+                GoogleCalendarManager.shared.setUser(user: user)
+            }
             if userState.isLoggedIn {
                 withAnimation {
                     fetchingEvents = true
@@ -79,7 +82,7 @@ struct LaunchScreen: View {
                     for id in calendarIds {
                         dispatchGroup.enter()
                         
-                        calManager.fetchEventsFromCalendarId(calId: id, completion: { calendarEvents in
+                        calManager.fetchEventsFromCalendarId(calId: id, completion: { events in
                             withAnimation {
                                 progressValue += 1.0 / Double(calendarIds.count)
                             }
@@ -101,11 +104,5 @@ struct LaunchScreen: View {
                 }
             }
         }
-    }
-}
-
-struct LaunchScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchScreen()
     }
 }

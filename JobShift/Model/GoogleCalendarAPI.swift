@@ -8,17 +8,15 @@ enum GoogleCalendarManagerError: Error {
 
 
 final class GoogleCalendarManager {
+    static let shared: GoogleCalendarManager = .init()
     private let service = GTLRCalendarService()
     private var calendarIds: [String] = []
+    private init() {}
     
-    init() {
-        let currentUser = GIDSignIn.sharedInstance.currentUser
-        if let user = currentUser {
-            service.authorizer = user.fetcherAuthorizer
-            service.shouldFetchNextPages = true
-        }
+    func setUser (user: GIDGoogleUser) {
+        self.service.authorizer = user.fetcherAuthorizer
+        self.service.shouldFetchNextPages = true
     }
-    
     func fetchCalendarIds(completion: @escaping (_ calendarIds: [String]) -> Void) {
         let calendarList = GTLRCalendarQuery_CalendarListList.query()
         service.executeQuery(calendarList) { (ticket, response, error) in
@@ -47,7 +45,7 @@ final class GoogleCalendarManager {
         }
     }
     
-    func fetchEventsFromCalendarId(calId: String, completion: @escaping (_ calendarEvents: [GTLRCalendar_Event]?) -> Void) {
+    func fetchEventsFromCalendarId(calId: String, completion: @escaping (_ events: [GTLRCalendar_Event]?) -> Void) {
         let eventsQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: calId)
         
         service.executeQuery(eventsQuery) { (ticket, response, error) in
@@ -69,5 +67,40 @@ final class GoogleCalendarManager {
             }
         }
     }
-
+    
+    func addEvent(toCalendarId calId: String, event: GTLRCalendar_Event, completion: @escaping (_ success: Bool) -> Void) {
+        let insertEvent = GTLRCalendarQuery_EventsInsert.query(withObject: event, calendarId: calId)
+        
+        service.executeQuery(insertEvent) { (ticket, response, error) in
+            do {
+                if let error = error {
+                    throw GoogleCalendarManagerError.errorWithText(text: "Error while inserting event '\(error.localizedDescription)'")
+                }
+                
+                completion(true)
+            } catch {
+                print(error)
+                print("GoogleCalendarManager - addEvent - \(error.localizedDescription)")
+                completion(false)
+            }
+        }
+    }
+    
+    func deleteEvent(fromCalendarId calId: String, eventId: String, completion: @escaping (_ success: Bool) -> Void) {
+        let deleteEvent = GTLRCalendarQuery_EventsDelete.query(withCalendarId: calId, eventId: eventId)
+        
+        service.executeQuery(deleteEvent) { (ticket, response, error) in
+            do {
+                if let error = error {
+                    throw GoogleCalendarManagerError.errorWithText(text: "Error while deleting event '\(error.localizedDescription)'")
+                }
+                
+                completion(true)
+            } catch {
+                print(error)
+                print("GoogleCalendarManager - deleteEvent - \(error.localizedDescription)")
+                completion(false)
+            }
+        }
+    }
 }
