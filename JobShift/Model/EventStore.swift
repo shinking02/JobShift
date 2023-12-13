@@ -53,15 +53,15 @@ final class EventStore {
             }
             return false
         }
-        // FIXME: 日付を跨ぐかつ半日以上のイベントは返却(暫定対応: 10個前のイベントまで確認)
+        // FIXME: 日付を跨いだ終日イベント, 日付を跨いだ半日以上のイベントは返却(暫定対応: 10個前のイベントまで確認)
         let additionalEvents: [GTLRCalendar_Event] = {
             let pastStartIndex = startIndex < 10 ? 0 : startIndex - 10
             return events[pastStartIndex..<startIndex].filter { event in
-                let startDate = event.start?.dateTime?.date ?? event.start?.date?.date
-                let endDate = event.end?.dateTime?.date ?? event.end?.date?.date
-                if let startDate = startDate, let endDate = endDate,
+                if let startDate = event.start?.dateTime?.date, let endDate = event.end?.dateTime?.date,
                    let targetHarfDate = Calendar.current.date(byAdding: .hour, value: -12, to: targetEndDate) {
                     return startDate..<endDate ~= targetHarfDate
+                } else if let startDate = event.start?.date?.date, let endDate = event.end?.date?.date {
+                    return startDate...endDate ~= targetEndDate
                 }
                 return false
             }
