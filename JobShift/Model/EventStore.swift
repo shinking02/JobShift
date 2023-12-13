@@ -46,15 +46,28 @@ final class EventStore {
         }
         let startIndex = binarySearch(events, targetStartDate, { $0.start?.dateTime?.date ?? $0.start?.date?.date ?? Date.distantFuture })
         let filteredEvents = events[startIndex..<events.endIndex].prefix { event in
-            if let startDateTime = event.start?.dateTime?.date, let endDateTime = event.end?.dateTime?.date {
-                return startDateTime < targetEndDate && endDateTime > targetStartDate
-            } else if let startDate = event.start?.date?.date, let endDate = event.end?.date?.date {
+            let startDate = event.start?.dateTime?.date ?? event.start?.date?.date
+            let endDate = event.end?.dateTime?.date ?? event.end?.date?.date
+            if let startDate = startDate, let endDate = endDate {
                 return startDate < targetEndDate && endDate > targetStartDate
             }
             return false
         }
+        // FIXME: 日付を跨ぐかつ半日以上のイベントは返却(暫定対応: 10個前のイベントまで確認)
+        let additionalEvents: [GTLRCalendar_Event] = {
+            let pastStartIndex = startIndex < 10 ? 0 : startIndex - 10
+            return events[pastStartIndex..<startIndex].filter { event in
+                let startDate = event.start?.dateTime?.date ?? event.start?.date?.date
+                let endDate = event.end?.dateTime?.date ?? event.end?.date?.date
+                if let startDate = startDate, let endDate = endDate,
+                   let targetHarfDate = Calendar.current.date(byAdding: .hour, value: -12, to: targetEndDate) {
+                    return startDate..<endDate ~= targetHarfDate
+                }
+                return false
+            }
+        }()
         
-        return Array(filteredEvents)
+        return Array(additionalEvents + filteredEvents)
     }
     
     private func binarySearch<T>(_ array: [T], _ target: Date, _ key: (T) -> Date) -> Array<T>.Index {
@@ -80,5 +93,4 @@ final class EventStore {
             return start1 < start2
         }
     }
-    
 }

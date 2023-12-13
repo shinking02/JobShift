@@ -15,11 +15,12 @@ struct SettingView: View {
                     HStack {
                         AsyncImage(url: URL(string: userState.imageURL)) { image in
                             image.resizable()
+                                .clipShape(Circle())
                         } placeholder: {
-                            ProgressView()
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
                         }
                             .frame(width: 40, height: 40)
-                            .clipShape(Circle())
                         Text(userState.email)
                             .padding(.horizontal)
                     }
