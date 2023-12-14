@@ -10,14 +10,13 @@ enum GoogleCalendarManagerError: Error {
 final class GoogleCalendarManager {
     static let shared: GoogleCalendarManager = .init()
     private let service = GTLRCalendarService()
-    private var calendarIds: [String] = []
     private init() {}
     
     func setUser (user: GIDGoogleUser) {
         self.service.authorizer = user.fetcherAuthorizer
         self.service.shouldFetchNextPages = true
     }
-    func fetchCalendarIds(completion: @escaping (_ calendarIds: [String]) -> Void) {
+    func fetchCalendarIds(completion: @escaping (_ calendars: [GTLRCalendar_CalendarListEntry]) -> Void) {
         let calendarListQuery = GTLRCalendarQuery_CalendarListList.query()
         service.executeQuery(calendarListQuery) { (ticket, response, error) in
             do {
@@ -34,9 +33,7 @@ final class GoogleCalendarManager {
                     completion([])
                     return
                 }
-                
-                self.calendarIds = entryList.compactMap { $0.identifier }
-                completion(self.calendarIds)
+                completion(entryList)
             } catch {
                 print(error)
                 print("GoogleCalendarManager - checkCalendar - error: \(error.localizedDescription)")

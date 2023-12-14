@@ -1,15 +1,19 @@
 import SwiftUI
 
 struct CalendarView: UIViewRepresentable {
+    @ObservedObject var eventStore: EventStore
     let didSelectDate: (_ dateComponents: DateComponents) -> Void
     
     final public class Coordinator: NSObject, UICalendarSelectionSingleDateDelegate, UICalendarViewDelegate {
+        @ObservedObject var eventStore: EventStore
         let didSelectDate: (_ dateComponents: DateComponents) -> Void
         
         init(
-            didSelectDate: @escaping (_ dateComponents: DateComponents) -> Void
+            didSelectDate: @escaping (_ dateComponents: DateComponents) -> Void,
+            eventStore: ObservedObject<EventStore>
         ) {
             self.didSelectDate = didSelectDate
+            self._eventStore = eventStore
         }
         
         public func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
@@ -20,7 +24,7 @@ struct CalendarView: UIViewRepresentable {
         }
         
         public func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            let dateEvents = EventStore.shared.getEventsFromDate(dateComponents: dateComponents)
+            let dateEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
             // FIXME: Job対応
             if dateEvents.isEmpty {
                 return nil
@@ -32,7 +36,7 @@ struct CalendarView: UIViewRepresentable {
     
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(didSelectDate: didSelectDate)
+        Coordinator(didSelectDate: didSelectDate, eventStore: _eventStore)
     }
     
     

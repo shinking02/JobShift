@@ -1,11 +1,9 @@
 import Foundation
 import GoogleAPIClientForREST
 
-final class EventStore {
-    static let shared: EventStore = .init()
-    private var events: [GTLRCalendar_Event] = []
+class EventStore: ObservableObject {
+    @Published var events: [GTLRCalendar_Event] = []
     private let calManager = GoogleCalendarManager.shared
-    private init () {}
     
     func addEvents(events: [GTLRCalendar_Event]) {
         self.events.append(contentsOf: events)
@@ -36,6 +34,27 @@ final class EventStore {
                 self.events = self.events.filter { $0.identifier != eventId }
             }
             completion(success)
+        }
+    }
+    
+    func updateEventStore(calendars: [GTLRCalendar_CalendarListEntry], completion: @escaping (_ success: Bool) -> Void) {
+        
+        var newEvents: [GTLRCalendar_Event] = []
+        let dispatchGroup = DispatchGroup()
+        calendars.forEach { calendar in
+            dispatchGroup.enter()
+            guard let id = calendar.identifier else { return }
+            calManager.fetchEventsFromCalendarId(calId: id) { events in
+                if let events = events {
+                    newEvents += events
+                }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.clearCalendarStore()
+            self.addEvents(events: newEvents)
+            completion(true)
         }
     }
     

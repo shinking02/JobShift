@@ -6,6 +6,7 @@ struct SettingView: View {
     @State private var logoutAlert = false
     @EnvironmentObject var userState: UserState
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var eventStore: EventStore
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
     var body: some View {
@@ -26,7 +27,7 @@ struct SettingView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: CalSettingView()) {
                         Text("カレンダー")
                     }
                     NavigationLink(destination: EmptyView()) {
@@ -43,7 +44,7 @@ struct SettingView: View {
                             Button("キャンセル", role: .cancel) {}
                             Button("ログアウト", role: .destructive) {
                                 GIDSignIn.sharedInstance.signOut()
-                                EventStore.shared.clearCalendarStore()
+                                eventStore.clearCalendarStore()
                                 userState.imageURL = ""
                                 userState.email = ""
                                 

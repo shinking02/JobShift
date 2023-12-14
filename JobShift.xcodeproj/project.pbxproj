@@ -11,6 +11,8 @@
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* GoogleCalendarManager.swift */; };
+		5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167C2B2ADDFC0049427D /* CalSettingView.swift */; };
+		5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */; };
 		54BD22282B2828A200B66497 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD22272B2828A200B66497 /* ShiftView.swift */; };
 		54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222A2B282A9000B66497 /* SalaryView.swift */; };
 		54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222C2B28366E00B66497 /* CalendarView.swift */; };
@@ -30,6 +32,8 @@
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
+		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
+		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		54BD22272B2828A200B66497 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
 		54BD222A2B282A9000B66497 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		54BD222C2B28366E00B66497 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				541ECF5D2B25F74000A8E091 /* SettingView.swift */,
+				5435167C2B2ADDFC0049427D /* CalSettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			children = (
 				54E393262B25B62C0002D4EB /* UserState.swift */,
 				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
+				5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */,
 				54303BC52B27409100F6485E /* GoogleCalendarManager.swift */,
 			);
 			path = Model;
@@ -289,11 +295,13 @@
 				54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */,
 				54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */,
 				54E393272B25B62C0002D4EB /* UserState.swift in Sources */,
+				5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
 				54BD22282B2828A200B66497 /* ShiftView.swift in Sources */,
 				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
+				5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */,
 				54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 				54BD222F2B28696B00B66497 /* EventRow.swift in Sources */,

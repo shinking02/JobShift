@@ -9,6 +9,7 @@ struct LaunchScreen: View {
     @State private var progressValue = 0.0
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var userState: UserState
+    @EnvironmentObject var eventStore: EventStore
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     var body: some View {
         if isLoading || !userState.isLoggedIn {
@@ -78,26 +79,30 @@ struct LaunchScreen: View {
                     progressValue += 0.1
                 }
                 var receivedEvents: [GTLRCalendar_Event] = []
-                calManager.fetchCalendarIds(completion: { calendarIds in
+                calManager.fetchCalendarIds(completion: { calendars in
                     let dispatchGroup = DispatchGroup()
-                    
-                    for id in calendarIds {
+                    let disableCalIds = UserDefaults.standard.array(forKey: UserDefaultsKeys.disabledCalIds) as? [String] ?? []
+                    let filterdCalendars = calendars.filter { cal in
+                        guard let id = cal.identifier else { return false }
+                        return !disableCalIds.contains(id)
+                    }
+                    userState.calendars = calendars
+                    userState.selectedCalendars = filterdCalendars
+                    for cal in filterdCalendars {
                         dispatchGroup.enter()
-                        
-                        calManager.fetchEventsFromCalendarId(calId: id, completion: { events in
+                        calManager.fetchEventsFromCalendarId(calId: cal.identifier ?? "", completion: { events in
                             if let events = events {
                                 receivedEvents.append(contentsOf: events)
                             }
                             withAnimation {
-                                progressValue += 0.9 / Double(calendarIds.count)
+                                progressValue += 0.9 / Double(filterdCalendars.count)
                             }
-                            
                             dispatchGroup.leave()
                         })
                     }
                     
                     dispatchGroup.notify(queue: .main) {
-                        EventStore.shared.addEvents(events: receivedEvents)
+                        eventStore.addEvents(events: receivedEvents)
                         withAnimation {
                             progressValue = 1
                             isLoading = false

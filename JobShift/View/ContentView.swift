@@ -3,7 +3,7 @@ import SwiftData
 
 struct ContentView: View {
     @EnvironmentObject var userState: UserState
-    
+    @EnvironmentObject var eventStore: EventStore
     var body: some View {
         TabView {
             ShiftView()

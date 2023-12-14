@@ -12,7 +12,7 @@ import GoogleSignIn
 @main
 struct JobShiftApp: App {
     @StateObject private var userState = UserState()
-
+    @StateObject var events = EventStore()
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
@@ -31,6 +31,7 @@ struct JobShiftApp: App {
                     }
                 }
                 .environmentObject(userState)
+                .environmentObject(events)
         }
     }
 }

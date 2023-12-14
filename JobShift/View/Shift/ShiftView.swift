@@ -4,19 +4,19 @@ import GoogleAPIClientForREST
 
 struct ShiftView: View {
     @State private var dateEvents: [GTLRCalendar_Event]?
-    @State private var selectedDate: DateComponents?
+    @State private var selectedDate: DateComponents
+    @EnvironmentObject var eventStore: EventStore
     init() {
         let currentDate = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
         self._selectedDate = State(initialValue: components)
-        self._dateEvents = State(initialValue: EventStore.shared.getEventsFromDate(dateComponents: components))
     }
     var body: some View {
         NavigationView {
             List {
-                CalendarView { dateComponents in
-                    dateEvents = EventStore.shared.getEventsFromDate(dateComponents: dateComponents)
+                CalendarView(eventStore: eventStore) { dateComponents in
+                    dateEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
                     selectedDate = dateComponents
                 }
                 if let dateEvents = dateEvents {
@@ -35,6 +35,9 @@ struct ShiftView: View {
                 }
             }
             .navigationTitle("シフト")
+        }
+        .onAppear {
+            self.dateEvents = eventStore.getEventsFromDate(dateComponents: selectedDate)
         }
     }
 }
