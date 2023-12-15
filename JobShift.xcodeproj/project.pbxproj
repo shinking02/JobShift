@@ -17,6 +17,7 @@
 		54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222A2B282A9000B66497 /* SalaryView.swift */; };
 		54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222C2B28366E00B66497 /* CalendarView.swift */; };
 		54BD222F2B28696B00B66497 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222E2B28696B00B66497 /* EventRow.swift */; };
+		54D8813A2B2C314200A04DCD /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D881392B2C314200A04DCD /* EventManager.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54E393272B25B62C0002D4EB /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* UserState.swift */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
@@ -38,6 +39,7 @@
 		54BD222A2B282A9000B66497 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		54BD222C2B28366E00B66497 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		54BD222E2B28696B00B66497 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		54D881392B2C314200A04DCD /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54E393262B25B62C0002D4EB /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				54BD22272B2828A200B66497 /* ShiftView.swift */,
+				54BD222C2B28366E00B66497 /* CalendarView.swift */,
 				54BD222E2B28696B00B66497 /* EventRow.swift */,
 			);
 			path = Shift;
@@ -84,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				54BD222A2B282A9000B66497 /* SalaryView.swift */,
-				54BD222C2B28366E00B66497 /* CalendarView.swift */,
 			);
 			path = Salary;
 			sourceTree = "<group>";
@@ -147,6 +149,7 @@
 			children = (
 				54E393262B25B62C0002D4EB /* UserState.swift */,
 				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
+				54D881392B2C314200A04DCD /* EventManager.swift */,
 				5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */,
 				54303BC52B27409100F6485E /* GoogleCalendarManager.swift */,
 			);
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D8813A2B2C314200A04DCD /* EventManager.swift in Sources */,
 				54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */,
 				54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */,
 				54E393272B25B62C0002D4EB /* UserState.swift in Sources */,

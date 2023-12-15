@@ -4,6 +4,7 @@ import GoogleAPIClientForREST
 
 struct CalSettingView: View {
     @EnvironmentObject var userState: UserState
+    @EnvironmentObject var eventStore: EventStore
     @State private var selectedCalendars: Set<GTLRCalendar_CalendarListEntry> = []
     @State private var showJobOnly: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKeys.showJobOnly)
 
@@ -30,8 +31,14 @@ struct CalSettingView: View {
                 self.selectedCalendars = Set(userState.selectedCalendars)
             }
         }
-        .onChange(of: selectedCalendars) {
-            //TODO: eventStoreの更新, userState.calendarsとselectedCalendarsを比較し、除外対象をuserDefaultに保存
-        }
+        .onDisappear {
+            if Set(userState.selectedCalendars) != selectedCalendars {
+                userState.selectedCalendars = Array(selectedCalendars)
+                eventStore.updateEventStore(calendars: Array(selectedCalendars)) { success in
+                    let disabledCals = userState.calendars.filter { !Array(selectedCalendars).contains($0) }
+                    UserDefaults.standard.set(disabledCals.map { $0.identifier }, forKey: UserDefaultsKeys.disabledCalIds)
+                }
+            }
+         }
     }
 }

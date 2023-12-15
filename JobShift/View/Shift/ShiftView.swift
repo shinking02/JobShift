@@ -3,26 +3,21 @@ import SwiftUI
 import GoogleAPIClientForREST
 
 struct ShiftView: View {
-    @State private var dateEvents: [GTLRCalendar_Event]?
-    @State private var selectedDate: DateComponents
     @EnvironmentObject var eventStore: EventStore
+    @State private var dateEvents: [GTLRCalendar_Event] = []
+    @State private var dateSelected: DateComponents?
     init() {
         let currentDate = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        self._selectedDate = State(initialValue: components)
+        self._dateSelected = State(initialValue: components)
     }
     var body: some View {
         NavigationView {
             List {
-                CalendarView(eventStore: eventStore) { dateComponents in
-                    dateEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
-                    selectedDate = dateComponents
-                }
-                if let dateEvents = dateEvents {
-                    ForEach(dateEvents, id: \.identifier) { event in
-                        EventRow(event: event)
-                    }
+                CalendarView(eventStore: eventStore, dateSelected: $dateSelected, dateEvents: $dateEvents)
+                ForEach(dateEvents, id: \.self) { event in
+                    EventRow(dateComponents: dateSelected!, event: event)
                 }
                 HStack {
                     Spacer()
@@ -35,9 +30,6 @@ struct ShiftView: View {
                 }
             }
             .navigationTitle("シフト")
-        }
-        .onAppear {
-            self.dateEvents = eventStore.getEventsFromDate(dateComponents: selectedDate)
         }
     }
 }
