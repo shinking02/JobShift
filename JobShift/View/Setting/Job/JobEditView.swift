@@ -105,7 +105,7 @@ struct JobEditView: View {
                         }
                     }
                 }
-                NavigationLink(destination: WageHistoryView(wages: $editJob.wages)) {
+                NavigationLink(destination: WageHistoryView(job: editJob)) {
                     Text("昇給履歴")
                 }
             }

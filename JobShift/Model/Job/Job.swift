@@ -63,11 +63,11 @@ final class Job {
     }
 }
 
-struct Wage: Codable {
+struct Wage: Codable, Hashable {
     var hourlyWage: Int
-    var nightHourlyWage: Int?
-    var holidayHourlyWage: Int?
-    var holidayHourlyNightWage: Int?
+    var nightHourlyWage: Int
+    var holidayHourlyWage: Int
+    var holidayHourlyNightWage: Int
     var start: DateComponents?
     var end: DateComponents?
 }

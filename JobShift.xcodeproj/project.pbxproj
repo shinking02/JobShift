@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */; };
 		540CCAAC2B2DB003008B25CB /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAB2B2DB003008B25CB /* JobEditView.swift */; };
+		540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
@@ -39,6 +40,7 @@
 		233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JobShift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.debug.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.debug.xcconfig"; sourceTree = "<group>"; };
 		540CCAAB2B2DB003008B25CB /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
+		540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageAddView.swift; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				540CCAAB2B2DB003008B25CB /* JobEditView.swift */,
 				54557AB52B2D4D45009F900E /* OTJobAddView.swift */,
 				54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */,
+				540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */,
 				54CE0A732B2DA080008EA726 /* BreakPicker.swift */,
 			);
 			path = Job;
@@ -361,6 +364,7 @@
 				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
 				5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */,
+				540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */,
 				5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */,
 				54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,

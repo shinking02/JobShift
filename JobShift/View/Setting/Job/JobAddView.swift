@@ -95,7 +95,7 @@ struct JobAddView: View {
                             }
                         }
                     }
-                    NavigationLink(destination: WageHistoryView(wages: $newJob.wages)) {
+                    NavigationLink(destination: WageHistoryView(job: newJob)) {
                         Text("昇給履歴")
                     }
                 }
@@ -107,7 +107,7 @@ struct JobAddView: View {
                             TextField("", value: $newJob.commuteWage, formatter: NumberFormatter())
                                 .multilineTextAlignment(TextAlignment.trailing)
                                 .keyboardType(.numberPad)
-                            Text("円")
+                            Text("円") 
                                 .foregroundColor(.secondary)
                         }
                     }
