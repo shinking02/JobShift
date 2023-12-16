@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import GoogleSignIn
+import SwiftData
 
 @main
 struct JobShiftApp: App {
@@ -32,6 +33,7 @@ struct JobShiftApp: App {
                 }
                 .environmentObject(userState)
                 .environmentObject(events)
+                .modelContainer(for: [Job.self, OneTimeJob.self])
         }
     }
 }

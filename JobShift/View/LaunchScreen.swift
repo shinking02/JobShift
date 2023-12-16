@@ -82,6 +82,7 @@ struct LaunchScreen: View {
                 calManager.fetchCalendarIds(completion: { calendars in
                     let dispatchGroup = DispatchGroup()
                     let disableCalIds = UserDefaults.standard.array(forKey: UserDefaultsKeys.disabledCalIds) as? [String] ?? []
+                    print(disableCalIds)
                     let filterdCalendars = calendars.filter { cal in
                         guard let id = cal.identifier else { return false }
                         return !disableCalIds.contains(id)

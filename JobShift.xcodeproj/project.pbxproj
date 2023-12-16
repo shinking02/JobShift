@@ -10,9 +10,14 @@
 		267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
+		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
+		5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9332B2D3932004B88C7 /* OneTimeJob.swift */; };
+		5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */; };
 		54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* GoogleCalendarManager.swift */; };
 		5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167C2B2ADDFC0049427D /* CalSettingView.swift */; };
 		5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */; };
+		54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB12B2D4CCA009F900E /* JobAddView.swift */; };
+		54557AB62B2D4D45009F900E /* OneTimeJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB52B2D4D45009F900E /* OneTimeJobAddView.swift */; };
 		54BD22282B2828A200B66497 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD22272B2828A200B66497 /* ShiftView.swift */; };
 		54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222A2B282A9000B66497 /* SalaryView.swift */; };
 		54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222C2B28366E00B66497 /* CalendarView.swift */; };
@@ -32,9 +37,14 @@
 		472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.debug.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.debug.xcconfig"; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		5423A9332B2D3932004B88C7 /* OneTimeJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeJob.swift; sourceTree = "<group>"; };
+		5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
 		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
 		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
 		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		54557AB12B2D4CCA009F900E /* JobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddView.swift; sourceTree = "<group>"; };
+		54557AB52B2D4D45009F900E /* OneTimeJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeJobAddView.swift; sourceTree = "<group>"; };
 		54BD22272B2828A200B66497 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
 		54BD222A2B282A9000B66497 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		54BD222C2B28366E00B66497 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -68,9 +78,46 @@
 			isa = PBXGroup;
 			children = (
 				541ECF5D2B25F74000A8E091 /* SettingView.swift */,
-				5435167C2B2ADDFC0049427D /* CalSettingView.swift */,
+				54557AB02B2D42A8009F900E /* Calendar */,
+				5423A9392B2D3B38004B88C7 /* Job */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		5423A9352B2D3A0E004B88C7 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				5423A9312B2D29FB004B88C7 /* Job.swift */,
+				5423A9332B2D3932004B88C7 /* OneTimeJob.swift */,
+			);
+			path = Job;
+			sourceTree = "<group>";
+		};
+		5423A9362B2D3A1F004B88C7 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
+				54D881392B2C314200A04DCD /* EventManager.swift */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		5423A9392B2D3B38004B88C7 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */,
+				54557AB52B2D4D45009F900E /* OneTimeJobAddView.swift */,
+				54557AB12B2D4CCA009F900E /* JobAddView.swift */,
+			);
+			path = Job;
+			sourceTree = "<group>";
+		};
+		54557AB02B2D42A8009F900E /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5435167C2B2ADDFC0049427D /* CalSettingView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		54BD22262B28286A00B66497 /* Shift */ = {
@@ -115,7 +162,6 @@
 			children = (
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
-				54F7379F2B25A1D4004A4975 /* ViewModel */,
 				54F7379D2B259A7A004A4975 /* View */,
 				54F7379E2B259A9B004A4975 /* Model */,
 				54F737912B259703004A4975 /* Assets.xcassets */,
@@ -148,19 +194,12 @@
 			isa = PBXGroup;
 			children = (
 				54E393262B25B62C0002D4EB /* UserState.swift */,
-				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
-				54D881392B2C314200A04DCD /* EventManager.swift */,
 				5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */,
 				54303BC52B27409100F6485E /* GoogleCalendarManager.swift */,
+				5423A9362B2D3A1F004B88C7 /* Event */,
+				5423A9352B2D3A0E004B88C7 /* Job */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		54F7379F2B25A1D4004A4975 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9D2333F9318687C0A0BAE3FE /* Frameworks */ = {
@@ -299,12 +338,17 @@
 				54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */,
 				54BD222B2B282A9000B66497 /* SalaryView.swift in Sources */,
 				54E393272B25B62C0002D4EB /* UserState.swift in Sources */,
+				5423A9322B2D29FB004B88C7 /* Job.swift in Sources */,
 				5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */,
+				54557AB62B2D4D45009F900E /* OneTimeJobAddView.swift in Sources */,
+				54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
+				5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
 				54BD22282B2828A200B66497 /* ShiftView.swift in Sources */,
 				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
+				5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */,
 				5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */,
 				54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,

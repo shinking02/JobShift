@@ -30,7 +30,7 @@ struct SettingView: View {
                     NavigationLink(destination: CalSettingView()) {
                         Text("カレンダー")
                     }
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: JobSettingView()) {
                         Text("バイト")
                     }
                 }
