@@ -14,7 +14,16 @@ struct JobSettingView: View {
         List {
             if !jobs.isEmpty {
                 Section(header: Text("定期バイト")) {
-                    
+                    ForEach(jobs.reversed()) { job in
+                        NavigationLink(destination: JobEditView(editJob: job)) {
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .foregroundColor(job.color.getColor())
+                                    .font(.caption)
+                                Text(job.name)
+                            }
+                        }
+                    }
                 }
             }
             if !oneTimeJobs.isEmpty {
@@ -27,7 +36,7 @@ struct JobSettingView: View {
             JobAddView()
         }
         .sheet(isPresented: $showingAddOneTimeJobView) {
-            OneTimeJobAddView()
+            OTJobAddView()
         }
         .navigationTitle("バイト")
         .navigationBarTitleDisplayMode(.inline)

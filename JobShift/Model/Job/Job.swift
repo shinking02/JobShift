@@ -4,30 +4,62 @@ import SwiftUI
 
 @Model
 final class Job {
+    let id: UUID
     var name: String
     var color: JobColor
-    var dailyWage: Int?
+    var isDailyWage: Bool
+    var dailyWage: Int
     var isNightWage: Bool
+    var nightWageStartTime: Date
     var isHolidayWage: Bool
     var wages: [Wage]
-    var commuteWage: Int?
-    var break1: Break?
-    var break2: Break?
+    var isCommuteWage: Bool
+    var commuteWage: Int
+    var isBreak1: Bool
+    var break1: Break
+    var isBreak2: Bool
+    var break2: Break
     var salaryCutoffDay: Int
     var salaryPaymentDay: Int
+    var salaries: [Salary]
     
-    init(name: String, color: JobColor, dailyWage: Int? = nil, isNightWage: Bool, isHolidayWage: Bool, wages: [Wage], commuteWage: Int? = nil, break1: Break? = nil, break2: Break? = nil, salaryCutoffDay: Int, salaryPaymentDay: Int) {
+    init(
+        name: String = "",
+        color: JobColor = JobColor.red,
+        isDailyWage: Bool = false,
+        dailyWage: Int = 10000,
+        isNightWage: Bool = false,
+        nightWageStartTime: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 22)) ?? Date(),
+        isHolidayWage: Bool = false,
+        wages: [Wage] = [Wage(hourlyWage: 1200, nightHourlyWage: 1300, holidayHourlyWage: 1300, holidayHourlyNightWage: 1400, start: nil, end: nil)],
+        isCommuteWage: Bool = false,
+        commuteWage: Int = 500,
+        isBreak1: Bool = false,
+        break1: Break = Break(breakMinutes: 60, breakIntervalMinutes: 360),
+        isBreak2: Bool = false,
+        break2: Break = Break(breakMinutes: 90, breakIntervalMinutes: 480),
+        salaryCutoffDay: Int = 20,
+        salaryPaymentDay: Int = 10,
+        salaries: [Salary] = []
+    ) {
+        self.id = UUID()
         self.name = name
         self.color = color
+        self.isDailyWage = isDailyWage
         self.dailyWage = dailyWage
         self.isNightWage = isNightWage
+        self.nightWageStartTime = nightWageStartTime
         self.isHolidayWage = isHolidayWage
         self.wages = wages
+        self.isCommuteWage = isCommuteWage
         self.commuteWage = commuteWage
+        self.isBreak1 = isBreak1
         self.break1 = break1
+        self.isBreak2 = isBreak2
         self.break2 = break2
         self.salaryCutoffDay = salaryCutoffDay
         self.salaryPaymentDay = salaryPaymentDay
+        self.salaries = salaries
     }
 }
 
@@ -35,7 +67,9 @@ struct Wage: Codable {
     var hourlyWage: Int
     var nightHourlyWage: Int?
     var holidayHourlyWage: Int?
-    var interval: DateInterval
+    var holidayHourlyNightWage: Int?
+    var start: DateComponents?
+    var end: DateComponents?
 }
 
 struct Break: Codable {
@@ -43,10 +77,19 @@ struct Break: Codable {
     var breakIntervalMinutes: Int
 }
 
-enum JobColor: String, Codable {
+struct Salary: Codable {
+    var salary: Int
+    var yearMonth: DateComponents
+}
+
+enum JobColor: String, Codable, CaseIterable {
     case red
-    case blue
+    case orange
+    case yellow
     case green
+    case blue
+    case purple
+    case brown
 }
 
 extension JobColor {
@@ -54,10 +97,18 @@ extension JobColor {
         switch self {
         case .red:
             return "レッド"
-        case .blue:
-            return "ブルー"
+        case .orange:
+            return "オレンジ"
+        case .yellow:
+            return "イエロー"
         case .green:
             return "グリーン"
+        case .blue:
+            return "ブルー"
+        case .purple:
+            return "パープル"
+        case .brown:
+            return "ブラウン"
         }
     }
     
@@ -65,10 +116,18 @@ extension JobColor {
         switch self {
         case .red:
             return Color.red
-        case .blue:
-            return Color.blue
+        case .orange:
+            return Color.orange
+        case .yellow:
+            return Color.yellow
         case .green:
             return Color.green
+        case .blue:
+            return Color.blue
+        case .purple:
+            return Color.purple
+        case .brown:
+            return Color.brown
         }
     }
 }
