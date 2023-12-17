@@ -51,7 +51,6 @@ struct CalSettingView: View {
                     }
                 }
             } else if showJobOnly == false && disabledJobOnlyFrag {
-                eventStore.clearCalendarStore()
                 eventStore.updateCalendarForStore(calendars: userState.selectedCalendars) { success in }
             }
          }
