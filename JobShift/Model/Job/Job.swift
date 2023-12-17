@@ -8,7 +8,6 @@ final class Job {
     var name: String
     var color: JobColor
     var isDailyWage: Bool
-    var dailyWage: Int
     var isNightWage: Bool
     var nightWageStartTime: Date
     var isHolidayWage: Bool
@@ -31,7 +30,7 @@ final class Job {
         isNightWage: Bool = false,
         nightWageStartTime: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 22)) ?? Date(),
         isHolidayWage: Bool = false,
-        wages: [Wage] = [Wage(hourlyWage: 1200, nightHourlyWage: 1300, holidayHourlyWage: 1300, holidayHourlyNightWage: 1400, start: nil, end: nil)],
+        wages: [Wage] = [Wage()],
         isCommuteWage: Bool = false,
         commuteWage: Int = 500,
         isBreak1: Bool = false,
@@ -46,7 +45,6 @@ final class Job {
         self.name = name
         self.color = color
         self.isDailyWage = isDailyWage
-        self.dailyWage = dailyWage
         self.isNightWage = isNightWage
         self.nightWageStartTime = nightWageStartTime
         self.isHolidayWage = isHolidayWage
@@ -68,8 +66,18 @@ struct Wage: Codable, Hashable {
     var nightHourlyWage: Int
     var holidayHourlyWage: Int
     var holidayHourlyNightWage: Int
-    var start: DateComponents?
-    var end: DateComponents?
+    var dailyWage: Int
+    var start: Date?
+    var end: Date?
+    init(hourlyWage: Int = 1200, nightHourlyWage: Int = 1300, holidayHourlyWage: Int = 1300, holidayHourlyNightWage: Int = 1400, dailyWage: Int = 10000, start: Date? = nil, end: Date? = nil) {
+        self.hourlyWage = hourlyWage
+        self.nightHourlyWage = nightHourlyWage
+        self.holidayHourlyWage = holidayHourlyWage
+        self.holidayHourlyNightWage = holidayHourlyNightWage
+        self.dailyWage = dailyWage
+        self.start = start
+        self.end = end
+    }
 }
 
 struct Break: Codable {

@@ -1,15 +1,17 @@
 import Foundation
 import SwiftUI
+import GoogleAPIClientForREST
 
-struct WageAddView : View {
+struct EventEditView: View {
     @Environment(\.dismiss) var dismiss
-    @Bindable var job: Job
+    @Environment var eventStore: EventStore
+    @State var event: GTLRCalendar_Event
     var body: some View {
         NavigationView {
             List {
-                Text("WageAddView")
+                
             }
-            .navigationTitle("昇給履歴の追加")
+            .navigationTitle("イベントを編集")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -19,8 +21,9 @@ struct WageAddView : View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("追加") {
-                        
+                        dismiss()
                     }
+                    
                 }
             }
         }

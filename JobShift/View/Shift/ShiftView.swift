@@ -1,11 +1,13 @@
 import Foundation
 import SwiftUI
-import GoogleAPIClientForREST
+import SwiftData
 
 struct ShiftView: View {
     @EnvironmentObject var eventStore: EventStore
-    @State private var dateEvents: [GTLRCalendar_Event] = []
+    @Query private var jobs: [Job]
+    @State private var dateEvents: [Event] = []
     @State private var dateSelected: DateComponents?
+    @State private var showEventEditView = false
     init() {
         let currentDate = Date()
         let calendar = Calendar.current
@@ -18,6 +20,14 @@ struct ShiftView: View {
                 CalendarView(eventStore: eventStore, dateSelected: $dateSelected, dateEvents: $dateEvents)
                 ForEach(dateEvents, id: \.self) { event in
                     EventRow(dateComponents: dateSelected!, event: event)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            self.showEventEditView = true
+                            print(event)
+                        }
+                        .sheet(isPresented: $showEventEditView) {
+                            EmptyView()
+                        }
                 }
                 HStack {
                     Spacer()
@@ -30,6 +40,11 @@ struct ShiftView: View {
                 }
             }
             .navigationTitle("シフト")
+        }
+        .onAppear {
+            if UserDefaults.standard.bool(forKey: UserDefaultsKeys.showJobOnly) {
+                eventStore.deleteNormalEvents(jobs: jobs)
+            }
         }
     }
 }

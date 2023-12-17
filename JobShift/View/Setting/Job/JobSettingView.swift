@@ -9,6 +9,8 @@ struct JobSettingView: View {
     @State private var showingDialog = false
     @State private var showingAddJobView = false
     @State private var showingAddOneTimeJobView = false
+    @State private var groupedOtJobs: [Int: [OneTimeJob]] = [:]
+    @State private var openThisYearRow = false
     
     var body: some View {
         List {
@@ -28,7 +30,21 @@ struct JobSettingView: View {
             }
             if !oneTimeJobs.isEmpty {
                 Section(header: Text("単発バイト")) {
-                    
+                    ForEach(Array(groupedOtJobs.keys).sorted(by: >), id: \.self) { year in
+                        DisclosureGroup(String(year) + "年") {
+                            ForEach((groupedOtJobs[year] ?? []).sorted { $0.date > $1.date }, id: \.self) { job in
+                                NavigationLink(destination: OTJobEditView(editOtJob: job)) {
+                                    HStack {
+                                        Text(job.name)
+                                        Spacer()
+                                        Text(getDateString(date: job.date))
+                                            .font(.callout)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -40,6 +56,12 @@ struct JobSettingView: View {
         }
         .navigationTitle("バイト")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            updateGroupedOtJobs()
+        }
+        .onChange(of: showingAddOneTimeJobView) {
+            updateGroupedOtJobs()
+        }
         .toolbar{
             Button(action: {
                 self.showingDialog = true
@@ -57,7 +79,20 @@ struct JobSettingView: View {
             } message: {
                 Text("追加するバイトの種類を選択してください")
             }
-
         }
+    }
+    private func updateGroupedOtJobs() {
+        withAnimation {
+            self.groupedOtJobs = Dictionary(grouping: self.oneTimeJobs) { (job: OneTimeJob) -> Int in
+                let calendar = Calendar.current
+                let year = calendar.component(.year, from: job.date)
+                return year
+            }
+        }
+    }
+    private func getDateString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M月d日"
+        return dateFormatter.string(from: date)
     }
 }

@@ -99,4 +99,21 @@ final class GoogleCalendarManager {
             }
         }
     }
+    
+    func updateEvent(inCalendarId calId: String, updatedEvent: GTLRCalendar_Event, completion: @escaping (_ success: Bool) -> Void) {
+        guard let eventId = updatedEvent.identifier else { return }
+        let updateEvent = GTLRCalendarQuery_EventsUpdate.query(withObject: updatedEvent, calendarId: calId, eventId: eventId)
+        service.executeQuery(updateEvent) { (ticket, response, error) in
+            do {
+                if let error = error {
+                    throw GoogleCalendarManagerError.errorWithText(text: "Error while updating event '\(error.localizedDescription)'")
+                }
+                completion(true)
+            } catch {
+                print(error)
+                print("GoogleCalendarManager - updateEvent - \(error.localizedDescription)")
+                completion(false)
+            }
+        }
+    }
 }

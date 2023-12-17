@@ -5,6 +5,8 @@ import SwiftData
 struct JobAddView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var eventStore: EventStore
+    @EnvironmentObject var userState: UserState
     @Query private var jobs: [Job]
     @Bindable var newJob = Job()
     @State var showAlert = false
@@ -44,7 +46,7 @@ struct JobAddView: View {
                     if newJob.isDailyWage {
                         HStack {
                             Text("1日の給料")
-                            TextField("", value: $newJob.dailyWage, formatter: NumberFormatter())
+                            TextField("", value: $newJob.wages[0].dailyWage, formatter: NumberFormatter())
                                 .multilineTextAlignment(TextAlignment.trailing)
                                 .keyboardType(.numberPad)
                             Text("円")
@@ -91,7 +93,6 @@ struct JobAddView: View {
                                     Text("円")
                                         .foregroundColor(.secondary)
                                 }
-                                
                             }
                         }
                     }
@@ -158,6 +159,7 @@ struct JobAddView: View {
                             self.alertMessage = "\(newJob.name)は存在します"
                             self.showAlert = true
                         } else {
+                            eventStore.updateCalendarForStore(calendars: userState.selectedCalendars) { success in }
                             context.insert(newJob)
                             dismiss()
                         }

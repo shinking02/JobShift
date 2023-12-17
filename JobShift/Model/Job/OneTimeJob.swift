@@ -7,13 +7,15 @@ final class OneTimeJob {
     var name: String
     var date: Date
     var salary: Int
-    var commuteWage: Int?
+    var isCommuteWage: Bool
+    var commuteWage: Int
     
-    init(name: String, date: Date, salary: Int, commuteWage: Int? = nil) {
+    init(name: String = "", date: Date = Date(), salary: Int = 6000, isCommuteWage: Bool = false, commuteWage: Int = 500) {
         self.id = UUID()
         self.name = name
         self.date = date
         self.salary = salary
+        self.isCommuteWage = isCommuteWage
         self.commuteWage = commuteWage
     }
 }

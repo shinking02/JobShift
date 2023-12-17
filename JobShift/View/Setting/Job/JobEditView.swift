@@ -54,7 +54,7 @@ struct JobEditView: View {
                 if editJob.isDailyWage {
                     HStack {
                         Text("1日の給料")
-                        TextField("", value: $editJob.dailyWage, formatter: NumberFormatter())
+                        TextField("", value: $editJob.wages[0].dailyWage, formatter: NumberFormatter())
                             .multilineTextAlignment(TextAlignment.trailing)
                             .keyboardType(.numberPad)
                         Text("円")
@@ -171,7 +171,7 @@ struct JobEditView: View {
                 }
             }
         }
-        .navigationTitle(editJob.name)
+        .navigationTitle(newName)
         .navigationBarTitleDisplayMode(.inline)
         .scrollDismissesKeyboard(.immediately)
         .onAppear {

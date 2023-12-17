@@ -1,16 +1,17 @@
 import Foundation
 import SwiftUI
-import GoogleAPIClientForREST
+import SwiftData
 
 struct EventRow: View {
+    @Query private var jobs: [Job]
     let dateComponents: DateComponents
-    let event: GTLRCalendar_Event
+    let event: Event
     var body: some View {
         HStack {
             Image(systemName: "circle.fill")
                 .foregroundColor(getEventColor(event))
                 .font(.caption)
-            Text(event.summary ?? "")
+            Text(event.gEvent.summary ?? "")
             Spacer()
             VStack {
                 let (start, end) = getEventTimeString(event)
@@ -24,15 +25,17 @@ struct EventRow: View {
         }
     }
     
-    func getEventColor(_ event: GTLRCalendar_Event) -> Color {
-        return .secondary
+    func getEventColor(_ event: Event) -> Color {
+        let job = jobs.first { $0.name == event.gEvent.summary }
+        guard let job else { return .secondary }
+        return job.color.getColor()
     }
     
-    func getEventTimeString(_ event: GTLRCalendar_Event) -> (String, String?) {
-        if event.start?.date?.date != nil {
+    func getEventTimeString(_ event: Event) -> (String, String?) {
+        if event.gEvent.start?.date?.date != nil {
             return ("終日", nil)
         }
-        if let startDate = event.start?.dateTime?.date, let endDate = event.end?.dateTime?.date {
+        if let startDate = event.gEvent.start?.dateTime?.date, let endDate = event.gEvent.end?.dateTime?.date {
             let calendar = Calendar.current
             let startComponent = calendar.dateComponents([.year, .month, .day], from: startDate)
             let endComponent = calendar.dateComponents([.year, .month, .day], from: endDate)
