@@ -19,6 +19,7 @@ struct EventAddView: View {
     @State private var isAllDay = true
     @State private var suggests: [Suggest] = []
     @State private var selectedSuggest: Suggest? = nil
+    @State private var showAddError = false
     
     var body: some View {
         NavigationView {
@@ -27,7 +28,7 @@ struct EventAddView: View {
                     Picker("バイト", selection: $selectedJob) {
                         ForEach(jobs, id: \.self) { job in
                             HStack {
-                                Text(job.name).tag(job as Job?)
+                                Text(job.name).tag(job.name)
                                 Spacer()
                                 Text("")
                             }
@@ -104,10 +105,16 @@ struct EventAddView: View {
                             if success {
                                 self.isUpdating = false
                                 dismiss()
+                            } else {
+                                self.showAddError = true
                             }
+                            self.isUpdating = false
                         }
                     }
                     .disabled(isUpdating || isDateError)
+                    .alert("追加に失敗しました", isPresented: $showAddError) {
+                        Button("OK", role: .cancel) {}
+                    }
                 }
             }
             .onAppear {

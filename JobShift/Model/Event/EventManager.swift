@@ -37,13 +37,14 @@ struct EventManager {
         let date = Calendar.current.date(from: dateComponents) ?? Date()
         let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: date)!
         let fourteenDaysAgo = Calendar.current.date(byAdding: .day, value: -14, to: date)!
+        let twentyOneDaysAgo = Calendar.current.date(byAdding: .day, value: -21, to: date)!
         let jobEvents7DaysAgo = getJobEvents(events: events, job: jobs, date: sevenDaysAgo)
         let jobEvents14DaysAgo = getJobEvents(events: events, job: jobs, date: fourteenDaysAgo)
         let remainingJobEvents = events
             .filter { event in
                 let eventDate = event.gEvent.start?.dateTime?.date ?? event.gEvent.start?.date?.date ?? Date.distantFuture
                 guard let jobName = event.gEvent.summary else { return false}
-                return jobs.contains { $0.name == jobName } && eventDate >= fourteenDaysAgo && eventDate < date
+                return jobs.contains { $0.name == jobName } && eventDate >= twentyOneDaysAgo && eventDate < date
             }
         var jobEvents: [Suggest] = []
         if let jobEvent7DaysAgo = jobEvents7DaysAgo.first, let job = jobs.first(where: { $0.name == jobEvent7DaysAgo.gEvent.summary }) {

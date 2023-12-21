@@ -13,6 +13,7 @@ struct EventEditView: View {
     @State var isUpdating = false
     @State var isDateError = false
     @State var showDeleteAlert = false
+    @State var showSaveError = false
     
     var body: some View {
         NavigationView {
@@ -31,7 +32,7 @@ struct EventEditView: View {
                     }) {
                         HStack {
                             Spacer()
-                            Text("バイトを削除")
+                            Text("イベントを削除")
                                 .foregroundColor(.red)
                             Spacer()
                         }
@@ -59,9 +60,14 @@ struct EventEditView: View {
                         updateEvent(event: editEvent) { success in
                             if success {
                                 dismiss()
+                            } else {
+                                self.showSaveError = true
                             }
                             self.isUpdating = false
                         }
+                    }
+                    .alert("保存に失敗しました", isPresented: $showSaveError) {
+                        Button("OK", role: .cancel) {}
                     }
                     .disabled(isUpdating || isDateError)
                     
