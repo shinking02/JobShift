@@ -3,43 +3,51 @@ import SwiftUI
 import SwiftData
 
 struct ShiftView: View {
+    @EnvironmentObject var userState: UserState
     @EnvironmentObject var eventStore: EventStore
     @Query private var jobs: [Job]
     @State private var dateEvents: [Event] = []
-    @State private var dateSelected: DateComponents?
+    @State private var selectedDate: DateComponents?
     @State private var showEventEditView = false
+    @State private var showAddEventView = false
+    @State private var selectedEvent: Event? = nil
+    
     init() {
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        self._dateSelected = State(initialValue: components)
+        self._selectedDate = State(initialValue: Calendar.current.dateComponents([.year, .month, .day], from: Date()))
     }
     var body: some View {
         NavigationView {
-            List {
-                CalendarView(eventStore: eventStore, dateSelected: $dateSelected, dateEvents: $dateEvents)
-                ForEach(dateEvents, id: \.self) { event in
-                    EventRow(dateComponents: dateSelected!, event: event)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            self.showEventEditView = true
-                            print(event)
-                        }
-                        .sheet(isPresented: $showEventEditView) {
-                            EmptyView()
-                        }
+            VStack {
+                CalendarView(eventStore: eventStore, selectedDate: $selectedDate, dateEvents: $dateEvents)
+                    .frame(height: 460)
+                    .padding(.horizontal)
+                List {
+                    ForEach(dateEvents, id: \.id) { event in
+                        EventRow(dateComponents: selectedDate!, event: event)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                self.selectedEvent = event
+                                self.showEventEditView = true
+                            }
+                    }
+                    .sheet(item: $selectedEvent) { event in
+                        EventEditView(event: event)
+                    }
                 }
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("追加")
-                    }).disabled(true)
-                    Spacer()
-                }
+                .listStyle(.plain)
+            }
+            .sheet(isPresented: $showAddEventView) {
+                EventAddView(suggestDate: selectedDate!, newEvent: Event(), selectedCal: userState.mainCal!, selectedJob: jobs[0])
             }
             .navigationTitle("シフト")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button(action: {
+                    self.showAddEventView = true
+                }, label: {
+                    Image(systemName: "plus")
+                })
+            }
         }
         .onAppear {
             if UserDefaults.standard.bool(forKey: UserDefaultsKeys.showJobOnly) {

@@ -4,7 +4,7 @@ import SwiftData
 struct CalendarView: UIViewRepresentable {
     @ObservedObject var eventStore: EventStore
     @Query private var jobs: [Job]
-    @Binding var dateSelected: DateComponents?
+    @Binding var selectedDate: DateComponents?
     @Binding var dateEvents: [Event]
 
     func makeUIView(context: Context) -> some UICalendarView {
@@ -24,9 +24,9 @@ struct CalendarView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        if let dateSelected = dateSelected {
+        if let selectedDate = selectedDate {
             withAnimation {
-                dateEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: dateSelected)
+                dateEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: selectedDate)
             }
         }
         let calendar = Calendar(identifier: .gregorian)
@@ -63,7 +63,7 @@ struct CalendarView: UIViewRepresentable {
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-            parent.dateSelected = dateComponents
+            parent.selectedDate = dateComponents
             guard let dateComponents else { return }
             parent.dateEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: dateComponents)
         }

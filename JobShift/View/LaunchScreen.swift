@@ -87,6 +87,8 @@ struct LaunchScreen: View {
                     }
                     userState.calendars = calendars
                     userState.selectedCalendars = filterdCalendars
+                    let mainCalId = UserDefaults.standard.string(forKey: UserDefaultsKeys.mainCalId)
+                    userState.mainCal = calendars.first { $0.identifier == mainCalId } ?? calendars[0]
                     for cal in filterdCalendars {
                         dispatchGroup.enter()
                         calManager.fetchEventsFromCalendarId(calId: cal.identifier ?? "", completion: { events in

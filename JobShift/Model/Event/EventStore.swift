@@ -20,9 +20,10 @@ class EventStore: ObservableObject {
     }
     
     func addEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
-        calManager.addEvent(toCalendarId: event.calId, event: event.gEvent) { success in
+        calManager.addEvent(toCalendarId: event.calId, event: event.gEvent) { success, insertIvent in
             if success {
-                self.events.append(event)
+                let newEvent = Event(calId: event.calId, gEvent: insertIvent!)
+                self.events.append(newEvent)
                 self.sortEventsByStartDate()
             }
             completion(success)
@@ -44,10 +45,13 @@ class EventStore: ObservableObject {
     }
     
     func updateEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
-        calManager.updateEvent(inCalendarId: event.calId, updatedEvent: event.gEvent) { success in
-            self.events = self.events.filter { $0.gEvent.identifier != event.gEvent.identifier }
-            self.events.append(event)
-            self.sortEventsByStartDate()
+        calManager.updateEvent(inCalendarId: event.calId, updatedEvent: event.gEvent) { success, updateEvent in
+            if success {
+                self.events = self.events.filter { $0.id != event.id }
+                self.events.append(Event(calId: event.calId, gEvent: updateEvent!))
+                self.sortEventsByStartDate()
+            }
+            completion(success)
         }
     }
     
@@ -58,6 +62,7 @@ class EventStore: ObservableObject {
             }
         }
     }
+
     
     func updateCalendarForStore(calendars: [GTLRCalendar_CalendarListEntry], completion: @escaping (_ success: Bool) -> Void) {
         deleteCalendarFromStore(calendars: calendars)
@@ -92,8 +97,15 @@ class EventStore: ObservableObject {
     }
 }
 
-struct Event: Hashable {
+struct Event: Hashable, Identifiable {
     let id: UUID = UUID()
     var calId: String
     var gEvent: GTLRCalendar_Event
+    init(calId: String = "", gEvent: GTLRCalendar_Event = GTLRCalendar_Event()) {
+        self.calId = calId
+        if gEvent.summary == nil {
+            gEvent.summary = "新規イベント"
+        }
+        self.gEvent = gEvent
+    }
 }

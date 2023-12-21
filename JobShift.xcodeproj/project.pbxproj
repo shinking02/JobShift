@@ -20,6 +20,9 @@
 		5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */; };
 		54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB12B2D4CCA009F900E /* JobAddView.swift */; };
 		54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB52B2D4D45009F900E /* OTJobAddView.swift */; };
+		547EB5E62B32877800D9E2E8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E52B32877800D9E2E8 /* Collections */; };
+		547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E72B32877800D9E2E8 /* DequeModule */; };
+		547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E92B32877800D9E2E8 /* OrderedCollections */; };
 		549077362B2EDA6F0004E523 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549077352B2EDA6F0004E523 /* EventEditView.swift */; };
 		54B8C9032B2E8A7F009834E2 /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */; };
 		54BD22282B2828A200B66497 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD22272B2828A200B66497 /* ShiftView.swift */; };
@@ -31,6 +34,7 @@
 		54D8813A2B2C314200A04DCD /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D881392B2C314200A04DCD /* EventManager.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54E393272B25B62C0002D4EB /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* UserState.swift */; };
+		54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E5CD6C2B3184FC008806E8 /* EventAddView.swift */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
 		54F7378E2B259702004A4975 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378D2B259702004A4975 /* ContentView.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
@@ -65,6 +69,7 @@
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54E393262B25B62C0002D4EB /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		54E5CD6C2B3184FC008806E8 /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		54F737882B259702004A4975 /* JobShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F7378B2B259702004A4975 /* JobShiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobShiftApp.swift; sourceTree = "<group>"; };
 		54F7378D2B259702004A4975 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,7 +84,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				547EB5E62B32877800D9E2E8 /* Collections in Frameworks */,
 				267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */,
+				547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */,
+				547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +166,7 @@
 			children = (
 				54BD22272B2828A200B66497 /* ShiftView.swift */,
 				549077352B2EDA6F0004E523 /* EventEditView.swift */,
+				54E5CD6C2B3184FC008806E8 /* EventAddView.swift */,
 				54BD222C2B28366E00B66497 /* CalendarView.swift */,
 				54BD222E2B28696B00B66497 /* EventRow.swift */,
 			);
@@ -271,6 +280,11 @@
 			dependencies = (
 			);
 			name = JobShift;
+			packageProductDependencies = (
+				547EB5E52B32877800D9E2E8 /* Collections */,
+				547EB5E72B32877800D9E2E8 /* DequeModule */,
+				547EB5E92B32877800D9E2E8 /* OrderedCollections */,
+			);
 			productName = JobShift;
 			productReference = 54F737882B259702004A4975 /* JobShift.app */;
 			productType = "com.apple.product-type.application";
@@ -299,6 +313,9 @@
 				Base,
 			);
 			mainGroup = 54F7377F2B259701004A4975;
+			packageReferences = (
+				547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 54F737892B259702004A4975 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -381,6 +398,7 @@
 				54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
 				5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */,
+				54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
 				54CE0A742B2DA080008EA726 /* BreakPicker.swift in Sources */,
 				54BD22282B2828A200B66497 /* ShiftView.swift in Sources */,
@@ -604,6 +622,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		547EB5E52B32877800D9E2E8 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		547EB5E72B32877800D9E2E8 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		547EB5E92B32877800D9E2E8 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 54F737802B259701004A4975 /* Project object */;
 }

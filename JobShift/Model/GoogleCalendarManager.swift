@@ -64,7 +64,7 @@ final class GoogleCalendarManager {
         }
     }
     
-    func addEvent(toCalendarId calId: String, event: GTLRCalendar_Event, completion: @escaping (_ success: Bool) -> Void) {
+    func addEvent(toCalendarId calId: String, event: GTLRCalendar_Event, completion: @escaping (_ success: Bool, _ insertedEvent: GTLRCalendar_Event?) -> Void) {
         let insertEvent = GTLRCalendarQuery_EventsInsert.query(withObject: event, calendarId: calId)
         
         service.executeQuery(insertEvent) { (ticket, response, error) in
@@ -72,12 +72,15 @@ final class GoogleCalendarManager {
                 if let error = error {
                     throw GoogleCalendarManagerError.errorWithText(text: "Error while inserting event '\(error.localizedDescription)'")
                 }
-                
-                completion(true)
+                if let insertedEvent = response as? GTLRCalendar_Event {
+                    completion(true, insertedEvent)
+                } else {
+                    throw GoogleCalendarManagerError.errorWithText(text: "Unexpected response format after inserting event")
+                }
             } catch {
                 print(error)
                 print("GoogleCalendarManager - addEvent - \(error.localizedDescription)")
-                completion(false)
+                completion(false, nil)
             }
         }
     }
@@ -100,7 +103,7 @@ final class GoogleCalendarManager {
         }
     }
     
-    func updateEvent(inCalendarId calId: String, updatedEvent: GTLRCalendar_Event, completion: @escaping (_ success: Bool) -> Void) {
+    func updateEvent(inCalendarId calId: String, updatedEvent: GTLRCalendar_Event, completion: @escaping (_ success: Bool, _ updatedEvent: GTLRCalendar_Event?) -> Void) {
         guard let eventId = updatedEvent.identifier else { return }
         let updateEvent = GTLRCalendarQuery_EventsUpdate.query(withObject: updatedEvent, calendarId: calId, eventId: eventId)
         service.executeQuery(updateEvent) { (ticket, response, error) in
@@ -108,11 +111,15 @@ final class GoogleCalendarManager {
                 if let error = error {
                     throw GoogleCalendarManagerError.errorWithText(text: "Error while updating event '\(error.localizedDescription)'")
                 }
-                completion(true)
+                
+                guard let updatedEvent = response as? GTLRCalendar_Event else {
+                    throw GoogleCalendarManagerError.errorWithText(text: "Unable to cast response to GTLRCalendar_Event")
+                }
+                completion(true, updatedEvent)
             } catch {
                 print(error)
                 print("GoogleCalendarManager - updateEvent - \(error.localizedDescription)")
-                completion(false)
+                completion(false, nil)
             }
         }
     }
