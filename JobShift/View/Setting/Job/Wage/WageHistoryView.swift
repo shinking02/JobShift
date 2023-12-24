@@ -65,14 +65,15 @@ struct WageHistoryView: View {
     private func getWageIntervalText(wage: Wage) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年M月d日"
-        if let start = wage.start, let end = wage.end {
-            return "\(dateFormatter.string(from: start))~\(dateFormatter.string(from: end))"
-        } else if let start = wage.start {
-            return "\(dateFormatter.string(from: start))~現在"
-        } else if let end = wage.end {
-            return "~\(dateFormatter.string(from: end))"
-        } else {
+        if wage.start == Date.distantPast && wage.end == Date.distantFuture {
             return "~現在"
         }
+        if wage.start == Date.distantPast {
+            return "~\(dateFormatter.string(from: wage.end))"
+        }
+        if wage.end == Date.distantFuture {
+            return "\(dateFormatter.string(from: wage.start))~現在"
+        }
+        return "\(dateFormatter.string(from: wage.start))~\(dateFormatter.string(from: wage.end))"
     }
 }

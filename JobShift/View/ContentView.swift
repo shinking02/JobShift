@@ -11,7 +11,7 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("シフト")
                 }
-            SalaryView()
+            SalaryMainView()
                 .tabItem {
                     Image(systemName: "yensign")
                     Text("給与")

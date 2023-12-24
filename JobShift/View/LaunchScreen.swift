@@ -106,6 +106,7 @@ struct LaunchScreen: View {
                     
                     dispatchGroup.notify(queue: .main) {
                         eventStore.addEvents(events: receivedEvents)
+                        SalaryManager.shared.setEventStore(eventStore: eventStore)
                         withAnimation {
                             progressValue = 1
                             isLoading = false

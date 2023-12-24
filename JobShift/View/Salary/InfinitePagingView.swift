@@ -26,7 +26,7 @@ struct InfinitePagingView<T: Hashable, Content: View>: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            ForEach(pages) { page in
+            ForEach(pages, id:\.self) { page in
                 content(page.object)
                     .tag(page)
                     .onDisappear {

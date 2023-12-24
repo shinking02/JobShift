@@ -2,8 +2,92 @@ import Foundation
 import GoogleAPIClientForREST
 import Collections
 
-struct EventManager {
-    static func getEventsFromDate(events: [Event], dateComponents: DateComponents) -> [Event] {
+class EventStore: ObservableObject {
+    @Published var events: [Event] = []
+    
+    private let calManager = GoogleCalendarManager.shared
+    
+    func addEvents(events: [Event]) {
+        self.events.append(contentsOf: events)
+        self.sortEventsByStartDate()
+    }
+    
+    func getEvents() -> [Event] {
+        return self.events
+    }
+    
+    func clearCalendarStore() {
+        self.events = []
+    }
+    
+    func addEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
+        calManager.addEvent(toCalendarId: event.calId, event: event.gEvent) { success, insertIvent in
+            if success {
+                let newEvent = Event(calId: event.calId, gEvent: insertIvent!)
+                self.events.append(newEvent)
+                self.sortEventsByStartDate()
+            }
+            completion(success)
+        }
+    }
+    
+    func deleteEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
+        calManager.deleteEvent(fromCalendarId: event.calId, eventId: event.gEvent.identifier ?? "") { success in
+            if success {
+                self.events = self.events.filter { $0.gEvent.identifier != event.gEvent.identifier }
+            }
+            completion(success)
+        }
+    }
+    
+    func deleteNormalEvents(jobs: [Job]) {
+        let jobNames = jobs.map { $0.name }
+        self.events = self.events.filter { jobNames.contains($0.gEvent.summary ?? "") }
+    }
+    
+    func updateEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
+        calManager.updateEvent(inCalendarId: event.calId, updatedEvent: event.gEvent) { success, updateEvent in
+            if success {
+                self.events = self.events.filter { $0.id != event.id }
+                self.events.append(Event(calId: event.calId, gEvent: updateEvent!))
+                self.sortEventsByStartDate()
+            }
+            completion(success)
+        }
+    }
+    
+    func deleteCalendarFromStore(calendars: [GTLRCalendar_CalendarListEntry]) {
+        self.events.removeAll { event in
+            calendars.contains { cal in
+                event.calId == cal.identifier
+            }
+        }
+    }
+
+    
+    func updateCalendarForStore(calendars: [GTLRCalendar_CalendarListEntry], completion: @escaping (_ success: Bool) -> Void) {
+        deleteCalendarFromStore(calendars: calendars)
+        var newEvents: [Event] = []
+        let dispatchGroup = DispatchGroup()
+        calendars.forEach { calendar in
+            guard let id = calendar.identifier else { return }
+            dispatchGroup.enter()
+            calManager.fetchEventsFromCalendarId(calId: id) { events in
+                if let events = events {
+                    newEvents += events.map { gEvent in
+                        return Event(calId: id, gEvent: gEvent)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.addEvents(events: newEvents)
+            completion(true)
+        }
+    }
+    
+    func getEventsFromDate(dateComponents: DateComponents) -> [Event] {
         guard let targetStartDate = Calendar.current.date(from: dateComponents),
               let targetEndDate = Calendar.current.date(byAdding: .day, value: 1, to: targetStartDate) else {
             return []
@@ -33,7 +117,7 @@ struct EventManager {
         return Array(additionalEvents + filteredEvents)
     }
     
-    static func getSuggest(events: [Event], jobs: [Job], dateComponents: DateComponents) -> [Suggest] {
+    func getSuggest(jobs: [Job], dateComponents: DateComponents) -> [Suggest] {
         let date = Calendar.current.date(from: dateComponents) ?? Date()
         let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: date)!
         let fourteenDaysAgo = Calendar.current.date(byAdding: .day, value: -14, to: date)!
@@ -74,7 +158,6 @@ struct EventManager {
         let suggestions: [Suggest] = jobEvents.map { je -> Suggest in
             let dayDiff = calendar.dateComponents([.day], from: je.start, to: date).day ?? 0
             var addDateComponents = DateComponents()
-            let gtlrEvent = GTLRCalendar_Event()
             var (newStart, newEnd): (Date, Date)
             addDateComponents.day = dayDiff + 1
             newStart = calendar.date(byAdding: addDateComponents, to: je.start)!
@@ -84,7 +167,14 @@ struct EventManager {
         return Array(OrderedSet(suggestions)) //重複排除
     }
     
-    private static func getJobEvents(events: [Event], job: [Job], date: Date) -> [Event] {
+    func getJobEventsBetweenDates(start: Date, end: Date, job: Job) -> [Event] {
+        let startIndex = binarySearch(events, start, { $0.gEvent.start?.dateTime?.date ?? $0.gEvent.start?.date?.date ?? Date.distantFuture })
+        let endIndex = binarySearch(events, end, { $0.gEvent.start?.dateTime?.date ?? $0.gEvent.start?.date?.date ?? Date.distantFuture })
+        let filteredEvents = events[startIndex...endIndex].filter { $0.gEvent.summary == job.name }
+        return Array(filteredEvents)
+    }
+    
+    private func getJobEvents(events: [Event], job: [Job], date: Date) -> [Event] {
         return events.filter { event in
             let eventDate = event.gEvent.start?.dateTime?.date ?? event.gEvent.start?.date?.date ?? Date.distantFuture
             let jobName = event.gEvent.summary ?? ""
@@ -92,7 +182,7 @@ struct EventManager {
         }
     }
     
-    static private func binarySearch<T>(_ array: [T], _ target: Date, _ key: (T) -> Date) -> Array<T>.Index {
+    private func binarySearch<T>(_ array: [T], _ target: Date, _ key: (T) -> Date) -> Array<T>.Index {
         var low = array.startIndex
         var high = array.endIndex
         while low < high {
@@ -104,6 +194,29 @@ struct EventManager {
             }
         }
         return low
+    }
+    
+    private func sortEventsByStartDate() {
+        self.events = events.sorted { event1, event2 in
+            guard let start1 = event1.gEvent.start?.dateTime?.date ?? event1.gEvent.start?.date?.date,
+                  let start2 = event2.gEvent.start?.dateTime?.date ?? event2.gEvent.start?.date?.date else {
+                return false
+            }
+            return start1 < start2
+        }
+    }
+}
+
+struct Event: Hashable, Identifiable {
+    let id: UUID = UUID()
+    var calId: String
+    var gEvent: GTLRCalendar_Event
+    init(calId: String = "", gEvent: GTLRCalendar_Event = GTLRCalendar_Event()) {
+        self.calId = calId
+        if gEvent.summary == nil {
+            gEvent.summary = "新規イベント"
+        }
+        self.gEvent = gEvent
     }
 }
 

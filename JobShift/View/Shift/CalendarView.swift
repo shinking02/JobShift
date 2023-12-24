@@ -26,7 +26,7 @@ struct CalendarView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {
         if let selectedDate = selectedDate {
             withAnimation {
-                dateEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: selectedDate)
+                dateEvents = eventStore.getEventsFromDate(dateComponents: selectedDate)
             }
         }
         let calendar = Calendar(identifier: .gregorian)
@@ -52,7 +52,7 @@ struct CalendarView: UIViewRepresentable {
         
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            let foundEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: dateComponents)
+            let foundEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
             if foundEvents.isEmpty { return nil }
             let jobNames = parent.jobs.map { $0.name }
             let jobEvent = foundEvents.first { jobNames.contains($0.gEvent.summary ?? "") }
@@ -65,7 +65,7 @@ struct CalendarView: UIViewRepresentable {
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
             parent.selectedDate = dateComponents
             guard let dateComponents else { return }
-            parent.dateEvents = EventManager.getEventsFromDate(events: eventStore.events, dateComponents: dateComponents)
+            parent.dateEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
         }
     }
 }

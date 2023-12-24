@@ -42,7 +42,7 @@ struct EventAddView: View {
                             DispatchQueue.global().async {
                                 DispatchQueue.main.async {
                                     withAnimation {
-                                        self.suggests = EventManager.getSuggest(events: Array(eventStore.events), jobs: jobs, dateComponents: suggestDate)
+                                        self.suggests = eventStore.getSuggest(jobs: jobs, dateComponents: suggestDate)
                                     }
                                 }
                             }
@@ -118,7 +118,7 @@ struct EventAddView: View {
                 }
             }
             .onAppear {
-                self.suggests = EventManager.getSuggest(events: Array(eventStore.events), jobs: jobs, dateComponents: suggestDate)
+                self.suggests = eventStore.getSuggest(jobs: jobs, dateComponents: suggestDate)
                 self.startDate = suggestDate.date ?? Date()
                 self.endDate = suggestDate.date ?? Date()
             }

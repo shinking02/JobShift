@@ -20,7 +20,7 @@ final class Job {
     var break2: Break
     var salaryCutoffDay: Int
     var salaryPaymentDay: Int
-    var salaries: [Salary]
+    var salaryHistories: [SalaryHistory]
     
     init(
         name: String = "",
@@ -39,7 +39,7 @@ final class Job {
         break2: Break = Break(breakMinutes: 90, breakIntervalMinutes: 480),
         salaryCutoffDay: Int = 20,
         salaryPaymentDay: Int = 10,
-        salaries: [Salary] = []
+        salaryHistories: [SalaryHistory] = []
     ) {
         self.id = UUID()
         self.name = name
@@ -57,7 +57,7 @@ final class Job {
         self.break2 = break2
         self.salaryCutoffDay = salaryCutoffDay
         self.salaryPaymentDay = salaryPaymentDay
-        self.salaries = salaries
+        self.salaryHistories = salaryHistories
     }
 }
 
@@ -67,9 +67,9 @@ struct Wage: Codable, Hashable {
     var holidayHourlyWage: Int
     var holidayHourlyNightWage: Int
     var dailyWage: Int
-    var start: Date?
-    var end: Date?
-    init(hourlyWage: Int = 1200, nightHourlyWage: Int = 1300, holidayHourlyWage: Int = 1300, holidayHourlyNightWage: Int = 1400, dailyWage: Int = 10000, start: Date? = nil, end: Date? = nil) {
+    var start: Date
+    var end: Date
+    init(hourlyWage: Int = 1200, nightHourlyWage: Int = 1300, holidayHourlyWage: Int = 1300, holidayHourlyNightWage: Int = 1400, dailyWage: Int = 10000, start: Date = Date.distantPast, end: Date = Date.distantFuture) {
         self.hourlyWage = hourlyWage
         self.nightHourlyWage = nightHourlyWage
         self.holidayHourlyWage = holidayHourlyWage
@@ -85,9 +85,10 @@ struct Break: Codable {
     var breakIntervalMinutes: Int
 }
 
-struct Salary: Codable {
+struct SalaryHistory: Codable {
     var salary: Int
-    var yearMonth: DateComponents
+    var year: Int
+    var month: Int
 }
 
 enum JobColor: String, Codable, CaseIterable {
