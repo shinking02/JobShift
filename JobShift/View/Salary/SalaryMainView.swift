@@ -18,31 +18,27 @@ struct SalaryMainView: View {
         let calendar = Calendar.current
         return calendar.component(.month, from: currentDate)
     }()
-    @State private var pages: [YearMonth] = {
+    @State private var pages: [SalaryPage] = {
         let currentDate = Date()
         let calendar = Calendar.current
         let currentMonth = calendar.component(.month, from: currentDate)
         let currentYear = calendar.component(.year, from: currentDate)
         
-        let lastMonthObject = YearMonth(year: currentMonth > 1 ? currentYear : currentYear - 1, month: currentMonth > 1 ? currentMonth - 1 : 12)
-        let currentMonthObject = YearMonth(year: currentYear, month: currentMonth)
-        let nextMonthObject = YearMonth(year: currentMonth < 12 ? currentYear : currentYear + 1, month: currentMonth < 12 ? currentMonth + 1 : 1)
+        let lastMonthObject = SalaryPage(year: currentMonth > 1 ? currentYear : currentYear - 1, month: currentMonth > 1 ? currentMonth - 1 : 12)
+        let currentMonthObject = SalaryPage(year: currentYear, month: currentMonth)
+        let nextMonthObject = SalaryPage(year: currentMonth < 12 ? currentYear : currentYear + 1, month: currentMonth < 12 ? currentMonth + 1 : 1)
         
         return [lastMonthObject, currentMonthObject, nextMonthObject]
     }()
+    @State private var includeCommute = false
+    @State private var showAddSalaryView = false
     private let salaryManager: SalaryManager = SalaryManager.shared
 
     var body: some View {
         NavigationView {
             ZStack {
                 InfinitePagingView(objects: $pages, pagingHandler: handlePageChange) { yearMonth in
-                    let salaries = SalaryManager.shared.getSalaries(jobs: jobs, otJobs: otJobs, year: yearMonth.year, month: yearMonth.month)
-                    SalaryView(salaries: salaries)
-                        .onTapGesture {
-                            withAnimation {
-                                self.pickerIsPresented = false
-                            }
-                        }
+                    SalaryView(year: yearMonth.year, month: yearMonth.month, unitType: selectedUnit, includeCommute: $includeCommute)
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -65,7 +61,7 @@ struct SalaryMainView: View {
                                 pickerIsPresented.toggle()
                             }
                         }) {
-                            Text("\(String(yearSelection))年\( selectedUnit == UnitType.month ? "\(String(monthSelection))月" : "")")
+                            Text("\(String(yearSelection))年\(selectedUnit == UnitType.month ? "\(String(monthSelection))月" : "")")
                                 .bold()
                                 .tint(Color(UIColor.label))
                             Image(systemName: "chevron.down")
@@ -75,10 +71,11 @@ struct SalaryMainView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            
+                            self.showAddSalaryView = true
                         }) {
                             Image(systemName: "plus")
                         }
+                        .disabled(jobs.count == 0)
                     }
                 }
                 if pickerIsPresented {
@@ -90,11 +87,27 @@ struct SalaryMainView: View {
                             .shadow(radius: 5)
                         Spacer()
                     }
+                    .background(Color.black.opacity(0.0001))
+                    .onTapGesture {
+                        withAnimation {
+                            self.pickerIsPresented = false
+                        }
+                    }
                     .zIndex(.infinity)
                     .transition(.scale(scale: 0, anchor: .top).combined(with: .opacity))
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
+            .onChange(of: pickerIsPresented) {
+                if !pickerIsPresented {
+                    updatePages()
+                }
+            }
+            .sheet(isPresented: $showAddSalaryView, onDismiss: {
+                updatePages()
+            }){
+                SalaryAddView(year: yearSelection, month: monthSelection, selectedJob: jobs[0])
+            }
         }
     }
     private func handlePageChange(direction: PageDirection) {
@@ -103,6 +116,9 @@ struct SalaryMainView: View {
         }
         switch direction {
         case .backward:
+            pages[2] = pages[1]
+            pages[1] = pages[0]
+            
             if self.selectedUnit == UnitType.month {
                 if self.monthSelection > 1 {
                     self.monthSelection -= 1
@@ -110,10 +126,21 @@ struct SalaryMainView: View {
                     self.yearSelection -= 1
                     self.monthSelection = 12
                 }
+                let (year, month): (Int, Int) = {
+                    if monthSelection > 1 {
+                        return (yearSelection, monthSelection - 1)
+                    } else {
+                        return (yearSelection - 1, 12)
+                    }
+                }()
+                pages[0] = SalaryPage(year: year, month: month)
             } else {
                 self.yearSelection -= 1
+                pages[0] = SalaryPage(year: yearSelection - 1)
             }
         case .forward:
+            pages[0] = pages[1]
+            pages[1] = pages[2]
             if self.selectedUnit == UnitType.month {
                 if self.monthSelection < 12 {
                     self.monthSelection += 1
@@ -121,42 +148,42 @@ struct SalaryMainView: View {
                     self.yearSelection += 1
                     self.monthSelection = 1
                 }
-            } else {
-                self.yearSelection += 1
-            }
-        }
-        updatePages()
-    }
-    private func updatePages() {
-        self.pages = {
-            if selectedUnit == UnitType.month {
-                let (previousPageYear, previousPageMonth): (Int, Int) = {
-                    if monthSelection > 1 {
-                        return (yearSelection, monthSelection - 1)
-                    } else {
-                        return (yearSelection - 1, 12)
-                    }
-                }()
-                let (nextPageYear, nextPageMonth): (Int, Int) = {
+                let (year, month): (Int, Int) = {
                     if monthSelection < 12 {
                         return (yearSelection, monthSelection + 1)
                     } else {
                         return (yearSelection + 1, 1)
                     }
                 }()
-                return [
-                    YearMonth(year: previousPageYear, month: previousPageMonth),
-                    YearMonth(year: yearSelection, month: monthSelection),
-                    YearMonth(year: nextPageYear, month: nextPageMonth)
-                ]
+                pages[2] = SalaryPage(year: year, month: month)
             } else {
-                return [
-                    YearMonth(year: yearSelection - 1),
-                    YearMonth(year: yearSelection),
-                    YearMonth(year: yearSelection + 1)
-                ]
+                self.yearSelection += 1
+                pages[2] = SalaryPage(year: yearSelection + 1)
             }
-        }()
+        }
+    }
+    private func updatePages() {
+        if self.selectedUnit == UnitType.month {
+            var previousYear = yearSelection
+            var previousMonth = monthSelection - 1
+            if previousMonth == 0 {
+                previousMonth = 12
+                previousYear -= 1
+            }
+            var nextYear = yearSelection
+            var nextMonth = monthSelection + 1
+            if nextMonth == 13 {
+                nextMonth = 1
+                nextYear += 1
+            }
+            pages[0] = SalaryPage(year: previousYear, month: previousMonth)
+            pages[1] = SalaryPage(year: yearSelection, month: monthSelection)
+            pages[2] = SalaryPage(year: nextYear, month: nextMonth)
+        } else {
+            pages[0] = SalaryPage(year: yearSelection - 1)
+            pages[1] = SalaryPage(year: yearSelection)
+            pages[2] = SalaryPage(year: yearSelection + 1)
+        }
     }
 }
 
@@ -165,7 +192,7 @@ enum UnitType: String {
     case year
 }
 
-struct YearMonth: Hashable, Identifiable {
+struct SalaryPage: Hashable, Identifiable {
     let id = UUID()
     var year: Int
     var month: Int?

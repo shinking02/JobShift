@@ -170,7 +170,7 @@ class EventStore: ObservableObject {
     func getJobEventsBetweenDates(start: Date, end: Date, job: Job) -> [Event] {
         let startIndex = binarySearch(events, start, { $0.gEvent.start?.dateTime?.date ?? $0.gEvent.start?.date?.date ?? Date.distantFuture })
         let endIndex = binarySearch(events, end, { $0.gEvent.start?.dateTime?.date ?? $0.gEvent.start?.date?.date ?? Date.distantFuture })
-        let filteredEvents = events[startIndex...endIndex].filter { $0.gEvent.summary == job.name }
+        let filteredEvents = events[startIndex..<endIndex].filter { $0.gEvent.summary == job.name }
         return Array(filteredEvents)
     }
     

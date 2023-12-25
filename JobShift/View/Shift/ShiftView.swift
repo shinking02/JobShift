@@ -47,6 +47,7 @@ struct ShiftView: View {
                 }, label: {
                     Image(systemName: "plus")
                 })
+                .disabled(jobs.count == 0)
             }
         }
         .onAppear {
