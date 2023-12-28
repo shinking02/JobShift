@@ -68,6 +68,7 @@
 		54302B722B3D5A6100BB6216 /* OtDetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailYear.swift; sourceTree = "<group>"; };
 		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
 		543340EC2B3D6556002C302A /* EditSalaryHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistory.swift; sourceTree = "<group>"; };
+		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
 		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		5439F7922B34F9FB005CC21F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
@@ -232,6 +233,7 @@
 		54F7378A2B259702004A4975 /* JobShift */ = {
 			isa = PBXGroup;
 			children = (
+				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
 				54F7379D2B259A7A004A4975 /* View */,
@@ -582,6 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
@@ -614,6 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";

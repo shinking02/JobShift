@@ -3,12 +3,12 @@ import SwiftData
 
 @Model
 final class OneTimeJob {
-    let id: UUID
-    var name: String
-    var date: Date
-    var salary: Int
-    var isCommuteWage: Bool
-    var commuteWage: Int
+    let id: UUID = UUID()
+    var name: String = ""
+    var date: Date = Date()
+    var salary: Int = 0
+    var isCommuteWage: Bool = false
+    var commuteWage: Int = 0
     
     init(name: String = "", date: Date = Date(), salary: Int = 6000, isCommuteWage: Bool = false, commuteWage: Int = 500) {
         self.id = UUID()

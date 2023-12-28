@@ -4,23 +4,23 @@ import SwiftUI
 
 @Model
 final class Job {
-    let id: UUID
-    var name: String
-    var color: JobColor
-    var isDailyWage: Bool
-    var isNightWage: Bool
-    var nightWageStartTime: Date
-    var isHolidayWage: Bool
-    var wages: [Wage]
-    var isCommuteWage: Bool
-    var commuteWage: Int
-    var isBreak1: Bool
-    var break1: Break
-    var isBreak2: Bool
-    var break2: Break
-    var salaryCutoffDay: Int
-    var salaryPaymentDay: Int
-    var salaryHistories: [SalaryHistory]
+    let id: UUID = UUID()
+    var name: String = ""
+    var color: JobColor = JobColor.red
+    var isDailyWage: Bool = false
+    var isNightWage: Bool = false
+    var nightWageStartTime: Date = Date()
+    var isHolidayWage: Bool = false
+    var wages: [Wage] = []
+    var isCommuteWage: Bool = false
+    var commuteWage: Int = 0
+    var isBreak1: Bool = false
+    var break1: Break = Break(breakMinutes: 0, breakIntervalMinutes: 0)
+    var isBreak2: Bool = false
+    var break2: Break = Break(breakMinutes: 0, breakIntervalMinutes: 0)
+    var salaryCutoffDay: Int = 0
+    var salaryPaymentDay: Int = 0
+    var salaryHistories: [SalaryHistory] = []
     
     init(
         name: String = "",
