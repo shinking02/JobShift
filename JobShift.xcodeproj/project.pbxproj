@@ -11,14 +11,16 @@
 		540CCAAC2B2DB003008B25CB /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAB2B2DB003008B25CB /* JobEditView.swift */; };
 		540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */; };
 		541107032B34438500A32AF9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541107022B34438500A32AF9 /* CustomDatePicker.swift */; };
-		541107052B34489200A32AF9 /* SalaryMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541107042B34489200A32AF9 /* SalaryMonthView.swift */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
 		5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9332B2D3932004B88C7 /* OneTimeJob.swift */; };
 		5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */; };
 		5427156D2B380E9100263D28 /* SalaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427156C2B380E9100263D28 /* SalaryRow.swift */; };
+		54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54302B702B3D524000BB6216 /* OtDetailMonth.swift */; };
+		54302B732B3D5A6100BB6216 /* OtDetailYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54302B722B3D5A6100BB6216 /* OtDetailYear.swift */; };
 		54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* GoogleCalendarManager.swift */; };
+		543340ED2B3D6556002C302A /* EditSalaryHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543340EC2B3D6556002C302A /* EditSalaryHistory.swift */; };
 		5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167C2B2ADDFC0049427D /* CalSettingView.swift */; };
 		5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */; };
 		5439F7932B34F9FB005CC21F /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439F7922B34F9FB005CC21F /* SalaryView.swift */; };
@@ -27,6 +29,8 @@
 		54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB12B2D4CCA009F900E /* JobAddView.swift */; };
 		54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB52B2D4D45009F900E /* OTJobAddView.swift */; };
 		54616CC02B38F9E6001045EC /* SalaryAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54616CBF2B38F9E6001045EC /* SalaryAddView.swift */; };
+		5477EE7E2B39A5FA00B13CB9 /* DetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */; };
+		5477EE812B3B074F00B13CB9 /* DetailYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE802B3B074F00B13CB9 /* DetailYear.swift */; };
 		547EB5E62B32877800D9E2E8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E52B32877800D9E2E8 /* Collections */; };
 		547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E72B32877800D9E2E8 /* DequeModule */; };
 		547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E92B32877800D9E2E8 /* OrderedCollections */; };
@@ -54,14 +58,16 @@
 		540CCAAB2B2DB003008B25CB /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
 		540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageAddView.swift; sourceTree = "<group>"; };
 		541107022B34438500A32AF9 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
-		541107042B34489200A32AF9 /* SalaryMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryMonthView.swift; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		5423A9332B2D3932004B88C7 /* OneTimeJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeJob.swift; sourceTree = "<group>"; };
 		5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
 		5427156C2B380E9100263D28 /* SalaryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryRow.swift; sourceTree = "<group>"; };
+		54302B702B3D524000BB6216 /* OtDetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailMonth.swift; sourceTree = "<group>"; };
+		54302B722B3D5A6100BB6216 /* OtDetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailYear.swift; sourceTree = "<group>"; };
 		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
+		543340EC2B3D6556002C302A /* EditSalaryHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistory.swift; sourceTree = "<group>"; };
 		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
 		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		5439F7922B34F9FB005CC21F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
@@ -70,6 +76,8 @@
 		54557AB12B2D4CCA009F900E /* JobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddView.swift; sourceTree = "<group>"; };
 		54557AB52B2D4D45009F900E /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
 		54616CBF2B38F9E6001045EC /* SalaryAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddView.swift; sourceTree = "<group>"; };
+		5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonth.swift; sourceTree = "<group>"; };
+		5477EE802B3B074F00B13CB9 /* DetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYear.swift; sourceTree = "<group>"; };
 		549077352B2EDA6F0004E523 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54BD22272B2828A200B66497 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
@@ -124,14 +132,6 @@
 			path = OTJob;
 			sourceTree = "<group>";
 		};
-		541107062B34489B00A32AF9 /* Month */ = {
-			isa = PBXGroup;
-			children = (
-				541107042B34489200A32AF9 /* SalaryMonthView.swift */,
-			);
-			path = Month;
-			sourceTree = "<group>";
-		};
 		541ECF5F2B25F74700A8E091 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +172,17 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		5477EE7F2B39AFB000B13CB9 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */,
+				5477EE802B3B074F00B13CB9 /* DetailYear.swift */,
+				54302B702B3D524000BB6216 /* OtDetailMonth.swift */,
+				54302B722B3D5A6100BB6216 /* OtDetailYear.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		54BD22262B28286A00B66497 /* Shift */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,10 +201,11 @@
 				54BD222A2B282A9000B66497 /* SalaryMainView.swift */,
 				5439F7922B34F9FB005CC21F /* SalaryView.swift */,
 				5427156C2B380E9100263D28 /* SalaryRow.swift */,
+				543340EC2B3D6556002C302A /* EditSalaryHistory.swift */,
+				5477EE7F2B39AFB000B13CB9 /* Detail */,
 				544E52DD2B34110900F54B22 /* InfinitePagingView.swift */,
 				541107022B34438500A32AF9 /* CustomDatePicker.swift */,
 				54616CBF2B38F9E6001045EC /* SalaryAddView.swift */,
-				541107062B34489B00A32AF9 /* Month */,
 			);
 			path = Salary;
 			sourceTree = "<group>";
@@ -413,12 +425,16 @@
 				5427156D2B380E9100263D28 /* SalaryRow.swift in Sources */,
 				5439F7932B34F9FB005CC21F /* SalaryView.swift in Sources */,
 				5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */,
+				543340ED2B3D6556002C302A /* EditSalaryHistory.swift in Sources */,
 				54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */,
+				5477EE7E2B39A5FA00B13CB9 /* DetailMonth.swift in Sources */,
 				544E52DE2B34110900F54B22 /* InfinitePagingView.swift in Sources */,
 				540CCAAC2B2DB003008B25CB /* JobEditView.swift in Sources */,
 				54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */,
+				5477EE812B3B074F00B13CB9 /* DetailYear.swift in Sources */,
 				541107032B34438500A32AF9 /* CustomDatePicker.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
+				54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */,
 				5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */,
 				54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
@@ -427,10 +443,10 @@
 				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
 				5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */,
+				54302B732B3D5A6100BB6216 /* OtDetailYear.swift in Sources */,
 				540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */,
 				5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */,
 				54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */,
-				541107052B34489200A32AF9 /* SalaryMonthView.swift in Sources */,
 				54B8C9032B2E8A7F009834E2 /* OTJobEditView.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 				54616CC02B38F9E6001045EC /* SalaryAddView.swift in Sources */,

@@ -15,44 +15,72 @@ final class SalaryManager {
         var salaries: [Salary] = []
         guard let eventStore else { return salaries }
         salaries = jobs.compactMap { job in
-            let (start, end) = calculateDates(year: year, month: month, day: job.salaryCutoffDay)
-            let events = eventStore.getJobEventsBetweenDates(start: start, end: end, job: job)
-
-            var forcastWage = 0
-            var totalMinutes = 0
-            events.forEach { e in
-                let (salary, minutes) = calcSalaryAndMinutesByEvent(job: job, event: e.gEvent)
-                forcastWage += salary
-                totalMinutes += minutes
-            }
-            let commuteWage = job.isCommuteWage ? job.commuteWage * events.count : 0
-            var isConfirmed = false
-            let confirmedWage = {
-                if let month = month, let cSalary = job.salaryHistories.first(where: { $0.year == year && $0.month == month }) {
-                    isConfirmed = true
-                    return cSalary.salary
-                } else {
-                    let cSalaries = job.salaryHistories.filter { $0.year == year }
-                    if cSalaries.count != 0 {
-                        isConfirmed = cSalaries.count >= 12
-                        return cSalaries.reduce(0) { $0 + $1.salary }
+            if let month = month {
+                let (start, end) = calculateDates(year: year, month: month, day: job.salaryCutoffDay)
+                let events = eventStore.getJobEventsBetweenDates(start: start, end: end, job: job)
+                var forcastWage = 0
+                var totalMinutes = 0
+                events.forEach { e in
+                    let (salary, minutes) = calcSalaryAndMinutesByEvent(job: job, event: e.gEvent)
+                    forcastWage += salary
+                    totalMinutes += minutes
+                }
+                let commuteWage = job.isCommuteWage ? job.commuteWage * events.count : 0
+                var isConfirmed = false
+                let confirmedWage = {
+                    if let cSalary = job.salaryHistories.first(where: { $0.year == year && $0.month == month }) {
+                        isConfirmed = true
+                        return cSalary.salary
+                    }
+                    return 0
+                }()
+                return Salary(
+                    job: job,
+                    isConfirmed: isConfirmed,
+                    confirmedWage: confirmedWage - commuteWage,
+                    forcastWage: forcastWage,
+                    commuteWage: commuteWage,
+                    events: events.map { $0.gEvent },
+                    count: events.count,
+                    totalMinutes: totalMinutes
+                )
+            } else {
+                var forcastWage = 0
+                var totalMinutes = 0
+                var confirmeCount = 0
+                var allEvents = [Event]()
+                for m in 1...12 {
+                    let history = job.salaryHistories.first { $0.year == year && $0.month == m }
+                    if history != nil {
+                        confirmeCount += 1
+                    }
+                    let (start, end) = calculateDates(year: year, month: m, day: job.salaryCutoffDay)
+                    let events = eventStore.getJobEventsBetweenDates(start: start, end: end, job: job)
+                    allEvents.append(contentsOf: events)
+                    if let history = history {
+                        forcastWage += history.salary - (job.isCommuteWage ? job.commuteWage * events.count : 0)
+                    }
+                    events.forEach { e in
+                        let (salary, minutes) = calcSalaryAndMinutesByEvent(job: job, event: e.gEvent)
+                        if history == nil {
+                            forcastWage += salary
+                        }
+                        totalMinutes += minutes
                     }
                 }
-                return 0
-            }()
-            if events.count < 1 && !isConfirmed {
-                return nil
+                let confirmedWage = job.salaryHistories.filter { $0.year == year }.reduce(0) { $0 + $1.salary }
+                let commuteWage = job.isCommuteWage ? job.commuteWage * allEvents.count : 0
+                return Salary(
+                    job: job,
+                    isConfirmed: confirmeCount == 12,
+                    confirmedWage: confirmedWage - commuteWage,
+                    forcastWage: forcastWage,
+                    commuteWage: commuteWage,
+                    events: allEvents.map { $0.gEvent },
+                    count: allEvents.count,
+                    totalMinutes: totalMinutes
+                )
             }
-            return Salary(
-                        job: job,
-                        isConfirmed: isConfirmed,
-                        confirmedWage: confirmedWage - commuteWage,
-                        forcastWage: forcastWage,
-                        commuteWage: commuteWage,
-                        events: events.map { $0.gEvent },
-                        count: events.count,
-                        totalMinutes: totalMinutes
-                    )
         }
         let (otStart, otEnd) = calculateDates(year: year, month: month, day: 31)
         let targetOtJobs = otJobs.filter { ot in

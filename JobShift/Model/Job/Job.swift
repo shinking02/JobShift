@@ -85,7 +85,7 @@ struct Break: Codable {
     var breakIntervalMinutes: Int
 }
 
-struct SalaryHistory: Codable {
+struct SalaryHistory: Hashable, Codable {
     var salary: Int
     var year: Int
     var month: Int

@@ -104,7 +104,7 @@ struct SalaryMainView: View {
                 }
             }
             .sheet(isPresented: $showAddSalaryView, onDismiss: {
-                updatePages()
+                pages[1] = SalaryPage(year: yearSelection, month: selectedUnit == UnitType.month ? monthSelection : nil)
             }){
                 SalaryAddView(year: yearSelection, month: monthSelection, selectedJob: jobs[0])
             }

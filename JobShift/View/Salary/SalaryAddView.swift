@@ -78,7 +78,7 @@ struct SalaryAddView: View {
                             self.showAlert = false
                         }
                     } message: {
-                        Text("\(year)年\(month)月の給与実績が存在します")
+                        Text("\(String(year))年\(month)月の給与実績が存在します")
                     }
                 }
             }

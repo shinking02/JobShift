@@ -3,6 +3,10 @@ import SwiftUI
 struct SalaryRow: View {
     @State var salary: Salary
     @Binding var includeCommute: Bool
+    @State var unitType: UnitType
+    @State var year: Int
+    @State var month: Int?
+    
     var body: some View {
         Section {
             HStack {
@@ -11,18 +15,11 @@ struct SalaryRow: View {
                     .frame(width: 3)
                     .cornerRadius(2)
                 VStack {
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: DestinationView()) {
                         HStack {
                             Text(salary.job?.name ?? "単発バイト")
                                 .bold()
-                            Text(salary.isConfirmed ? "確定" : "見込み").font(.caption).lineLimit(1)
-                                .foregroundColor(salary.isConfirmed ? .green : .orange)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .cornerRadius(40) 
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .stroke(.secondary, lineWidth: 1.5))
+                            ConfirmChip(isConfirmed: salary.isConfirmed)
                             Spacer()
                             Text("\(salary.count)出勤")
                                 .foregroundColor(.secondary)
@@ -55,5 +52,35 @@ struct SalaryRow: View {
             .frame(height: 80)
         }
         .listSectionSpacing(20)
+    }
+    @ViewBuilder
+    private func DestinationView() -> some View {
+        if let job = salary.job {
+            if let month = month {
+                DetailMonth(year: year, month: month, targetJob: job)
+            } else {
+                DetailYear(year: year, targetJob: job)
+            }
+        } else {
+            if let month = month {
+                OtDetailMonth(year: year, month: month)
+            } else {
+                OtDetailYear(year: year)
+            }
+        }
+    }
+}
+
+struct ConfirmChip: View {
+    @State var isConfirmed: Bool
+    var body: some View {
+        Text(isConfirmed ? "確定" : "見込み").font(.caption).lineLimit(1)
+            .foregroundColor(isConfirmed ? .green : .orange)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .cornerRadius(40)
+            .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(.secondary, lineWidth: 1.5))
     }
 }

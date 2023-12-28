@@ -75,16 +75,17 @@ struct SalaryView: View {
                                     let diff = totalSalary - lastTotalSalary
                                     let (color, image): (Color, String) = {
                                         if diff > 0 {
-                                            return (.green, "arrow.up.forward")
+                                            return (.green, "arrow.up")
                                         }
                                         if diff < 0 {
-                                            return (.red, "arrow.down.forward")
+                                            return (.red, "arrow.down")
                                         }
                                         return (.secondary, "arrow.forward")
                                     }()
                                     HStack {
                                         Text("\(abs(diff))円")
                                         Image(systemName: image)
+                                            .frame(width: 3)
                                     }
                                     .font(.caption)
                                     .foregroundStyle(color)
@@ -122,7 +123,9 @@ struct SalaryView: View {
                 }
             }
             ForEach(salaries, id: \.self) { salary in
-                    SalaryRow(salary: salary, includeCommute: $includeCommute)
+                if (salary.count > 0 && salary.forcastWage > 0) || salary.isConfirmed {
+                    SalaryRow(salary: salary, includeCommute: $includeCommute, unitType: unitType, year: year, month: month)
+                }
             }
         }
         .onAppear {
@@ -135,6 +138,7 @@ struct SalaryView: View {
                 return month - 1
             }()
             self.salaries = SalaryManager.shared.getSalaries(jobs: jobs, otJobs: otJobs, year: year, month: month)
+            self.salaries.sort { ($0.isConfirmed ? $0.confirmedWage : $0.forcastWage) > ($1.isConfirmed ? $1.confirmedWage : $1.forcastWage) }
             self.lastSalaries = SalaryManager.shared.getSalaries(jobs: jobs, otJobs: otJobs, year: lastYear, month: lastMonth)
         }
     }
