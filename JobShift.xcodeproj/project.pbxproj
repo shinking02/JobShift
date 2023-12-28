@@ -69,6 +69,7 @@
 		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
 		543340EC2B3D6556002C302A /* EditSalaryHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistory.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
+		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
 		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		5439F7922B34F9FB005CC21F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		54F7377F2B259701004A4975 = {
 			isa = PBXGroup;
 			children = (
+				543340EF2B3DD725002C302A /* README.md */,
 				54E3931E2B25A8E20002D4EB /* .gitignore */,
 				54F7378A2B259702004A4975 /* JobShift */,
 				54F737892B259702004A4975 /* Products */,

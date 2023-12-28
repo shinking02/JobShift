@@ -8,7 +8,7 @@ struct SalaryAddView: View {
     @State var month: Int
     @State var selectedJob: Job
     @Query private var jobs: [Job]
-    @State private var salary: Int = 0
+    @State private var salary: Int? = 0
     @State private var showAlert = false
     @State private var pickerIsPresented = false
     
@@ -69,8 +69,10 @@ struct SalaryAddView: View {
                             self.showAlert = true
                             return
                         }
-                        selectedJob.salaryHistories.append(SalaryHistory(salary: salary, year: year, month: month))
-                        try? context.save()
+                        if let salary = salary {
+                            selectedJob.salaryHistories.append(SalaryHistory(salary: salary, year: year, month: month))
+                            try? context.save()
+                        }
                         dismiss()
                     }
                     .alert("エラー", isPresented: $showAlert) {
