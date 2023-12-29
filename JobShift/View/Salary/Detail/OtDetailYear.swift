@@ -8,6 +8,7 @@ struct OtDetailYear: View {
     @Query private var otJobs: [OneTimeJob]
     @State private var salaryAvg = 0
     @State private var showAvgLine = true
+    @State private var chartData: [ChartData] = []
     
     var body: some View {
         List {
@@ -38,10 +39,10 @@ struct OtDetailYear: View {
                     + Text(" 円")
                         .bold()
                         .foregroundColor(.secondary)
-                    Chart(targetOtJobs) { job in
+                    Chart(chartData) { record in
                         BarMark(
-                            x: .value("月", job.date, unit: .month),
-                            y: .value("給与", job.salary),
+                            x: .value("月", record.date, unit: .month),
+                            y: .value("給与", record.salary),
                             width: 20
                         )
                         .opacity(showAvgLine ? 0.2 : 1)
@@ -64,7 +65,7 @@ struct OtDetailYear: View {
                             AxisTick()
                             AxisValueLabel(content: {
                                 if let intValue = value.as(Int.self) {
-                                    Text("\(intValue / 10000)")
+                                    Text("\(intValue / 1000)")
                                 }
                             })
                         })
@@ -76,7 +77,7 @@ struct OtDetailYear: View {
                             AxisValueLabel(format: .dateTime.month(.defaultDigits), centered: true)
                         }
                     }
-                    .chartYAxisLabel("万円")
+                    .chartYAxisLabel("千円")
                 }
                 Toggle(isOn: $showAvgLine.animation(), label: {
                     Text("平均を表示")
@@ -114,7 +115,16 @@ struct OtDetailYear: View {
             }
             self.targetOtJobs.sort { $0.date > $1.date }
             let totalSalary = targetOtJobs.reduce(0) { $0 + $1.salary }
-            self.salaryAvg = totalSalary / targetOtJobs.count
+            self.salaryAvg = totalSalary / 12
+            for month in 1...12 {
+                let dateComp = DateComponents(year: year, month: month)
+                let date = Calendar.current.date(from: dateComp)!
+                let salary = targetOtJobs.filter { job in
+                    let jobDateComp = Calendar.current.dateComponents([.year, .month], from: job.date)
+                    return jobDateComp.year == year && jobDateComp.month == month
+                }.reduce(0) { $0 + $1.salary }
+                chartData.append(ChartData(date: date, salary: salary))
+            }
         }
     }
     private func formattedDateString(from date: Date) -> String {
@@ -126,3 +136,8 @@ struct OtDetailYear: View {
     }
 }
 
+private struct ChartData: Identifiable {
+    let id = UUID()
+    var date: Date
+    var salary: Int
+}
