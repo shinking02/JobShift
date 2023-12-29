@@ -11,6 +11,7 @@ struct JobSettingView: View {
     @State private var showingAddOneTimeJobView = false
     @State private var groupedOtJobs: [Int: [OneTimeJob]] = [:]
     @State private var openThisYearRow = false
+    @State private var expanded: Set<Int> = []
     
     var body: some View {
         List {
@@ -31,7 +32,16 @@ struct JobSettingView: View {
             if !oneTimeJobs.isEmpty {
                 Section(header: Text("単発バイト")) {
                     ForEach(Array(groupedOtJobs.keys).sorted(by: >), id: \.self) { year in
-                        DisclosureGroup(String(year) + "年") {
+                        DisclosureGroup(String(year) + "年", isExpanded: Binding<Bool>(
+                            get: { expanded.contains(year) },
+                            set: { isExpanding in
+                                if isExpanding {
+                                    expanded.insert(year)
+                                } else {
+                                    expanded.remove(year)
+                                }
+                            }
+                        )) {
                             ForEach((groupedOtJobs[year] ?? []).sorted { $0.date > $1.date }, id: \.self) { job in
                                 NavigationLink(destination: OTJobEditView(editOtJob: job)) {
                                     HStack {
@@ -58,6 +68,8 @@ struct JobSettingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             updateGroupedOtJobs()
+            let currentYear = Calendar.current.component(.year, from: Date())
+            self.expanded.insert(currentYear)
         }
         .onChange(of: showingAddOneTimeJobView) {
             updateGroupedOtJobs()
