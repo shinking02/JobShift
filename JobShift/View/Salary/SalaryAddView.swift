@@ -9,6 +9,7 @@ struct SalaryAddView: View {
     @State var selectedJob: Job
     @Query private var jobs: [Job]
     @State private var salary: Int? = 0
+    @State private var salaryString: String = "0"
     @State private var showAlert = false
     @State private var pickerIsPresented = false
     
@@ -46,7 +47,7 @@ struct SalaryAddView: View {
                     }
                     HStack {
                         Text("給与")
-                        TextField("", value: $salary, formatter: NumberFormatter())
+                        TextField("", text: $salaryString)
                             .multilineTextAlignment(TextAlignment.trailing)
                             .keyboardType(.numberPad)
                         Text("円")
@@ -64,6 +65,7 @@ struct SalaryAddView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("追加") {
+                        self.salary = Int(salaryString) ?? nil
                         let existSalary = selectedJob.salaryHistories.first { $0.month == month && $0.year == year }
                         if existSalary != nil {
                             self.showAlert = true
