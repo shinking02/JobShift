@@ -99,6 +99,8 @@ enum JobColor: String, Codable, CaseIterable {
     case blue
     case purple
     case brown
+    case pink
+    case mint
 }
 
 extension JobColor {
@@ -118,6 +120,10 @@ extension JobColor {
             return "パープル"
         case .brown:
             return "ブラウン"
+        case .pink:
+            return "ピンク"
+        case .mint:
+            return "ミント"
         }
     }
     
@@ -137,6 +143,10 @@ extension JobColor {
             return Color.purple
         case .brown:
             return Color.brown
+        case .pink:
+            return Color.pink
+        case .mint:
+            return Color.mint
         }
     }
 }
