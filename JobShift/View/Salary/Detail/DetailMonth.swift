@@ -123,16 +123,21 @@ struct DetailMonth: View {
                         let isAllday = event.start?.date?.date != nil
                         let start = event.start?.dateTime?.date ?? event.start?.date?.date ?? Date.distantPast
                         let end = event.end?.dateTime?.date ?? event.end?.date?.date ?? Date.distantFuture
-                        HStack {
-                            Text(formattedDateString(from: start))
-                            Spacer()
-                            if !isAllday {
-                                VStack {
-                                    Text(formattedTimeString(from: start))
-                                    Text(formattedTimeString(from: end))
+                        let eventId = event.identifier ?? ""
+                        NavigationLink(destination: EditEventSummary(eventId: eventId, title: formattedDateString(from: start), targetJob: targetJob)) {
+                            HStack {
+                                Text(formattedDateString(from: start))
+                                Text(targetJob.eventSummaries[eventId] ?? "")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                if !isAllday {
+                                    VStack {
+                                        Text(formattedTimeString(from: start))
+                                        Text(formattedTimeString(from: end))
+                                    }
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
                                 }
-                                .font(.caption)
-                                .foregroundColor(.secondary)
                             }
                         }
                     }

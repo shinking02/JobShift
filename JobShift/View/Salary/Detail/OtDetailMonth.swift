@@ -37,9 +37,13 @@ struct OtDetailMonth: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+
                         HStack {
                             Text("\(job.name)")
                                 .font(.title3.bold())
+                            Text("\(job.summary)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                             Spacer()
                             Text("\(job.salary)")
                                 .font(.title3.bold())

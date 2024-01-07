@@ -42,6 +42,7 @@
 		54BD222F2B28696B00B66497 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222E2B28696B00B66497 /* EventRow.swift */; };
 		54CE0A702B2D6FFF008EA726 /* WageHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */; };
 		54CE0A742B2DA080008EA726 /* BreakPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE0A732B2DA080008EA726 /* BreakPicker.swift */; };
+		54DC38932B4AA91C00725A51 /* EditEventSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC38922B4AA91C00725A51 /* EditEventSummary.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54E393272B25B62C0002D4EB /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* UserState.swift */; };
 		54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E5CD6C2B3184FC008806E8 /* EventAddView.swift */; };
@@ -88,6 +89,7 @@
 		54BD222E2B28696B00B66497 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageHistoryView.swift; sourceTree = "<group>"; };
 		54CE0A732B2DA080008EA726 /* BreakPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPicker.swift; sourceTree = "<group>"; };
+		54DC38922B4AA91C00725A51 /* EditEventSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventSummary.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54E393262B25B62C0002D4EB /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				5477EE802B3B074F00B13CB9 /* DetailYear.swift */,
 				54302B702B3D524000BB6216 /* OtDetailMonth.swift */,
 				54302B722B3D5A6100BB6216 /* OtDetailYear.swift */,
+				54DC38922B4AA91C00725A51 /* EditEventSummary.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54DC38932B4AA91C00725A51 /* EditEventSummary.swift in Sources */,
 				54CE0A702B2D6FFF008EA726 /* WageHistoryView.swift in Sources */,
 				5439F7972B35051E005CC21F /* SalaryManager.swift in Sources */,
 				54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */,
@@ -588,7 +592,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
@@ -604,7 +608,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -621,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
@@ -637,7 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

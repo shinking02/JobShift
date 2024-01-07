@@ -12,6 +12,9 @@ struct OTJobEditView: View {
             Section(header: Text("名前")) {
                 TextField("", text: $editOtJob.name)
             }
+            Section(header: Text("メモ")) {
+                TextField("", text: $editOtJob.summary)
+            }
             Section {
                 DatePicker("勤務日", selection: $editOtJob.date, displayedComponents: .date)
                     .frame(height: 30)
