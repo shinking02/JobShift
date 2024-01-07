@@ -6,6 +6,7 @@ struct ShiftView: View {
     @EnvironmentObject var userState: UserState
     @EnvironmentObject var eventStore: EventStore
     @Query private var jobs: [Job]
+    @Query private var otJobs: [OneTimeJob]
     @State private var dateEvents: [Event] = []
     @State private var selectedDate: DateComponents?
     @State private var showEventEditView = false
@@ -22,6 +23,19 @@ struct ShiftView: View {
                     .frame(height: 460)
                     .padding(.horizontal)
                 List {
+                    let dateOtJobs = otJobs.filter { otJob in
+                        let jobDateComp = Calendar.current.dateComponents([.year, .month, .day], from: otJob.date)
+                        return jobDateComp.year == selectedDate!.year && jobDateComp.month == selectedDate!.month && jobDateComp.day == selectedDate!.day
+                    }
+                    ForEach(dateOtJobs, id: \.self) { otJob in
+                        HStack {
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                            Text(otJob.name)
+                            Spacer()
+                        }
+                    }
                     ForEach(dateEvents, id: \.id) { event in
                         EventRow(dateComponents: selectedDate!, event: event)
                             .contentShape(Rectangle())
