@@ -13,6 +13,9 @@ struct OTJobAddView: View {
                 Section(header: Text("名前"), footer:Text("バイト名を入力してください。名前によるGoogleカレンダーからの集計は行われません。")) {
                     TextField("", text: $newOtJob.name)
                 }
+                Section(header: Text("メモ")) {
+                    TextField("", text: $newOtJob.summary)
+                }
                 Section {
                     DatePicker("勤務日", selection: $newOtJob.date, displayedComponents: .date)
                         .frame(height: 30)

@@ -21,6 +21,7 @@ final class Job {
     var salaryCutoffDay: Int = 0
     var salaryPaymentDay: Int = 0
     var salaryHistories: [SalaryHistory] = []
+    var eventSummaries: [String: String] = [:]
     
     init(
         name: String = "",
@@ -39,7 +40,8 @@ final class Job {
         break2: Break = Break(breakMinutes: 90, breakIntervalMinutes: 480),
         salaryCutoffDay: Int = 20,
         salaryPaymentDay: Int = 10,
-        salaryHistories: [SalaryHistory] = []
+        salaryHistories: [SalaryHistory] = [],
+        eventSummaries: [String: String] = [:]
     ) {
         self.id = UUID()
         self.name = name
@@ -58,6 +60,7 @@ final class Job {
         self.salaryCutoffDay = salaryCutoffDay
         self.salaryPaymentDay = salaryPaymentDay
         self.salaryHistories = salaryHistories
+        self.eventSummaries = eventSummaries
     }
 }
 
