@@ -4,6 +4,7 @@ import SwiftData
 struct CalendarView: UIViewRepresentable {
     @ObservedObject var eventStore: EventStore
     @Query private var jobs: [Job]
+    @Query private var otJobs: [OneTimeJob]
     @Binding var selectedDate: DateComponents?
     @Binding var dateEvents: [Event]
 
@@ -53,13 +54,20 @@ struct CalendarView: UIViewRepresentable {
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
             let foundEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
-            if foundEvents.isEmpty { return nil }
             let jobNames = parent.jobs.map { $0.name }
             let jobEvent = foundEvents.first { jobNames.contains($0.gEvent.summary ?? "") }
-            guard let jobEvent else { return .default(color: UIColor(Color.secondary)) }
-            let job = parent.jobs.first { $0.name == jobEvent.gEvent.summary }
-            guard let job else { return .default(color: UIColor(Color.secondary)) }
-            return .default(color: UIColor(job.color.getColor()))
+            let dateOtJobs = parent.otJobs.filter { otJob in
+                let jobDateComp = Calendar.current.dateComponents([.year, .month, .day], from: otJob.date)
+                return jobDateComp.year == dateComponents.year && jobDateComp.month == dateComponents.month && jobDateComp.day == dateComponents.day
+            }
+            if let jobEvent = jobEvent {
+                let job = parent.jobs.first { $0.name == jobEvent.gEvent.summary }!
+                return .default(color: UIColor(job.color.getColor()))
+            }
+            if !foundEvents.isEmpty || !dateOtJobs.isEmpty {
+                return .default(color: UIColor(Color.secondary))
+            }
+            return nil
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
