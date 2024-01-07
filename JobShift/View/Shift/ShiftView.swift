@@ -5,7 +5,6 @@ import SwiftData
 struct ShiftView: View {
     @EnvironmentObject var userState: UserState
     @EnvironmentObject var eventStore: EventStore
-    @Environment(\.dismiss) var dismiss
     @Query private var jobs: [Job]
     @Query private var otJobs: [OneTimeJob]
     @State private var dateEvents: [Event] = []
