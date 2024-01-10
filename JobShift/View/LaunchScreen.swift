@@ -36,6 +36,8 @@ struct LaunchScreen: View {
                     Spacer()
                     Text("Version: \(version)")
                         .foregroundStyle(.secondary)
+                    Text("3chi3chihonoka")
+                        .foregroundStyle(.secondary)
                 }
             }
             .onAppear {
