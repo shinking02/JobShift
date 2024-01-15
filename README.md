@@ -3,9 +3,9 @@
 <img src="https://github.com/shinking02/JobShift/assets/72262790/b7223cc8-d924-4230-8ead-b09be7f8e6c5" width="240">
 </p>
 <p align="center">
-<img src="https://github.com/shinking02/JobShift/assets/72262790/45f77e36-12c9-4c0c-adae-eb11fed2cf62" width="300">
-  <img src="https://github.com/shinking02/JobShift/assets/72262790/30909288-7389-47ac-9d69-e91591879e49" width="300">
-  <img src="https://github.com/shinking02/JobShift/assets/72262790/20645d8f-55c4-4781-a37b-b91167f72acf" width="300">
+<img src="https://github.com/shinking02/JobShift/assets/72262790/45f77e36-12c9-4c0c-adae-eb11fed2cf62" width="280">
+  <img src="https://github.com/shinking02/JobShift/assets/72262790/30909288-7389-47ac-9d69-e91591879e49" width="280">
+  <img src="https://github.com/shinking02/JobShift/assets/72262790/20645d8f-55c4-4781-a37b-b91167f72acf" width="280">
 </p>
 
 
