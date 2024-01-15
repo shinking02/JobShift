@@ -6,6 +6,8 @@
 <img src="https://github.com/shinking02/JobShift/assets/72262790/45f77e36-12c9-4c0c-adae-eb11fed2cf62" width="280">
   <img src="https://github.com/shinking02/JobShift/assets/72262790/30909288-7389-47ac-9d69-e91591879e49" width="280">
   <img src="https://github.com/shinking02/JobShift/assets/72262790/20645d8f-55c4-4781-a37b-b91167f72acf" width="280">
+  <img src="https://github.com/shinking02/JobShift/assets/72262790/4d6c764f-071e-49b0-8b33-ce5ea3bda902" width="280">
+
 </p>
 
 
