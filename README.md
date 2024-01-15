@@ -18,3 +18,4 @@ Google Calendar APIを使用しているため、動作にはAPIが有効にな�
 - Xcode：15.0.1 
 - iOS: 17.0 Later
 
+mainブランチの更新で、TestFlightで自動配布されます。
