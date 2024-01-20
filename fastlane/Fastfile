@@ -31,7 +31,7 @@ lane :beta do
   # アプリをビルド
   build_app(
     workspace: "JobShift.xcworkspace",
-    scheme: "JobSift",
+    scheme: "JobShift",
     export_options: {
       method: "app-store",
     }
