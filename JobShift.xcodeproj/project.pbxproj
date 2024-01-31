@@ -14,7 +14,6 @@
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
-		5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9332B2D3932004B88C7 /* OneTimeJob.swift */; };
 		5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */; };
 		5427156D2B380E9100263D28 /* SalaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427156C2B380E9100263D28 /* SalaryRow.swift */; };
 		54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54302B702B3D524000BB6216 /* OtDetailMonth.swift */; };
@@ -62,7 +61,6 @@
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
-		5423A9332B2D3932004B88C7 /* OneTimeJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeJob.swift; sourceTree = "<group>"; };
 		5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
 		5427156C2B380E9100263D28 /* SalaryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryRow.swift; sourceTree = "<group>"; };
 		54302B702B3D524000BB6216 /* OtDetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailMonth.swift; sourceTree = "<group>"; };
@@ -144,15 +142,6 @@
 				5423A9392B2D3B38004B88C7 /* Job */,
 			);
 			path = Setting;
-			sourceTree = "<group>";
-		};
-		5423A9352B2D3A0E004B88C7 /* Job */ = {
-			isa = PBXGroup;
-			children = (
-				5423A9312B2D29FB004B88C7 /* Job.swift */,
-				5423A9332B2D3932004B88C7 /* OneTimeJob.swift */,
-			);
-			path = Job;
 			sourceTree = "<group>";
 		};
 		5423A9392B2D3B38004B88C7 /* Job */ = {
@@ -276,8 +265,8 @@
 				5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */,
 				54303BC52B27409100F6485E /* GoogleCalendarManager.swift */,
 				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
+				5423A9312B2D29FB004B88C7 /* Job.swift */,
 				5439F7962B35051E005CC21F /* SalaryManager.swift */,
-				5423A9352B2D3A0E004B88C7 /* Job */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -443,7 +432,6 @@
 				541107032B34438500A32AF9 /* CustomDatePicker.swift in Sources */,
 				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
 				54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */,
-				5423A9342B2D3932004B88C7 /* OneTimeJob.swift in Sources */,
 				54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */,
 				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
 				54CE0A742B2DA080008EA726 /* BreakPicker.swift in Sources */,
@@ -611,7 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -649,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

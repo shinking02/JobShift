@@ -14,6 +14,14 @@ import SwiftData
 struct JobShiftApp: App {
     @StateObject private var userState = UserState()
     @StateObject var events = EventStore()
+    let container: ModelContainer
+    init() {
+        do {
+            container = try ModelContainer(for: Job.self, OneTimeJob.self, migrationPlan: JobMigrationPlan.self)
+        } catch {
+            fatalError("Failed to initialize model container.")
+        }
+    }
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
@@ -33,7 +41,7 @@ struct JobShiftApp: App {
                 }
                 .environmentObject(userState)
                 .environmentObject(events)
-                .modelContainer(for: [Job.self, OneTimeJob.self])
+                .modelContainer(container)
         }
     }
 }
