@@ -13,16 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Increment Build Number
-        run: |
-          chmod +x ./scripts/increment_build_number.sh
-          ./scripts/increment_build_number.sh
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git add .
-          git commit -m "Increment build number [skip ci]"
-          git push origin main
-
       - name: Select Xcode version
         run: sudo xcode-select -s '/Applications/Xcode_15.0.app/Contents/Developer'
 
