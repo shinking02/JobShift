@@ -16,7 +16,7 @@ struct SalaryAddView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(footer: Text("交通費を含めてください")) {
+                Section {
                     Picker("バイト", selection: $selectedJob) {
                         ForEach(jobs, id: \.self) { job in
                             HStack {
@@ -45,6 +45,12 @@ struct SalaryAddView: View {
                     if pickerIsPresented {
                         CustomDatePicker(selectedYear: $year, selectedMonth: $month, showMonth: true)
                     }
+                }
+                var (startDate, endDate) = SalaryManager.shared.calculateDates(year: year, month: month, day: selectedJob.salaryCutoffDay)
+                Section(
+                    header: Text("\(formatDate(startDate))〜\(formatDate(endDate)) 勤務分"),
+                    footer: Text("交通費を含めてください")
+                ) {
                     HStack {
                         Text("給与")
                         TextField("", text: $salaryString)
@@ -87,5 +93,11 @@ struct SalaryAddView: View {
                 }
             }
         }
+    }
+    private func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "M月d日"
+        return dateFormatter.string(from: date)
     }
 }
