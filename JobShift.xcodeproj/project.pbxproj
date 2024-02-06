@@ -79,7 +79,6 @@
 		54616CBF2B38F9E6001045EC /* SalaryAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddView.swift; sourceTree = "<group>"; };
 		5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonth.swift; sourceTree = "<group>"; };
 		5477EE802B3B074F00B13CB9 /* DetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYear.swift; sourceTree = "<group>"; };
-		5480DF892B6D21F600500449 /* increment_build_number.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = increment_build_number.sh; sourceTree = "<group>"; };
 		549077352B2EDA6F0004E523 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
 		54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54BD22272B2828A200B66497 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
@@ -178,14 +177,6 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		5480DF882B6D21D700500449 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				5480DF892B6D21F600500449 /* increment_build_number.sh */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
 		54BD22262B28286A00B66497 /* Shift */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,7 +207,6 @@
 		54F7377F2B259701004A4975 = {
 			isa = PBXGroup;
 			children = (
-				5480DF882B6D21D700500449 /* scripts */,
 				543340EF2B3DD725002C302A /* README.md */,
 				54E3931E2B25A8E20002D4EB /* .gitignore */,
 				54F7378A2B259702004A4975 /* JobShift */,
@@ -592,7 +582,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
@@ -609,7 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -630,7 +620,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
@@ -647,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
