@@ -66,7 +66,6 @@ class EventStore: ObservableObject {
 
     
     func updateCalendarForStore(calendars: [GTLRCalendar_CalendarListEntry], completion: @escaping (_ success: Bool) -> Void) {
-        deleteCalendarFromStore(calendars: calendars)
         var newEvents: [Event] = []
         let dispatchGroup = DispatchGroup()
         calendars.forEach { calendar in
@@ -82,6 +81,7 @@ class EventStore: ObservableObject {
             }
         }
         dispatchGroup.notify(queue: .main) {
+            self.deleteCalendarFromStore(calendars: calendars)
             self.addEvents(events: newEvents)
             completion(true)
         }
