@@ -28,6 +28,8 @@
 		54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB12B2D4CCA009F900E /* JobAddView.swift */; };
 		54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB52B2D4D45009F900E /* OTJobAddView.swift */; };
 		54616CC02B38F9E6001045EC /* SalaryAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54616CBF2B38F9E6001045EC /* SalaryAddView.swift */; };
+		546D3FA62B7514970027D044 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 546D3FA52B7514970027D044 /* RiveRuntime */; };
+		546D42412B7514DA0027D044 /* shapes.riv in Resources */ = {isa = PBXBuildFile; fileRef = 546D3FB22B7514D90027D044 /* shapes.riv */; };
 		5477EE7E2B39A5FA00B13CB9 /* DetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */; };
 		5477EE812B3B074F00B13CB9 /* DetailYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE802B3B074F00B13CB9 /* DetailYear.swift */; };
 		547EB5E62B32877800D9E2E8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E52B32877800D9E2E8 /* Collections */; };
@@ -77,6 +79,7 @@
 		54557AB12B2D4CCA009F900E /* JobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddView.swift; sourceTree = "<group>"; };
 		54557AB52B2D4D45009F900E /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
 		54616CBF2B38F9E6001045EC /* SalaryAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddView.swift; sourceTree = "<group>"; };
+		546D3FB22B7514D90027D044 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
 		5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonth.swift; sourceTree = "<group>"; };
 		5477EE802B3B074F00B13CB9 /* DetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYear.swift; sourceTree = "<group>"; };
 		549077352B2EDA6F0004E523 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546D3FA62B7514970027D044 /* RiveRuntime in Frameworks */,
 				547EB5E62B32877800D9E2E8 /* Collections in Frameworks */,
 				267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */,
 				547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */,
@@ -163,6 +167,14 @@
 				5435167C2B2ADDFC0049427D /* CalSettingView.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		546D3FAD2B7514D90027D044 /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				546D3FB22B7514D90027D044 /* shapes.riv */,
+			);
+			path = RiveAssets;
 			sourceTree = "<group>";
 		};
 		5477EE7F2B39AFB000B13CB9 /* Detail */ = {
@@ -233,6 +245,7 @@
 				54F7379D2B259A7A004A4975 /* View */,
 				54F7379E2B259A9B004A4975 /* Model */,
 				54F737912B259703004A4975 /* Assets.xcassets */,
+				546D3FAD2B7514D90027D044 /* RiveAssets */,
 				54F737932B259703004A4975 /* Preview Content */,
 			);
 			path = JobShift;
@@ -310,6 +323,7 @@
 				547EB5E52B32877800D9E2E8 /* Collections */,
 				547EB5E72B32877800D9E2E8 /* DequeModule */,
 				547EB5E92B32877800D9E2E8 /* OrderedCollections */,
+				546D3FA52B7514970027D044 /* RiveRuntime */,
 			);
 			productName = JobShift;
 			productReference = 54F737882B259702004A4975 /* JobShift.app */;
@@ -341,6 +355,7 @@
 			mainGroup = 54F7377F2B259701004A4975;
 			packageReferences = (
 				547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				546D3FA42B7514970027D044 /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = 54F737892B259702004A4975 /* Products */;
 			projectDirPath = "";
@@ -356,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546D42412B7514DA0027D044 /* shapes.riv in Resources */,
 				54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */,
 				54E3931F2B25A8E20002D4EB /* .gitignore in Resources */,
 				54F737922B259703004A4975 /* Assets.xcassets in Resources */,
@@ -580,12 +596,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -603,7 +617,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.shin.JobShift 1705747310";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -618,12 +631,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -641,7 +652,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.shin.JobShift 1705747310";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -672,6 +682,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		546D3FA42B7514970027D044 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 		547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -683,6 +701,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		546D3FA52B7514970027D044 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 546D3FA42B7514970027D044 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
 		547EB5E52B32877800D9E2E8 /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;

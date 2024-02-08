@@ -1,5 +1,6 @@
 import SwiftUI
 import GoogleSignIn
+import RiveRuntime
 
 struct LaunchScreen: View {
     @State private var isLoading = true
@@ -13,18 +14,25 @@ struct LaunchScreen: View {
     var body: some View {
         if isLoading || !userState.isLoggedIn {
             ZStack {
-                Color(UIColor.systemBackground)
-                    .ignoresSafeArea() // fill all screen
+                RiveViewModel(fileName: "shapes").view()
+                    .ignoresSafeArea()
+                    .blur(radius: 40)
+                    .background(
+                        Image("spline")
+                            .blur(radius: 40)
+                            .offset(x: 200, y: 100)
+                    )
+                
                 VStack {
-                    Spacer()
                     Image(colorScheme == .dark ? "icon_dark" : "icon_light")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding()
+                    Spacer()
                     VStack {
                         if showLoginBtn {
                             Button(action: handleSignInButton) {
                                 Image(colorScheme == .dark ? "google_login_dark" : "google_login_light")
+                                    .shadow(radius: 10)
                             }
                         }
                         if fetchingEvents {
@@ -33,7 +41,6 @@ struct LaunchScreen: View {
                         }
                     }
                     .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                    Spacer()
                     Text("Version: \(version)")
                         .foregroundStyle(.secondary)
                     Text("3chi3chihonoka")
