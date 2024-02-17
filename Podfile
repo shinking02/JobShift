@@ -10,7 +10,7 @@ target 'JobShift' do
   pod 'GoogleSignIn'
   pod 'GoogleAPIClientForREST/Calendar'
   pod 'HolidayJp'
-
+  pod 'RealmSwift'
 
 end
 

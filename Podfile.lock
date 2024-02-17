@@ -23,11 +23,17 @@ PODS:
   - GTMSessionFetcher/Full (3.1.1):
     - GTMSessionFetcher/Core
   - HolidayJp (0.2.1)
+  - Realm (10.46.0):
+    - Realm/Headers (= 10.46.0)
+  - Realm/Headers (10.46.0)
+  - RealmSwift (10.46.0):
+    - Realm (= 10.46.0)
 
 DEPENDENCIES:
   - GoogleAPIClientForREST/Calendar
   - GoogleSignIn
   - HolidayJp
+  - RealmSwift
 
 SPEC REPOS:
   trunk:
@@ -37,6 +43,8 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - HolidayJp
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
@@ -45,7 +53,9 @@ SPEC CHECKSUMS:
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   HolidayJp: 897c873583fb769033109534e85ed64f2f1f5ff1
+  Realm: 699b80d8e5fc66acafd2d530199e77781a2d69d3
+  RealmSwift: 3230b8fc63759433a6938a0dd2a5dc0dc2b15760
 
-PODFILE CHECKSUM: 36622ddf1962e11a8016ed9147cb294a37a9d83c
+PODFILE CHECKSUM: 24bc8e2954ad2137c412603259653312f07e382b
 
 COCOAPODS: 1.14.3

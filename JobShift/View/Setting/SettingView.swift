@@ -3,85 +3,101 @@ import SwiftUI
 import GoogleSignIn
 
 struct SettingView: View {
-    @State private var logoutAlert = false
-    @EnvironmentObject var userState: UserState
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var eventStore: EventStore
-    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    @EnvironmentObject var appState: AppState
+    @State private var showLogoutAlert: Bool = false
+    @State private var isDevelopperMode: Bool = UserDefaultsData.shared.getIsDevelopperMode()
+    @State private var syncTokens = UserDefaultsData.shared.getGoogleSyncTokens()
+    @State private var isCleardDataBase: Bool = false
+    @State private var isCleardSyncTokens: Bool = false
     
     var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    HStack {
-                        AsyncImage(url: URL(string: userState.imageURL)) { image in
-                            image.resizable()
-                                .clipShape(Circle())
-                        } placeholder: {
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                        }
-                            .frame(width: 40, height: 40)
-                        Text(userState.email)
-                            .padding(.horizontal)
+        List {
+            Section {
+                HStack {
+                    AsyncImage(url: URL(string: appState.user.imageUrl)) { image in
+                        image.resizable()
+                           .clipShape(Circle())
+                   } placeholder: {
+                       Image(systemName: "person.crop.circle")
+                           .resizable()
+                   }
+                   .frame(width: 50, height: 50)
+                    VStack(alignment: .leading) {
+                        Text(appState.user.name)
+                            .font(.title2)
+                        Text(appState.user.email)
+                            .foregroundStyle(.secondary)
                     }
-                }
-                Section {
-                    NavigationLink(destination: CalSettingView()) {
-                        Text("カレンダー")
-                    }
-                    NavigationLink(destination: JobSettingView()) {
-                        Text("バイト")
-                    }
-                }
-                Section {
-                    HStack {
-                        Spacer()
-                        Button("ログアウト") {
-                            logoutAlert = true
-                        }
-                        .alert("確認", isPresented: $logoutAlert) {
-                            Button("キャンセル", role: .cancel) {}
-                            Button("ログアウト", role: .destructive) {
-                                GIDSignIn.sharedInstance.signOut()
-                                eventStore.clearCalendarStore()
-                                userState.imageURL = ""
-                                userState.email = ""
-                                
-                                withAnimation {
-                                    userState.isLoggedIn = false
-                                }
-                            }
-                        } message: {
-                            Text("ログアウトしますか？")
-                        }
-                        .foregroundColor(.red)
-                        Spacer()
-                    }
-                }
-                Section(
-                    footer:
-                        HStack{
-                            Spacer()
-                            Image(colorScheme == .dark ? "github_dark" : "github_light")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 18, height: 18, alignment: .center)
-
-                            Link("Github Repository",
-                                 destination: URL(string: "https://github.com/shinking02/JobShift")!)
-                            Spacer()
-                        }
-                ) {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(version)
-                            .foregroundColor(.secondary)
-                    }
+                    .padding(.horizontal)
                 }
             }
-            .navigationTitle("設定")
+            Section {
+                NavigationLink(destination: EmptyView()) {
+                    Text("カレンダー")
+                }
+                NavigationLink(destination: EmptyView()) {
+                    Text("バイト")
+                }
+            }
+            Section {
+                Toggle("開発者モード", isOn: $isDevelopperMode.animation())
+                    .onChange(of: isDevelopperMode) {
+                        UserDefaultsData.shared.setIsDevelopperMode(isDevelopperMode)
+                    }
+            }
+            if isDevelopperMode {
+                if !syncTokens.isEmpty {
+                    Section(header: Text("SYNCTOKEN")) {
+                        ForEach(syncTokens.sorted(by: >), id: \.key) { key, value in
+                            Text(key)
+                                .lineLimit(1)
+                            Text(value)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                                .font(.caption2)
+                        }
+                    }
+                }
+                Section {
+                    Button(action: {
+                        EventStore.shared.clear()
+                        isCleardDataBase = true
+                    } ) {
+                        Text("Clear DataBase")
+                    }.disabled(isCleardDataBase)
+                    Button(action: {
+                        syncTokens = [:]
+                        isCleardSyncTokens = true
+                        UserDefaultsData.shared.setGoogleSyncTokens(syncTokens)
+                    } ) {
+                        Text("Clear SyncTokens")
+                    }.disabled(isCleardSyncTokens)
+                }
+            }
+            Section {
+                HStack {
+                    Spacer()
+                    Button("サインアウト") {
+                        showLogoutAlert = true
+                    }
+                    .alert("サインアウトしますか？", isPresented: $showLogoutAlert) {
+                        Button("キャンセル", role: .cancel) {}
+                        Button("サインアウト", role: .destructive) {
+                            GIDSignIn.sharedInstance.signOut()
+                            appState.user = User(email: "", imageUrl: "", name:
+                                                    "")
+                            withAnimation {
+                                appState.firstSyncProcessed = false
+                                appState.isLoggedIn = false
+                            }
+                        }
+                    } message: {
+                        Text("バイトのデータは失われません")
+                    }
+                    .foregroundColor(.red)
+                    Spacer()
+                }
+            }
         }
     }
 }

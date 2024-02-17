@@ -2,8 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @EnvironmentObject var userState: UserState
-    @EnvironmentObject var eventStore: EventStore
     var body: some View {
         TabView {
             ShiftView()
@@ -11,7 +9,7 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("シフト")
                 }
-            SalaryMainView()
+            SalaryView()
                 .tabItem {
                     Image(systemName: "yensign")
                     Text("給与")
@@ -23,6 +21,4 @@ struct ContentView: View {
                 }
         }
     }
-
-    
 }

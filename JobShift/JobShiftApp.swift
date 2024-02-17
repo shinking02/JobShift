@@ -1,10 +1,3 @@
-//
-//  JobShiftApp.swift
-//  JobShift
-//
-//  Created by 川上真 on 2023/12/10.
-//
-
 import SwiftUI
 import SwiftData
 import GoogleSignIn
@@ -12,10 +5,11 @@ import SwiftData
 
 @main
 struct JobShiftApp: App {
-    @StateObject private var userState = UserState()
-    @StateObject var events = EventStore()
+    @StateObject private var appState = AppState.shared
+
     let container: ModelContainer
     init() {
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
         do {
             container = try ModelContainer(for: Job.self, OneTimeJob.self, migrationPlan: JobMigrationPlan.self)
         } catch {
@@ -30,17 +24,22 @@ struct JobShiftApp: App {
                 }
                 .onAppear {
                     GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-                        if user != nil {
-                            userState.email = user?.profile?.email ?? ""
-                            userState.imageURL = user?.profile?.imageURL(withDimension: 50)?.absoluteString ?? ""
-                            userState.isLoggedIn = true
-                        } else {
-                            userState.isLoggedIn = false
+                        withAnimation {
+                            if let user = user {
+                                appState.user.email = user.profile?.email ?? ""
+                                appState.user.imageUrl = user.profile?.imageURL(withDimension: 50)?.absoluteString ?? ""
+                                appState.user.name = user.profile?.name ?? ""
+                                appState.isLoggedIn = true
+                                CalendarManager.shared.setUser(user)
+                            } else {
+                                appState.isLoggedIn = false
+                            }
+                            appState.loginProcessed = true
                         }
+                        
                     }
                 }
-                .environmentObject(userState)
-                .environmentObject(events)
+                .environmentObject(appState)
                 .modelContainer(container)
         }
     }
