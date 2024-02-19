@@ -39,11 +39,8 @@ struct LaunchScreen: View {
                 }
                 .foregroundStyle(.secondary)
                 .onAppear() {
-                    // Waiting Google login to be restored.
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        Task {
-                            await viewModel.setupApp()
-                        }
+                    Task {
+                        await viewModel.setupApp()
                     }
                 }
             }

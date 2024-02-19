@@ -29,6 +29,10 @@ class LaunchScreenViewModel: ObservableObject {
     func setupApp() async {
         let calendarManager = CalendarManager.shared
         let userDefaultsData = UserDefaultsData.shared
+        // Wait until appState.loginProcessed becomes true
+        while !appState.loginProcessed {
+            try! await Task.sleep(nanoseconds: 1_000_000_000) // Sleep for 1 second
+        }
         if !appState.isLoggedIn {
             return
         }
@@ -37,9 +41,15 @@ class LaunchScreenViewModel: ObservableObject {
             userDefaultsData.clearAll()
             CalendarManager.shared.clear()
         }
-        if userDefaultsData.getActiveCalIds().isEmpty {
-            let calendarIds = await calendarManager.getUserCalendarIds()
-            userDefaultsData.setActiveCallIds(calendarIds)
+        
+        let apiCalendars = Set(await calendarManager.getUserCalendar())
+        let activeCalendars = Set(userDefaultsData.getActiveCalendars())
+        if activeCalendars.isEmpty {
+            userDefaultsData.setActiveCalendars(Array(apiCalendars))
+        } else {
+            let newActiveCalendars = apiCalendars.intersection(activeCalendars)
+            userDefaultsData.setActiveCalendars(Array(newActiveCalendars))
+            userDefaultsData.setAllCalendars(Array(apiCalendars))
         }
         await calendarManager.sync()
         userDefaultsData.setLastSyncedEmail(appState.user.email)

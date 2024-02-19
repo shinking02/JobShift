@@ -28,6 +28,7 @@
 		54FD0E702B7F9C2F00A3E9F4 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */; };
 		54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E752B7F9CDE00A3E9F4 /* SalaryView.swift */; };
 		54FD0E782B7F9CEE00A3E9F4 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */; };
+		54FD0E7C2B822BC100A3E9F4 /* CalendarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		54FD0E752B7F9CDE00A3E9F4 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
+		54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingView.swift; sourceTree = "<group>"; };
 		865D90C72E6BE4CE65C8E084 /* Pods-JobShift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.release.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */,
+				54FD0E7D2B822C8B00A3E9F4 /* Calendar */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -178,6 +181,14 @@
 				54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */,
 			);
 			path = Shift;
+			sourceTree = "<group>";
+		};
+		54FD0E7D2B822C8B00A3E9F4 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		9D2333F9318687C0A0BAE3FE /* Frameworks */ = {
@@ -327,6 +338,7 @@
 				54FD0E702B7F9C2F00A3E9F4 /* SettingView.swift in Sources */,
 				54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */,
 				54E393272B25B62C0002D4EB /* AppState.swift in Sources */,
+				54FD0E7C2B822BC100A3E9F4 /* CalendarSettingView.swift in Sources */,
 				5423A9322B2D29FB004B88C7 /* Job.swift in Sources */,
 				5435167F2B2ADE6E0049427D /* UserDefaultsData.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,

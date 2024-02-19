@@ -2,10 +2,16 @@ import Foundation
 
 enum UserDefaultsKeys {
     static let lastSyncedEmail = "LAST_SYNCED_EMAIL"
-    static let activeCallIds = "ACTIVE_CALL_IDS"
     static let showOnlyJobEventSetting = "SHOW_ONLY_JOBEVENT_SETTING"
     static let googleSyncToken = "GOOGLE_SYNC_TOKEN"
     static let isDevelopperMode = "IS_DEVELOPPER_MODE"
+    static let activeCalendars = "ACTIVE_CALENDARS"
+    static let allCalendars = "ALL_CALENDARS"
+}
+
+struct UserCalendar: Codable, Hashable {
+    var id: String
+    var name: String
 }
 
 final class UserDefaultsData {
@@ -19,14 +25,6 @@ final class UserDefaultsData {
     
     func setLastSyncedEmail(_ email: String) {
         userDefaults.setValue(email, forKey: UserDefaultsKeys.lastSyncedEmail)
-    }
-    
-    func getActiveCalIds() -> [String] {
-        return userDefaults.stringArray(forKey: UserDefaultsKeys.activeCallIds) ?? []
-    }
-
-    func setActiveCallIds(_ ids: [String]) {
-        userDefaults.set(ids, forKey: UserDefaultsKeys.activeCallIds)
     }
 
     func getShowOnlyJobEventSetting() -> Bool {
@@ -52,9 +50,44 @@ final class UserDefaultsData {
     func setIsDevelopperMode(_ value: Bool) {
         userDefaults.set(value, forKey: UserDefaultsKeys.isDevelopperMode)
     }
+    
+    func getActiveCalendars() -> [UserCalendar] {
+        let jsonDecoder = JSONDecoder()
+        guard let data = userDefaults.data(forKey: UserDefaultsKeys.activeCalendars),
+              let activeCalendars = try? jsonDecoder.decode([UserCalendar].self, from: data) else {
+            return []
+        }
+        return activeCalendars
+    }
+    
+    func setActiveCalendars(_ activeCalendars: [UserCalendar]) {
+        let jsonEncoder = JSONEncoder()
+        guard let data = try? jsonEncoder.encode(activeCalendars) else {
+            return
+        }
+        userDefaults.set(data, forKey: UserDefaultsKeys.activeCalendars)
+    }
+    
+    func getAllCalendars() -> [UserCalendar] {
+        let jsonDecoder = JSONDecoder()
+        guard let data = userDefaults.data(forKey: UserDefaultsKeys.allCalendars),
+              let allCalendars = try? jsonDecoder.decode([UserCalendar].self, from: data) else {
+            return []
+        }
+        return allCalendars
+    }
+    
+    func setAllCalendars(_ allCalendars: [UserCalendar]) {
+        let jsonEncoder = JSONEncoder()
+        guard let data = try? jsonEncoder.encode(allCalendars) else {
+            return
+        }
+        userDefaults.set(data, forKey: UserDefaultsKeys.allCalendars)
+    }
 
     func clearAll() {
-        setActiveCallIds([])
+        setActiveCalendars([])
+        setAllCalendars([])
         setShowOnlyJobEventSetting(false)
         setIsDevelopperMode(false)
     }

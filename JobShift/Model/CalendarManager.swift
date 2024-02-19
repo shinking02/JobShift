@@ -21,7 +21,7 @@ final class CalendarManager {
         self.service.shouldFetchNextPages = true
     }
     
-    func getUserCalendarIds() async -> [String] {
+    func getUserCalendar() async -> [UserCalendar] {
         await withCheckedContinuation { continuation in
             let query = GTLRCalendarQuery_CalendarListList.query()
             self.service.executeQuery(query) { (ticket, response, error) in
@@ -32,8 +32,8 @@ final class CalendarManager {
                     guard let calendarList = response as? GTLRCalendar_CalendarList, let items = calendarList.items else {
                         throw CalendarManagerError.errorWithText(text: "Error while parsing calendar list response")
                     }
-                    let calendarIds = items.compactMap { $0.identifier }
-                    continuation.resume(returning: calendarIds)
+                    let calendars = items.map { UserCalendar(id: $0.identifier!, name: $0.summary!) }
+                    continuation.resume(returning: calendars)
                 } catch {
                     print("GoogleCalendarManager - getUserCalendarIds - \(error.localizedDescription)")
                 }
@@ -42,7 +42,8 @@ final class CalendarManager {
     }
     
     func sync() async {
-        let calendarIds = userDefaultsData.getActiveCalIds()
+        let activeCalendars = userDefaultsData.getActiveCalendars()
+        let calendarIds = activeCalendars.map { $0.id }
         syncTokens = userDefaultsData.getGoogleSyncTokens()
 
         await withCheckedContinuation { continuation in
