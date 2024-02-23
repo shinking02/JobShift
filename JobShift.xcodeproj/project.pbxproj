@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */; };
+		540E33D22B88344400ADABA9 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540E33D12B88344400ADABA9 /* JobSettingView.swift */; };
+		540E33D52B883DE100ADABA9 /* JobSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540E33D42B883DE100ADABA9 /* JobSettingViewModel.swift */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
 		54303BC62B27409100F6485E /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* CalendarManager.swift */; };
@@ -20,6 +22,15 @@
 		547EB5E62B32877800D9E2E8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E52B32877800D9E2E8 /* Collections */; };
 		547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E72B32877800D9E2E8 /* DequeModule */; };
 		547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E92B32877800D9E2E8 /* OrderedCollections */; };
+		54C18E4F2B886CFA002E51D7 /* SwiftDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */; };
+		54C18E512B8877F3002E51D7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E502B8877F3002E51D7 /* DateExtension.swift */; };
+		54C18E532B888B39002E51D7 /* OTJobFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E522B888B39002E51D7 /* OTJobFormView.swift */; };
+		54C18E552B888F89002E51D7 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E542B888F89002E51D7 /* OTJobAddView.swift */; };
+		54D567052B885359000AB118 /* CalendarSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D567042B885359000AB118 /* CalendarSettingViewModel.swift */; };
+		54D567072B886650000AB118 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D567062B886650000AB118 /* SettingViewModel.swift */; };
+		54E2AD7D2B88A86D008A9A77 /* OTJobAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2AD7C2B88A86D008A9A77 /* OTJobAddViewModel.swift */; };
+		54E2AD7F2B88C70A008A9A77 /* OTJobEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2AD7E2B88C70A008A9A77 /* OTJobEditViewModel.swift */; };
+		54E2AD812B88C71D008A9A77 /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54E393272B25B62C0002D4EB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* AppState.swift */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
@@ -34,6 +45,8 @@
 /* Begin PBXFileReference section */
 		233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JobShift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.debug.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.debug.xcconfig"; sourceTree = "<group>"; };
+		540E33D12B88344400ADABA9 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
+		540E33D42B883DE100ADABA9 /* JobSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingViewModel.swift; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		54303BC52B27409100F6485E /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
@@ -44,6 +57,15 @@
 		545A9CE92B7F810A0065487C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		546D43DC2B7DE4940027D044 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		546D43E32B7E00C40027D044 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
+		54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSource.swift; sourceTree = "<group>"; };
+		54C18E502B8877F3002E51D7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		54C18E522B888B39002E51D7 /* OTJobFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobFormView.swift; sourceTree = "<group>"; };
+		54C18E542B888F89002E51D7 /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
+		54D567042B885359000AB118 /* CalendarSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingViewModel.swift; sourceTree = "<group>"; };
+		54D567062B886650000AB118 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		54E2AD7C2B88A86D008A9A77 /* OTJobAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddViewModel.swift; sourceTree = "<group>"; };
+		54E2AD7E2B88C70A008A9A77 /* OTJobEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditViewModel.swift; sourceTree = "<group>"; };
+		54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54E393262B25B62C0002D4EB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -74,10 +96,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		540E33D02B88341400ADABA9 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				540E33D12B88344400ADABA9 /* JobSettingView.swift */,
+				54C18E522B888B39002E51D7 /* OTJobFormView.swift */,
+				54C18E542B888F89002E51D7 /* OTJobAddView.swift */,
+				54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */,
+			);
+			path = Job;
+			sourceTree = "<group>";
+		};
+		540E33D32B883DD200ADABA9 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				54D567062B886650000AB118 /* SettingViewModel.swift */,
+				54D567022B885335000AB118 /* Calendar */,
+				54D567032B885345000AB118 /* Job */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		545A9CE62B7E097B0065487C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				545A9CE72B7E09900065487C /* LaunchScreenViewModel.swift */,
+				540E33D32B883DD200ADABA9 /* Setting */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -100,6 +144,32 @@
 				546D43E32B7E00C40027D044 /* shapes.riv */,
 			);
 			path = RiveAssets;
+			sourceTree = "<group>";
+		};
+		54C18E562B889185002E51D7 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				54C18E502B8877F3002E51D7 /* DateExtension.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		54D567022B885335000AB118 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				54D567042B885359000AB118 /* CalendarSettingViewModel.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		54D567032B885345000AB118 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				540E33D42B883DE100ADABA9 /* JobSettingViewModel.swift */,
+				54E2AD7C2B88A86D008A9A77 /* OTJobAddViewModel.swift */,
+				54E2AD7E2B88C70A008A9A77 /* OTJobEditViewModel.swift */,
+			);
+			path = Job;
 			sourceTree = "<group>";
 		};
 		54F7377F2B259701004A4975 = {
@@ -129,6 +199,7 @@
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
+				54C18E562B889185002E51D7 /* Lib */,
 				546D43DB2B7DE4520027D044 /* View */,
 				545A9CE62B7E097B0065487C /* ViewModel */,
 				54F7379E2B259A9B004A4975 /* Model */,
@@ -151,6 +222,7 @@
 			children = (
 				54E393262B25B62C0002D4EB /* AppState.swift */,
 				5435167E2B2ADE6E0049427D /* UserDefaultsData.swift */,
+				54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */,
 				54303BC52B27409100F6485E /* CalendarManager.swift */,
 				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
 				5423A9312B2D29FB004B88C7 /* Job.swift */,
@@ -163,6 +235,7 @@
 			children = (
 				54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */,
 				54FD0E7D2B822C8B00A3E9F4 /* Calendar */,
+				540E33D02B88341400ADABA9 /* Job */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -334,17 +407,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54E2AD7F2B88C70A008A9A77 /* OTJobEditViewModel.swift in Sources */,
+				54C18E532B888B39002E51D7 /* OTJobFormView.swift in Sources */,
 				546D43DD2B7DE4940027D044 /* LaunchScreen.swift in Sources */,
 				54FD0E702B7F9C2F00A3E9F4 /* SettingView.swift in Sources */,
+				54C18E4F2B886CFA002E51D7 /* SwiftDataSource.swift in Sources */,
 				54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */,
+				54C18E512B8877F3002E51D7 /* DateExtension.swift in Sources */,
 				54E393272B25B62C0002D4EB /* AppState.swift in Sources */,
 				54FD0E7C2B822BC100A3E9F4 /* CalendarSettingView.swift in Sources */,
 				5423A9322B2D29FB004B88C7 /* Job.swift in Sources */,
+				54D567072B886650000AB118 /* SettingViewModel.swift in Sources */,
+				540E33D52B883DE100ADABA9 /* JobSettingViewModel.swift in Sources */,
 				5435167F2B2ADE6E0049427D /* UserDefaultsData.swift in Sources */,
+				54C18E552B888F89002E51D7 /* OTJobAddView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
 				545A9CEA2B7F810A0065487C /* ContentView.swift in Sources */,
+				54E2AD7D2B88A86D008A9A77 /* OTJobAddViewModel.swift in Sources */,
+				540E33D22B88344400ADABA9 /* JobSettingView.swift in Sources */,
 				545A9CE82B7E09900065487C /* LaunchScreenViewModel.swift in Sources */,
 				54303BC62B27409100F6485E /* CalendarManager.swift in Sources */,
+				54D567052B885359000AB118 /* CalendarSettingViewModel.swift in Sources */,
+				54E2AD812B88C71D008A9A77 /* OTJobEditView.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 				54FD0E782B7F9CEE00A3E9F4 /* ShiftView.swift in Sources */,
 			);

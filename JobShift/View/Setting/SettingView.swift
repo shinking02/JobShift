@@ -1,14 +1,9 @@
-import Foundation
 import SwiftUI
-import GoogleSignIn
 
 struct SettingView: View {
-    @EnvironmentObject var appState: AppState
+    @ObservedObject var viewModel = SettingViewModel()
+    @State var appState: AppState = AppState.shared
     @State private var showLogoutAlert: Bool = false
-    @State private var isDevelopperMode: Bool = UserDefaultsData.shared.getIsDevelopperMode()
-    @State private var syncTokens = UserDefaultsData.shared.getGoogleSyncTokens()
-    @State private var isCleardDataBase: Bool = false
-    @State private var isCleardSyncTokens: Bool = false
     
     var body: some View {
         NavigationView {
@@ -34,22 +29,22 @@ struct SettingView: View {
                 }
                 Section {
                     NavigationLink(destination: CalendarSettingView()) {
-                        Text("カレンダー")
+                        Text("カレンダー設定")
                     }
-                    NavigationLink(destination: EmptyView()) {
-                        Text("バイト")
+                    NavigationLink(destination: JobSettingView()) {
+                        Text("バイト一覧")
                     }
                 }
                 Section {
-                    Toggle("開発者モード", isOn: $isDevelopperMode.animation())
-                        .onChange(of: isDevelopperMode) {
-                            UserDefaultsData.shared.setIsDevelopperMode(isDevelopperMode)
+                    Toggle("開発者モード", isOn: $viewModel.isDevelopperMode.animation())
+                        .onChange(of: viewModel.isDevelopperMode) {
+                            viewModel.handleChangeDevelopperMode()
                         }
                 }
-                if isDevelopperMode {
-                    if !syncTokens.isEmpty {
+                if viewModel.isDevelopperMode {
+                    if !viewModel.syncTokens.isEmpty {
                         Section(header: Text("SYNCTOKEN")) {
-                            ForEach(syncTokens.sorted(by: >), id: \.key) { key, value in
+                            ForEach(viewModel.syncTokens.sorted(by: >), id: \.key) { key, value in
                                 Text(key)
                                     .lineLimit(1)
                                 Text(value)
@@ -61,18 +56,15 @@ struct SettingView: View {
                     }
                     Section {
                         Button(action: {
-                            EventStore.shared.clear()
-                            isCleardDataBase = true
+                            viewModel.clearDataBase()
                         } ) {
                             Text("Clear DataBase")
-                        }.disabled(isCleardDataBase)
+                        }.disabled(viewModel.isCleardDataBase)
                         Button(action: {
-                            syncTokens = [:]
-                            isCleardSyncTokens = true
-                            UserDefaultsData.shared.setGoogleSyncTokens(syncTokens)
+                            viewModel.clearSyncTokens()
                         } ) {
                             Text("Clear SyncTokens")
-                        }.disabled(isCleardSyncTokens)
+                        }.disabled(viewModel.isCleardSyncTokens)
                     }
                 }
                 Section {
@@ -84,13 +76,7 @@ struct SettingView: View {
                         .alert("サインアウトしますか？", isPresented: $showLogoutAlert) {
                             Button("キャンセル", role: .cancel) {}
                             Button("サインアウト", role: .destructive) {
-                                GIDSignIn.sharedInstance.signOut()
-                                appState.user = User(email: "", imageUrl: "", name:
-                                                        "")
-                                withAnimation {
-                                    appState.firstSyncProcessed = false
-                                    appState.isLoggedIn = false
-                                }
+                                viewModel.signOut(appState: appState)
                             }
                         } message: {
                             Text("バイトのデータは失われません")
@@ -100,6 +86,7 @@ struct SettingView: View {
                     }
                 }
             }
+            .navigationTitle("設定")
         }
     }
 }

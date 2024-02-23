@@ -26,6 +26,7 @@ class LaunchScreenViewModel: ObservableObject {
             }
         }
     }
+    
     func setupApp() async {
         let calendarManager = CalendarManager.shared
         let userDefaultsData = UserDefaultsData.shared
@@ -49,8 +50,10 @@ class LaunchScreenViewModel: ObservableObject {
         } else {
             let newActiveCalendars = apiCalendars.intersection(activeCalendars)
             userDefaultsData.setActiveCalendars(Array(newActiveCalendars))
-            userDefaultsData.setAllCalendars(Array(apiCalendars))
         }
+        let sortedApiCalendars = Array(apiCalendars).sorted { $0.name < $1.name }
+        userDefaultsData.setAllCalendars(sortedApiCalendars)
+        
         await calendarManager.sync()
         userDefaultsData.setLastSyncedEmail(appState.user.email)
         DispatchQueue.main.async {

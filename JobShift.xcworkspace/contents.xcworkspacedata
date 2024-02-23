@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:OTJobAddView.swift">
+   </FileRef>
+   <FileRef
       location = "group:JobShift.xcodeproj">
    </FileRef>
    <FileRef
