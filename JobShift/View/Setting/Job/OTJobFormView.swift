@@ -1,10 +1,7 @@
 import SwiftUI
 
 enum OTJobFocusField {
-    case name
-    case salary
     case commuteWage
-    case summary
 }
 
 struct OTJobFormView: View {
@@ -43,6 +40,5 @@ struct OTJobFormView: View {
         Section(header: Text("メモ")) {
             TextField("手渡し", text: $summary)
         }
-        
     }
 }

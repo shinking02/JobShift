@@ -40,6 +40,9 @@ struct OTJobEditView: View {
                 }
             }
         }
+        .onDisappear() {
+            viewModel.validateAndUpdate()
+        }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(otJob.name)
     }

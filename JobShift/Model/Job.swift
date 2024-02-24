@@ -8,17 +8,11 @@ typealias OneTimeJob = JobSchemaV3.OneTimeJob
 
 struct Wage: Codable, Hashable {
     var hourlyWage: Int
-    var nightHourlyWage: Int
-    var holidayHourlyWage: Int
-    var holidayHourlyNightWage: Int
     var dailyWage: Int
     var start: Date
     var end: Date
-    init(hourlyWage: Int = 1200, nightHourlyWage: Int = 1300, holidayHourlyWage: Int = 1300, holidayHourlyNightWage: Int = 1400, dailyWage: Int = 10000, start: Date = Date.distantPast, end: Date = Date.distantFuture) {
+    init(hourlyWage: Int = 1200, dailyWage: Int = 10000, start: Date = Date.distantPast, end: Date = Date.distantFuture) {
         self.hourlyWage = hourlyWage
-        self.nightHourlyWage = nightHourlyWage
-        self.holidayHourlyWage = holidayHourlyWage
-        self.holidayHourlyNightWage = holidayHourlyNightWage
         self.dailyWage = dailyWage
         self.start = start
         self.end = end
@@ -28,6 +22,12 @@ struct Wage: Codable, Hashable {
 struct Break: Codable {
     var breakMinutes: Int
     var breakIntervalMinutes: Int
+}
+
+struct EventSummary: Codable {
+    var eventId: String
+    var summary: String
+    var adjustment: Int?
 }
 
 struct SalaryHistory: Hashable, Codable {
@@ -285,7 +285,6 @@ enum JobSchemaV3: VersionedSchema {
         var color: JobColor = JobColor.red
         var isDailyWage: Bool = false
         var isNightWage: Bool = false
-        var nightWageStartTime: Date = Date()
         var isHolidayWage: Bool = false
         var wages: [Wage] = []
         var isCommuteWage: Bool = false
@@ -296,8 +295,11 @@ enum JobSchemaV3: VersionedSchema {
         var break2: Break = Break(breakMinutes: 0, breakIntervalMinutes: 0)
         var salaryCutoffDay: Int = 0
         var salaryPaymentDay: Int = 0
+        var displayPaymentDay: Bool = true
+        var startDate: Date = Date.distantPast
         var salaryHistories: [SalaryHistory] = []
-        var eventSummaries: [String: String] = [:]
+        @Attribute(originalName: "eventSummaries") var eventSummariesOld: [String: String] = [:]
+        var eventSummaries: [EventSummary] = []
         var lastAccessedTime: Date = Date()
         
         init(
@@ -306,7 +308,6 @@ enum JobSchemaV3: VersionedSchema {
             isDailyWage: Bool = false,
             dailyWage: Int = 10000,
             isNightWage: Bool = false,
-            nightWageStartTime: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 22)) ?? Date(),
             isHolidayWage: Bool = false,
             wages: [Wage] = [Wage()],
             isCommuteWage: Bool = false,
@@ -318,15 +319,16 @@ enum JobSchemaV3: VersionedSchema {
             salaryCutoffDay: Int = 20,
             salaryPaymentDay: Int = 10,
             salaryHistories: [SalaryHistory] = [],
-            eventSummaries: [String: String] = [:],
-            lastAccessedTime: Date = Date()
+            eventSummaries: [EventSummary] = [],
+            lastAccessedTime: Date = Date(),
+            displayPaymentDay: Bool = true,
+            startDate: Date = Date.distantPast
         ) {
             self.id = UUID()
             self.name = name
             self.color = color
             self.isDailyWage = isDailyWage
             self.isNightWage = isNightWage
-            self.nightWageStartTime = nightWageStartTime
             self.isHolidayWage = isHolidayWage
             self.wages = wages
             self.isCommuteWage = isCommuteWage
@@ -340,6 +342,9 @@ enum JobSchemaV3: VersionedSchema {
             self.salaryHistories = salaryHistories
             self.eventSummaries = eventSummaries
             self.lastAccessedTime = lastAccessedTime
+            self.displayPaymentDay = displayPaymentDay
+            self.lastAccessedTime = Date()
+            self.startDate = startDate
         }
     }
 
@@ -380,7 +385,18 @@ enum JobMigrationPlan: SchemaMigrationPlan {
         ]
     }
     static let migrateV1toV2 = MigrationStage.lightweight(fromVersion: JobSchemaV1.self, toVersion: JobSchemaV2.self)
-    static let migrateV2toV3 = MigrationStage.lightweight(fromVersion: JobSchemaV2.self, toVersion: JobSchemaV3.self)
+    static let migrateV2toV3 = MigrationStage.custom(
+        fromVersion: JobSchemaV2.self,
+        toVersion: JobSchemaV3.self,
+        willMigrate: nil,
+        didMigrate: { context in
+            let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
+            jobs?.forEach { job in
+                job.eventSummaries = job.eventSummariesOld.map { EventSummary(eventId: $0.key, summary: $0.value) }
+            }
+            try? context.save()
+        }
+    )
 }
 
 

@@ -13,7 +13,7 @@ struct JobSettingView: View {
             if !viewModel.jobs.isEmpty {
                 Section(header: Text("定期バイト")) {
                     ForEach(viewModel.jobs) { job in
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: JobEditView(job: job)) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(job.color.getColor())
@@ -74,7 +74,7 @@ struct JobSettingView: View {
         .sheet(isPresented: $showingAddJobView, onDismiss: {
             viewModel.fetchFromSwiftData()
         }) {
-            EmptyView()
+            JobAddView()
         }
         .sheet(isPresented: $showingAddOTJobView, onDismiss: {
             viewModel.fetchFromSwiftData()

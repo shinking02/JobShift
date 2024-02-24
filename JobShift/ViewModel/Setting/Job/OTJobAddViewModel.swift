@@ -17,9 +17,13 @@ class OTJobAddViewModel: ObservableObject {
         }
     }
     @Published var date: Date = Date()
-    @Published var isCommuteWage: Bool = false
+    @Published var isCommuteWage: Bool = false {
+        didSet {
+            validateFields()
+        }
+    }
     @Published var summary: String = ""
-    @Published var validationError: Bool = false
+    @Published var validationError: Bool = true
     private var dataSource = SwiftDataSource.shared
     
     init() {

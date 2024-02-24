@@ -12,14 +12,12 @@ class JobSettingViewModel: ObservableObject {
     }
     
     func fetchFromSwiftData() {
-        self.jobs = dataSource.fetchJobs().sorted { $0.lastAccessedTime > $1.lastAccessedTime }
+        self.jobs = dataSource.fetchJobs()
         self.oneTimeJobs = dataSource.fetchOTJobs()
-        withAnimation {
-            self.groupedOtJobs = Dictionary(grouping: self.oneTimeJobs) { (job: OneTimeJob) -> Int in
-                let calendar = Calendar.current
-                let year = calendar.component(.year, from: job.date)
-                return year
-            }
+        self.groupedOtJobs = Dictionary(grouping: self.oneTimeJobs) { (job: OneTimeJob) -> Int in
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: job.date)
+            return year
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftData
+import RealmSwift
 
 final class SwiftDataSource {
     private let modelContainer: ModelContainer
@@ -24,7 +25,7 @@ final class SwiftDataSource {
 
     func fetchJobs() -> [Job] {
         do {
-            return try modelContext.fetch(FetchDescriptor<Job>())
+            return try modelContext.fetch(FetchDescriptor<Job>(sortBy: [.init(\.lastAccessedTime, order: .reverse)]))
         } catch {
             fatalError(error.localizedDescription)
         }

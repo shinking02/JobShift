@@ -5,7 +5,7 @@ class OTJobEditViewModel: ObservableObject {
     @Published var salary: String
     @Published var isCommuteWage: Bool
     @Published var commuteWage: String
-    
+
     private var otJob: OneTimeJob
     private var dataSource = SwiftDataSource.shared
     
