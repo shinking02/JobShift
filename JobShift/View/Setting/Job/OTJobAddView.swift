@@ -2,19 +2,12 @@ import SwiftUI
 
 struct OTJobAddView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var viewModel = OTJobAddViewModel()
+    @State var viewModel: OTJobAddViewModel
     
     var body: some View {
         NavigationView {
             Form {
-                OTJobFormView(
-                    name: $viewModel.name,
-                    salary: $viewModel.salary,
-                    date: $viewModel.date,
-                    isCommuteWage: $viewModel.isCommuteWage,
-                    commuteWage: $viewModel.commuteWage,
-                    summary: $viewModel.summary
-                )
+                OTJobFormView(viewModel: viewModel)
             }
             .scrollDismissesKeyboard(.immediately)
             .toolbar {
@@ -25,7 +18,7 @@ struct OTJobAddView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("追加") {
-                        viewModel.handleAddButton()
+                        viewModel.addButtonTapped()
                         dismiss()
                     }.disabled(viewModel.validationError)
                 }

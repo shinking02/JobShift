@@ -5,7 +5,7 @@ import SwiftData
 
 @main
 struct JobShiftApp: App {
-    @StateObject private var appState = AppState.shared
+    @State private var appState = AppState.shared
 
     let container: ModelContainer
     init() {
@@ -34,12 +34,11 @@ struct JobShiftApp: App {
                             } else {
                                 appState.isLoggedIn = false
                             }
-                            appState.loginProcessed = true
+                            appState.loginRestored = true
                         }
                         
                     }
                 }
-                .environmentObject(appState)
                 .modelContainer(container)
         }
     }

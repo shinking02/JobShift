@@ -1,28 +1,20 @@
 import SwiftUI
 
 struct JobEditView: View {
-    @Bindable var job: Job
-    @StateObject private var viewModel: JobEditViewModel
+    @State var viewModel: JobEditViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var showDeleteAlert = false
     
-    init(job: Job) {
-        self._job = Bindable(job)
-        self._viewModel = StateObject(wrappedValue: JobEditViewModel(job: job))
-    }
     var body: some View {
         List {
             JobFormView(viewModel: viewModel)
             Section {
                 HStack {
                     Spacer()
-                    Button("削除") {
-                        showDeleteAlert = true
-                    }
-                    .alert("\(job.name)を削除しますか？", isPresented: $showDeleteAlert) {
+                    Button("削除") {viewModel.deleteButtonTapped()}
+                        .alert("\(viewModel.job.name)を削除しますか？", isPresented: $viewModel.showDeleteAlert) {
                         Button("キャンセル", role: .cancel) {}
                         Button("削除", role: .destructive) {
-                            viewModel.delete()
+                            viewModel.jobDelete()
                             dismiss()
                         }
                     }
@@ -36,6 +28,6 @@ struct JobEditView: View {
             viewModel.trySave()
         }
         .scrollDismissesKeyboard(.immediately)
-        .navigationTitle(job.name)
+        .navigationTitle(viewModel.job.name)
     }
 }

@@ -1,19 +1,18 @@
 import SwiftUI
 
 struct JobSettingView: View {
-    @StateObject private var viewModel = JobSettingViewModel()
+    @State private var viewModel = JobSettingViewModel()
     @State private var expandedYears: Set<Int> = [Calendar.current.component(.year, from: Date())]
     @State private var showingJobTypeDialog = false
     @State private var showingAddJobView = false
     @State private var showingAddOTJobView = false
-    
     
     var body: some View {
         List {
             if !viewModel.jobs.isEmpty {
                 Section(header: Text("定期バイト")) {
                     ForEach(viewModel.jobs) { job in
-                        NavigationLink(destination: JobEditView(job: job)) {
+                        NavigationLink(destination: JobEditView(viewModel: JobEditViewModel(job: job))) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(job.color.getColor())
@@ -38,7 +37,7 @@ struct JobSettingView: View {
                             }
                         )) {
                             ForEach((viewModel.groupedOtJobs[year] ?? []).sorted { $0.date > $1.date }, id: \.self) { job in
-                                NavigationLink(destination: OTJobEditView(otJob: job)) {
+                                NavigationLink(destination: OTJobEditView(viewModel: OTJobEditViewModel(otJob: job))) {
                                     HStack {
                                         Text(job.name)
                                         Spacer()
@@ -72,17 +71,17 @@ struct JobSettingView: View {
             }
         }
         .sheet(isPresented: $showingAddJobView, onDismiss: {
-            viewModel.fetchFromSwiftData()
+            viewModel.onAppear()
         }) {
-            JobAddView()
+            JobAddView(viewModel: JobAddViewModel())
         }
         .sheet(isPresented: $showingAddOTJobView, onDismiss: {
-            viewModel.fetchFromSwiftData()
+            viewModel.onAppear()
         }) {
-            OTJobAddView()
+            OTJobAddView(viewModel: OTJobAddViewModel())
         }
         .onAppear() {
-            viewModel.fetchFromSwiftData()
+            viewModel.onAppear()
         }
         .navigationTitle("バイト一覧")
         .navigationBarTitleDisplayMode(.inline)

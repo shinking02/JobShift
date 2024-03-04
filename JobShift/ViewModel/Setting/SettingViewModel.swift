@@ -1,41 +1,30 @@
-import Foundation
+import Observation
 import GoogleSignIn
-import SwiftUI
 
-class SettingViewModel: ObservableObject {
-    @Published var isDevelopperMode: Bool
-    @Published var syncTokens: [String: String]
-    @Published var isCleardDataBase: Bool
-    @Published var isCleardSyncTokens: Bool
-    
-    init() {
-        self.isDevelopperMode = UserDefaultsData.shared.getIsDevelopperMode()
-        self.syncTokens = UserDefaultsData.shared.getGoogleSyncTokens()
-        self.isCleardDataBase = false
-        self.isCleardSyncTokens = false
+@Observable final class SettingViewModel {
+    var appState = AppState.shared
+    var showLogoutAlert = false
+    var isClearedDataBase = false
+    var isClearedSyncToken = false
+    var isClearedLastSeenOnboardingVersion = false
+    func signOutButtonTapped() {
+        showLogoutAlert = true
     }
-    
+    func signOut() {
+        GIDSignIn.sharedInstance.signOut()
+        appState.isLoggedIn = false
+        appState.firstSyncProcessed = false
+    }
     func clearDataBase() {
         EventStore.shared.clear()
-        self.isCleardDataBase = true
+        isClearedDataBase = true
     }
-    
-    func clearSyncTokens() {
-        self.syncTokens = [:]
-        self.isCleardSyncTokens = true
-        UserDefaultsData.shared.setGoogleSyncTokens(self.syncTokens)
+    func clearSyncToken() {
+        appState.googleSyncToken = [:]
+        isClearedSyncToken = true
     }
-    
-    func handleChangeDevelopperMode() {
-        UserDefaultsData.shared.setIsDevelopperMode(self.isDevelopperMode)
-    }
-    
-    func signOut(appState: AppState) {
-        GIDSignIn.sharedInstance.signOut()
-        appState.user = User(email: "", imageUrl: "", name: "")
-        withAnimation {
-            appState.firstSyncProcessed = false
-            appState.isLoggedIn = false
-        }
+    func clearLastSeenOnboardingVersion() {
+        appState.lastSeenOnboardingVersion = ""
+        isClearedLastSeenOnboardingVersion = true
     }
 }

@@ -2,8 +2,7 @@ import SwiftUI
 import Algorithms
 
 struct WageHistoryView: View {
-    @State private var showAddWageView = false
-    @StateObject var viewModel: JobBaseViewModel
+    @State var viewModel: JobFormViewModel
     
     var body: some View {
         List {
@@ -31,49 +30,18 @@ struct WageHistoryView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showAddWageView = true }, label: {
+                Button(action: { viewModel.wagePlusButtonTapped() }, label: {
                     Image(systemName: "plus")
                 })
             }
         }
-        .sheet(isPresented: $showAddWageView, onDismiss: viewModel.sortAndUpdateWages) {
+        .sheet(isPresented: $viewModel.showAddWageView, onDismiss: viewModel.addSheetDismiss) {
             WageAddView(viewModel: viewModel)
         }
         .onAppear {
-            viewModel.sortAndUpdateWages()
+            viewModel.addViewOnAppear()
         }
         .navigationTitle("昇給履歴")
     }
 }
 
-struct WageAddView: View {
-    @StateObject var viewModel: JobBaseViewModel
-    @Environment(\.dismiss) var dismiss
-    
-    var body: some View {
-        NavigationView {
-            List {
-                DatePicker("昇給日", selection: $viewModel.newWageDate, in: viewModel.startDate..., displayedComponents: .date)
-                            .environment(\.locale, Locale(identifier: "ja_JP"))
-                            .frame(height: 30)
-                TextField("昇給後の時給(円)", text: $viewModel.newWageString)
-                    .keyboardType(.numberPad)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("キャンセル") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("追加") {
-                        viewModel.addNewWage()
-                        dismiss()
-                    }.disabled(viewModel.newWageValidateError)
-                }
-            }
-            .navigationTitle("昇給履歴を追加")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-    }
-}

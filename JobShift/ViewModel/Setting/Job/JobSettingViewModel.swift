@@ -1,23 +1,26 @@
+import Observation
 import Foundation
-import SwiftUI
 
-class JobSettingViewModel: ObservableObject {
-    @Published var jobs: [Job] = []
-    @Published var groupedOtJobs: [Int: [OneTimeJob]] = [:]
-    private var oneTimeJobs: [OneTimeJob] = []
-    private let dataSource = SwiftDataSource.shared
+@Observable final class JobSettingViewModel {
+    var jobs: [Job] = []
+    var otJobs: [OneTimeJob] = []
+    var groupedOtJobs: [Int: [OneTimeJob]] = [:]
+    var expandedYears: Set<Int> = [Calendar.current.component(.year, from: Date())]
+    var showingJobTypeDialog = false
+    var showingAddJobView = false
+    var showingAddOTJobView = false
+    private let swiftDataSource = SwiftDataSource.shared
     
-    init() {
-        fetchFromSwiftData()
+    func onAppear() {
+        jobs = swiftDataSource.fetchJobs()
+        otJobs = swiftDataSource.fetchOTJobs()
+        updateGroupedOtJobs()
     }
     
-    func fetchFromSwiftData() {
-        self.jobs = dataSource.fetchJobs()
-        self.oneTimeJobs = dataSource.fetchOTJobs()
-        self.groupedOtJobs = Dictionary(grouping: self.oneTimeJobs) { (job: OneTimeJob) -> Int in
-            let calendar = Calendar.current
-            let year = calendar.component(.year, from: job.date)
-            return year
-        }
+    private func updateGroupedOtJobs() {
+        groupedOtJobs = Dictionary(grouping: otJobs, by: { job in
+            return Calendar.current.component(.year, from: job.date)
+        })
     }
 }
+

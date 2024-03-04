@@ -1,10 +1,35 @@
 import Foundation
 import SwiftData
 import SwiftUI
-
+import HolidayJp
 
 typealias Job = JobSchemaV3.Job
 typealias OneTimeJob = JobSchemaV3.OneTimeJob
+
+extension Job {
+    func getSalaryPaymentDay(year: Int, month: Int) -> Date? {
+        let calendar = Calendar.current
+        var dateComp = DateComponents(calendar: calendar, year: year, month: month, day: self.salaryPaymentDay)
+        // 給料日が存在しない場合は、月末日をセット
+        if dateComp.month != month {
+            dateComp.day = 0
+        }
+        // 祝日・土日の場合は、直前の平日を取得
+        while let date = dateComp.date {
+            if date.isHoliday() {
+                let previousDate = calendar.date(byAdding: .day, value: -1, to: date)
+                dateComp = calendar.dateComponents(in: TimeZone.current, from: previousDate!)
+            } else {
+                break
+            }
+        }
+        
+        if calendar.compare(dateComp.date!, to: self.startDate, toGranularity: .day) == .orderedAscending {
+            return nil
+        }
+        return calendar.date(from: dateComp)!
+    }
+}
 
 struct Wage: Codable, Hashable {
     var hourlyWage: Int
@@ -22,6 +47,10 @@ struct Wage: Codable, Hashable {
 struct Break: Codable {
     var breakMinutes: Int
     var breakIntervalMinutes: Int
+    init(breakMinutes: Int = 45, breakIntervalMinutes: Int = 360) {
+        self.breakMinutes = breakMinutes
+        self.breakIntervalMinutes = breakIntervalMinutes
+    }
 }
 
 struct EventSummary: Codable {

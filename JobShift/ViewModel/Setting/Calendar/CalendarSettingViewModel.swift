@@ -1,26 +1,18 @@
-import Foundation
+import Observation
 
-class CalendarSettingViewModel: ObservableObject {
-    @Published var allCalendars: [UserCalendar] = []
-    @Published var selectedCalendars: Set<UserCalendar> = []
-    @Published var showOnlyJobEvent: Bool = false
-    
-    init() {
-        allCalendars = UserDefaultsData.shared.getAllCalendars()
-        selectedCalendars = Set(UserDefaultsData.shared.getActiveCalendars())
-        showOnlyJobEvent = UserDefaultsData.shared.getShowOnlyJobEventSetting()
-    }
-    
-    func toggleCalendarSelection(_ calendar: UserCalendar) {
-        if selectedCalendars.contains(calendar) {
-            selectedCalendars.remove(calendar)
-        } else {
-            selectedCalendars.insert(calendar)
+@Observable final class CalendarSettingViewModel {
+    var appState = AppState.shared
+    var calendars = AppState.shared.userCalendars
+    func setActiveCalendar(_ calendar: UserCalendar) {
+        appState.userCalendars = appState.userCalendars.map { item in
+            let item = item
+            if item.id == calendar.id {
+                item.isActive.toggle()
+            }
+            return item
         }
-        UserDefaultsData.shared.setActiveCalendars(Array(selectedCalendars))
     }
-    
-    func updateShowOnlyJobEventSetting() {
-        UserDefaultsData.shared.setShowOnlyJobEventSetting(showOnlyJobEvent)
+    func onDisappear() {
+        appState.userCalendars = calendars
     }
 }

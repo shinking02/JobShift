@@ -6,7 +6,7 @@ enum JobFocusField {
 }
 
 struct JobFormView: View {
-    @StateObject var viewModel: JobBaseViewModel
+    @Bindable var viewModel: JobFormViewModel
     @FocusState private var focusState : JobFocusField?
 
     var body: some View {
@@ -80,7 +80,7 @@ struct JobFormView: View {
                 Toggle("深夜手当", isOn: $viewModel.isNightWage)
             }
         }
-        Section(footer: Text("有効な場合 土, 日, 祝日を基本時給から35%加算して計算します。\n深夜手当が有効な場合22:00〜24:00は60%加算で計算し、24:00〜翌5:00は35%加算で計算します。なお翌日も休日の場合は22:00〜5:00間を60%加算で計算します。\n日給が有効の場合は日給に対して35%加算されます。")) {
+        Section(footer: Text("有効な場合 土, 日, 祝日を基本時給から35%加算して計算します。\n深夜手当が有効な場合22:00〜24:00は60%加算で計算し、24:00〜翌5:00は25%加算で計算します。なお翌日も休日の場合は22:00〜5:00間を60%加算で計算します。\n日給が有効の場合は日給に対して35%加算されます。")) {
             Toggle("休日手当", isOn: $viewModel.isHolidayWage)
         }
         if !viewModel.isDailyWage {

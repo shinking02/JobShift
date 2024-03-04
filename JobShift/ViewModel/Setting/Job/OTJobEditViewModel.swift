@@ -1,39 +1,24 @@
-import Foundation
+import Observation
 
-class OTJobEditViewModel: ObservableObject {
-    @Published var name: String
-    @Published var salary: String
-    @Published var isCommuteWage: Bool
-    @Published var commuteWage: String
-
-    private var otJob: OneTimeJob
-    private var dataSource = SwiftDataSource.shared
-    
-    init(otJob: OneTimeJob) {
-        self.name = otJob.name
-        self.salary = String(otJob.salary)
-        self.isCommuteWage = otJob.isCommuteWage
-        self.commuteWage = otJob.commuteWage == 0 ? "" : String(otJob.commuteWage)
-        self.otJob = otJob
+@Observable final class OTJobEditViewModel: OTJobFormViewModel {
+    var showDeleteAlert = false
+    var otJob: OneTimeJob
+    required init(otJob: OneTimeJob?) {
+        self.otJob = otJob ?? OneTimeJob()
+        super.init(otJob: otJob)
     }
-    
+    func deleteButtonTapped() {
+        showDeleteAlert = true
+    }
     func delete() {
-        dataSource.removeOTJob(otJob)
+        let swiftDataSource = SwiftDataSource.shared
+        swiftDataSource.removeOTJob(otJob)
     }
-    
-    func validateAndUpdate() {
-        if name.isEmpty {
-            return
-        }
-        if Int(salary) == nil {
-            return
-        }
-        if isCommuteWage && Int(commuteWage) == nil {
-            return
-        }
-        otJob.name = name
-        otJob.salary = Int(salary)!
+    func onDisappear() {
+        otJob.name = name.isEmpty ? otJob.name : name
         otJob.isCommuteWage = isCommuteWage
-        otJob.commuteWage = Int(commuteWage) ?? 0
+        otJob.commuteWage = Int(commuteWageString) ?? 0
+        otJob.date = date
+        otJob.summary = summary
     }
 }

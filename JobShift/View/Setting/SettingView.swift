@@ -1,27 +1,25 @@
 import SwiftUI
+import CachedAsyncImage
 
 struct SettingView: View {
-    @ObservedObject var viewModel = SettingViewModel()
-    @State var appState: AppState = AppState.shared
-    @State private var showLogoutAlert: Bool = false
+    @State var viewModel = SettingViewModel()
     
     var body: some View {
         NavigationView {
             List {
                 Section {
                     HStack {
-                        AsyncImage(url: URL(string: appState.user.imageUrl)) { image in
+                        CachedAsyncImage(url: URL(string: viewModel.appState.user.imageUrl)) { image in
                             image.resizable()
                                .clipShape(Circle())
                        } placeholder: {
-                           Image(systemName: "person.crop.circle")
-                               .resizable()
+                            ProgressView()
                        }
                        .frame(width: 50, height: 50)
                         VStack(alignment: .leading) {
-                            Text(appState.user.name)
+                            Text(viewModel.appState.user.name)
                                 .font(.title2)
-                            Text(appState.user.email)
+                            Text(viewModel.appState.user.email)
                                 .foregroundStyle(.secondary)
                         }
                         .padding(.horizontal)
@@ -36,15 +34,29 @@ struct SettingView: View {
                     }
                 }
                 Section {
-                    Toggle("開発者モード", isOn: $viewModel.isDevelopperMode.animation())
-                        .onChange(of: viewModel.isDevelopperMode) {
-                            viewModel.handleChangeDevelopperMode()
-                        }
+                    Toggle("開発者モード", isOn: $viewModel.appState.isDevelopperMode)
                 }
-                if viewModel.isDevelopperMode {
-                    if !viewModel.syncTokens.isEmpty {
+                if viewModel.appState.isDevelopperMode {
+                    Section {
+                        Button(action: {
+                            viewModel.clearDataBase()
+                        } ) {
+                            Text("Clear DataBase")
+                        }.disabled(viewModel.isClearedDataBase)
+                        Button(action: {
+                            viewModel.clearSyncToken()
+                        } ) {
+                            Text("Clear SyncTokens")
+                        }.disabled(viewModel.isClearedSyncToken)
+                        Button(action: {
+                            viewModel.clearLastSeenOnboardingVersion()
+                        } ) {
+                            Text("Clear LastSeenOBVersion")
+                        }.disabled(viewModel.isClearedLastSeenOnboardingVersion)
+                    }
+                    if !viewModel.appState.googleSyncToken.isEmpty {
                         Section(header: Text("SYNCTOKEN")) {
-                            ForEach(viewModel.syncTokens.sorted(by: >), id: \.key) { key, value in
+                            ForEach(viewModel.appState.googleSyncToken.sorted(by: >), id: \.key) { key, value in
                                 Text(key)
                                     .lineLimit(1)
                                 Text(value)
@@ -54,29 +66,17 @@ struct SettingView: View {
                             }
                         }
                     }
-                    Section {
-                        Button(action: {
-                            viewModel.clearDataBase()
-                        } ) {
-                            Text("Clear DataBase")
-                        }.disabled(viewModel.isCleardDataBase)
-                        Button(action: {
-                            viewModel.clearSyncTokens()
-                        } ) {
-                            Text("Clear SyncTokens")
-                        }.disabled(viewModel.isCleardSyncTokens)
-                    }
                 }
                 Section {
                     HStack {
                         Spacer()
                         Button("サインアウト") {
-                            showLogoutAlert = true
+                            viewModel.signOutButtonTapped()
                         }
-                        .alert("サインアウトしますか？", isPresented: $showLogoutAlert) {
+                        .alert("サインアウトしますか？", isPresented: $viewModel.showLogoutAlert) {
                             Button("キャンセル", role: .cancel) {}
                             Button("サインアウト", role: .destructive) {
-                                viewModel.signOut(appState: appState)
+                                viewModel.signOut()
                             }
                         } message: {
                             Text("バイトのデータは失われません")
@@ -86,6 +86,7 @@ struct SettingView: View {
                     }
                 }
             }
+            .animation(.default, value: viewModel.appState.isDevelopperMode)
             .navigationTitle("設定")
         }
     }

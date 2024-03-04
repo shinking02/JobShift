@@ -2,12 +2,13 @@ import SwiftUI
 
 struct JobAddView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var viewModel = JobAddViewModel()
+    @State var viewModel: JobAddViewModel
     
     var body: some View {
         NavigationView {
             List {
                 JobFormView(viewModel: viewModel)
+                EmptyView()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -17,7 +18,7 @@ struct JobAddView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("追加") {
-                        viewModel.handleAddButton()
+                        viewModel.addButtonTapped()
                         dismiss()
                     }.disabled(viewModel.validationError)
                 }

@@ -1,9 +1,11 @@
-import Foundation
 import GoogleAPIClientForREST
 import GoogleSignIn
+import RealmSwift
 
 enum CalendarManagerError: Error {
     case errorWithText(text: String)
+    case invalidSyncToken
+    case eventListQueryError(String)
 }
 
 final class CalendarManager {
@@ -13,7 +15,6 @@ final class CalendarManager {
     private let service = GTLRCalendarService()
     private let appState = AppState.shared
     private let eventStore = EventStore.shared
-    private let userDefaultsData = UserDefaultsData.shared
     private var syncTokens: [String: String] = [:]
     
     func setUser (_ user: GIDGoogleUser) {
@@ -24,7 +25,7 @@ final class CalendarManager {
     func getUserCalendar() async -> [UserCalendar] {
         await withCheckedContinuation { continuation in
             let query = GTLRCalendarQuery_CalendarListList.query()
-            self.service.executeQuery(query) { (ticket, response, error) in
+            self.service.executeQuery(query) { [self] (ticket, response, error) in
                 do {
                     if let error = error {
                         throw CalendarManagerError.errorWithText(text: "Error while executing calendar list query '\(error.localizedDescription)'")
@@ -32,8 +33,20 @@ final class CalendarManager {
                     guard let calendarList = response as? GTLRCalendar_CalendarList, let items = calendarList.items else {
                         throw CalendarManagerError.errorWithText(text: "Error while parsing calendar list response")
                     }
-                    let calendars = items.map { UserCalendar(id: $0.identifier!, name: $0.summary!) }
-                    continuation.resume(returning: calendars)
+                    let oldCalendars = appState.userCalendars
+                    let newCalendars: [UserCalendar] = {
+                        var calendar: [UserCalendar] = []
+                        for item in items {
+                            let existCal = oldCalendars.first { $0.id == item.identifier! }
+                            if let existCal = existCal {
+                                calendar.append(existCal)
+                                continue
+                            }
+                            calendar.append(UserCalendar(id: item.identifier!, name: item.summary ?? "", isActive: true))
+                        }
+                        return calendar
+                    }()
+                    continuation.resume(returning: newCalendars)
                 } catch {
                     print("GoogleCalendarManager - getUserCalendarIds - \(error.localizedDescription)")
                 }
@@ -42,9 +55,8 @@ final class CalendarManager {
     }
     
     func sync() async {
-        let activeCalendars = userDefaultsData.getActiveCalendars()
-        let calendarIds = activeCalendars.map { $0.id }
-        syncTokens = userDefaultsData.getGoogleSyncTokens()
+        let calendarIds = appState.userCalendars.filter { $0.isActive }.map({ $0.id })
+        syncTokens = appState.googleSyncToken
 
         await withCheckedContinuation { continuation in
             Task {
@@ -55,19 +67,19 @@ final class CalendarManager {
                         }
                     }
                     await taskGroup.waitForAll()
-                    self.userDefaultsData.setGoogleSyncTokens(self.syncTokens)
+                    appState.googleSyncToken = syncTokens
                     continuation.resume()
                 }
             }
         }
     }
-    
+
     func syncCalendar(_ calendarId: String) async {
         let eventsQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: calendarId)
         let syncToken = syncTokens[calendarId] ?? ""
         eventsQuery.singleEvents = true
         eventsQuery.syncToken = syncToken
-        
+
         await withCheckedContinuation { continuation in
             self.service.executeQuery(eventsQuery) { (ticket, response, error) in
                 do {
@@ -84,38 +96,23 @@ final class CalendarManager {
                         }
                     }
                     let items = (response as? GTLRCalendar_Events)?.items ?? []
-                    items.forEach { event in
-                        DispatchQueue.global(qos: .utility).async {
+                    DispatchQueue.global(qos: .utility).async {
+                        items.forEach { event in
                             if event.status == "cancelled" {
                                 self.eventStore.deleteEvent(event.identifier!)
                             } else {
-                                self.eventStore.addEvent(event, calendarId)
+                                self.eventStore.syncEvent(event, calendarId)
                             }
                         }
+                        continuation.resume()
                     }
                     self.syncTokens[calendarId] = (response as? GTLRCalendar_Events)?.nextSyncToken ?? ""
-                    continuation.resume()
+                    self.appState.googleSyncToken = self.syncTokens
                 } catch {
                     print("GoogleCalendarManager - syncCalendar - \(error.localizedDescription)")
                 }
             }
         }
-    }
-    
-    func clear() {
-        eventStore.clear()
-    }
-    
-    func addEvent(_ event: Event) {
-        
-    }
-    
-    func deleteEvent(_ id: String) {
-        
-    }
-    
-    func updateEvent(_ event: Event) {
-        
     }
 }
 
