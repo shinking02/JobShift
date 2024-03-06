@@ -5,7 +5,7 @@ struct SettingView: View {
     @State var viewModel = SettingViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     HStack {

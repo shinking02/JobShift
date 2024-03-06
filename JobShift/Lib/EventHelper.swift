@@ -7,7 +7,7 @@ struct EventHelper {
     
     func getEventColor(_ event: Event) -> Color {
         let jobs = dataSource.fetchJobs()
-        let job = jobs.first { $0.name == event.summary }
+        let job = jobs.first { $0.name == event.summary || "\($0.name)給料支払日" == event.summary }
         if let job = job {
             return job.color.getColor()
         }

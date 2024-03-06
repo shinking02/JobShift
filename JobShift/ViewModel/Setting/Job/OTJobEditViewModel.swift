@@ -16,7 +16,7 @@ import Observation
     }
     func onDisappear() {
         otJob.name = name.isEmpty ? otJob.name : name
-        otJob.isCommuteWage = isCommuteWage
+        otJob.isCommuteWage = isCommuteWage && Int(commuteWageString) != nil
         otJob.commuteWage = Int(commuteWageString) ?? 0
         otJob.date = date
         otJob.summary = summary

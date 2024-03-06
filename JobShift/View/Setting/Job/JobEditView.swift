@@ -25,7 +25,7 @@ struct JobEditView: View {
         }
         // onDisappearだとJobSettingViewのonAppearより後に実行される場合がある
         .onWillDisappear {
-            viewModel.trySave()
+            viewModel.onDisappear()
         }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(viewModel.job.name)

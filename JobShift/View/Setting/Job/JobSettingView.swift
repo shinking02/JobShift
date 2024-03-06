@@ -3,9 +3,6 @@ import SwiftUI
 struct JobSettingView: View {
     @State private var viewModel = JobSettingViewModel()
     @State private var expandedYears: Set<Int> = [Calendar.current.component(.year, from: Date())]
-    @State private var showingJobTypeDialog = false
-    @State private var showingAddJobView = false
-    @State private var showingAddOTJobView = false
     
     var body: some View {
         List {
@@ -54,28 +51,28 @@ struct JobSettingView: View {
         }
         .toolbar {
             Button(action: {
-                self.showingJobTypeDialog = true
+                viewModel.jobPlusButtonTapped()
             }, label: {
                 Image(systemName: "plus")
             })
-            .confirmationDialog("", isPresented: $showingJobTypeDialog, titleVisibility: .hidden) {
+            .confirmationDialog("", isPresented: $viewModel.showingJobTypeDialog, titleVisibility: .hidden) {
                 Button("定期バイト") {
-                    self.showingAddJobView = true
+                    viewModel.addJobButtonTapped()
                 }
                 Button("単発バイト") {
-                    self.showingAddOTJobView = true
+                    viewModel.addOTJobButtonTapped()
                 }
                 Button("キャンセル", role: .cancel) {}
             } message: {
                 Text("追加するバイトの種類を選択してください")
             }
         }
-        .sheet(isPresented: $showingAddJobView, onDismiss: {
+        .sheet(isPresented: $viewModel.showingAddJobView, onDismiss: {
             viewModel.onAppear()
         }) {
             JobAddView(viewModel: JobAddViewModel())
         }
-        .sheet(isPresented: $showingAddOTJobView, onDismiss: {
+        .sheet(isPresented: $viewModel.showingAddOTJobView, onDismiss: {
             viewModel.onAppear()
         }) {
             OTJobAddView(viewModel: OTJobAddViewModel())

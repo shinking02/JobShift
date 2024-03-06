@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CalendarView: UIViewRepresentable {
     let selectionBehavior: (DateComponents?) -> Void
@@ -36,14 +37,17 @@ struct CalendarView: UIViewRepresentable {
     
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
         var parent: CalendarView
+        private let decorationSessionQueue = DispatchQueue(label: "DecorationSessionQueue")
         init(parent: CalendarView) {
             self.parent = parent
         }
         
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-           let decoration = parent.decorationFor(dateComponents)
-           return decoration
+            decorationSessionQueue.sync {
+                let decoration = parent.decorationFor(dateComponents)
+                return decoration
+            }
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {

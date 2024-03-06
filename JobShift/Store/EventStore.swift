@@ -9,12 +9,16 @@ class Event: Object {
     @Persisted var isAllDay: Bool
     @Persisted var start: Date
     @Persisted var end: Date
+    private static var realm = try! Realm()
+    static func all() -> Results<Event> {
+        realm.objects(Event.self)
+    }
 }
 
 @Observable final class EventStore {
     static let shared: EventStore = .init()
-    private var notificationTokens: [NotificationToken] = []
     private let appState = AppState.shared
+    private init() {}
     
     
     func addEvent(_ event: Event) {

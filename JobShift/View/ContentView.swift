@@ -3,7 +3,7 @@ import SwiftData
 
 struct ContentView: View {
     @State private var viewModel = ContentViewModel()
-//    @State private var shiftViewModel = ShiftViewModel()
+    @State var shiftViewModel = ShiftViewModel()
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
             ForEach(Tab.allCases, id: \.rawValue) { tab in
@@ -16,11 +16,10 @@ struct ContentView: View {
                     .toolbarBackground(.bar, for: .tabBar)
             }
         }
-//        .environmentObject(shiftViewModel)
+        .environment(shiftViewModel)
         .sheet(isPresented: $viewModel.showCalendarSheet) {
-//            ShiftSheetView()
-//            .environmentObject(shiftViewModel)
-            EmptyView()
+            ShiftSheetView()
+            .environment(shiftViewModel)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .presentationDetents([.height(240), .large])
             .presentationCornerRadius(18)

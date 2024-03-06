@@ -6,7 +6,6 @@ struct OTJobEditView: View {
     
     var body: some View {
         Form {
-            // Validation is done by viewModel
             OTJobFormView(viewModel: viewModel)
             Section {
                 HStack {

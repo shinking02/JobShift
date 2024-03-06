@@ -21,7 +21,6 @@ enum Tab: String, CaseIterable {
         switch self {
         case .shift:
             ShiftView()
-            EmptyView()
         case .salary:
             SalaryView()
         case .setting:

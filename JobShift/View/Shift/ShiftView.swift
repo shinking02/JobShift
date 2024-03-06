@@ -3,19 +3,16 @@ import SwiftUI
 
 struct ShiftView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-//    @EnvironmentObject private var viewModel: ShiftViewModel
+    @Environment(ShiftViewModel.self) var viewModel
     
     var body: some View {
         VStack {
-//            CalendarView(
-//                selectionBehavior: viewModel.dateSelectionBehavior,
-//                decorationFor: viewModel.decorator
-//            )
-//            .padding(.horizontal)
-//            .frame(height: 460)
-//            .onAppear {
-//                viewModel.onAppear()
-//            }
+            CalendarView(
+                selectionBehavior: viewModel.selectionBehavior,
+                decorationFor: viewModel.decorationFor
+            )
+            .padding(.horizontal)
+            .frame(height: 460)
             Spacer()
         }
         .background(Color(.systemGroupedBackground))

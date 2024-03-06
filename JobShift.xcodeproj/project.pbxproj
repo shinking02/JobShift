@@ -26,6 +26,7 @@
 		5442B4222B95FED00047434B /* OTJobFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4212B95FED00047434B /* OTJobFormViewModel.swift */; };
 		5442B42A2B9602270047434B /* OTJobAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4292B9602270047434B /* OTJobAddViewModel.swift */; };
 		5442B42C2B9606660047434B /* OTJobEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B42B2B9606660047434B /* OTJobEditViewModel.swift */; };
+		5442B42F2B9609850047434B /* ShiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B42E2B9609850047434B /* ShiftViewModel.swift */; };
 		5453AE562B8CDB970053B72D /* ShiftSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5453AE552B8CDB970053B72D /* ShiftSheetView.swift */; };
 		545A9CE42B7E06A40065487C /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 545A9CE32B7E06A40065487C /* RiveRuntime */; };
 		545A9CEA2B7F810A0065487C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A9CE92B7F810A0065487C /* ContentView.swift */; };
@@ -85,6 +86,7 @@
 		5442B4212B95FED00047434B /* OTJobFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobFormViewModel.swift; sourceTree = "<group>"; };
 		5442B4292B9602270047434B /* OTJobAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddViewModel.swift; sourceTree = "<group>"; };
 		5442B42B2B9606660047434B /* OTJobEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditViewModel.swift; sourceTree = "<group>"; };
+		5442B42E2B9609850047434B /* ShiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewModel.swift; sourceTree = "<group>"; };
 		5453AE552B8CDB970053B72D /* ShiftSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftSheetView.swift; sourceTree = "<group>"; };
 		545A9CE92B7F810A0065487C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		546D43DC2B7DE4940027D044 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -143,7 +145,6 @@
 				54E2AD822B88DD89008A9A77 /* JobFormView.swift */,
 				54FEEFEF2B89A847002A3BCC /* JobAddView.swift */,
 				54FEEFFA2B89FB7D002A3BCC /* JobEditView.swift */,
-				5442B41F2B95E6EB0047434B /* JobEditViewModel.swift */,
 				54C18E522B888B39002E51D7 /* OTJobFormView.swift */,
 				54C18E542B888F89002E51D7 /* OTJobAddView.swift */,
 				54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */,
@@ -160,6 +161,7 @@
 				5442B4062B9444EA0047434B /* LaunchScreenViewModel.swift */,
 				5442B4082B945B940047434B /* OnboardingViewModel.swift */,
 				5442B40A2B945D440047434B /* ContentViewModel.swift */,
+				5442B42D2B9609450047434B /* Shift */,
 				5442B40C2B94600F0047434B /* Setting */,
 			);
 			path = ViewModel;
@@ -195,13 +197,22 @@
 			isa = PBXGroup;
 			children = (
 				5442B4132B946F3E0047434B /* JobSettingViewModel.swift */,
-				5442B42B2B9606660047434B /* OTJobEditViewModel.swift */,
-				5442B4292B9602270047434B /* OTJobAddViewModel.swift */,
-				5442B4172B94800B0047434B /* JobAddViewModel.swift */,
 				5442B4152B9473800047434B /* JobFormViewModel.swift */,
+				5442B4172B94800B0047434B /* JobAddViewModel.swift */,
+				5442B41F2B95E6EB0047434B /* JobEditViewModel.swift */,
 				5442B4212B95FED00047434B /* OTJobFormViewModel.swift */,
+				5442B4292B9602270047434B /* OTJobAddViewModel.swift */,
+				5442B42B2B9606660047434B /* OTJobEditViewModel.swift */,
 			);
 			path = Job;
+			sourceTree = "<group>";
+		};
+		5442B42D2B9609450047434B /* Shift */ = {
+			isa = PBXGroup;
+			children = (
+				5442B42E2B9609850047434B /* ShiftViewModel.swift */,
+			);
+			path = Shift;
 			sourceTree = "<group>";
 		};
 		546D43DB2B7DE4520027D044 /* View */ = {
@@ -486,6 +497,7 @@
 				54C18E4F2B886CFA002E51D7 /* SwiftDataSource.swift in Sources */,
 				5453AE562B8CDB970053B72D /* ShiftSheetView.swift in Sources */,
 				5442B4142B946F3E0047434B /* JobSettingViewModel.swift in Sources */,
+				5442B42F2B9609850047434B /* ShiftViewModel.swift in Sources */,
 				5442B42A2B9602270047434B /* OTJobAddViewModel.swift in Sources */,
 				54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */,
 				5442B4162B9473800047434B /* JobFormViewModel.swift in Sources */,

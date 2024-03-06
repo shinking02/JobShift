@@ -5,6 +5,7 @@ import Observation
     var showDeleteAlert = false
     @ObservationIgnored var job: Job
     private let swiftDataSouce = SwiftDataSource.shared
+    
     required init(job: Job?) {
         self.job = job ?? Job()
         super.init(job: job)
@@ -16,14 +17,14 @@ import Observation
     func jobDelete() {
         swiftDataSouce.removeJob(job)
     }
-    func trySave() {
+    func onDisappear() {
         job.name = name.isEmpty ? job.name : name
         job.color = color
         job.isDailyWage = isDailyWage
         job.isNightWage = isNightWage
         job.isHolidayWage = isHolidayWage
         job.wages = wages
-        job.isCommuteWage = isCommuteWage
+        job.isCommuteWage = isCommuteWage && Int(commuteWageString) != nil
         job.commuteWage = Int(commuteWageString) ?? 0
         job.isBreak1 = isBreak1
         job.isBreak2 = isBreak2
