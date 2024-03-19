@@ -29,6 +29,155 @@ extension Job {
         }
         return calendar.date(from: dateComp)!
     }
+
+    func getMonthSalary(year: Int, month: Int) -> Salary {
+        let interval = getWorkDayInterval(year: year, month: month)
+        let targetEvents = EventStore.shared.getJobEvents(interval: interval, jobName: self.name)
+        var totalSalary = 0
+        var totalMinutes = 0
+        var details: [SalaryDetail] = []
+        
+        targetEvents.forEach { event in
+            let (salary, minutes) = calculateEventSalary(event)
+            totalSalary += salary
+            totalMinutes += minutes
+            details.append(SalaryDetail(
+                event: event,
+                dateText: event.start.toMdEString(brackets: true),
+                startText: event.isAllDay ? "終日" : event.start.toHmmString(),
+                endText: event.isAllDay ? "" : event.end.toHmmString(),
+                summary: self.eventSummaries.first { $0.eventId == event.id }?.summary ?? "",
+                salary: salary,
+                hasAdjustment: self.eventSummaries.first { $0.eventId == event.id }?.adjustment != nil
+            ))
+        }
+        let confirmTotal = self.salaryHistories.first { $0.year == year && $0.month == month }?.salary ?? nil
+        return Salary(
+            year: year,
+            month: month,
+            job: self,
+            totalSalary: totalSalary,
+            totalMinutes: totalMinutes,
+            count: targetEvents.count,
+            isConfirm: confirmTotal != nil || interval.end < self.startDate,
+            confirmTotal: confirmTotal ?? 0,
+            commuteWage: self.isCommuteWage ? details.count * self.commuteWage : 0,
+            details: details
+        )
+    }
+    
+    func getYearSalary(year: Int) -> [Salary] {
+        var salaries: [Salary] = []
+        for month in 1...12 {
+            let salary = getMonthSalary(year: year, month: month)
+            salaries.append(salary)
+        }
+        return salaries
+    }
+    
+    func getWorkDayInterval(year: Int, month: Int?) -> DateInterval {
+        let currendar = Calendar.current
+        if let month = month {
+            let startComponents = {
+                let tempStart = DateComponents(year: year, month: month - 1, day: 1)
+                let startMonthDays = currendar.daysInMonth(for: currendar.date(from: tempStart)!)
+                if startMonthDays < self.salaryCutoffDay + 1 {
+                    return DateComponents(year: year, month: month, day: 1)
+                } else {
+                    return DateComponents(year: year, month: month - 1, day: self.salaryCutoffDay + 1)
+                }
+            }()
+            let endComponents = {
+                let tempEnd = DateComponents(year: year, month: month,  day: 1)
+                let endMonthDays = currendar.daysInMonth(for: currendar.date(from: tempEnd)!)
+                if endMonthDays < self.salaryCutoffDay {
+                    return DateComponents(year: year, month: month + 1, day: 0, hour: 23, minute: 59)
+                } else {
+                    return DateComponents(year: year, month: month, day: self.salaryCutoffDay, hour: 23, minute: 59)
+                }
+            }()
+            return DateInterval(start: currendar.date(from: startComponents)!, end: currendar.date(from: endComponents)!)
+        } else {
+            let startComponents = DateComponents(year: year - 1, month: 12, day: self.salaryCutoffDay + 1)
+            let endComponents = DateComponents(year: year, month: 12, day: self.salaryCutoffDay)
+            return DateInterval(start: max(currendar.date(from: startComponents)!, self.startDate), end: currendar.date(from: endComponents)!)
+        }
+    }
+    
+    private func calculateEventSalary(_ event: Event) -> (salary: Int, minutes: Int) {
+        let wage = self.wages.first { $0.start <= event.start && event.start < $0.end }!
+        var totalMinutes = event.end.timeIntervalSince(event.start) / 60
+        if totalMinutes == 0 && event.isAllDay {
+            totalMinutes = 24 * 60 // １日の終日イベントは開始と終了が同じになっている
+        }
+        let adjustment = self.eventSummaries.first { $0.eventId == event.id }?.adjustment ?? 0
+        if self.isDailyWage {
+            if self.isHolidayWage && event.start.isHoliday() {
+                return (Int(Double(wage.dailyWage) * 1.35) + adjustment, Int(totalMinutes))
+            }
+            return (wage.dailyWage + adjustment, Int(totalMinutes))
+        }
+        let nightStandard = {
+            let calendar = Calendar.current
+            var components = calendar.dateComponents([.year, .month, .day], from: event.start)
+            components.hour = 22
+            components.minute = 0
+            components.second = 0
+            return calendar.date(from: components)!
+        }()
+        var nightMinutes = max(0, min(event.end.timeIntervalSince(nightStandard) / 60, totalMinutes, 420))
+        var normalMinutes = totalMinutes - nightMinutes
+        let normalRate = self.isHolidayWage && event.start.isHoliday() ? 1.35 : 1
+        let nightRate = self.isNightWage ? normalRate + 0.25 : normalRate
+        
+        let break1 = self.isBreak1 ? self.break1 : nil
+        let break2 = self.isBreak2 ? self.break2 : nil
+        let targetBreak = [break1, break2]
+            .compactMap { $0 }
+            .filter { Double($0.breakIntervalMinutes) <= totalMinutes }
+            .sorted { $0.breakIntervalMinutes < $1.breakIntervalMinutes }
+            .last
+        var breakMinutes = 0.0
+        var tmpTotalMinutes = totalMinutes
+        while let targetBreak = targetBreak, Double(targetBreak.breakIntervalMinutes) <= tmpTotalMinutes {
+            breakMinutes += Double(targetBreak.breakMinutes)
+            tmpTotalMinutes -= Double(targetBreak.breakIntervalMinutes + targetBreak.breakMinutes)
+        }
+        if breakMinutes <= normalMinutes {
+            normalMinutes -= breakMinutes
+        } else {
+            breakMinutes -= normalMinutes
+            normalMinutes = 0
+            nightMinutes -= breakMinutes
+        }
+        let normalSalary: Int = Int(Double(wage.hourlyWage) * normalRate * normalMinutes / 60)
+        let nightSalary: Int = Int(Double(wage.hourlyWage) * nightRate * nightMinutes / 60)
+        return (normalSalary + nightSalary + adjustment, Int(totalMinutes - breakMinutes))
+    }
+}
+
+struct Salary: Identifiable {
+    let id = UUID()
+    var year: Int
+    var month: Int
+    var job: Job?
+    var totalSalary: Int
+    var totalMinutes: Int
+    var count: Int
+    var isConfirm: Bool
+    var confirmTotal: Int
+    var commuteWage: Int
+    var details: [SalaryDetail]
+}
+
+struct SalaryDetail: Hashable {
+    var event: Event
+    var dateText: String
+    var startText: String
+    var endText: String
+    var summary: String
+    var salary: Int
+    var hasAdjustment: Bool
 }
 
 struct Wage: Codable, Hashable {
@@ -329,7 +478,7 @@ enum JobSchemaV3: VersionedSchema {
         var salaryHistories: [SalaryHistory] = []
         @Attribute(originalName: "eventSummaries") var eventSummariesOld: [String: String] = [:]
         var eventSummaries: [EventSummary] = []
-        var lastAccessedTime: Date = Date()
+        var recentlySalary: Int = 0
         
         init(
             name: String = "",
@@ -370,9 +519,7 @@ enum JobSchemaV3: VersionedSchema {
             self.salaryPaymentDay = salaryPaymentDay
             self.salaryHistories = salaryHistories
             self.eventSummaries = eventSummaries
-            self.lastAccessedTime = lastAccessedTime
             self.displayPaymentDay = displayPaymentDay
-            self.lastAccessedTime = Date()
             self.startDate = startDate
         }
     }

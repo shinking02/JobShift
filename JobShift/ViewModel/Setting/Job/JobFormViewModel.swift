@@ -43,13 +43,14 @@ import Foundation
     var newWageValidateError: Bool {
         return newWageString.isEmpty || Int(newWageString) == nil
     }
+    private var job: Job?
     required init(job: Job?) {
         if let job = job {
             name = job.name
             color = job.color
             isDailyWage = job.isDailyWage
-            dailyWageString = wages[0].dailyWage == 0 ? "" : String(wages[0].dailyWage)
-            hourlyWageString = wages[0].hourlyWage == 0 ? "" : String(wages[0].hourlyWage)
+            dailyWageString = job.wages[0].dailyWage == 0 ? "" : String(job.wages[0].dailyWage)
+            hourlyWageString = job.wages[0].hourlyWage == 0 ? "" : String(job.wages[0].hourlyWage)
             startDate = job.startDate
             isCommuteWage = job.isCommuteWage
             commuteWageString = job.commuteWage == 0 ? "" : String(job.commuteWage)
@@ -63,6 +64,7 @@ import Foundation
             salaryCutoffDay = job.salaryCutoffDay
             salaryPaymentDay = job.salaryPaymentDay
             wages = job.wages
+            self.job = job
         }
     }
     func checkFirstWageError() {
@@ -75,6 +77,7 @@ import Foundation
     
     func deleteWage(at: IndexSet) {
         wages.remove(atOffsets: at)
+        sortWages()
     }
     
     func wagePlusButtonTapped() {
@@ -114,5 +117,8 @@ import Foundation
         }
         result[0].start = startDate
         wages = result
+        if job != nil {
+            job!.wages = result
+        }
     }
 }

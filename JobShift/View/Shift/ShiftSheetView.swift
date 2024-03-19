@@ -2,6 +2,9 @@ import SwiftUI
 
 struct ShiftSheetView: View {
     @Environment(ShiftViewModel.self) var viewModel
+    @State private var editingEvent: ShiftViewEvent?
+    @State private var addingEvent: ShiftViewEvent?
+    
     private let eventHelper = EventHelper()
     var body: some View {
         NavigationView {
@@ -12,56 +15,102 @@ struct ShiftSheetView: View {
                     features: [
                         Feature(title: "給料日の表示", description: "カレンダーに給料日が表示されるようになりました。", icon: "yensign"),
                         Feature(title: "パフォーマンスの向上", description: "すべての処理のパフォーマンスが向上し、より高速に低電力で安定して動作するようになりました。", icon: "bolt"),
-                        Feature(title: "勤務開始日の設定", description: "定期バイトの勤務開始日を設定できるようになりました。", icon: "calendar"),
+                        Feature(title: "入社日の設定", description: "定期バイトの入社日を設定できるようになりました。", icon: "calendar"),
                         Feature(title: "UIの調整", description: "UIの細かな調整を全ページで行いました。これによりUXが格段に向上しています。", icon: "hand.tap")
                     ],
                     color: Color.blue
                 )
-                ForEach(viewModel.selectedDateEvents, id: \.id) { event in
-                    Divider()
-                        .padding(.horizontal)
-                    HStack {
-                        Rectangle()
-                            .frame(width: 4)
-                            .cornerRadius(2)
-                            .foregroundStyle(eventHelper.getEventColor(event))
-                        VStack(alignment: .leading) {
-                            Text(event.summary)
-                                .bold()
-                                .lineLimit(1)
+                if viewModel.selectedDateEvents.isEmpty {
+                    Text("予定がありません")
+                        .font(.title3)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(viewModel.selectedDateEvents, id: \.id) { event in
+                        Divider()
+                            .padding(.horizontal)
+                        HStack {
+                            Rectangle()
+                                .frame(width: 4, height: 32)
+                                .cornerRadius(2)
+                                .foregroundStyle(event.color)
+                            VStack(alignment: .leading) {
+                                Text(event.title)
+                                    .bold()
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text(event.timeText1)
+                                if let timeText2 = event.timeText2 {
+                                    Text(timeText2)
+                                }
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         }
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                }
-                ForEach(viewModel.selectedDateJobEvents, id: \.id) { event in
-                    Divider()
                         .padding(.horizontal)
-                    HStack {
-                        Rectangle()
-                            .frame(width: 4)
-                            .cornerRadius(2)
-                            .foregroundStyle(eventHelper.getEventColor(event))
-                        VStack(alignment: .leading) {
-                            Text(event.summary)
-                                .bold()
-                                .lineLimit(1)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if event.canEdit {
+                                editingEvent = event
+                            }
                         }
-                        Spacer()
                     }
-                    .padding(.horizontal)
                 }
+                if !viewModel.selectedDateSuggests.isEmpty {
+                    Text("提案")
+                        .font(.caption)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top)
+                        .padding(.horizontal)
+                        .foregroundStyle(.secondary)
+                    ScrollView (.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(viewModel.selectedDateSuggests, id: \.id) { suggest in
+                                SuggestCardView(suggest: suggest)
+                                    .onTapGesture {
+                                        addingEvent = suggest
+                                    }
+                            }
+                        }
+                    }
+                    .safeAreaPadding(.horizontal)
+                }
+            }
+            .sheet(item: $editingEvent, onDismiss: viewModel.onAppear) { event in
+                EventEditView(event: event)
+            }
+            .sheet(item: $addingEvent, onDismiss: viewModel.onAppear) { event in
+                EventAddView(event: event)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text(viewModel.selectedDate.toMdEString())
+                    Text("\(viewModel.selectedDate.toMdEString(brackets: false))曜日")
                         .font(.title3.bold())
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: {
+                        addingEvent = ShiftViewEvent(
+                            id: UUID().uuidString,
+                            color: .secondary,
+                            title: "",
+                            summary: nil,
+                            timeText1: "",
+                            timeText2: nil,
+                            canEdit: false,
+                            calendarId: "",
+                            isAllday: true,
+                            start: viewModel.selectedDate,
+                            end: viewModel.selectedDate
+                        )
+
+                    }) {
                         Image(systemName: "plus")
                             .font(.title3)
                     }
+                    .disabled(!viewModel.canAddEvent)
                 }
             }
         }

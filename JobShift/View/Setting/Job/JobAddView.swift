@@ -8,7 +8,6 @@ struct JobAddView: View {
         NavigationView {
             List {
                 JobFormView(viewModel: viewModel)
-                EmptyView()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

@@ -8,6 +8,7 @@ enum UserDefaultsKeys {
     static let isDevelopperMode = "IS_DEVELOPPER_MODE"
     static let userCalendars = "USER_CALENDARS"
     static let lastSeenOnboardingVersion = "LAST_SEEN_ONBOARDING_VERSION"
+    static let defaultCalendar = "DEFAULT_CALENDAR"
 }
 
 @Observable final class UserCalendar: Codable, Hashable {
@@ -76,4 +77,19 @@ struct User {
     var isLoggedIn: Bool = false
     var loginRestored: Bool = false
     var firstSyncProcessed: Bool = false
+    var defaultCalendar: UserCalendar? {
+        get {
+            let jsonDecoder = JSONDecoder()
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.defaultCalendar),
+                  let defaultCalendar = try? jsonDecoder.decode(UserCalendar.self, from: data) else {
+                return nil
+            }
+            return defaultCalendar
+        }
+        set {
+            let jsonEncoder = JSONEncoder()
+            guard let data = try? jsonEncoder.encode(newValue) else { return }
+            UserDefaults.standard.set(data, forKey: UserDefaultsKeys.defaultCalendar)
+        }
+    }
 }

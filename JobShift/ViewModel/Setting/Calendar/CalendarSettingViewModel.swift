@@ -3,6 +3,7 @@ import Observation
 @Observable final class CalendarSettingViewModel {
     var appState = AppState.shared
     var calendars = AppState.shared.userCalendars
+    var defaultCalendar: UserCalendar = AppState.shared.defaultCalendar ?? AppState.shared.userCalendars.first!
     func setActiveCalendar(_ calendar: UserCalendar) {
         appState.userCalendars = appState.userCalendars.map { item in
             let item = item
@@ -12,7 +13,8 @@ import Observation
             return item
         }
     }
-    func onDisappear() {
+    func onWillDisappear() {
         appState.userCalendars = calendars
+        appState.defaultCalendar = defaultCalendar
     }
 }

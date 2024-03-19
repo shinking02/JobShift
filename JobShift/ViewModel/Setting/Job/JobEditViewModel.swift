@@ -34,6 +34,5 @@ import Observation
         job.salaryPaymentDay = salaryPaymentDay
         job.displayPaymentDay = displayPaymentDay
         job.startDate = startDate
-        job.lastAccessedTime = Date()
     }
 }

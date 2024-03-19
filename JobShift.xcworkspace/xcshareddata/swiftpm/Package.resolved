@@ -1,12 +1,93 @@
 {
   "pins" : [
     {
+      "identity" : "appauth-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/openid/AppAuth-iOS.git",
+      "state" : {
+        "revision" : "71cde449f13d453227e687458144bde372d30fc7",
+        "version" : "1.6.2"
+      }
+    },
+    {
+      "identity" : "google-api-objectivec-client-for-rest",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/google-api-objectivec-client-for-rest",
+      "state" : {
+        "branch" : "main",
+        "revision" : "430f209f4850a91d8613af36d93c9c0d75dfcf0e"
+      }
+    },
+    {
+      "identity" : "googlesignin-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleSignIn-iOS",
+      "state" : {
+        "revision" : "7932d33686c1dc4d7df7a919aae47361d1cdfda4",
+        "version" : "7.0.0"
+      }
+    },
+    {
+      "identity" : "gtm-session-fetcher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/gtm-session-fetcher.git",
+      "state" : {
+        "revision" : "76135c9f4e1ac85459d5fec61b6f76ac47ab3a4c",
+        "version" : "3.3.1"
+      }
+    },
+    {
+      "identity" : "gtmappauth",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GTMAppAuth.git",
+      "state" : {
+        "revision" : "cee3c709307912d040bd1e06ca919875a92339c6",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "holiday_jp-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/holiday-jp/holiday_jp-swift",
+      "state" : {
+        "revision" : "45129b042d941ab1abce2b878ee048c39f1813a8",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "licenselist",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cybozu/LicenseList.git",
+      "state" : {
+        "revision" : "37fd936bcc244a75ececf004d249519fb5f4b7d6",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "a5e87a39cffdcc591f3203c11cfca68100d0b9a6",
+        "version" : "13.26.0"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7a2f7d41ffa409978a6b5e475c2ee57f08222705"
+      }
+    },
+    {
       "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/rive-app/rive-ios.git",
+      "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "ce21e5a002b0996f55336355dcbbe852deace9ec",
-        "version" : "5.7.1"
+        "revision" : "b59607519432ee048130c6520acce5c8a7f5c06c",
+        "version" : "5.9.1"
       }
     },
     {
@@ -16,15 +97,6 @@
       "state" : {
         "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
         "version" : "1.2.0"
-      }
-    },
-    {
-      "identity" : "swift-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections.git",
-      "state" : {
-        "revision" : "a902f1823a7ff3c9ab2fba0f992396b948eda307",
-        "version" : "1.0.5"
       }
     },
     {

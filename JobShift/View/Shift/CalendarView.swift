@@ -8,11 +8,9 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 struct CalendarView: UIViewRepresentable {
-    let selectionBehavior: (DateComponents?) -> Void
-    let decorationFor: (DateComponents) -> UICalendarView.Decoration?
+    @Bindable var viewModel: ShiftViewModel
     
     func makeUIView(context: Context) -> some UICalendarView {
         let view = UICalendarView()
@@ -32,28 +30,35 @@ struct CalendarView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        uiView.reloadDecorations(forDateComponents: uiView.visibleDateComponents.monthDatesArray(), animated: true)
+        if viewModel.shouldUpdateDecorationsOnAppear {
+            uiView.reloadDecorations(forDateComponents: uiView.visibleDateComponents.monthDatesArray(), animated: true)
+        }
+        if !viewModel.decorationUpdatedDates.isEmpty {
+            uiView.reloadDecorations(forDateComponents: viewModel.decorationUpdatedDates, animated: true)
+        }
+        viewModel.decorationReloaded()
     }
     
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
         var parent: CalendarView
-        private let decorationSessionQueue = DispatchQueue(label: "DecorationSessionQueue")
         init(parent: CalendarView) {
             self.parent = parent
         }
         
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            decorationSessionQueue.sync {
-                let decoration = parent.decorationFor(dateComponents)
-                return decoration
+            parent.viewModel.updateDecoration(dateComponents)
+            guard let decoration = parent.viewModel.decorationStore[dateComponents] else {
+                return nil
             }
+            if let image = decoration.image {
+                return .image(image, color: decoration.color, size: .large)
+            }
+            return .default(color: decoration.color)
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-            parent.selectionBehavior(dateComponents)
+            parent.viewModel.selectionBehavior(dateComponents)
         }
-        
-        
     }
 }

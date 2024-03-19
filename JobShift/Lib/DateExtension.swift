@@ -15,12 +15,18 @@ extension Date {
         }
         return dateFormatter.string(from: self)
     }
-    func toMdEString() -> String {
+    func toMdEString(brackets: Bool) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
-        dateFormatter.dateFormat = "M月d日 E曜日"
+        dateFormatter.dateFormat = brackets ? "M月d日 (E)" : "M月d日 E"
         return dateFormatter.string(from: self)
     }
+    func toHmmString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H:mm"
+        return dateFormatter.string(from: self)
+    }
+    
     func isHoliday() -> Bool {
         let calendar = Calendar.current
         return HolidayJp.isHoliday(self) || calendar.component(.weekday, from: self) == 1 || calendar.component(.weekday, from: self) == 7
@@ -36,5 +42,11 @@ extension DateComponents {
               components.day = day
               return components
         }
+    }
+}
+
+extension Calendar {
+    func daysInMonth(for date:Date) -> Int {
+        return range(of: .day, in: .month, for: date)!.count
     }
 }

@@ -1,6 +1,7 @@
 import Observation
+import GoogleAPIClientForREST_Calendar
 import RealmSwift
-import GoogleAPIClientForREST
+
 
 class Event: Object {
     @Persisted(primaryKey: true) var id: String
@@ -9,7 +10,7 @@ class Event: Object {
     @Persisted var isAllDay: Bool
     @Persisted var start: Date
     @Persisted var end: Date
-    private static var realm = try! Realm()
+    private static var realm = try! Realm()    
     static func all() -> Results<Event> {
         realm.objects(Event.self)
     }
@@ -96,6 +97,32 @@ class Event: Object {
             .filter(filterRule, activeCalendarIds, dateEnd, dateStart, dateEnd, dateStart, dateStart, dateEnd, jobNames)
             .sorted(byKeyPath: "start", ascending: true)
         return events;
+    }
+    
+    func updateEvent(_ event: GTLRCalendar_Event) {
+        let realm = try! Realm()
+        let existingEvent = realm.objects(Event.self).filter("id = %@", event.identifier!).first
+        if let existingEvent = existingEvent {
+            try! realm.write {
+                existingEvent.summary = event.summary ?? ""
+                existingEvent.isAllDay = event.start?.date?.date != nil
+                existingEvent.start = event.start?.date?.date ?? event.start?.dateTime?.date ?? Date.distantPast
+                existingEvent.end = {
+                    if existingEvent.isAllDay {
+                        return Calendar.current.date(byAdding: .day, value: -1, to: event.end?.date?.date ?? Date.distantFuture)!
+                    }
+                    return event.end?.dateTime?.date ?? Date.distantFuture
+                }()
+            }
+        }
+    }
+    
+    func getJobEvents(interval: DateInterval, jobName: String) -> [Event] {
+        let realm = try! Realm()
+        let events = realm.objects(Event.self)
+            .filter("start < %@ AND start >= %@ AND summary = %@", interval.end, interval.start, jobName)
+            .sorted(byKeyPath: "start", ascending: true)
+        return Array(events)
     }
     
     private func createEvent(_ event: GTLRCalendar_Event, _ calendarId: String) -> Event {

@@ -1,5 +1,5 @@
-import GoogleAPIClientForREST
 import GoogleSignIn
+import GoogleAPIClientForREST_Calendar
 import RealmSwift
 
 enum CalendarManagerError: Error {
@@ -62,8 +62,9 @@ final class CalendarManager {
             Task {
                 await withTaskGroup(of: Void.self) { taskGroup in
                     for calendarId in calendarIds {
-                        taskGroup.addTask {
-                            await self.syncCalendar(calendarId)
+                        taskGroup.addTask { [weak self] in
+                            guard let strongSelf = self else { return }
+                            await strongSelf.syncCalendar(calendarId)
                         }
                     }
                     await taskGroup.waitForAll()
@@ -110,6 +111,110 @@ final class CalendarManager {
                     self.appState.googleSyncToken = self.syncTokens
                 } catch {
                     print("GoogleCalendarManager - syncCalendar - \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func addEvent(_ event: ShiftViewEvent) async {
+        let gtlrEvent = GTLRCalendar_Event()
+        let gtlrStart = GTLRCalendar_EventDateTime()
+        let gtlrEnd = GTLRCalendar_EventDateTime()
+        let calendar = Calendar.current
+        let (gtlrDateStart, gtlrDateEnd): (GTLRDateTime, GTLRDateTime) = {
+            if event.isAllday {
+                let startComponent = calendar.dateComponents([.year, .month, .day], from: event.start)
+                let endComponent = calendar.dateComponents([.year, .month, .day], from: event.end)
+                return (GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 1, to: calendar.date(from: startComponent)!)!),
+                        GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 2, to: calendar.date(from: endComponent)!)!))
+            } else {
+                return (GTLRDateTime(date: event.start), GTLRDateTime(date: event.end))
+            }
+        }()
+        if event.isAllday {
+            gtlrStart.date = gtlrDateStart
+            gtlrEnd.date = gtlrDateEnd
+        } else {
+            gtlrStart.dateTime = gtlrDateStart
+            gtlrEnd.dateTime = gtlrDateEnd
+        }
+        gtlrEvent.summary = event.title
+        gtlrEvent.start = gtlrStart
+        gtlrEvent.end = gtlrEnd
+        
+        let query = GTLRCalendarQuery_EventsInsert.query(withObject: gtlrEvent, calendarId: event.calendarId)
+        await withCheckedContinuation { continuation in
+            self.service.executeQuery(query) { (ticket, response, error) in
+                do {
+                    if let error = error {
+                        throw CalendarManagerError.errorWithText(text: "Error while executing events insert query '\(error.localizedDescription)'")
+                    }
+                    let gtlrEvent = response as! GTLRCalendar_Event
+                    self.eventStore.syncEvent(gtlrEvent, event.calendarId)
+                    continuation.resume()
+                } catch {
+                    print("GoogleCalendarManager - addEvent - \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func updateEvent(_ event: ShiftViewEvent) async {
+        let gtlrEvent = GTLRCalendar_Event()
+        let gtlrStart = GTLRCalendar_EventDateTime()
+        let gtlrEnd = GTLRCalendar_EventDateTime()
+        let calendar = Calendar.current
+        let (gtlrDateStart, gtlrDateEnd): (GTLRDateTime, GTLRDateTime) = {
+            if event.isAllday {
+                let startComponent = calendar.dateComponents([.year, .month, .day], from: event.start)
+                let endComponent = calendar.dateComponents([.year, .month, .day], from: event.end)
+                return (GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 1, to: calendar.date(from: startComponent)!)!),
+                        GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 2, to: calendar.date(from: endComponent)!)!))
+            } else {
+                return (GTLRDateTime(date: event.start), GTLRDateTime(date: event.end))
+            }
+        }()
+        if event.isAllday {
+            gtlrStart.date = gtlrDateStart
+            gtlrEnd.date = gtlrDateEnd
+        } else {
+            gtlrStart.dateTime = gtlrDateStart
+            gtlrEnd.dateTime = gtlrDateEnd
+        }
+        gtlrEvent.summary = event.title
+        gtlrEvent.start = gtlrStart
+        gtlrEvent.end = gtlrEnd
+        
+        let query = GTLRCalendarQuery_EventsUpdate.query(withObject: gtlrEvent, calendarId: event.calendarId, eventId: event.id)
+        await withCheckedContinuation { continuation in
+            self.service.executeQuery(query) { (ticket, response, error) in
+                do {
+                    if let error = error {
+                        throw CalendarManagerError.errorWithText(text: "Error while executing events update query '\(error.localizedDescription)'")
+                    }
+                    self.eventStore.updateEvent(response as! GTLRCalendar_Event)
+                    continuation.resume()
+                } catch {
+                    print(error)
+                    print(event.id)
+                    print("GoogleCalendarManager - updateEvent - \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func deleteEvent(_ event: ShiftViewEvent) async {
+        let query = GTLRCalendarQuery_EventsDelete.query(withCalendarId: event.calendarId, eventId: event.id)
+        await withCheckedContinuation { continuation in
+            self.service.executeQuery(query) { (ticket, response, error) in
+                do {
+                    if let error = error {
+                        throw CalendarManagerError.errorWithText(text: "Error while executing events delete query '\(error.localizedDescription)'")
+                    }
+                    self.eventStore.deleteEvent(event.id)
+                    continuation.resume()
+                } catch {
+                    print("GoogleCalendarManager - deleteEvent - \(error.localizedDescription)")
                 }
             }
         }

@@ -25,7 +25,7 @@ final class SwiftDataSource {
 
     func fetchJobs() -> [Job] {
         do {
-            return try modelContext.fetch(FetchDescriptor<Job>(sortBy: [.init(\.lastAccessedTime, order: .reverse)]))
+            return try modelContext.fetch(FetchDescriptor<Job>(sortBy: [.init(\.recentlySalary, order: .reverse)]))
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -33,6 +33,14 @@ final class SwiftDataSource {
     
     func removeJob(_ job: Job) {
         modelContext.delete(job)
+    }
+    
+    func save() {
+        do {
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func appendOTJob(_ otJob: OneTimeJob) {

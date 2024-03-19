@@ -7,10 +7,10 @@ target 'JobShift' do
 
   # Pods for JobShift
 
-  pod 'GoogleSignIn'
-  pod 'GoogleAPIClientForREST/Calendar'
-  pod 'HolidayJp'
-  pod 'RealmSwift'
+#  pod 'GoogleSignIn'
+#  pod 'GoogleAPIClientForREST/Calendar'
+#  pod 'HolidayJp'
+#  pod 'RealmSwift'
 
 end
 

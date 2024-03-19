@@ -16,9 +16,11 @@ import Observation
     }
     func onDisappear() {
         otJob.name = name.isEmpty ? otJob.name : name
+        otJob.salary = Int(salaryString) ?? 0
         otJob.isCommuteWage = isCommuteWage && Int(commuteWageString) != nil
         otJob.commuteWage = Int(commuteWageString) ?? 0
         otJob.date = date
         otJob.summary = summary
+        SwiftDataSource.shared.save()
     }
 }

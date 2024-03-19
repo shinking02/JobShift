@@ -7,14 +7,14 @@ struct ShiftView: View {
     
     var body: some View {
         VStack {
-            CalendarView(
-                selectionBehavior: viewModel.selectionBehavior,
-                decorationFor: viewModel.decorationFor
-            )
+            CalendarView(viewModel: viewModel)
             .padding(.horizontal)
             .frame(height: 460)
             Spacer()
         }
         .background(Color(.systemGroupedBackground))
+        .onAppear() {
+            viewModel.onAppear()
+        }
     }
 }

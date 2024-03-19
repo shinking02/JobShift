@@ -5,16 +5,9 @@ import Observation
         super.init(otJob: nil)
     }
     var validationError: Bool {
-        if name.isEmpty {
-            return true
-        }
-        if isCommuteWage {
-            return Int(commuteWageString) == nil
-        }
-        if Int(salaryString) == nil {
-            return true
-        }
-        return false
+        name.isEmpty ||
+        (Int(salaryString) == nil) ||
+        (isCommuteWage && Int(commuteWageString) == nil)
     }
     func addButtonTapped() {
         let swiftDataSource = SwiftDataSource.shared

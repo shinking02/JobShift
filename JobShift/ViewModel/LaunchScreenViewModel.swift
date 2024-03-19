@@ -28,7 +28,7 @@ import GoogleSignIn
         let eventStore = EventStore.shared
         // Wait until appState.loginProcessed becomes true
         while !appState.loginRestored {
-            try! await Task.sleep(nanoseconds: 1_000_000_000) // Sleep for 1 second
+            try! await Task.sleep(nanoseconds: 500_000_000) // Sleep for 0.5 second
         }
         if !appState.isLoggedIn {
             return
@@ -40,6 +40,19 @@ import GoogleSignIn
             appState.lastSeenOnboardingVersion = ""
         }
         appState.userCalendars = await calendarManager.getUserCalendar().sorted(by: { $0.name < $1.name })
+        if appState.defaultCalendar == nil {
+            appState.defaultCalendar = appState.userCalendars.first!
+        }
+        
+        SwiftDataSource.shared.fetchJobs().forEach { job in
+            var recentlySalary = 0
+            let thisMonth = YearMonth.origin
+            let lastMonth = thisMonth.backward()
+            recentlySalary += job.getMonthSalary(year: thisMonth.year, month: thisMonth.month).totalSalary
+            recentlySalary += job.getMonthSalary(year: lastMonth.year, month: lastMonth.month).totalSalary
+            job.recentlySalary = recentlySalary
+        }
+        
         await calendarManager.sync()
         appState.lastSyncedEmail = appState.user.email
         appState.firstSyncProcessed = true

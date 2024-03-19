@@ -6,17 +6,28 @@ struct ContentView: View {
     @State var shiftViewModel = ShiftViewModel()
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
-            ForEach(Tab.allCases, id: \.rawValue) { tab in
-                tab.view
-                    .tag(tab)
-                    .tabItem {
-                        Label(tab.rawValue, systemImage: tab.symbol)
-                    }
-                    .toolbarBackground(.visible, for: .tabBar)
-                    .toolbarBackground(.bar, for: .tabBar)
-            }
+            ShiftView()
+                .tag(Tab.shift)
+                .tabItem {
+                    Label(Tab.shift.rawValue, systemImage: Tab.shift.symbol)
+                }
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(.bar, for: .tabBar)
+                .environment(shiftViewModel)
+            SalaryView()
+                .tag(Tab.salary)
+                .tabItem {
+                    Label(Tab.salary.rawValue, systemImage: Tab.salary.symbol)
+                }
+            SettingView()
+                .tag(Tab.setting)
+                .tabItem {
+                    Label(Tab.setting.rawValue, systemImage: Tab.setting.symbol)
+                }
         }
-        .environment(shiftViewModel)
+        .onAppear {
+            viewModel.onAppear()
+        }
         .sheet(isPresented: $viewModel.showCalendarSheet) {
             ShiftSheetView()
             .environment(shiftViewModel)

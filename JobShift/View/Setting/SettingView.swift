@@ -1,5 +1,6 @@
 import SwiftUI
 import CachedAsyncImage
+import LicenseList
 
 struct SettingView: View {
     @State var viewModel = SettingViewModel()
@@ -27,13 +28,18 @@ struct SettingView: View {
                 }
                 Section {
                     NavigationLink(destination: CalendarSettingView()) {
-                        Text("カレンダー設定")
+                        Text("カレンダー")
                     }
                     NavigationLink(destination: JobSettingView()) {
-                        Text("バイト一覧")
+                        Text("バイト")
                     }
                 }
                 Section {
+                    NavigationLink("ライセンス") {
+                        LicenseListView()
+                            .navigationTitle("ライセンス")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
                     Toggle("開発者モード", isOn: $viewModel.appState.isDevelopperMode)
                 }
                 if viewModel.appState.isDevelopperMode {
@@ -67,7 +73,12 @@ struct SettingView: View {
                         }
                     }
                 }
-                Section {
+                Section(footer: HStack {
+                    Spacer()
+                    Text("© 2024 Shin Kawakami")
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }) {
                     HStack {
                         Spacer()
                         Button("サインアウト") {

@@ -5,17 +5,10 @@ import Observation
         super.init(job: nil)
     }
     var validationError: Bool {
-        if name.isEmpty {
-            return true
-        }
-        if isCommuteWage {
-            return Int(commuteWageString) == nil
-        }
-        if isDailyWage {
-            return Int(dailyWageString) == nil
-        } else {
-            return Int(hourlyWageString) == nil
-        }
+            name.isEmpty ||
+            (isDailyWage && Int(dailyWageString) == nil) ||
+            (!isDailyWage && Int(hourlyWageString) == nil) ||
+            (isCommuteWage && Int(commuteWageString) == nil)
     }
     func addButtonTapped() {
         let swiftDataSource = SwiftDataSource.shared

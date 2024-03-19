@@ -80,7 +80,7 @@ struct JobSettingView: View {
         .onAppear() {
             viewModel.onAppear()
         }
-        .navigationTitle("バイト一覧")
+        .navigationTitle("バイト")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

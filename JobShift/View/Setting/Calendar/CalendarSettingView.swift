@@ -10,6 +10,13 @@ struct CalendarSettingView: View {
                     Text("バイトの予定のみを表示")
                 }
             }
+            Section {
+                Picker("デフォルトの追加先", selection: $viewModel.defaultCalendar) {
+                    ForEach(viewModel.calendars, id: \.self) { calendar in
+                        Text(calendar.name)
+                    }
+                }
+            }
             Section(header: Text("使用するカレンダー")) {
                 ForEach(viewModel.calendars, id: \.self) { calendar in
                     Toggle(isOn: Binding<Bool>(
@@ -23,11 +30,11 @@ struct CalendarSettingView: View {
                 }
             }
         }
-        .onDisappear {
-            viewModel.onDisappear()
+        .onWillDisappear {
+            viewModel.onWillDisappear()
         }
         .environment(\.editMode, .constant(.active))
-        .navigationTitle("カレンダー設定")
+        .navigationTitle("カレンダー")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
