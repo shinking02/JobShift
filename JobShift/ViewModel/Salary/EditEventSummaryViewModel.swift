@@ -9,14 +9,14 @@ import Observation
     init(job: Job, eventId: String) {
         self.job = job
         self.eventId = eventId
-        let target = job.eventSummaries.first { $0.eventId == eventId }
+        let target = job.newEventSummaries.first { $0.eventId == eventId }
         summary = target != nil ? target!.summary : ""
         adjustString = target != nil && target!.adjustment != nil ? String(target!.adjustment!) : ""
     }
     
     func onDisappear() {
-        job.eventSummaries.removeAll { $0.eventId == eventId }
-        job.eventSummaries.append(EventSummary(eventId: eventId, summary: summary, adjustment: Int(adjustString)))
+        job.newEventSummaries.removeAll { $0.eventId == eventId }
+        job.newEventSummaries.append(EventSummary(eventId: eventId, summary: summary, adjustment: Int(adjustString)))
         SwiftDataSource.shared.save()
     }
 }

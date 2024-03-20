@@ -46,9 +46,9 @@ extension Job {
                 dateText: event.start.toMdEString(brackets: true),
                 startText: event.isAllDay ? "終日" : event.start.toHmmString(),
                 endText: event.isAllDay ? "" : event.end.toHmmString(),
-                summary: self.eventSummaries.first { $0.eventId == event.id }?.summary ?? "",
+                summary: self.newEventSummaries.first { $0.eventId == event.id }?.summary ?? "",
                 salary: salary,
-                hasAdjustment: self.eventSummaries.first { $0.eventId == event.id }?.adjustment != nil
+                hasAdjustment: self.newEventSummaries.first { $0.eventId == event.id }?.adjustment != nil
             ))
         }
         let confirmTotal = self.salaryHistories.first { $0.year == year && $0.month == month }?.salary ?? nil
@@ -110,7 +110,7 @@ extension Job {
         if totalMinutes == 0 && event.isAllDay {
             totalMinutes = 24 * 60 // １日の終日イベントは開始と終了が同じになっている
         }
-        let adjustment = self.eventSummaries.first { $0.eventId == event.id }?.adjustment ?? 0
+        let adjustment = self.newEventSummaries.first { $0.eventId == event.id }?.adjustment ?? 0
         if self.isDailyWage {
             if self.isHolidayWage && event.start.isHoliday() {
                 return (Int(Double(wage.dailyWage) * 1.35) + adjustment, Int(totalMinutes))
@@ -477,7 +477,7 @@ enum JobSchemaV3: VersionedSchema {
         var startDate: Date = Date.distantPast
         var salaryHistories: [SalaryHistory] = []
         @Attribute(originalName: "eventSummaries") var eventSummariesOld: [String: String] = [:]
-        var eventSummaries: [EventSummary] = []
+        var newEventSummaries: [EventSummary] = []
         var recentlySalary: Int = 0
         
         init(
@@ -497,7 +497,7 @@ enum JobSchemaV3: VersionedSchema {
             salaryCutoffDay: Int = 20,
             salaryPaymentDay: Int = 10,
             salaryHistories: [SalaryHistory] = [],
-            eventSummaries: [EventSummary] = [],
+            newEventSummaries: [EventSummary] = [],
             displayPaymentDay: Bool = true,
             startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2020, month: 4, day: 1)) ?? Date()
         ) {
@@ -517,7 +517,7 @@ enum JobSchemaV3: VersionedSchema {
             self.salaryCutoffDay = salaryCutoffDay
             self.salaryPaymentDay = salaryPaymentDay
             self.salaryHistories = salaryHistories
-            self.eventSummaries = eventSummaries
+            self.newEventSummaries = newEventSummaries
             self.displayPaymentDay = displayPaymentDay
             self.startDate = startDate
         }
@@ -567,7 +567,7 @@ enum JobMigrationPlan: SchemaMigrationPlan {
         didMigrate: { context in
             let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
             jobs?.forEach { job in
-                job.eventSummaries = job.eventSummariesOld.map { EventSummary(eventId: $0.key, summary: $0.value) }
+                job.newEventSummaries = job.eventSummariesOld.map { EventSummary(eventId: $0.key, summary: $0.value) }
             }
             try? context.save()
         }
