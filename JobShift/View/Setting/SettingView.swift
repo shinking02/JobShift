@@ -1,9 +1,11 @@
 import SwiftUI
 import CachedAsyncImage
 import LicenseList
+import SwiftData
 
 struct SettingView: View {
     @State var viewModel = SettingViewModel()
+    @Query var jobs: [Job]
     
     var body: some View {
         NavigationStack {
@@ -69,6 +71,18 @@ struct SettingView: View {
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                                     .font(.caption2)
+                            }
+                        }
+                    }
+                    ForEach(jobs, id: \.id) { job in
+                        Section(header: Text("\(job.name) new")) {
+                            ForEach(job.newEventSummaries, id: \.self) { summary in
+                                Text(summary)
+                            }
+                        }
+                        Section(header: Text("\(job.name) old")) {
+                            ForEach(job.eventSummaries, id: \.self) { summary in
+                                Text(summary)
                             }
                         }
                     }
