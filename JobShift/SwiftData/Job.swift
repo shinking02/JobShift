@@ -202,7 +202,7 @@ struct Break: Codable {
     }
 }
 
-struct EventSummary: Codable {
+struct EventSummary: Codable, Hashable {
     var eventId: String
     var summary: String
     var adjustment: Int?

@@ -77,12 +77,14 @@ struct SettingView: View {
                     ForEach(jobs, id: \.id) { job in
                         Section(header: Text("\(job.name) new")) {
                             ForEach(job.newEventSummaries, id: \.self) { summary in
-                                Text(summary)
+                                Text("\(summary.eventId)")
+                                Text("\(summary.summary)")
                             }
                         }
                         Section(header: Text("\(job.name) old")) {
-                            ForEach(job.eventSummaries, id: \.self) { summary in
-                                Text(summary)
+                            ForEach(job.eventSummaries.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                                Text("\(key)")
+                                Text("\(value)")
                             }
                         }
                     }
