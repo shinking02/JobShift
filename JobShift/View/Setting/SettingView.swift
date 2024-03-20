@@ -1,33 +1,33 @@
+import Foundation
 import SwiftUI
-import CachedAsyncImage
-import LicenseList
+import GoogleSignIn
 
 struct SettingView: View {
-    @State var viewModel = SettingViewModel()
+    @State private var logoutAlert = false
+    @EnvironmentObject var userState: UserState
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var eventStore: EventStore
+    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section {
                     HStack {
-                        CachedAsyncImage(url: URL(string: viewModel.appState.user.imageUrl)) { image in
+                        AsyncImage(url: URL(string: userState.imageURL)) { image in
                             image.resizable()
-                               .clipShape(Circle())
-                       } placeholder: {
-                            ProgressView()
-                       }
-                       .frame(width: 50, height: 50)
-                        VStack(alignment: .leading) {
-                            Text(viewModel.appState.user.name)
-                                .font(.title2)
-                            Text(viewModel.appState.user.email)
-                                .foregroundStyle(.secondary)
+                                .clipShape(Circle())
+                        } placeholder: {
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
                         }
-                        .padding(.horizontal)
+                            .frame(width: 40, height: 40)
+                        Text(userState.email)
+                            .padding(.horizontal)
                     }
                 }
                 Section {
-                    NavigationLink(destination: CalendarSettingView()) {
+                    NavigationLink(destination: CalSettingView()) {
                         Text("カレンダー")
                     }
                     NavigationLink(destination: JobSettingView()) {
@@ -35,69 +35,52 @@ struct SettingView: View {
                     }
                 }
                 Section {
-                    NavigationLink("ライセンス") {
-                        LicenseListView()
-                            .navigationTitle("ライセンス")
-                            .navigationBarTitleDisplayMode(.inline)
-                    }
-                    Toggle("開発者モード", isOn: $viewModel.appState.isDevelopperMode)
-                }
-                if viewModel.appState.isDevelopperMode {
-                    Section {
-                        Button(action: {
-                            viewModel.clearDataBase()
-                        } ) {
-                            Text("Clear DataBase")
-                        }.disabled(viewModel.isClearedDataBase)
-                        Button(action: {
-                            viewModel.clearSyncToken()
-                        } ) {
-                            Text("Clear SyncTokens")
-                        }.disabled(viewModel.isClearedSyncToken)
-                        Button(action: {
-                            viewModel.clearLastSeenOnboardingVersion()
-                        } ) {
-                            Text("Clear LastSeenOBVersion")
-                        }.disabled(viewModel.isClearedLastSeenOnboardingVersion)
-                    }
-                    if !viewModel.appState.googleSyncToken.isEmpty {
-                        Section(header: Text("SYNCTOKEN")) {
-                            ForEach(viewModel.appState.googleSyncToken.sorted(by: >), id: \.key) { key, value in
-                                Text(key)
-                                    .lineLimit(1)
-                                Text(value)
-                                    .foregroundStyle(.secondary)
-                                    .lineLimit(1)
-                                    .font(.caption2)
-                            }
-                        }
-                    }
-                }
-                Section(footer: HStack {
-                    Spacer()
-                    Text("© 2024 Shin Kawakami")
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                }) {
                     HStack {
                         Spacer()
-                        Button("サインアウト") {
-                            viewModel.signOutButtonTapped()
+                        Button("ログアウト") {
+                            logoutAlert = true
                         }
-                        .alert("サインアウトしますか？", isPresented: $viewModel.showLogoutAlert) {
+                        .alert("確認", isPresented: $logoutAlert) {
                             Button("キャンセル", role: .cancel) {}
-                            Button("サインアウト", role: .destructive) {
-                                viewModel.signOut()
+                            Button("ログアウト", role: .destructive) {
+                                GIDSignIn.sharedInstance.signOut()
+                                eventStore.clearCalendarStore()
+                                userState.imageURL = ""
+                                userState.email = ""
+                                
+                                withAnimation {
+                                    userState.isLoggedIn = false
+                                }
                             }
                         } message: {
-                            Text("バイトのデータは失われません")
+                            Text("ログアウトしますか？")
                         }
                         .foregroundColor(.red)
                         Spacer()
                     }
                 }
+                Section(
+                    footer:
+                        HStack{
+                            Spacer()
+                            Image(colorScheme == .dark ? "github_dark" : "github_light")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 18, height: 18, alignment: .center)
+
+                            Link("Github Repository",
+                                 destination: URL(string: "https://github.com/shinking02/JobShift")!)
+                            Spacer()
+                        }
+                ) {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(version)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
-            .animation(.default, value: viewModel.appState.isDevelopperMode)
             .navigationTitle("設定")
         }
     }
