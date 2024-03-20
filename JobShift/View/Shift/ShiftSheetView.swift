@@ -16,7 +16,7 @@ struct ShiftSheetView: View {
                         Feature(title: "給料日の表示", description: "カレンダーに給料日が表示されるようになりました。", icon: "yensign"),
                         Feature(title: "パフォーマンスの向上", description: "すべての処理のパフォーマンスが向上し、より高速に低電力で安定して動作するようになりました。", icon: "bolt"),
                         Feature(title: "入社日の設定", description: "定期バイトの入社日を設定できるようになりました。", icon: "calendar"),
-                        Feature(title: "UIの調整", description: "UIの細かな調整を全ページで行いました。これによりUXが格段に向上しています。", icon: "hand.tap")
+                        Feature(title: "UIの調整", description: "UIの細かな調整を全ページで行いました。これによりUXが向上しています。", icon: "hand.tap")
                     ],
                     color: Color.blue
                 )
