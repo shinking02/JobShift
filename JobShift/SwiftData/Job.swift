@@ -476,7 +476,7 @@ enum JobSchemaV3: VersionedSchema {
         var displayPaymentDay: Bool = true
         var startDate: Date = Date.distantPast
         var salaryHistories: [SalaryHistory] = []
-        @Attribute(originalName: "eventSummaries") var eventSummariesOld: [String: String] = [:]
+        var eventSummaries: [String: String] = [:]
         var newEventSummaries: [EventSummary] = []
         var recentlySalary: Int = 0
         
@@ -567,7 +567,7 @@ enum JobMigrationPlan: SchemaMigrationPlan {
         didMigrate: { context in
             let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
             jobs?.forEach { job in
-                job.newEventSummaries = job.eventSummariesOld.map { EventSummary(eventId: $0.key, summary: $0.value) }
+                job.newEventSummaries = job.eventSummaries.map { EventSummary(eventId: $0.key, summary: $0.value) }
             }
             try? context.save()
         }
