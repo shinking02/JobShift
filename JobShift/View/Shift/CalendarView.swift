@@ -1,64 +1,79 @@
-//
-// Created for UICalendarView_SwiftUI
-// by Stewart Lynch on 2022-07-01
-// Using Swift 5.0
-//
-// Follow me on Twitter: @StewartLynch
-// Subscribe on YouTube: https://youTube.com/StewartLynch
-//
-
 import SwiftUI
+import SwiftData
 
 struct CalendarView: UIViewRepresentable {
-    @Bindable var viewModel: ShiftViewModel
-    
+    @ObservedObject var eventStore: EventStore
+    @Query private var jobs: [Job]
+    @Query private var otJobs: [OneTimeJob]
+    @Binding var selectedDate: DateComponents?
+    @Binding var dateEvents: [Event]
+
     func makeUIView(context: Context) -> some UICalendarView {
         let view = UICalendarView()
         view.delegate = context.coordinator
         view.calendar = Calendar(identifier: .gregorian)
-        let dateSelection = UICalendarSelectionSingleDate(delegate: context.coordinator)
-        view.selectionBehavior = dateSelection
+        view.delegate = context.coordinator
         view.locale = Locale(identifier: "ja_JP")
         view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        view.backgroundColor = .clear
-        dateSelection.setSelected(Calendar.current.dateComponents([.year, .month, .day], from: Date()), animated: true)
+        let dateSelection = UICalendarSelectionSingleDate(delegate: context.coordinator)
+        view.selectionBehavior = dateSelection
         return view
     }
     func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
+        Coordinator(parent: self, eventStore: _eventStore)
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        if viewModel.shouldUpdateDecorationsOnAppear {
-            uiView.reloadDecorations(forDateComponents: uiView.visibleDateComponents.monthDatesArray(), animated: true)
+        if let selectedDate = selectedDate {
+            withAnimation {
+                dateEvents = eventStore.getEventsFromDate(dateComponents: selectedDate)
+            }
         }
-        if !viewModel.decorationUpdatedDates.isEmpty {
-            uiView.reloadDecorations(forDateComponents: viewModel.decorationUpdatedDates, animated: true)
+        let calendar = Calendar(identifier: .gregorian)
+        let startDate = calendar.date(from: uiView.visibleDateComponents)!
+        let endDate = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startDate)!
+        var dateComponentsArray: [DateComponents] = []
+        var currentDate = startDate
+        while currentDate <= endDate {
+            let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+            dateComponentsArray.append(components)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
         }
-        viewModel.decorationReloaded()
+        uiView.reloadDecorations(forDateComponents: dateComponentsArray, animated: true)
     }
     
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
         var parent: CalendarView
-        init(parent: CalendarView) {
+        @ObservedObject var eventStore: EventStore
+        init(parent: CalendarView, eventStore: ObservedObject<EventStore>) {
             self.parent = parent
+            self._eventStore = eventStore
         }
         
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            parent.viewModel.updateDecoration(dateComponents)
-            guard let decoration = parent.viewModel.decorationStore[dateComponents] else {
-                return nil
+            let foundEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
+            let jobNames = parent.jobs.map { $0.name }
+            let jobEvent = foundEvents.first { jobNames.contains($0.gEvent.summary ?? "") }
+            let dateOtJobs = parent.otJobs.filter { otJob in
+                let jobDateComp = Calendar.current.dateComponents([.year, .month, .day], from: otJob.date)
+                return jobDateComp.year == dateComponents.year && jobDateComp.month == dateComponents.month && jobDateComp.day == dateComponents.day
             }
-            if let image = decoration.image {
-                return .image(image, color: decoration.color, size: .large)
+            if let jobEvent = jobEvent {
+                let job = parent.jobs.first { $0.name == jobEvent.gEvent.summary }!
+                return .default(color: UIColor(job.color.getColor()))
             }
-            return .default(color: decoration.color)
+            if !foundEvents.isEmpty || !dateOtJobs.isEmpty {
+                return .default(color: UIColor(Color.secondary))
+            }
+            return nil
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-            parent.viewModel.selectionBehavior(dateComponents)
+            parent.selectedDate = dateComponents
+            guard let dateComponents else { return }
+            parent.dateEvents = eventStore.getEventsFromDate(dateComponents: dateComponents)
         }
     }
 }
