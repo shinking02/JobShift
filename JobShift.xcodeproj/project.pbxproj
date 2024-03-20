@@ -45,7 +45,7 @@
 		545180872B9B366E006413EC /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 545180862B9B366E006413EC /* GoogleAPIClientForREST_Calendar */; };
 		5451808A2B9B37F1006413EC /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 545180892B9B37F1006413EC /* Algorithms */; };
 		5453AE562B8CDB970053B72D /* ShiftSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5453AE552B8CDB970053B72D /* ShiftSheetView.swift */; };
-		5458D3C12BAA705D00598163 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 5458D3C02BAA705D00598163 /* LicenseList */; };
+		5458D3C42BAA733C00598163 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 5458D3C32BAA733C00598163 /* LicenseList */; };
 		545A9CEA2B7F810A0065487C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A9CE92B7F810A0065487C /* ContentView.swift */; };
 		546D43DD2B7DE4940027D044 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D43DC2B7DE4940027D044 /* LaunchScreen.swift */; };
 		546D43EA2B7E00C50027D044 /* shapes.riv in Resources */ = {isa = PBXBuildFile; fileRef = 546D43E32B7E00C40027D044 /* shapes.riv */; };
@@ -185,7 +185,7 @@
 				5451807C2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS in Frameworks */,
 				5479D71C2B9B2E5300C59A3B /* RealmSwift in Frameworks */,
 				545180802B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway in Frameworks */,
-				5458D3C12BAA705D00598163 /* LicenseList in Frameworks */,
+				5458D3C42BAA733C00598163 /* LicenseList in Frameworks */,
 				5479D7122B9B2DE000C59A3B /* CachedAsyncImage in Frameworks */,
 				5479D7152B9B2E1800C59A3B /* GoogleSignIn in Frameworks */,
 				545180822B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport in Frameworks */,
@@ -457,6 +457,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5458D3C62BAA734700598163 /* PBXTargetDependency */,
 			);
 			name = JobShift;
 			packageProductDependencies = (
@@ -474,7 +475,7 @@
 				545180812B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport */,
 				545180862B9B366E006413EC /* GoogleAPIClientForREST_Calendar */,
 				545180892B9B37F1006413EC /* Algorithms */,
-				5458D3C02BAA705D00598163 /* LicenseList */,
+				5458D3C32BAA733C00598163 /* LicenseList */,
 			);
 			productName = JobShift;
 			productReference = 54F737882B259702004A4975 /* JobShift.app */;
@@ -512,7 +513,7 @@
 				5479D7182B9B2E5300C59A3B /* XCRemoteSwiftPackageReference "realm-swift" */,
 				545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
 				545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				5458D3BD2BAA6FF300598163 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = 54F737892B259702004A4975 /* Products */;
 			projectDirPath = "";
@@ -614,6 +615,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5458D3C62BAA734700598163 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 5458D3C52BAA734700598163 /* PrepareLicenseList */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		54F737962B259703004A4975 /* Debug */ = {
@@ -851,12 +859,12 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		5458D3BD2BAA6FF300598163 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+		5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cybozu/LicenseList";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.0;
+				kind = revision;
+				revision = dea01ac5695883e9a313fc8dd778371ab7d5a32d;
 			};
 		};
 		5479D70A2B9B2D8300C59A3B /* XCRemoteSwiftPackageReference "holiday_jp-swift" */ = {
@@ -937,10 +945,15 @@
 			package = 545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
 		};
-		5458D3C02BAA705D00598163 /* LicenseList */ = {
+		5458D3C32BAA733C00598163 /* LicenseList */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5458D3BD2BAA6FF300598163 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			package = 5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */;
 			productName = LicenseList;
+		};
+		5458D3C52BAA734700598163 /* PrepareLicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = "plugin:PrepareLicenseList";
 		};
 		5479D70B2B9B2D8300C59A3B /* HolidayJp */ = {
 			isa = XCSwiftPackageProductDependency;
