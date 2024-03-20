@@ -23,7 +23,11 @@ struct SalaryRowView: View {
                                     includeCommuteWage: includeCommuteWage
                                 ))
                             } else {
-                                EmptyView()
+                                DetailYearView(viewModel: DetailYearViewModel(
+                                    job: entry.job!,
+                                    year: year,
+                                    includeCommuteWage: includeCommuteWage
+                                ))
                             }
                         } else {
                             DetailSalaryOTJobView(viewModel: DetailSalaryOTJobViewModel(

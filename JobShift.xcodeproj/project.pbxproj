@@ -10,6 +10,8 @@
 		54058C7E2BA6A7D70055881F /* SalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54058C7D2BA6A7D70055881F /* SalaryRowView.swift */; };
 		540A7DAD2BA6B86500417D23 /* SalaryChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A7DAC2BA6B86500417D23 /* SalaryChartViewModel.swift */; };
 		540E33D22B88344400ADABA9 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540E33D12B88344400ADABA9 /* JobSettingView.swift */; };
+		5410BF6F2BAA55E600034D66 /* DetailYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410BF6E2BAA55E600034D66 /* DetailYearView.swift */; };
+		5410BF712BAA562E00034D66 /* DetailYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */; };
 		5417DF572B9D7B5100C4AE22 /* SuggestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5417DF562B9D7B5100C4AE22 /* SuggestCardView.swift */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
@@ -98,6 +100,8 @@
 		54058C7D2BA6A7D70055881F /* SalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryRowView.swift; sourceTree = "<group>"; };
 		540A7DAC2BA6B86500417D23 /* SalaryChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryChartViewModel.swift; sourceTree = "<group>"; };
 		540E33D12B88344400ADABA9 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
+		5410BF6E2BAA55E600034D66 /* DetailYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYearView.swift; sourceTree = "<group>"; };
+		5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYearViewModel.swift; sourceTree = "<group>"; };
 		5417DF562B9D7B5100C4AE22 /* SuggestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestCardView.swift; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
@@ -327,6 +331,7 @@
 				54DADC1B2BA6C0C20072546F /* SalaryAddSheetViewModel.swift */,
 				54DDF1282BA6B03C00F081E6 /* SalaryYearViewModel.swift */,
 				54EBC7C42BA85F90000594B3 /* DetailMonthViewModel.swift */,
+				5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */,
 				54B43FEE2BA9B74E00B80C94 /* DetailSalaryOTJobViewModel.swift */,
 				54A78B602BA70F5A00072955 /* EditEventSummaryViewModel.swift */,
 				54CAB72B2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift */,
@@ -409,6 +414,7 @@
 				54DADC192BA6BEF50072546F /* SalaryAddSheetView.swift */,
 				544431FF2BA66DAA00D9206E /* ConfirmChip.swift */,
 				548B66FC2BA6F93D00E64026 /* DetailMonthView.swift */,
+				5410BF6E2BAA55E600034D66 /* DetailYearView.swift */,
 				54B43FEC2BA9B6A500B80C94 /* DetailSalaryOTJobView.swift */,
 				54A78B5E2BA70E4700072955 /* EditEventSummaryView.swift */,
 				54CAB7292BA9CC630097247E /* EditSalaryHistoryView.swift */,
@@ -537,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54E1409A2BA5475500C72510 /* CustomDatePicker.swift in Sources */,
+				5410BF6F2BAA55E600034D66 /* DetailYearView.swift in Sources */,
 				54C18E532B888B39002E51D7 /* OTJobFormView.swift in Sources */,
 				54CAB72C2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift in Sources */,
 				5442B4222B95FED00047434B /* OTJobFormViewModel.swift in Sources */,
@@ -551,6 +558,7 @@
 				5442B4142B946F3E0047434B /* JobSettingViewModel.swift in Sources */,
 				5417DF572B9D7B5100C4AE22 /* SuggestCardView.swift in Sources */,
 				5442B42F2B9609850047434B /* ShiftViewModel.swift in Sources */,
+				5410BF712BAA562E00034D66 /* DetailYearViewModel.swift in Sources */,
 				54B43FEF2BA9B74F00B80C94 /* DetailSalaryOTJobViewModel.swift in Sources */,
 				54A78B612BA70F5A00072955 /* EditEventSummaryViewModel.swift in Sources */,
 				5442B42A2B9602270047434B /* OTJobAddViewModel.swift in Sources */,
