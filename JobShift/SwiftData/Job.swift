@@ -500,7 +500,7 @@ enum JobSchemaV3: VersionedSchema {
             eventSummaries: [EventSummary] = [],
             lastAccessedTime: Date = Date(),
             displayPaymentDay: Bool = true,
-            startDate: Date = Date.distantPast
+            startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2020, month: 4, day: 1)) ?? Date()
         ) {
             self.id = UUID()
             self.name = name
