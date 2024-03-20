@@ -563,15 +563,14 @@ enum JobMigrationPlan: SchemaMigrationPlan {
     static let migrateV2toV3 = MigrationStage.custom(
         fromVersion: JobSchemaV2.self,
         toVersion: JobSchemaV3.self,
-        willMigrate: nil,
-        didMigrate: { context in
-            let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
-            jobs?.forEach { job in
-                job.newEventSummaries = job.eventSummaries.map { EventSummary(eventId: $0.key, summary: $0.value) }
-            }
-            try? context.save()
+        willMigrate: nil
+    ) { context in
+        let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
+        jobs?.forEach { job in
+            job.newEventSummaries = job.eventSummaries.map { EventSummary(eventId: $0.key, summary: $0.value) }
         }
-    )
+        try? context.save()
+    }
 }
 
 
