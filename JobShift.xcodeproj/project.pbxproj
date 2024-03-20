@@ -7,98 +7,172 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */; };
-		540CCAAC2B2DB003008B25CB /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAB2B2DB003008B25CB /* JobEditView.swift */; };
-		540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */; };
-		541107032B34438500A32AF9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541107022B34438500A32AF9 /* CustomDatePicker.swift */; };
+		54058C7E2BA6A7D70055881F /* SalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54058C7D2BA6A7D70055881F /* SalaryRowView.swift */; };
+		540A7DAD2BA6B86500417D23 /* SalaryChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540A7DAC2BA6B86500417D23 /* SalaryChartViewModel.swift */; };
+		540E33D22B88344400ADABA9 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540E33D12B88344400ADABA9 /* JobSettingView.swift */; };
+		5410BF6F2BAA55E600034D66 /* DetailYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410BF6E2BAA55E600034D66 /* DetailYearView.swift */; };
+		5410BF712BAA562E00034D66 /* DetailYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */; };
+		5417DF572B9D7B5100C4AE22 /* SuggestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5417DF562B9D7B5100C4AE22 /* SuggestCardView.swift */; };
 		541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5B2B25F67D00A8E091 /* EventStore.swift */; };
-		541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ECF5D2B25F74000A8E091 /* SettingView.swift */; };
 		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
-		5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */; };
-		5427156D2B380E9100263D28 /* SalaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427156C2B380E9100263D28 /* SalaryRow.swift */; };
-		54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54302B702B3D524000BB6216 /* OtDetailMonth.swift */; };
-		54302B732B3D5A6100BB6216 /* OtDetailYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54302B722B3D5A6100BB6216 /* OtDetailYear.swift */; };
-		54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* GoogleCalendarManager.swift */; };
-		543340ED2B3D6556002C302A /* EditSalaryHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543340EC2B3D6556002C302A /* EditSalaryHistory.swift */; };
-		5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167C2B2ADDFC0049427D /* CalSettingView.swift */; };
-		5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */; };
-		5439F7932B34F9FB005CC21F /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439F7922B34F9FB005CC21F /* SalaryView.swift */; };
-		5439F7972B35051E005CC21F /* SalaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439F7962B35051E005CC21F /* SalaryManager.swift */; };
-		544E52DE2B34110900F54B22 /* InfinitePagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544E52DD2B34110900F54B22 /* InfinitePagingView.swift */; };
-		54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB12B2D4CCA009F900E /* JobAddView.swift */; };
-		54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54557AB52B2D4D45009F900E /* OTJobAddView.swift */; };
-		54616CC02B38F9E6001045EC /* SalaryAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54616CBF2B38F9E6001045EC /* SalaryAddView.swift */; };
-		5477EE7E2B39A5FA00B13CB9 /* DetailMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */; };
-		5477EE812B3B074F00B13CB9 /* DetailYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477EE802B3B074F00B13CB9 /* DetailYear.swift */; };
-		547EB5E62B32877800D9E2E8 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E52B32877800D9E2E8 /* Collections */; };
-		547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E72B32877800D9E2E8 /* DequeModule */; };
-		547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 547EB5E92B32877800D9E2E8 /* OrderedCollections */; };
-		549077362B2EDA6F0004E523 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549077352B2EDA6F0004E523 /* EventEditView.swift */; };
-		54B8C9032B2E8A7F009834E2 /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */; };
-		54BD22282B2828A200B66497 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD22272B2828A200B66497 /* ShiftView.swift */; };
-		54BD222B2B282A9000B66497 /* SalaryMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222A2B282A9000B66497 /* SalaryMainView.swift */; };
-		54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222C2B28366E00B66497 /* CalendarView.swift */; };
-		54BD222F2B28696B00B66497 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD222E2B28696B00B66497 /* EventRow.swift */; };
-		54CE0A702B2D6FFF008EA726 /* WageHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */; };
-		54CE0A742B2DA080008EA726 /* BreakPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE0A732B2DA080008EA726 /* BreakPicker.swift */; };
-		54DC38932B4AA91C00725A51 /* EditEventSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DC38922B4AA91C00725A51 /* EditEventSummary.swift */; };
+		54303BC62B27409100F6485E /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54303BC52B27409100F6485E /* CalendarManager.swift */; };
+		5432BA682B9DFA4C004CA247 /* PagedInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5432BA672B9DFA4C004CA247 /* PagedInfiniteScrollView.swift */; };
+		5442B4052B9414800047434B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4042B9414800047434B /* AppState.swift */; };
+		5442B4072B9444EA0047434B /* LaunchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4062B9444EA0047434B /* LaunchScreenViewModel.swift */; };
+		5442B4092B945B940047434B /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4082B945B940047434B /* OnboardingViewModel.swift */; };
+		5442B40B2B945D440047434B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B40A2B945D440047434B /* ContentViewModel.swift */; };
+		5442B40E2B94602B0047434B /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B40D2B94602B0047434B /* SettingViewModel.swift */; };
+		5442B4112B9463B00047434B /* CalendarSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4102B9463B00047434B /* CalendarSettingViewModel.swift */; };
+		5442B4142B946F3E0047434B /* JobSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4132B946F3E0047434B /* JobSettingViewModel.swift */; };
+		5442B4162B9473800047434B /* JobFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4152B9473800047434B /* JobFormViewModel.swift */; };
+		5442B4182B94800B0047434B /* JobAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4172B94800B0047434B /* JobAddViewModel.swift */; };
+		5442B41C2B95D6510047434B /* WageAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B41B2B95D6510047434B /* WageAddView.swift */; };
+		5442B4202B95E6EB0047434B /* JobEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B41F2B95E6EB0047434B /* JobEditViewModel.swift */; };
+		5442B4222B95FED00047434B /* OTJobFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4212B95FED00047434B /* OTJobFormViewModel.swift */; };
+		5442B42A2B9602270047434B /* OTJobAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B4292B9602270047434B /* OTJobAddViewModel.swift */; };
+		5442B42C2B9606660047434B /* OTJobEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B42B2B9606660047434B /* OTJobEditViewModel.swift */; };
+		5442B42F2B9609850047434B /* ShiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B42E2B9609850047434B /* ShiftViewModel.swift */; };
+		544432002BA66DAA00D9206E /* ConfirmChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544431FF2BA66DAA00D9206E /* ConfirmChip.swift */; };
+		5445CB622B9DAA410005D5F8 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5445CB612B9DAA410005D5F8 /* EventEditView.swift */; };
+		5445CB642B9DAE5A0005D5F8 /* EventEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5445CB632B9DAE5A0005D5F8 /* EventEditViewModel.swift */; };
+		5445CB662B9DCE160005D5F8 /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5445CB652B9DCE160005D5F8 /* EventAddView.swift */; };
+		5445CB682B9DD3910005D5F8 /* EventAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5445CB672B9DD3910005D5F8 /* EventAddViewModel.swift */; };
+		5451807A2B9B33EF006413EC /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = 545180792B9B33EF006413EC /* GoogleAPIClientForRESTCore */; };
+		5451807C2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = 5451807B2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS */; };
+		5451807E2B9B33EF006413EC /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */ = {isa = PBXBuildFile; productRef = 5451807D2B9B33EF006413EC /* GoogleAPIClientForREST_AIPlatformNotebooks */; };
+		545180802B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 5451807F2B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway */; };
+		545180822B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport in Frameworks */ = {isa = PBXBuildFile; productRef = 545180812B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport */; };
+		545180872B9B366E006413EC /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = 545180862B9B366E006413EC /* GoogleAPIClientForREST_Calendar */; };
+		5451808A2B9B37F1006413EC /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 545180892B9B37F1006413EC /* Algorithms */; };
+		545180952B9B3BA5006413EC /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 545180942B9B3BA5006413EC /* LicenseList */; };
+		5453AE562B8CDB970053B72D /* ShiftSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5453AE552B8CDB970053B72D /* ShiftSheetView.swift */; };
+		545A9CEA2B7F810A0065487C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A9CE92B7F810A0065487C /* ContentView.swift */; };
+		546D43DD2B7DE4940027D044 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546D43DC2B7DE4940027D044 /* LaunchScreen.swift */; };
+		546D43EA2B7E00C50027D044 /* shapes.riv in Resources */ = {isa = PBXBuildFile; fileRef = 546D43E32B7E00C40027D044 /* shapes.riv */; };
+		5479D70C2B9B2D8300C59A3B /* HolidayJp in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D70B2B9B2D8300C59A3B /* HolidayJp */; };
+		5479D70F2B9B2DA700C59A3B /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D70E2B9B2DA700C59A3B /* RiveRuntime */; };
+		5479D7122B9B2DE000C59A3B /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D7112B9B2DE000C59A3B /* CachedAsyncImage */; };
+		5479D7152B9B2E1800C59A3B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D7142B9B2E1800C59A3B /* GoogleSignIn */; };
+		5479D7172B9B2E1800C59A3B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D7162B9B2E1800C59A3B /* GoogleSignInSwift */; };
+		5479D71A2B9B2E5300C59A3B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D7192B9B2E5300C59A3B /* Realm */; };
+		5479D71C2B9B2E5300C59A3B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5479D71B2B9B2E5300C59A3B /* RealmSwift */; };
+		548B66FD2BA6F93D00E64026 /* DetailMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548B66FC2BA6F93D00E64026 /* DetailMonthView.swift */; };
+		54A78B5F2BA70E4700072955 /* EditEventSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A78B5E2BA70E4700072955 /* EditEventSummaryView.swift */; };
+		54A78B612BA70F5A00072955 /* EditEventSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A78B602BA70F5A00072955 /* EditEventSummaryViewModel.swift */; };
+		54B43FED2BA9B6A600B80C94 /* DetailSalaryOTJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B43FEC2BA9B6A500B80C94 /* DetailSalaryOTJobView.swift */; };
+		54B43FEF2BA9B74F00B80C94 /* DetailSalaryOTJobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B43FEE2BA9B74E00B80C94 /* DetailSalaryOTJobViewModel.swift */; };
+		54B74E242B8A1572005DA634 /* OnWillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B74E232B8A1572005DA634 /* OnWillDisappear.swift */; };
+		54B74E262B8A1D1B005DA634 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B74E252B8A1D1B005DA634 /* OnboardingView.swift */; };
+		54BC8BA22B8B095D00ACAC4A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BC8BA12B8B095D00ACAC4A /* CalendarView.swift */; };
+		54BC8BA72B8B35C300ACAC4A /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BC8BA62B8B35C300ACAC4A /* Tab.swift */; };
+		54BC8BA92B8BACCE00ACAC4A /* ButtomSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BC8BA82B8BACCE00ACAC4A /* ButtomSheetHelper.swift */; };
+		54C18E4F2B886CFA002E51D7 /* SwiftDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */; };
+		54C18E512B8877F3002E51D7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E502B8877F3002E51D7 /* DateExtension.swift */; };
+		54C18E532B888B39002E51D7 /* OTJobFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E522B888B39002E51D7 /* OTJobFormView.swift */; };
+		54C18E552B888F89002E51D7 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C18E542B888F89002E51D7 /* OTJobAddView.swift */; };
+		54CAB72A2BA9CC630097247E /* EditSalaryHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CAB7292BA9CC630097247E /* EditSalaryHistoryView.swift */; };
+		54CAB72C2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CAB72B2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift */; };
+		54DADC1A2BA6BEF50072546F /* SalaryAddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DADC192BA6BEF50072546F /* SalaryAddSheetView.swift */; };
+		54DADC1C2BA6C0C20072546F /* SalaryAddSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DADC1B2BA6C0C20072546F /* SalaryAddSheetViewModel.swift */; };
+		54DDF1292BA6B03C00F081E6 /* SalaryYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DDF1282BA6B03C00F081E6 /* SalaryYearViewModel.swift */; };
+		54E1409A2BA5475500C72510 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E140992BA5475500C72510 /* CustomDatePicker.swift */; };
+		54E1409C2BA55ECE00C72510 /* SalaryChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E1409B2BA55ECE00C72510 /* SalaryChartView.swift */; };
+		54E1409F2BA55F1F00C72510 /* SalaryMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E1409E2BA55F1F00C72510 /* SalaryMonthViewModel.swift */; };
+		54E2AD812B88C71D008A9A77 /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */; };
+		54E2AD832B88DD89008A9A77 /* JobFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2AD822B88DD89008A9A77 /* JobFormView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
-		54E393272B25B62C0002D4EB /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E393262B25B62C0002D4EB /* UserState.swift */; };
-		54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E5CD6C2B3184FC008806E8 /* EventAddView.swift */; };
+		54EBC7C52BA85F90000594B3 /* DetailMonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EBC7C42BA85F90000594B3 /* DetailMonthViewModel.swift */; };
+		54ECCDB12B8F2A2A00847BB6 /* EventHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ECCDB02B8F2A2A00847BB6 /* EventHelper.swift */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
-		54F7378E2B259702004A4975 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378D2B259702004A4975 /* ContentView.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
 		54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737942B259703004A4975 /* Preview Assets.xcassets */; };
-		54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7379B2B259970004A4975 /* LaunchScreen.swift */; };
+		54FD0E702B7F9C2F00A3E9F4 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */; };
+		54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E752B7F9CDE00A3E9F4 /* SalaryView.swift */; };
+		54FD0E782B7F9CEE00A3E9F4 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */; };
+		54FD0E7C2B822BC100A3E9F4 /* CalendarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */; };
+		54FEEFEE2B899F75002A3BCC /* BreakPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FEEFED2B899F75002A3BCC /* BreakPicker.swift */; };
+		54FEEFF02B89A847002A3BCC /* JobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FEEFEF2B89A847002A3BCC /* JobAddView.swift */; };
+		54FEEFF42B89BC53002A3BCC /* WageHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FEEFF32B89BC53002A3BCC /* WageHistoryView.swift */; };
+		54FEEFFB2B89FB7D002A3BCC /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FEEFFA2B89FB7D002A3BCC /* JobEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JobShift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.debug.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.debug.xcconfig"; sourceTree = "<group>"; };
-		540CCAAB2B2DB003008B25CB /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
-		540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageAddView.swift; sourceTree = "<group>"; };
-		541107022B34438500A32AF9 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		54058C7D2BA6A7D70055881F /* SalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryRowView.swift; sourceTree = "<group>"; };
+		540A7DAC2BA6B86500417D23 /* SalaryChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryChartViewModel.swift; sourceTree = "<group>"; };
+		540E33D12B88344400ADABA9 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
+		5410BF6E2BAA55E600034D66 /* DetailYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYearView.swift; sourceTree = "<group>"; };
+		5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYearViewModel.swift; sourceTree = "<group>"; };
+		5417DF562B9D7B5100C4AE22 /* SuggestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestCardView.swift; sourceTree = "<group>"; };
 		541ECF5B2B25F67D00A8E091 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
-		541ECF5D2B25F74000A8E091 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
-		5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingView.swift; sourceTree = "<group>"; };
-		5427156C2B380E9100263D28 /* SalaryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryRow.swift; sourceTree = "<group>"; };
-		54302B702B3D524000BB6216 /* OtDetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailMonth.swift; sourceTree = "<group>"; };
-		54302B722B3D5A6100BB6216 /* OtDetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtDetailYear.swift; sourceTree = "<group>"; };
-		54303BC52B27409100F6485E /* GoogleCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarManager.swift; sourceTree = "<group>"; };
-		543340EC2B3D6556002C302A /* EditSalaryHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistory.swift; sourceTree = "<group>"; };
+		54303BC52B27409100F6485E /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		5432BA672B9DFA4C004CA247 /* PagedInfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedInfiniteScrollView.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		5435167C2B2ADDFC0049427D /* CalSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalSettingView.swift; sourceTree = "<group>"; };
-		5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		5439F7922B34F9FB005CC21F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
-		5439F7962B35051E005CC21F /* SalaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryManager.swift; sourceTree = "<group>"; };
-		544E52DD2B34110900F54B22 /* InfinitePagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinitePagingView.swift; sourceTree = "<group>"; };
-		54557AB12B2D4CCA009F900E /* JobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddView.swift; sourceTree = "<group>"; };
-		54557AB52B2D4D45009F900E /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
-		54616CBF2B38F9E6001045EC /* SalaryAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddView.swift; sourceTree = "<group>"; };
-		5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonth.swift; sourceTree = "<group>"; };
-		5477EE802B3B074F00B13CB9 /* DetailYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailYear.swift; sourceTree = "<group>"; };
-		549077352B2EDA6F0004E523 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
-		54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
-		54BD22272B2828A200B66497 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
-		54BD222A2B282A9000B66497 /* SalaryMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryMainView.swift; sourceTree = "<group>"; };
-		54BD222C2B28366E00B66497 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		54BD222E2B28696B00B66497 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
-		54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageHistoryView.swift; sourceTree = "<group>"; };
-		54CE0A732B2DA080008EA726 /* BreakPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPicker.swift; sourceTree = "<group>"; };
-		54DC38922B4AA91C00725A51 /* EditEventSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventSummary.swift; sourceTree = "<group>"; };
+		5442B4042B9414800047434B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		5442B4062B9444EA0047434B /* LaunchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewModel.swift; sourceTree = "<group>"; };
+		5442B4082B945B940047434B /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		5442B40A2B945D440047434B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		5442B40D2B94602B0047434B /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		5442B4102B9463B00047434B /* CalendarSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingViewModel.swift; sourceTree = "<group>"; };
+		5442B4132B946F3E0047434B /* JobSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSettingViewModel.swift; sourceTree = "<group>"; };
+		5442B4152B9473800047434B /* JobFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobFormViewModel.swift; sourceTree = "<group>"; };
+		5442B4172B94800B0047434B /* JobAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddViewModel.swift; sourceTree = "<group>"; };
+		5442B41B2B95D6510047434B /* WageAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageAddView.swift; sourceTree = "<group>"; };
+		5442B41F2B95E6EB0047434B /* JobEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JobEditViewModel.swift; path = JobShift/ViewModel/Setting/Job/JobEditViewModel.swift; sourceTree = SOURCE_ROOT; };
+		5442B4212B95FED00047434B /* OTJobFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobFormViewModel.swift; sourceTree = "<group>"; };
+		5442B4292B9602270047434B /* OTJobAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddViewModel.swift; sourceTree = "<group>"; };
+		5442B42B2B9606660047434B /* OTJobEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditViewModel.swift; sourceTree = "<group>"; };
+		5442B42E2B9609850047434B /* ShiftViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewModel.swift; sourceTree = "<group>"; };
+		544431FF2BA66DAA00D9206E /* ConfirmChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmChip.swift; sourceTree = "<group>"; };
+		5445CB612B9DAA410005D5F8 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		5445CB632B9DAE5A0005D5F8 /* EventEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditViewModel.swift; sourceTree = "<group>"; };
+		5445CB652B9DCE160005D5F8 /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
+		5445CB672B9DD3910005D5F8 /* EventAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddViewModel.swift; sourceTree = "<group>"; };
+		5453AE552B8CDB970053B72D /* ShiftSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftSheetView.swift; sourceTree = "<group>"; };
+		545A9CE92B7F810A0065487C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		546D43DC2B7DE4940027D044 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		546D43E32B7E00C40027D044 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
+		548B66FC2BA6F93D00E64026 /* DetailMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonthView.swift; sourceTree = "<group>"; };
+		54A78B5E2BA70E4700072955 /* EditEventSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventSummaryView.swift; sourceTree = "<group>"; };
+		54A78B602BA70F5A00072955 /* EditEventSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventSummaryViewModel.swift; sourceTree = "<group>"; };
+		54B43FEC2BA9B6A500B80C94 /* DetailSalaryOTJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalaryOTJobView.swift; sourceTree = "<group>"; };
+		54B43FEE2BA9B74E00B80C94 /* DetailSalaryOTJobViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalaryOTJobViewModel.swift; sourceTree = "<group>"; };
+		54B74E232B8A1572005DA634 /* OnWillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWillDisappear.swift; sourceTree = "<group>"; };
+		54B74E252B8A1D1B005DA634 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		54BC8BA12B8B095D00ACAC4A /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		54BC8BA62B8B35C300ACAC4A /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		54BC8BA82B8BACCE00ACAC4A /* ButtomSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSheetHelper.swift; sourceTree = "<group>"; };
+		54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSource.swift; sourceTree = "<group>"; };
+		54C18E502B8877F3002E51D7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		54C18E522B888B39002E51D7 /* OTJobFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobFormView.swift; sourceTree = "<group>"; };
+		54C18E542B888F89002E51D7 /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
+		54CAB7292BA9CC630097247E /* EditSalaryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistoryView.swift; sourceTree = "<group>"; };
+		54CAB72B2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalaryHistoryViewModel.swift; sourceTree = "<group>"; };
+		54DADC192BA6BEF50072546F /* SalaryAddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddSheetView.swift; sourceTree = "<group>"; };
+		54DADC1B2BA6C0C20072546F /* SalaryAddSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddSheetViewModel.swift; sourceTree = "<group>"; };
+		54DDF1282BA6B03C00F081E6 /* SalaryYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryYearViewModel.swift; sourceTree = "<group>"; };
+		54E140992BA5475500C72510 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		54E1409B2BA55ECE00C72510 /* SalaryChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryChartView.swift; sourceTree = "<group>"; };
+		54E1409E2BA55F1F00C72510 /* SalaryMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryMonthViewModel.swift; sourceTree = "<group>"; };
+		54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
+		54E2AD822B88DD89008A9A77 /* JobFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobFormView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		54E393262B25B62C0002D4EB /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
-		54E5CD6C2B3184FC008806E8 /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
+		54EBC7C42BA85F90000594B3 /* DetailMonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMonthViewModel.swift; sourceTree = "<group>"; };
+		54ECCDB02B8F2A2A00847BB6 /* EventHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHelper.swift; sourceTree = "<group>"; };
 		54F737882B259702004A4975 /* JobShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54F7378B2B259702004A4975 /* JobShiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobShiftApp.swift; sourceTree = "<group>"; };
-		54F7378D2B259702004A4975 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		54F737912B259703004A4975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F737942B259703004A4975 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		54F7379B2B259970004A4975 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
-		865D90C72E6BE4CE65C8E084 /* Pods-JobShift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobShift.release.xcconfig"; path = "Target Support Files/Pods-JobShift/Pods-JobShift.release.xcconfig"; sourceTree = "<group>"; };
+		54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		54FD0E752B7F9CDE00A3E9F4 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
+		54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
+		54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingView.swift; sourceTree = "<group>"; };
+		54FEEFED2B899F75002A3BCC /* BreakPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakPicker.swift; sourceTree = "<group>"; };
+		54FEEFEF2B89A847002A3BCC /* JobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobAddView.swift; sourceTree = "<group>"; };
+		54FEEFF32B89BC53002A3BCC /* WageHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageHistoryView.swift; sourceTree = "<group>"; };
+		54FEEFFA2B89FB7D002A3BCC /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,100 +180,161 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				547EB5E62B32877800D9E2E8 /* Collections in Frameworks */,
-				267E76741F20AECAE5312E2B /* Pods_JobShift.framework in Frameworks */,
-				547EB5EA2B32877800D9E2E8 /* OrderedCollections in Frameworks */,
-				547EB5E82B32877800D9E2E8 /* DequeModule in Frameworks */,
+				5479D71A2B9B2E5300C59A3B /* Realm in Frameworks */,
+				5479D7172B9B2E1800C59A3B /* GoogleSignInSwift in Frameworks */,
+				5451807C2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS in Frameworks */,
+				5479D71C2B9B2E5300C59A3B /* RealmSwift in Frameworks */,
+				545180802B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway in Frameworks */,
+				545180952B9B3BA5006413EC /* LicenseList in Frameworks */,
+				5479D7122B9B2DE000C59A3B /* CachedAsyncImage in Frameworks */,
+				5479D7152B9B2E1800C59A3B /* GoogleSignIn in Frameworks */,
+				545180822B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport in Frameworks */,
+				5451808A2B9B37F1006413EC /* Algorithms in Frameworks */,
+				5479D70C2B9B2D8300C59A3B /* HolidayJp in Frameworks */,
+				5451807E2B9B33EF006413EC /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */,
+				545180872B9B366E006413EC /* GoogleAPIClientForREST_Calendar in Frameworks */,
+				5451807A2B9B33EF006413EC /* GoogleAPIClientForRESTCore in Frameworks */,
+				5479D70F2B9B2DA700C59A3B /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		540CCAAF2B2E6B40008B25CB /* Wage */ = {
+		540E33D02B88341400ADABA9 /* Job */ = {
 			isa = PBXGroup;
 			children = (
-				54CE0A6F2B2D6FFF008EA726 /* WageHistoryView.swift */,
-				540CCAAD2B2DE9AA008B25CB /* WageAddView.swift */,
-			);
-			path = Wage;
-			sourceTree = "<group>";
-		};
-		540CCAB02B2E6B53008B25CB /* OTJob */ = {
-			isa = PBXGroup;
-			children = (
-				54557AB52B2D4D45009F900E /* OTJobAddView.swift */,
-				54B8C9022B2E8A7F009834E2 /* OTJobEditView.swift */,
-			);
-			path = OTJob;
-			sourceTree = "<group>";
-		};
-		541ECF5F2B25F74700A8E091 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				541ECF5D2B25F74000A8E091 /* SettingView.swift */,
-				54557AB02B2D42A8009F900E /* Calendar */,
-				5423A9392B2D3B38004B88C7 /* Job */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		5423A9392B2D3B38004B88C7 /* Job */ = {
-			isa = PBXGroup;
-			children = (
-				5423A9372B2D3B1E004B88C7 /* JobSettingView.swift */,
-				54557AB12B2D4CCA009F900E /* JobAddView.swift */,
-				540CCAAB2B2DB003008B25CB /* JobEditView.swift */,
-				54CE0A732B2DA080008EA726 /* BreakPicker.swift */,
-				540CCAB02B2E6B53008B25CB /* OTJob */,
-				540CCAAF2B2E6B40008B25CB /* Wage */,
+				540E33D12B88344400ADABA9 /* JobSettingView.swift */,
+				54E2AD822B88DD89008A9A77 /* JobFormView.swift */,
+				54FEEFEF2B89A847002A3BCC /* JobAddView.swift */,
+				54FEEFFA2B89FB7D002A3BCC /* JobEditView.swift */,
+				54C18E522B888B39002E51D7 /* OTJobFormView.swift */,
+				54C18E542B888F89002E51D7 /* OTJobAddView.swift */,
+				54E2AD802B88C71D008A9A77 /* OTJobEditView.swift */,
+				54FEEFF32B89BC53002A3BCC /* WageHistoryView.swift */,
+				5442B41B2B95D6510047434B /* WageAddView.swift */,
+				54FEEFED2B899F75002A3BCC /* BreakPicker.swift */,
 			);
 			path = Job;
 			sourceTree = "<group>";
 		};
-		54557AB02B2D42A8009F900E /* Calendar */ = {
+		5442B4022B9406ED0047434B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5435167C2B2ADDFC0049427D /* CalSettingView.swift */,
+				5442B4062B9444EA0047434B /* LaunchScreenViewModel.swift */,
+				5442B4082B945B940047434B /* OnboardingViewModel.swift */,
+				5442B40A2B945D440047434B /* ContentViewModel.swift */,
+				54E1409D2BA55F1200C72510 /* Salary */,
+				5442B42D2B9609450047434B /* Shift */,
+				5442B40C2B94600F0047434B /* Setting */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5442B4032B940CAE0047434B /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				5423A9312B2D29FB004B88C7 /* Job.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		5442B40C2B94600F0047434B /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5442B40D2B94602B0047434B /* SettingViewModel.swift */,
+				5442B40F2B9463970047434B /* Calendar */,
+				5442B4122B946F2A0047434B /* Job */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		5442B40F2B9463970047434B /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5442B4102B9463B00047434B /* CalendarSettingViewModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		5477EE7F2B39AFB000B13CB9 /* Detail */ = {
+		5442B4122B946F2A0047434B /* Job */ = {
 			isa = PBXGroup;
 			children = (
-				5477EE7D2B39A5FA00B13CB9 /* DetailMonth.swift */,
-				5477EE802B3B074F00B13CB9 /* DetailYear.swift */,
-				54302B702B3D524000BB6216 /* OtDetailMonth.swift */,
-				54302B722B3D5A6100BB6216 /* OtDetailYear.swift */,
-				54DC38922B4AA91C00725A51 /* EditEventSummary.swift */,
+				5442B4132B946F3E0047434B /* JobSettingViewModel.swift */,
+				5442B4152B9473800047434B /* JobFormViewModel.swift */,
+				5442B4172B94800B0047434B /* JobAddViewModel.swift */,
+				5442B41F2B95E6EB0047434B /* JobEditViewModel.swift */,
+				5442B4212B95FED00047434B /* OTJobFormViewModel.swift */,
+				5442B4292B9602270047434B /* OTJobAddViewModel.swift */,
+				5442B42B2B9606660047434B /* OTJobEditViewModel.swift */,
 			);
-			path = Detail;
+			path = Job;
 			sourceTree = "<group>";
 		};
-		54BD22262B28286A00B66497 /* Shift */ = {
+		5442B42D2B9609450047434B /* Shift */ = {
 			isa = PBXGroup;
 			children = (
-				54BD22272B2828A200B66497 /* ShiftView.swift */,
-				549077352B2EDA6F0004E523 /* EventEditView.swift */,
-				54E5CD6C2B3184FC008806E8 /* EventAddView.swift */,
-				54BD222C2B28366E00B66497 /* CalendarView.swift */,
-				54BD222E2B28696B00B66497 /* EventRow.swift */,
+				5442B42E2B9609850047434B /* ShiftViewModel.swift */,
+				5445CB632B9DAE5A0005D5F8 /* EventEditViewModel.swift */,
+				5445CB672B9DD3910005D5F8 /* EventAddViewModel.swift */,
 			);
 			path = Shift;
 			sourceTree = "<group>";
 		};
-		54BD22292B282A7600B66497 /* Salary */ = {
+		545180832B9B360A006413EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				54BD222A2B282A9000B66497 /* SalaryMainView.swift */,
-				5439F7922B34F9FB005CC21F /* SalaryView.swift */,
-				5427156C2B380E9100263D28 /* SalaryRow.swift */,
-				543340EC2B3D6556002C302A /* EditSalaryHistory.swift */,
-				5477EE7F2B39AFB000B13CB9 /* Detail */,
-				544E52DD2B34110900F54B22 /* InfinitePagingView.swift */,
-				541107022B34438500A32AF9 /* CustomDatePicker.swift */,
-				54616CBF2B38F9E6001045EC /* SalaryAddView.swift */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		546D43DB2B7DE4520027D044 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				546D43DC2B7DE4940027D044 /* LaunchScreen.swift */,
+				54B74E252B8A1D1B005DA634 /* OnboardingView.swift */,
+				545A9CE92B7F810A0065487C /* ContentView.swift */,
+				54FD0E742B7F9CCC00A3E9F4 /* Shift */,
+				54FD0E732B7F9CB600A3E9F4 /* Salary */,
+				54FD0E6E2B7F9C2400A3E9F4 /* Setting */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		546D43DE2B7E00C40027D044 /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				546D43E32B7E00C40027D044 /* shapes.riv */,
+			);
+			path = RiveAssets;
+			sourceTree = "<group>";
+		};
+		54C18E562B889185002E51D7 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				54BC8BA62B8B35C300ACAC4A /* Tab.swift */,
+				54C18E502B8877F3002E51D7 /* DateExtension.swift */,
+				54E140992BA5475500C72510 /* CustomDatePicker.swift */,
+				54BC8BA82B8BACCE00ACAC4A /* ButtomSheetHelper.swift */,
+				5432BA672B9DFA4C004CA247 /* PagedInfiniteScrollView.swift */,
+				54B74E232B8A1572005DA634 /* OnWillDisappear.swift */,
+				54ECCDB02B8F2A2A00847BB6 /* EventHelper.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		54E1409D2BA55F1200C72510 /* Salary */ = {
+			isa = PBXGroup;
+			children = (
+				540A7DAC2BA6B86500417D23 /* SalaryChartViewModel.swift */,
+				54E1409E2BA55F1F00C72510 /* SalaryMonthViewModel.swift */,
+				54DADC1B2BA6C0C20072546F /* SalaryAddSheetViewModel.swift */,
+				54DDF1282BA6B03C00F081E6 /* SalaryYearViewModel.swift */,
+				54EBC7C42BA85F90000594B3 /* DetailMonthViewModel.swift */,
+				5410BF702BAA562E00034D66 /* DetailYearViewModel.swift */,
+				54B43FEE2BA9B74E00B80C94 /* DetailSalaryOTJobViewModel.swift */,
+				54A78B602BA70F5A00072955 /* EditEventSummaryViewModel.swift */,
+				54CAB72B2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift */,
 			);
 			path = Salary;
 			sourceTree = "<group>";
@@ -210,9 +345,9 @@
 				543340EF2B3DD725002C302A /* README.md */,
 				54E3931E2B25A8E20002D4EB /* .gitignore */,
 				54F7378A2B259702004A4975 /* JobShift */,
+				546D43DE2B7E00C40027D044 /* RiveAssets */,
 				54F737892B259702004A4975 /* Products */,
-				DE391D74ECBFFFD5C280C33E /* Pods */,
-				9D2333F9318687C0A0BAE3FE /* Frameworks */,
+				545180832B9B360A006413EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,8 +365,11 @@
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
-				54F7379D2B259A7A004A4975 /* View */,
-				54F7379E2B259A9B004A4975 /* Model */,
+				5442B4032B940CAE0047434B /* SwiftData */,
+				54C18E562B889185002E51D7 /* Lib */,
+				546D43DB2B7DE4520027D044 /* View */,
+				5442B4022B9406ED0047434B /* ViewModel */,
+				54F7379E2B259A9B004A4975 /* Store */,
 				54F737912B259703004A4975 /* Assets.xcassets */,
 				54F737932B259703004A4975 /* Preview Content */,
 			);
@@ -246,46 +384,63 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		54F7379D2B259A7A004A4975 /* View */ = {
+		54F7379E2B259A9B004A4975 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				54F7378D2B259702004A4975 /* ContentView.swift */,
-				54F7379B2B259970004A4975 /* LaunchScreen.swift */,
-				54BD22292B282A7600B66497 /* Salary */,
-				54BD22262B28286A00B66497 /* Shift */,
-				541ECF5F2B25F74700A8E091 /* Setting */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		54F7379E2B259A9B004A4975 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				54E393262B25B62C0002D4EB /* UserState.swift */,
-				5435167E2B2ADE6E0049427D /* UserDefaultsKeys.swift */,
-				54303BC52B27409100F6485E /* GoogleCalendarManager.swift */,
+				5442B4042B9414800047434B /* AppState.swift */,
+				54C18E4E2B886CFA002E51D7 /* SwiftDataSource.swift */,
+				54303BC52B27409100F6485E /* CalendarManager.swift */,
 				541ECF5B2B25F67D00A8E091 /* EventStore.swift */,
-				5423A9312B2D29FB004B88C7 /* Job.swift */,
-				5439F7962B35051E005CC21F /* SalaryManager.swift */,
 			);
-			path = Model;
+			path = Store;
 			sourceTree = "<group>";
 		};
-		9D2333F9318687C0A0BAE3FE /* Frameworks */ = {
+		54FD0E6E2B7F9C2400A3E9F4 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				233EFDE9A8CBFF5CBD760845 /* Pods_JobShift.framework */,
+				54FD0E6F2B7F9C2F00A3E9F4 /* SettingView.swift */,
+				54FD0E7D2B822C8B00A3E9F4 /* Calendar */,
+				540E33D02B88341400ADABA9 /* Job */,
 			);
-			name = Frameworks;
+			path = Setting;
 			sourceTree = "<group>";
 		};
-		DE391D74ECBFFFD5C280C33E /* Pods */ = {
+		54FD0E732B7F9CB600A3E9F4 /* Salary */ = {
 			isa = PBXGroup;
 			children = (
-				472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */,
-				865D90C72E6BE4CE65C8E084 /* Pods-JobShift.release.xcconfig */,
+				54FD0E752B7F9CDE00A3E9F4 /* SalaryView.swift */,
+				54E1409B2BA55ECE00C72510 /* SalaryChartView.swift */,
+				54058C7D2BA6A7D70055881F /* SalaryRowView.swift */,
+				54DADC192BA6BEF50072546F /* SalaryAddSheetView.swift */,
+				544431FF2BA66DAA00D9206E /* ConfirmChip.swift */,
+				548B66FC2BA6F93D00E64026 /* DetailMonthView.swift */,
+				5410BF6E2BAA55E600034D66 /* DetailYearView.swift */,
+				54B43FEC2BA9B6A500B80C94 /* DetailSalaryOTJobView.swift */,
+				54A78B5E2BA70E4700072955 /* EditEventSummaryView.swift */,
+				54CAB7292BA9CC630097247E /* EditSalaryHistoryView.swift */,
 			);
-			path = Pods;
+			path = Salary;
+			sourceTree = "<group>";
+		};
+		54FD0E742B7F9CCC00A3E9F4 /* Shift */ = {
+			isa = PBXGroup;
+			children = (
+				54FD0E772B7F9CEE00A3E9F4 /* ShiftView.swift */,
+				5453AE552B8CDB970053B72D /* ShiftSheetView.swift */,
+				5417DF562B9D7B5100C4AE22 /* SuggestCardView.swift */,
+				54BC8BA12B8B095D00ACAC4A /* CalendarView.swift */,
+				5445CB612B9DAA410005D5F8 /* EventEditView.swift */,
+				5445CB652B9DCE160005D5F8 /* EventAddView.swift */,
+			);
+			path = Shift;
+			sourceTree = "<group>";
+		};
+		54FD0E7D2B822C8B00A3E9F4 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				54FD0E7B2B822BC100A3E9F4 /* CalendarSettingView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,11 +450,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54F737982B259703004A4975 /* Build configuration list for PBXNativeTarget "JobShift" */;
 			buildPhases = (
-				CE78132DFD88449421F55B46 /* [CP] Check Pods Manifest.lock */,
 				54F737842B259702004A4975 /* Sources */,
 				54F737852B259702004A4975 /* Frameworks */,
 				54F737862B259702004A4975 /* Resources */,
-				FE79B011181F1A2FDB55FE91 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -307,9 +460,21 @@
 			);
 			name = JobShift;
 			packageProductDependencies = (
-				547EB5E52B32877800D9E2E8 /* Collections */,
-				547EB5E72B32877800D9E2E8 /* DequeModule */,
-				547EB5E92B32877800D9E2E8 /* OrderedCollections */,
+				5479D70B2B9B2D8300C59A3B /* HolidayJp */,
+				5479D70E2B9B2DA700C59A3B /* RiveRuntime */,
+				5479D7112B9B2DE000C59A3B /* CachedAsyncImage */,
+				5479D7142B9B2E1800C59A3B /* GoogleSignIn */,
+				5479D7162B9B2E1800C59A3B /* GoogleSignInSwift */,
+				5479D7192B9B2E5300C59A3B /* Realm */,
+				5479D71B2B9B2E5300C59A3B /* RealmSwift */,
+				545180792B9B33EF006413EC /* GoogleAPIClientForRESTCore */,
+				5451807B2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS */,
+				5451807D2B9B33EF006413EC /* GoogleAPIClientForREST_AIPlatformNotebooks */,
+				5451807F2B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway */,
+				545180812B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport */,
+				545180862B9B366E006413EC /* GoogleAPIClientForREST_Calendar */,
+				545180892B9B37F1006413EC /* Algorithms */,
+				545180942B9B3BA5006413EC /* LicenseList */,
 			);
 			productName = JobShift;
 			productReference = 54F737882B259702004A4975 /* JobShift.app */;
@@ -340,7 +505,14 @@
 			);
 			mainGroup = 54F7377F2B259701004A4975;
 			packageReferences = (
-				547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				5479D70A2B9B2D8300C59A3B /* XCRemoteSwiftPackageReference "holiday_jp-swift" */,
+				5479D70D2B9B2DA700C59A3B /* XCRemoteSwiftPackageReference "rive-ios" */,
+				5479D7102B9B2DE000C59A3B /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				5479D7132B9B2E1800C59A3B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				5479D7182B9B2E5300C59A3B /* XCRemoteSwiftPackageReference "realm-swift" */,
+				545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
+				545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				545180932B9B3BA5006413EC /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = 54F737892B259702004A4975 /* Products */;
 			projectDirPath = "";
@@ -359,94 +531,85 @@
 				54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */,
 				54E3931F2B25A8E20002D4EB /* .gitignore in Resources */,
 				54F737922B259703004A4975 /* Assets.xcassets in Resources */,
+				546D43EA2B7E00C50027D044 /* shapes.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CE78132DFD88449421F55B46 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JobShift-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FE79B011181F1A2FDB55FE91 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JobShift/Pods-JobShift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JobShift/Pods-JobShift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JobShift/Pods-JobShift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54F737842B259702004A4975 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54DC38932B4AA91C00725A51 /* EditEventSummary.swift in Sources */,
-				54CE0A702B2D6FFF008EA726 /* WageHistoryView.swift in Sources */,
-				5439F7972B35051E005CC21F /* SalaryManager.swift in Sources */,
-				54BD222D2B28366E00B66497 /* CalendarView.swift in Sources */,
-				549077362B2EDA6F0004E523 /* EventEditView.swift in Sources */,
-				54BD222B2B282A9000B66497 /* SalaryMainView.swift in Sources */,
-				54E393272B25B62C0002D4EB /* UserState.swift in Sources */,
+				54E1409A2BA5475500C72510 /* CustomDatePicker.swift in Sources */,
+				5410BF6F2BAA55E600034D66 /* DetailYearView.swift in Sources */,
+				54C18E532B888B39002E51D7 /* OTJobFormView.swift in Sources */,
+				54CAB72C2BA9CCFF0097247E /* EditSalaryHistoryViewModel.swift in Sources */,
+				5442B4222B95FED00047434B /* OTJobFormViewModel.swift in Sources */,
+				546D43DD2B7DE4940027D044 /* LaunchScreen.swift in Sources */,
+				5442B42C2B9606660047434B /* OTJobEditViewModel.swift in Sources */,
+				54DDF1292BA6B03C00F081E6 /* SalaryYearViewModel.swift in Sources */,
+				54FD0E702B7F9C2F00A3E9F4 /* SettingView.swift in Sources */,
+				5442B4072B9444EA0047434B /* LaunchScreenViewModel.swift in Sources */,
+				54C18E4F2B886CFA002E51D7 /* SwiftDataSource.swift in Sources */,
+				5453AE562B8CDB970053B72D /* ShiftSheetView.swift in Sources */,
+				54A78B5F2BA70E4700072955 /* EditEventSummaryView.swift in Sources */,
+				5442B4142B946F3E0047434B /* JobSettingViewModel.swift in Sources */,
+				5417DF572B9D7B5100C4AE22 /* SuggestCardView.swift in Sources */,
+				5442B42F2B9609850047434B /* ShiftViewModel.swift in Sources */,
+				5410BF712BAA562E00034D66 /* DetailYearViewModel.swift in Sources */,
+				54B43FEF2BA9B74F00B80C94 /* DetailSalaryOTJobViewModel.swift in Sources */,
+				54A78B612BA70F5A00072955 /* EditEventSummaryViewModel.swift in Sources */,
+				5442B42A2B9602270047434B /* OTJobAddViewModel.swift in Sources */,
+				54FD0E762B7F9CDE00A3E9F4 /* SalaryView.swift in Sources */,
+				5442B4162B9473800047434B /* JobFormViewModel.swift in Sources */,
+				54C18E512B8877F3002E51D7 /* DateExtension.swift in Sources */,
+				54FEEFF42B89BC53002A3BCC /* WageHistoryView.swift in Sources */,
+				54DADC1A2BA6BEF50072546F /* SalaryAddSheetView.swift in Sources */,
+				54FD0E7C2B822BC100A3E9F4 /* CalendarSettingView.swift in Sources */,
+				54CAB72A2BA9CC630097247E /* EditSalaryHistoryView.swift in Sources */,
+				54B43FED2BA9B6A600B80C94 /* DetailSalaryOTJobView.swift in Sources */,
+				54ECCDB12B8F2A2A00847BB6 /* EventHelper.swift in Sources */,
+				5445CB622B9DAA410005D5F8 /* EventEditView.swift in Sources */,
+				54BC8BA72B8B35C300ACAC4A /* Tab.swift in Sources */,
+				54E1409C2BA55ECE00C72510 /* SalaryChartView.swift in Sources */,
 				5423A9322B2D29FB004B88C7 /* Job.swift in Sources */,
-				5427156D2B380E9100263D28 /* SalaryRow.swift in Sources */,
-				5439F7932B34F9FB005CC21F /* SalaryView.swift in Sources */,
-				5435167F2B2ADE6E0049427D /* UserDefaultsKeys.swift in Sources */,
-				543340ED2B3D6556002C302A /* EditSalaryHistory.swift in Sources */,
-				54557AB62B2D4D45009F900E /* OTJobAddView.swift in Sources */,
-				5477EE7E2B39A5FA00B13CB9 /* DetailMonth.swift in Sources */,
-				544E52DE2B34110900F54B22 /* InfinitePagingView.swift in Sources */,
-				540CCAAC2B2DB003008B25CB /* JobEditView.swift in Sources */,
-				54557AB22B2D4CCA009F900E /* JobAddView.swift in Sources */,
-				5477EE812B3B074F00B13CB9 /* DetailYear.swift in Sources */,
-				541107032B34438500A32AF9 /* CustomDatePicker.swift in Sources */,
-				54F7379C2B259970004A4975 /* LaunchScreen.swift in Sources */,
-				54302B712B3D524000BB6216 /* OtDetailMonth.swift in Sources */,
-				54E5CD6D2B3184FC008806E8 /* EventAddView.swift in Sources */,
-				54F7378E2B259702004A4975 /* ContentView.swift in Sources */,
-				54CE0A742B2DA080008EA726 /* BreakPicker.swift in Sources */,
-				54BD22282B2828A200B66497 /* ShiftView.swift in Sources */,
-				541ECF5E2B25F74000A8E091 /* SettingView.swift in Sources */,
+				54BC8BA22B8B095D00ACAC4A /* CalendarView.swift in Sources */,
+				5445CB662B9DCE160005D5F8 /* EventAddView.swift in Sources */,
+				54058C7E2BA6A7D70055881F /* SalaryRowView.swift in Sources */,
+				5442B4182B94800B0047434B /* JobAddViewModel.swift in Sources */,
+				54EBC7C52BA85F90000594B3 /* DetailMonthViewModel.swift in Sources */,
+				54FEEFFB2B89FB7D002A3BCC /* JobEditView.swift in Sources */,
+				544432002BA66DAA00D9206E /* ConfirmChip.swift in Sources */,
+				5445CB682B9DD3910005D5F8 /* EventAddViewModel.swift in Sources */,
+				54B74E262B8A1D1B005DA634 /* OnboardingView.swift in Sources */,
+				54BC8BA92B8BACCE00ACAC4A /* ButtomSheetHelper.swift in Sources */,
+				54C18E552B888F89002E51D7 /* OTJobAddView.swift in Sources */,
 				541ECF5C2B25F67D00A8E091 /* EventStore.swift in Sources */,
-				5423A9382B2D3B1E004B88C7 /* JobSettingView.swift in Sources */,
-				54302B732B3D5A6100BB6216 /* OtDetailYear.swift in Sources */,
-				540CCAAE2B2DE9AA008B25CB /* WageAddView.swift in Sources */,
-				5435167D2B2ADDFC0049427D /* CalSettingView.swift in Sources */,
-				54303BC62B27409100F6485E /* GoogleCalendarManager.swift in Sources */,
-				54B8C9032B2E8A7F009834E2 /* OTJobEditView.swift in Sources */,
+				545A9CEA2B7F810A0065487C /* ContentView.swift in Sources */,
+				540E33D22B88344400ADABA9 /* JobSettingView.swift in Sources */,
+				548B66FD2BA6F93D00E64026 /* DetailMonthView.swift in Sources */,
+				54303BC62B27409100F6485E /* CalendarManager.swift in Sources */,
+				54B74E242B8A1572005DA634 /* OnWillDisappear.swift in Sources */,
+				540A7DAD2BA6B86500417D23 /* SalaryChartViewModel.swift in Sources */,
+				54FEEFF02B89A847002A3BCC /* JobAddView.swift in Sources */,
+				5442B40B2B945D440047434B /* ContentViewModel.swift in Sources */,
+				54E2AD832B88DD89008A9A77 /* JobFormView.swift in Sources */,
+				54DADC1C2BA6C0C20072546F /* SalaryAddSheetViewModel.swift in Sources */,
+				5442B4112B9463B00047434B /* CalendarSettingViewModel.swift in Sources */,
+				5432BA682B9DFA4C004CA247 /* PagedInfiniteScrollView.swift in Sources */,
+				5442B4202B95E6EB0047434B /* JobEditViewModel.swift in Sources */,
+				5445CB642B9DAE5A0005D5F8 /* EventEditViewModel.swift in Sources */,
+				54E2AD812B88C71D008A9A77 /* OTJobEditView.swift in Sources */,
+				5442B4092B945B940047434B /* OnboardingViewModel.swift in Sources */,
+				5442B40E2B94602B0047434B /* SettingViewModel.swift in Sources */,
+				54FEEFEE2B899F75002A3BCC /* BreakPicker.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
-				54616CC02B38F9E6001045EC /* SalaryAddView.swift in Sources */,
-				54BD222F2B28696B00B66497 /* EventRow.swift in Sources */,
+				54FD0E782B7F9CEE00A3E9F4 /* ShiftView.swift in Sources */,
+				5442B41C2B95D6510047434B /* WageAddView.swift in Sources */,
+				5442B4052B9414800047434B /* AppState.swift in Sources */,
+				54E1409F2BA55F1F00C72510 /* SalaryMonthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,18 +737,15 @@
 		};
 		54F737992B259703004A4975 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 472BF2ABAC465F0A40AB1A9B /* Pods-JobShift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -603,7 +763,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.shin.JobShift 1705747310";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -612,18 +771,15 @@
 		};
 		54F7379A2B259703004A4975 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 865D90C72E6BE4CE65C8E084 /* Pods-JobShift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JobShift/JobShift.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KH9QD5V23;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -641,7 +797,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.shin.JobShift 1705747310";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -672,31 +827,147 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
+			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
+				minimumVersion = 1.2.0;
+			};
+		};
+		545180932B9B3BA5006413EC /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cybozu/LicenseList";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+		5479D70A2B9B2D8300C59A3B /* XCRemoteSwiftPackageReference "holiday_jp-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/holiday-jp/holiday_jp-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
+		5479D70D2B9B2DA700C59A3B /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		5479D7102B9B2DE000C59A3B /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+		5479D7132B9B2E1800C59A3B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		5479D7182B9B2E5300C59A3B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		547EB5E52B32877800D9E2E8 /* Collections */ = {
+		545180792B9B33EF006413EC /* GoogleAPIClientForRESTCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForRESTCore;
 		};
-		547EB5E72B32877800D9E2E8 /* DequeModule */ = {
+		5451807B2B9B33EF006413EC /* GoogleAPIClientForREST_ACMEDNS */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_ACMEDNS;
 		};
-		547EB5E92B32877800D9E2E8 /* OrderedCollections */ = {
+		5451807D2B9B33EF006413EC /* GoogleAPIClientForREST_AIPlatformNotebooks */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 547EB5E42B32877800D9E2E8 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_AIPlatformNotebooks;
+		};
+		5451807F2B9B33EF006413EC /* GoogleAPIClientForREST_APIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_APIGateway;
+		};
+		545180812B9B33EF006413EC /* GoogleAPIClientForREST_AbusiveExperienceReport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_AbusiveExperienceReport;
+		};
+		545180862B9B366E006413EC /* GoogleAPIClientForREST_Calendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545180782B9B33EF006413EC /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_Calendar;
+		};
+		545180892B9B37F1006413EC /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		545180942B9B3BA5006413EC /* LicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 545180932B9B3BA5006413EC /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = LicenseList;
+		};
+		5479D70B2B9B2D8300C59A3B /* HolidayJp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D70A2B9B2D8300C59A3B /* XCRemoteSwiftPackageReference "holiday_jp-swift" */;
+			productName = HolidayJp;
+		};
+		5479D70E2B9B2DA700C59A3B /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D70D2B9B2DA700C59A3B /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+		5479D7112B9B2DE000C59A3B /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D7102B9B2DE000C59A3B /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+		5479D7142B9B2E1800C59A3B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D7132B9B2E1800C59A3B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		5479D7162B9B2E1800C59A3B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D7132B9B2E1800C59A3B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		5479D7192B9B2E5300C59A3B /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D7182B9B2E5300C59A3B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		5479D71B2B9B2E5300C59A3B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5479D7182B9B2E5300C59A3B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

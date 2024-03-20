@@ -2,27 +2,42 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @EnvironmentObject var userState: UserState
-    @EnvironmentObject var eventStore: EventStore
+    @State private var viewModel = ContentViewModel()
+    @State var shiftViewModel = ShiftViewModel()
     var body: some View {
-        TabView {
+        TabView(selection: $viewModel.selectedTab) {
             ShiftView()
+                .tag(Tab.shift)
                 .tabItem {
-                    Image(systemName: "calendar")
-                    Text("シフト")
+                    Label(Tab.shift.rawValue, systemImage: Tab.shift.symbol)
                 }
-            SalaryMainView()
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(.bar, for: .tabBar)
+                .environment(shiftViewModel)
+            SalaryView()
+                .tag(Tab.salary)
                 .tabItem {
-                    Image(systemName: "yensign")
-                    Text("給与")
+                    Label(Tab.salary.rawValue, systemImage: Tab.salary.symbol)
                 }
             SettingView()
+                .tag(Tab.setting)
                 .tabItem {
-                    Image(systemName: "gear")
-                    Text("設定")
+                    Label(Tab.setting.rawValue, systemImage: Tab.setting.symbol)
                 }
         }
+        .onAppear {
+            viewModel.onAppear()
+        }
+        .sheet(isPresented: $viewModel.showCalendarSheet) {
+            ShiftSheetView()
+            .environment(shiftViewModel)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .presentationDetents([.height(240), .large])
+            .presentationCornerRadius(18)
+            .presentationBackground(.bar)
+            .presentationBackgroundInteraction(.enabled(upThrough: .large))
+            .interactiveDismissDisabled()
+            .bottomMaskForSheet()
+        }
     }
-
-    
 }

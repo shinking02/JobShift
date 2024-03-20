@@ -1,24 +1,15 @@
-import Foundation
 import SwiftUI
-import SwiftData
 
 struct JobSettingView: View {
-    @Environment(\.modelContext) private var context
-    @Query private var jobs: [Job]
-    @Query private var oneTimeJobs: [OneTimeJob]
-    @State private var showingDialog = false
-    @State private var showingAddJobView = false
-    @State private var showingAddOneTimeJobView = false
-    @State private var groupedOtJobs: [Int: [OneTimeJob]] = [:]
-    @State private var openThisYearRow = false
-    @State private var expanded: Set<Int> = []
+    @State private var viewModel = JobSettingViewModel()
+    @State private var expandedYears: Set<Int> = [Calendar.current.component(.year, from: Date())]
     
     var body: some View {
         List {
-            if !jobs.isEmpty {
+            if !viewModel.jobs.isEmpty {
                 Section(header: Text("定期バイト")) {
-                    ForEach(jobs.reversed()) { job in
-                        NavigationLink(destination: JobEditView(editJob: job)) {
+                    ForEach(viewModel.jobs) { job in
+                        NavigationLink(destination: JobEditView(viewModel: JobEditViewModel(job: job))) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(job.color.getColor())
@@ -29,25 +20,25 @@ struct JobSettingView: View {
                     }
                 }
             }
-            if !oneTimeJobs.isEmpty {
+            if !viewModel.groupedOtJobs.isEmpty {
                 Section(header: Text("単発バイト")) {
-                    ForEach(Array(groupedOtJobs.keys).sorted(by: >), id: \.self) { year in
+                    ForEach(Array(viewModel.groupedOtJobs.keys).sorted(by: >), id: \.self) { year in
                         DisclosureGroup(String(year) + "年", isExpanded: Binding<Bool>(
-                            get: { expanded.contains(year) },
+                            get: { expandedYears.contains(year) },
                             set: { isExpanding in
                                 if isExpanding {
-                                    expanded.insert(year)
+                                    expandedYears.insert(year)
                                 } else {
-                                    expanded.remove(year)
+                                    expandedYears.remove(year)
                                 }
                             }
                         )) {
-                            ForEach((groupedOtJobs[year] ?? []).sorted { $0.date > $1.date }, id: \.self) { job in
-                                NavigationLink(destination: OTJobEditView(editOtJob: job)) {
+                            ForEach((viewModel.groupedOtJobs[year] ?? []).sorted { $0.date > $1.date }, id: \.self) { job in
+                                NavigationLink(destination: OTJobEditView(viewModel: OTJobEditViewModel(otJob: job))) {
                                     HStack {
                                         Text(job.name)
                                         Spacer()
-                                        Text(getDateString(date: job.date))
+                                        Text(job.date.toMdString())
                                             .font(.callout)
                                             .foregroundColor(.secondary)
                                     }
@@ -58,53 +49,38 @@ struct JobSettingView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingAddJobView) {
-            JobAddView()
-        }
-        .sheet(isPresented: $showingAddOneTimeJobView) {
-            OTJobAddView()
-        }
-        .navigationTitle("バイト")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            updateGroupedOtJobs()
-            let currentYear = Calendar.current.component(.year, from: Date())
-            self.expanded.insert(currentYear)
-        }
-        .onChange(of: showingAddOneTimeJobView) {
-            updateGroupedOtJobs()
-        }
-        .toolbar{
+        .toolbar {
             Button(action: {
-                self.showingDialog = true
+                viewModel.jobPlusButtonTapped()
             }, label: {
                 Image(systemName: "plus")
             })
-            .confirmationDialog("", isPresented: $showingDialog, titleVisibility: .hidden) {
+            .confirmationDialog("", isPresented: $viewModel.showingJobTypeDialog, titleVisibility: .hidden) {
                 Button("定期バイト") {
-                    self.showingAddJobView = true
+                    viewModel.addJobButtonTapped()
                 }
                 Button("単発バイト") {
-                    self.showingAddOneTimeJobView = true
+                    viewModel.addOTJobButtonTapped()
                 }
                 Button("キャンセル", role: .cancel) {}
             } message: {
                 Text("追加するバイトの種類を選択してください")
             }
         }
-    }
-    private func updateGroupedOtJobs() {
-        withAnimation {
-            self.groupedOtJobs = Dictionary(grouping: self.oneTimeJobs) { (job: OneTimeJob) -> Int in
-                let calendar = Calendar.current
-                let year = calendar.component(.year, from: job.date)
-                return year
-            }
+        .sheet(isPresented: $viewModel.showingAddJobView, onDismiss: {
+            viewModel.onAppear()
+        }) {
+            JobAddView(viewModel: JobAddViewModel())
         }
-    }
-    private func getDateString(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M月d日"
-        return dateFormatter.string(from: date)
+        .sheet(isPresented: $viewModel.showingAddOTJobView, onDismiss: {
+            viewModel.onAppear()
+        }) {
+            OTJobAddView(viewModel: OTJobAddViewModel())
+        }
+        .onAppear() {
+            viewModel.onAppear()
+        }
+        .navigationTitle("バイト")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
