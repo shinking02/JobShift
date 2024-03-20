@@ -498,7 +498,6 @@ enum JobSchemaV3: VersionedSchema {
             salaryPaymentDay: Int = 10,
             salaryHistories: [SalaryHistory] = [],
             eventSummaries: [EventSummary] = [],
-            lastAccessedTime: Date = Date(),
             displayPaymentDay: Bool = true,
             startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2020, month: 4, day: 1)) ?? Date()
         ) {
