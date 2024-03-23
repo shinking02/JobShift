@@ -19,6 +19,11 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
+      - name: Disable Xcode Fingerprint Validation
+        run: |
+          defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidation -bool YES
+          defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+
       - name: Bundle Install
         run: bundle install
 
