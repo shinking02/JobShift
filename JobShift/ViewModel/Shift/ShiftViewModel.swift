@@ -133,6 +133,10 @@ struct ShiftViewEvent: Identifiable {
             return paymentDay != nil && calendar.compare(date, to: paymentDay!, toGranularity: .day) == .orderedSame
         }
         if let paymentDayJob = paymentDayJob {
+            let salary = paymentDayJob.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
+            if salary.count == 0 {
+                return nil
+            }
             return DecorationData(color: UIColor(paymentDayJob.color.getColor()), image: UIImage(systemName: "yensign"))
         }
         let dateEvents = getDateEvents(date)
