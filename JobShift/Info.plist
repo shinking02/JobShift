@@ -19,6 +19,8 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>332496818279-1q1kb20jvu33ugbqt7fvhdpk5sdd7j7g.apps.googleusercontent.com</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
