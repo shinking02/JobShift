@@ -201,19 +201,22 @@ struct ShiftViewEvent: Identifiable {
                 ))
             }
         paymentDayJobs.forEach { job in
-            dateEvents.append(ShiftViewEvent(
-                id: UUID().uuidString,
-                color: Color(job.color.getColor()),
-                title: "給料日: \(job.name)",
-                summary: nil,
-                timeText1: "",
-                timeText2: nil,
-                canEdit: false,
-                calendarId: "",
-                isAllday: true,
-                start: Date(),
-                end: Date()
-            ))
+            let salary = job.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
+            if salary.count > 0 {
+                dateEvents.append(ShiftViewEvent(
+                    id: UUID().uuidString,
+                    color: Color(job.color.getColor()),
+                    title: "給料日: \(job.name)",
+                    summary: nil,
+                    timeText1: "",
+                    timeText2: nil,
+                    canEdit: false,
+                    calendarId: "",
+                    isAllday: true,
+                    start: Date(),
+                    end: Date()
+                ))
+            }
         }
         let dateOtJobs = otJobs.filter { calendar.compare($0.date, to: date, toGranularity: .day) == .orderedSame }
         dateOtJobs.forEach { otJob in
