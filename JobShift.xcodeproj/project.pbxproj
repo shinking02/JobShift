@@ -453,11 +453,11 @@
 				54F737842B259702004A4975 /* Sources */,
 				54F737852B259702004A4975 /* Frameworks */,
 				54F737862B259702004A4975 /* Resources */,
+				54825F0B2BAED0A900FE9972 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5458D3C62BAA734700598163 /* PBXTargetDependency */,
 			);
 			name = JobShift;
 			packageProductDependencies = (
@@ -538,6 +538,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54825F0B2BAED0A900FE9972 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect --format # 自動修正の有効化\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		54F737842B259702004A4975 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -615,13 +636,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5458D3C62BAA734700598163 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 5458D3C52BAA734700598163 /* PrepareLicenseList */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		54F737962B259703004A4975 /* Debug */ = {
@@ -752,7 +766,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
@@ -770,7 +784,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -790,7 +804,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"JobShift/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8KH9QD5V23;
@@ -808,7 +822,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shin.JobShift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -865,14 +879,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.2.0;
-			};
-		};
-		5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/cybozu/LicenseList";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
 			};
 		};
 		5479D70A2B9B2D8300C59A3B /* XCRemoteSwiftPackageReference "holiday_jp-swift" */ = {
@@ -957,11 +963,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 545180882B9B37F1006413EC /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
-		};
-		5458D3C52BAA734700598163 /* PrepareLicenseList */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5458D3C22BAA733B00598163 /* XCRemoteSwiftPackageReference "LicenseList" */;
-			productName = "plugin:PrepareLicenseList";
 		};
 		5479D70B2B9B2D8300C59A3B /* HolidayJp */ = {
 			isa = XCSwiftPackageProductDependency;
