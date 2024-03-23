@@ -14,8 +14,8 @@ struct ShiftViewEvent: Identifiable {
     var color: Color
     var title: String
     var summary: String?
-    var timeText1: String
-    var timeText2: String?
+    var detailText1: String
+    var detailText2: String?
     var canEdit: Bool
     var calendarId: String
     var isAllday: Bool
@@ -87,8 +87,8 @@ struct ShiftViewEvent: Identifiable {
                 var newEv = ev
                 newEv.start = newStart
                 newEv.end = newEnd
-                newEv.timeText1 = ev.isAllday ? "終日" : "\(ev.start.toHmmString()) ~ \(ev.end.toHmmString())"
-                newEv.timeText2 = nil
+                newEv.detailText1 = ev.isAllday ? "終日" : "\(ev.start.toHmmString()) ~ \(ev.end.toHmmString())"
+                newEv.detailText2 = nil
                 suggests.append(newEv)
             }
         }
@@ -185,14 +185,14 @@ struct ShiftViewEvent: Identifiable {
             .sorted(byKeyPath: "start", ascending: true)
             .forEach { event in
                 let color = eventHelper.getEventColor(event)
-                let (timeText1, timeText2) = eventHelper.getIntervalText(event, self.selectedDate)
+                let (start, end) = eventHelper.getIntervalText(event, self.selectedDate)
                 dateEvents.append(ShiftViewEvent(
                     id: event.id,
                     color: color,
                     title: event.summary,
                     summary: event.description,
-                    timeText1: timeText1,
-                    timeText2: timeText2,
+                    detailText1: start,
+                    detailText2: end,
                     canEdit: true,
                     calendarId: event.calendarId,
                     isAllday: event.isAllDay,
@@ -208,8 +208,8 @@ struct ShiftViewEvent: Identifiable {
                     color: Color(job.color.getColor()),
                     title: "給料日: \(job.name)",
                     summary: nil,
-                    timeText1: "",
-                    timeText2: nil,
+                    detailText1: salary.isConfirm ? "\(salary.confirmTotal)円" : "\(salary.totalSalary)円",
+                    detailText2: nil,
                     canEdit: false,
                     calendarId: "",
                     isAllday: true,
@@ -225,8 +225,8 @@ struct ShiftViewEvent: Identifiable {
                 color: .secondary,
                 title: otJob.name,
                 summary: nil,
-                timeText1: "",
-                timeText2: nil,
+                detailText1: "\(otJob.salary)円",
+                detailText2: nil,
                 canEdit: false,
                 calendarId: "",
                 isAllday: true,
@@ -262,14 +262,14 @@ struct ShiftViewEvent: Identifiable {
                     activeCalendarIds, end, start, job.name)
             .forEach { e in
                 let color = eventHelper.getEventColor(e)
-                let (timeText1, timeText2) = eventHelper.getIntervalText(e, self.selectedDate)
+                let (start, end) = eventHelper.getIntervalText(e, self.selectedDate)
                 intervalEvents.append(ShiftViewEvent(
                     id: e.id,
                     color: color,
                     title: e.summary,
                     summary: e.description,
-                    timeText1: timeText1,
-                    timeText2: timeText2,
+                    detailText1: start,
+                    detailText2: end,
                     canEdit: true,
                     calendarId: e.calendarId,
                     isAllday: e.isAllDay,

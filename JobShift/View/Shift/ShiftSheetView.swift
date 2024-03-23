@@ -42,9 +42,9 @@ struct ShiftSheetView: View {
                             }
                             Spacer()
                             VStack(alignment: .trailing) {
-                                Text(event.timeText1)
-                                if let timeText2 = event.timeText2 {
-                                    Text(timeText2)
+                                Text(event.detailText1)
+                                if let detailText2 = event.detailText2 {
+                                    Text(detailText2)
                                 }
                             }
                             .font(.caption)
@@ -97,8 +97,8 @@ struct ShiftSheetView: View {
                             color: .secondary,
                             title: "",
                             summary: nil,
-                            timeText1: "",
-                            timeText2: nil,
+                            detailText1: "",
+                            detailText2: nil,
                             canEdit: false,
                             calendarId: "",
                             isAllday: true,

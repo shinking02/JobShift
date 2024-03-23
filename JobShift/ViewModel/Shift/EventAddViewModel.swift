@@ -34,7 +34,7 @@ import Foundation
             color: jobSelection.color.getColor(),
             title: jobSelection.name,
             summary: "",
-            timeText1: "",
+            detailText1: "",
             canEdit: true,
             calendarId: calendarSelection.id,
             isAllday: isAllday,

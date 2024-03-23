@@ -24,7 +24,7 @@ struct SuggestCardView: View {
                     Spacer()
                 }
                 HStack {
-                    Text(suggest.timeText1)
+                    Text(suggest.detailText1)
                         .font(.headline)
                     Spacer()
                 }
