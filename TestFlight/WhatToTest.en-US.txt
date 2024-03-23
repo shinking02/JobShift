@@ -1,0 +1,1 @@
+WhatToTest.en-US.txt　テスト
