@@ -1,1 +1,3 @@
-WhatToTest.en-US.txt　テスト
+TestFlightのテスト概要の整理
+PRリクエスト時のテンプレートを作成
+
