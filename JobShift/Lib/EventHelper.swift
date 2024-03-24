@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct EventHelper {
     private let dataSource = SwiftDataSource.shared

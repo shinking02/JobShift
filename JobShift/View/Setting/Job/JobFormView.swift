@@ -7,7 +7,7 @@ enum JobFocusField {
 
 struct JobFormView: View {
     @Bindable var viewModel: JobFormViewModel
-    @FocusState private var focusState : JobFocusField?
+    @FocusState private var focusState: JobFocusField?
 
     var body: some View {
         Section(header: Text("名前"), footer: Text("この名前を使用してGoogleカレンダーからイベントを取得します")) {
@@ -80,7 +80,12 @@ struct JobFormView: View {
                 Toggle("深夜手当", isOn: $viewModel.isNightWage)
             }
         }
-        Section(footer: Text("有効な場合 土, 日, 祝日を基本時給から35%加算して計算します。\n深夜手当が有効な場合22:00〜24:00は60%加算で計算し、24:00〜翌5:00は25%加算で計算します。なお翌日も休日の場合は22:00〜5:00間を60%加算で計算します。\n日給が有効の場合は日給に対して35%加算されます。")) {
+        Section(footer: Text("""
+        有効な場合 土, 日, 祝日を基本時給から35%加算して計算します。
+        深夜手当が有効な場合22:00〜24:00は60%加算で計算し、24:00〜翌5:00は25%加算で計算します。なお翌日も休日の場合は22:00〜5:00間を60%加算で計算します。
+        日給が有効の場合は日給に対して35%加算されます。
+        """
+        )) {
             Toggle("休日手当", isOn: $viewModel.isHolidayWage)
         }
         if !viewModel.isDailyWage {
@@ -95,7 +100,10 @@ struct JobFormView: View {
                 }
             }
         }
-        Section(footer: Text("給料支払い日は支払日より1つ前の勤務期間で発生した給料が振り込まれる日です。\n例えば給料締日が10日で給料支払い日が25日の場合、2月16日〜3月15日の勤務期間で発生した給料が3月25日に振り込まれます。給料支払い日が祝日または休日の場合は前営業日に支払われるとします")) {
+        Section(footer: Text("""
+        給料支払い日は支払日より1つ前の勤務期間で発生した給料が振り込まれる日です。
+        例えば給料締日が10日で給料支払い日が25日の場合、2月16日〜3月15日の勤務期間で発生した給料が3月25日に振り込まれます。給料支払い日が祝日または休日の場合は前営業日に支払われるとします
+        """)) {
             Toggle("給料支払い日を表示する", isOn: $viewModel.displayPaymentDay)
             HStack {
                 Picker("給料締日", selection: $viewModel.salaryCutoffDay) {
@@ -115,4 +123,3 @@ struct JobFormView: View {
         }
     }
 }
-

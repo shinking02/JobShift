@@ -29,11 +29,12 @@ import Observation
         let lastSalary = job.getMonthSalary(year: lastYearMonth.year, month: lastYearMonth.month)
         forcastSalary = String(salary.totalSalary + (includeCommuteWage ? salary.commuteWage : 0))
         confirmSalary = salary.isConfirm ? String(salary.confirmTotal + (includeCommuteWage ? salary.commuteWage : 0)) : "-"
-        avgMinutes = salary.count != 0 ? Int(salary.totalMinutes / salary.count) : 0
-        count = salary.count
-        lastAvgMinutes = lastSalary.count != 0 ? Int(lastSalary.totalMinutes / lastSalary.count) : 0
-        lastCount = lastSalary.count
+        avgMinutes = salary.attendanceCount == 0 ? 0 : Int(salary.totalMinutes / salary.attendanceCount)
+        count = salary.attendanceCount
+        lastAvgMinutes = lastSalary.attendanceCount == 0 ? 0 : Int(lastSalary.totalMinutes / lastSalary.attendanceCount)
+        lastCount = lastSalary.attendanceCount
         details = salary.details
         title = job.name
     }
 }
+ 

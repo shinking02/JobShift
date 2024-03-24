@@ -1,7 +1,7 @@
-import SwiftUI
 import CachedAsyncImage
 import LicenseList
 import SwiftData
+import SwiftUI
 
 struct SettingView: View {
     @State var viewModel = SettingViewModel()
@@ -17,7 +17,7 @@ struct SettingView: View {
                                .clipShape(Circle())
                        } placeholder: {
                             ProgressView()
-                       }
+                        }
                        .frame(width: 50, height: 50)
                         VStack(alignment: .leading) {
                             Text(viewModel.appState.user.name)
@@ -48,19 +48,19 @@ struct SettingView: View {
                     Section {
                         Button(action: {
                             viewModel.clearDataBase()
-                        } ) {
+                        }, label: {
                             Text("Clear DataBase")
-                        }.disabled(viewModel.isClearedDataBase)
+                        }).disabled(viewModel.isClearedDataBase)
                         Button(action: {
                             viewModel.clearSyncToken()
-                        } ) {
+                        }, label: {
                             Text("Clear SyncTokens")
-                        }.disabled(viewModel.isClearedSyncToken)
+                        }).disabled(viewModel.isClearedSyncToken)
                         Button(action: {
                             viewModel.clearLastSeenOnboardingVersion()
-                        } ) {
+                        }, label: {
                             Text("Clear LastSeenOBVersion")
-                        }.disabled(viewModel.isClearedLastSeenOnboardingVersion)
+                        }).disabled(viewModel.isClearedLastSeenOnboardingVersion)
                     }
                     if !viewModel.appState.googleSyncToken.isEmpty {
                         Section(header: Text("SYNCTOKEN")) {

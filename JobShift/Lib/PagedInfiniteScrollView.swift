@@ -5,9 +5,9 @@
 //  Created by beader on 2023/4/19.
 //
 
+import Foundation
 import SwiftUI
 import UIKit
-import Foundation
 
 protocol Steppable {
     static var origin: Self { get }
@@ -79,7 +79,10 @@ struct PagedInfiniteScrollView<S: Steppable & Comparable, Content: View>: UIView
         pageViewController.dataSource = context.coordinator
         pageViewController.delegate = context.coordinator
 
-        let initialViewController = UIHostingController(rootView: IdentifiableContent(index: currentPage, content: { content(currentPage) }))
+        let initialViewController = UIHostingController(rootView: IdentifiableContent(
+            index: currentPage,
+            content: { content(currentPage) }
+            ))
         pageViewController.setViewControllers([initialViewController], direction: .forward, animated: false, completion: nil)
 
         return pageViewController
@@ -91,7 +94,10 @@ struct PagedInfiniteScrollView<S: Steppable & Comparable, Content: View>: UIView
 
         if currentPage != currentIndex {
             let direction: UIPageViewController.NavigationDirection = currentPage > currentIndex ? .forward : .reverse
-            let newViewController = UIHostingController(rootView: IdentifiableContent(index: currentPage, content: { content(currentPage) }))
+            let newViewController = UIHostingController(rootView: IdentifiableContent(
+                index: currentPage,
+                content: { content(currentPage) }
+                ))
             uiViewController.setViewControllers([newViewController], direction: direction, animated: true, completion: nil)
         }
     }
@@ -103,8 +109,12 @@ struct PagedInfiniteScrollView<S: Steppable & Comparable, Content: View>: UIView
             self.parent = parent
         }
 
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            guard let currentView = viewController as? UIHostingController<IdentifiableContent<Content, S>>, let currentIndex = currentView.rootView.index as S? else {
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            viewControllerBefore viewController: UIViewController
+        ) -> UIViewController? {
+            guard let currentView = viewController as? UIHostingController<IdentifiableContent<Content, S>>,
+                  let currentIndex = currentView.rootView.index as S? else {
                 return nil
             }
 
@@ -113,8 +123,12 @@ struct PagedInfiniteScrollView<S: Steppable & Comparable, Content: View>: UIView
             return UIHostingController(rootView: IdentifiableContent(index: previousIndex, content: { parent.content(previousIndex) }))
         }
 
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            guard let currentView = viewController as? UIHostingController<IdentifiableContent<Content, S>>, let currentIndex = currentView.rootView.index as S? else {
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            viewControllerAfter viewController: UIViewController
+        ) -> UIViewController? {
+            guard let currentView = viewController as? UIHostingController<IdentifiableContent<Content, S>>,
+            let currentIndex = currentView.rootView.index as S? else {
                 return nil
             }
 
@@ -123,7 +137,12 @@ struct PagedInfiniteScrollView<S: Steppable & Comparable, Content: View>: UIView
             return UIHostingController(rootView: IdentifiableContent(index: nextIndex, content: { parent.content(nextIndex) }))
         }
 
-        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            didFinishAnimating finished: Bool,
+            previousViewControllers: [UIViewController],
+            transitionCompleted completed: Bool
+        ) {
             if completed,
                let currentView = pageViewController.viewControllers?.first as? UIHostingController<IdentifiableContent<Content, S>>,
                let currentIndex = currentView.rootView.index as S? {

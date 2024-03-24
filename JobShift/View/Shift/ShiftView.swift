@@ -13,7 +13,7 @@ struct ShiftView: View {
             Spacer()
         }
         .background(Color(.systemGroupedBackground))
-        .onAppear() {
+        .onAppear {
             viewModel.onAppear()
         }
     }

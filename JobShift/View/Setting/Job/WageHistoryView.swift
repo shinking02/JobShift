@@ -1,5 +1,5 @@
-import SwiftUI
 import Algorithms
+import SwiftUI
 
 struct WageHistoryView: View {
     @State var viewModel: JobFormViewModel
@@ -44,4 +44,3 @@ struct WageHistoryView: View {
         .navigationTitle("昇給履歴")
     }
 }
-

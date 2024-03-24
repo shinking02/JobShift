@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 @Observable final class DetailSalaryOTJobViewModel {
     var confirmSalary: String = ""
@@ -27,6 +27,6 @@ import Foundation
                 return ojDateComponents.year == year
             }
         }
-        confirmSalary = String(otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ?  $0.commuteWage : 0) }.reduce(0, +))
+        confirmSalary = String(otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ? $0.commuteWage : 0) }.reduce(0, +))
     }
 }

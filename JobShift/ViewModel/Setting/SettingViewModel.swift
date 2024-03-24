@@ -1,5 +1,5 @@
-import Observation
 import GoogleSignIn
+import Observation
 
 @Observable final class SettingViewModel {
     var appState = AppState.shared

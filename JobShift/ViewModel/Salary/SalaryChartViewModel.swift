@@ -46,4 +46,3 @@ struct ChartEntry: Identifiable, Hashable {
         return lhs.id == rhs.id
     }
 }
-

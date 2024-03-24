@@ -1,5 +1,5 @@
-import SwiftData
 import RealmSwift
+import SwiftData
 
 final class SwiftDataSource {
     private let modelContainer: ModelContainer
@@ -10,8 +10,12 @@ final class SwiftDataSource {
 
     @MainActor
     private init() {
-        self.modelContainer = try! ModelContainer(for: Job.self, OneTimeJob.self, migrationPlan: JobMigrationPlan.self)
-        self.modelContext = modelContainer.mainContext
+        do {
+            self.modelContainer = try ModelContainer(for: Job.self, OneTimeJob.self, migrationPlan: JobMigrationPlan.self)
+            self.modelContext = modelContainer.mainContext
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
 
     func appendJob(_ job: Job) {

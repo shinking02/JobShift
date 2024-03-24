@@ -6,10 +6,10 @@ enum OTJobFocusField {
 
 struct OTJobFormView: View {
     @Bindable var viewModel: OTJobFormViewModel
-    @FocusState private var focusState : OTJobFocusField?
+    @FocusState private var focusState: OTJobFocusField?
     
     var body: some View {
-        Section(header: Text("名前"), footer:Text("バイト名を入力してください。名前によるGoogleカレンダーからの集計は行われません。")) {
+        Section(header: Text("名前"), footer: Text("バイト名を入力してください。名前によるGoogleカレンダーからの集計は行われません。")) {
             TextField("イベント設営", text: $viewModel.name)
         }
         Section(header: Text("給料(円)")) {

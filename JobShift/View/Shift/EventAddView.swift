@@ -41,13 +41,13 @@ struct EventAddView: View {
                             await viewModel.addButtonTapped()
                             dismiss()
                         }
-                    }) {
+                    }, label: {
                         if viewModel.apiLoading {
                             ProgressView()
                         } else {
                             Text("追加")
                         }
-                    }
+                    })
                     .disabled(viewModel.dateError)
                 }
             }

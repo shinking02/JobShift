@@ -8,7 +8,7 @@ extension View {
     }
 }
 
-fileprivate struct SheetRootViewFinder: UIViewRepresentable {
+private struct SheetRootViewFinder: UIViewRepresentable {
     var height: CGFloat
     func makeCoordinator() -> Coordinator {
         return Coordinator()
@@ -51,7 +51,6 @@ fileprivate struct SheetRootViewFinder: UIViewRepresentable {
         var isMasked: Bool = false
     }
 }
-
 
 fileprivate extension UIView {
     var viewBeforeWindow: UIView? {

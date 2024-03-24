@@ -15,8 +15,8 @@ import SwiftUI
                 let salary = salaries.map { $0.totalSalary + (includeCommuteWage ? $0.commuteWage : 0) }.reduce(0, +)
                 let confirmSalary = salaries.map { ($0.isConfirm ? $0.confirmTotal : $0.totalSalary) + (includeCommuteWage ? $0.commuteWage : 0) }.reduce(0, +)
                 let minutes = salaries.map { $0.totalMinutes }.reduce(0, +)
-                let isConfirm = salaries.map { $0.isConfirm }.reduce(true, { $0 && $1 })
-                let count = salaries.map { $0.count }.reduce(0, +)
+                let isConfirm = salaries.map { $0.isConfirm }.allSatisfy { $0 }
+                let count = salaries.map { $0.attendanceCount }.reduce(0, +)
                 if salary > 0 {
                     chartData.append(
                         ChartEntry(
@@ -41,11 +41,11 @@ import SwiftUI
                 chartData.append(
                     ChartEntry(
                         label: "単発バイト",
-                        salary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ?  $0.commuteWage : 0) }.reduce(0, +),
+                        salary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ? $0.commuteWage : 0) }.reduce(0, +),
                         minutes: 0,
                         color: .secondary,
                         isConfirm: true,
-                        confirmSalary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ?  $0.commuteWage : 0) }.reduce(0, +),
+                        confirmSalary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ? $0.commuteWage : 0) }.reduce(0, +),
                         count: otJobs.count,
                         isOtJob: true,
                         job: nil
@@ -70,4 +70,3 @@ import SwiftUI
         }
     }
 }
-

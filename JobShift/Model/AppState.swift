@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 enum UserDefaultsKeys {
     static let lastSyncedEmail = "LAST_SYNCED_EMAIL"

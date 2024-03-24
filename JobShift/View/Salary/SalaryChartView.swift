@@ -1,5 +1,5 @@
-import SwiftUI
 import Charts
+import SwiftUI
 
 struct SalaryChartView: View {
     @State var viewModel: SalaryChartViewModel
@@ -73,10 +73,10 @@ struct SalaryChartView: View {
         }
         .sheet(isPresented: $showSalaryAddSheet, onDismiss: {
             viewModel.update(includeCommuteWage)
-        }) {
+        }, content: {
             SalaryAddSheetView(viewModel: SalaryAddSheetViewModel(job: nil))
-        }
-        .onAppear() {
+        })
+        .onAppear {
             viewModel.update(includeCommuteWage)
         }
         .onChange(of: includeCommuteWage) {

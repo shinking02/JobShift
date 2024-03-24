@@ -46,7 +46,7 @@ extension DateComponents {
 }
 
 extension Calendar {
-    func daysInMonth(for date:Date) -> Int {
+    func daysInMonth(for date: Date) -> Int {
         return range(of: .day, in: .month, for: date)!.count
     }
 }

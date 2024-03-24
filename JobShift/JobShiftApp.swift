@@ -1,7 +1,6 @@
-import SwiftUI
-import SwiftData
 import GoogleSignIn
 import SwiftData
+import SwiftUI
 
 @main
 struct JobShiftApp: App {

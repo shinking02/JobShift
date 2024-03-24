@@ -1,8 +1,8 @@
-import Observation
-import UIKit
-import RealmSwift
 import Foundation
+import Observation
+import RealmSwift
 import SwiftUI
+import UIKit
 
 struct DecorationData: Equatable {
     var color: UIColor
@@ -29,14 +29,14 @@ struct ShiftViewEvent: Identifiable {
     var decorationStore: [DateComponents: DecorationData] = [:]
     var shouldUpdateDecorationsOnAppear: Bool = false
     var decorationUpdatedDates: [DateComponents] = []
-    var selectedDateEvents: [ShiftViewEvent]  {
+    var selectedDateEvents: [ShiftViewEvent] {
         getDateEvents(selectedDate)
     }
     var selectedDateSuggests: [ShiftViewEvent] {
         getSuggestEvents(selectedDate)
     }
     var canAddEvent: Bool {
-        jobs.count > 0
+        !jobs.isEmpty
     }
     private var jobs: [Job] = SwiftDataSource.shared.fetchJobs()
     private var otJobs: [OneTimeJob] = SwiftDataSource.shared.fetchOTJobs()
@@ -134,7 +134,7 @@ struct ShiftViewEvent: Identifiable {
         }
         if let paymentDayJob = paymentDayJob {
             let salary = paymentDayJob.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
-            if salary.count > 0 {
+            if salary.attendanceCount != 0 {
                 return DecorationData(color: UIColor(paymentDayJob.color.getColor()), image: UIImage(systemName: "yensign"))
             }
         }
@@ -150,15 +150,14 @@ struct ShiftViewEvent: Identifiable {
         }
         // No decorations if it is a cross day job and before 10:00 a.m. and that is the only time you are scheduled to work.
         let jobNames = jobs.map { $0.name }
-        for event in dateEvents {
-            if !jobNames.contains(event.title) {
-                return DecorationData(color: UIColor(.secondary))
-            }
+        for event in dateEvents where !jobNames.contains(event.title) {
+            return DecorationData(color: UIColor(.secondary))
         }
         return nil
     }
     
     private func getDateEvents(_ date: Date) -> [ShiftViewEvent] {
+        // swiftlint:disable:next force_try
         let realm = try! Realm()
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -200,8 +199,8 @@ struct ShiftViewEvent: Identifiable {
                 ))
             }
         paymentDayJobs.forEach { job in
-            let salary = job.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
-            if salary.count > 0 {
+             let salary = job.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
+             if salary.attendanceCount != 0 {
                 dateEvents.append(ShiftViewEvent(
                     id: UUID().uuidString,
                     color: Color(job.color.getColor()),
@@ -215,7 +214,7 @@ struct ShiftViewEvent: Identifiable {
                     start: Date(),
                     end: Date()
                 ))
-            }
+             }
         }
         let dateOtJobs = otJobs.filter { calendar.compare($0.date, to: date, toGranularity: .day) == .orderedSame }
         dateOtJobs.forEach { otJob in
@@ -237,6 +236,7 @@ struct ShiftViewEvent: Identifiable {
     }
     
     private func getDateJobEvent(_ date: Date, _ job: Job) -> Results<Event> {
+        // swiftlint:disable:next force_try
         let realm = try! Realm()
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -251,6 +251,7 @@ struct ShiftViewEvent: Identifiable {
     }
     
     private func getJobEventsFromInterval(start: Date, end: Date, job: Job) -> [ShiftViewEvent] {
+        // swiftlint:disable:next force_try
         let realm = try! Realm()
         let activeCalendarIds = AppState.shared.userCalendars.filter { $0.isActive }.map { $0.id }
         let eventHelper = EventHelper()
@@ -259,21 +260,21 @@ struct ShiftViewEvent: Identifiable {
         realm.objects(Event.self)
             .filter("calendarId IN %@ AND start <= %@ AND start >= %@ AND summary == %@",
                     activeCalendarIds, end, start, job.name)
-            .forEach { e in
-                let color = eventHelper.getEventColor(e)
-                let (start, end) = eventHelper.getIntervalText(e, self.selectedDate)
+            .forEach { event in
+                let color = eventHelper.getEventColor(event)
+                let (start, end) = eventHelper.getIntervalText(event, self.selectedDate)
                 intervalEvents.append(ShiftViewEvent(
-                    id: e.id,
+                    id: event.id,
                     color: color,
-                    title: e.summary,
-                    summary: e.description,
+                    title: event.summary,
+                    summary: event.description,
                     detailText1: start,
                     detailText2: end,
                     canEdit: true,
-                    calendarId: e.calendarId,
-                    isAllday: e.isAllDay,
-                    start: e.start,
-                    end: e.end
+                    calendarId: event.calendarId,
+                    isAllday: event.isAllDay,
+                    start: event.start,
+                    end: event.end
                 ))
             }
         return intervalEvents

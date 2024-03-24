@@ -25,7 +25,7 @@ struct OTJobEditView: View {
                 }
             }
         }
-        .onWillDisappear() {
+        .onWillDisappear {
             viewModel.onDisappear()
         }
         .scrollDismissesKeyboard(.immediately)
