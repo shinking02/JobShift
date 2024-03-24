@@ -134,10 +134,9 @@ struct ShiftViewEvent: Identifiable {
         }
         if let paymentDayJob = paymentDayJob {
             let salary = paymentDayJob.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
-            if salary.count == 0 {
-                return nil
+            if salary.count > 0 {
+                return DecorationData(color: UIColor(paymentDayJob.color.getColor()), image: UIImage(systemName: "yensign"))
             }
-            return DecorationData(color: UIColor(paymentDayJob.color.getColor()), image: UIImage(systemName: "yensign"))
         }
         let dateEvents = getDateEvents(date)
         if dateEvents.isEmpty {
