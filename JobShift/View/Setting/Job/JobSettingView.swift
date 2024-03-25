@@ -69,15 +69,15 @@ struct JobSettingView: View {
         }
         .sheet(isPresented: $viewModel.showingAddJobView, onDismiss: {
             viewModel.onAppear()
-        }) {
+        }, content: {
             JobAddView(viewModel: JobAddViewModel())
-        }
+        })
         .sheet(isPresented: $viewModel.showingAddOTJobView, onDismiss: {
             viewModel.onAppear()
-        }) {
+        }, content: {
             OTJobAddView(viewModel: OTJobAddViewModel())
-        }
-        .onAppear() {
+        })
+        .onAppear {
             viewModel.onAppear()
         }
         .navigationTitle("バイト")

@@ -66,7 +66,7 @@ struct ShiftSheetView: View {
                         .padding(.top)
                         .padding(.horizontal)
                         .foregroundStyle(.secondary)
-                    ScrollView (.horizontal, showsIndicators: false) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(viewModel.selectedDateSuggests, id: \.id) { suggest in
                                 SuggestCardView(suggest: suggest)
@@ -106,10 +106,10 @@ struct ShiftSheetView: View {
                             end: viewModel.selectedDate
                         )
 
-                    }) {
+                    }, label: {
                         Image(systemName: "plus")
                             .font(.title3)
-                    }
+                    })
                     .disabled(!viewModel.canAddEvent)
                 }
             }

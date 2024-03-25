@@ -1,5 +1,5 @@
-import SwiftUI
 import Charts
+import SwiftUI
 
 struct DetailYearView: View {
     @State var viewModel: DetailYearViewModel
@@ -69,7 +69,7 @@ struct DetailYearView: View {
                             AxisTick()
                             AxisValueLabel(content: {
                                 if let intValue = value.as(Int.self) {
-                                    Text("\(intValue / 10000)")
+                                    Text("\(intValue / 10_000)")
                                 }
                             })
                         })

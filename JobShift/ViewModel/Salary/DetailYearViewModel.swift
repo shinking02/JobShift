@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 @Observable final class DetailYearViewModel {
     var forcastSalary: String = ""
@@ -29,18 +29,18 @@ import Foundation
         }
         forcastSalary = String(salaries.map { $0.totalSalary + (includeCommuteWage ? $0.commuteWage : 0) }.reduce(0, +))
         confirmSalary = String(salaries.map { $0.isConfirm ? $0.confirmTotal + (includeCommuteWage ? $0.commuteWage : 0) : 0 }.reduce(0, +))
-        count = salaries.map { $0.count }.reduce(0, +)
-        avgMinutes = count != 0 ? salaries.map { $0.totalMinutes }.reduce(0, +) / count : 0
-        yearChartDatas = salaries.map { s in
-            let salary = {
-                if s.isConfirm {
-                    return s.confirmTotal + (self.includeCommuteWage ? s.commuteWage : 0)
+        let attendanceCount = salaries.map { $0.attendanceCount }.reduce(0, +)
+        avgMinutes = attendanceCount == 0 ? salaries.map { $0.totalMinutes }.reduce(0, +) / count : 0
+        yearChartDatas = salaries.map { salary in
+            let yearSalary = {
+                if salary.isConfirm {
+                    return salary.confirmTotal + (self.includeCommuteWage ? salary.commuteWage : 0)
                 } else {
-                    return s.totalSalary + (self.includeCommuteWage ? s.commuteWage : 0)
+                    return salary.totalSalary + (self.includeCommuteWage ? salary.commuteWage : 0)
                 }
             }()
-            let date = Calendar.current.date(from: DateComponents(year: year, month: s.month))!
-            return YearChartData(date: date, month: s.month, salary: salary, isConfirm: s.isConfirm, count: s.count)
+            let date = Calendar.current.date(from: DateComponents(year: year, month: salary.month))!
+            return YearChartData(date: date, month: salary.month, salary: yearSalary, isConfirm: salary.isConfirm, count: salary.attendanceCount)
         }
         monthAvg = yearChartDatas.map { $0.salary }.reduce(0, +) / yearChartDatas.count
     }
@@ -54,4 +54,3 @@ struct YearChartData: Identifiable {
     var isConfirm: Bool
     var count: Int
 }
-

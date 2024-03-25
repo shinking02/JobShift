@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct SalaryView: View {
     @State private var currentPage: YearMonth = .origin
@@ -67,39 +67,39 @@ struct SalaryView: View {
                             pickerIsPresented = false
                             showMonth.toggle()
                         }
-                    }) {
+                    }, label: {
                         Image(systemName: showMonth ? "moon.fill" : "moon")
-                    }
+                    })
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
                         withAnimation {
                             includeCommuteWage.toggle()
                         }
-                    }) {
+                    }, label: {
                         Image(systemName: includeCommuteWage ? "tram.fill" : "tram")
-                    }
+                    })
                 }
                 ToolbarItem(placement: .principal) {
                     Button(action: {
                         withAnimation(.spring(duration: 0.3)) {
                             pickerIsPresented.toggle()
                         }
-                    }) {
+                    }, label: {
                         Text("\(String(showMonth ? currentPage.year : currentYear))年\(showMonth ? "\(String(currentPage.month))月" : "")")
                             .bold()
                             .foregroundStyle(pickerIsPresented ? .blue : .primary)
                         Image(systemName: "chevron.down")
                             .frame(width: 20)
                             .rotationEffect(.degrees(pickerIsPresented ? 0 : -90))
-                    }
+                    })
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
                         showSalaryAddSheet = true
-                    }) {
+                    }, label: {
                         Image(systemName: "plus")
-                    }
+                    })
                     .disabled(jobs.isEmpty)
                 }
             }

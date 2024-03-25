@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct EditEventSummaryView: View {
     @State var viewModel: EditEventSummaryViewModel

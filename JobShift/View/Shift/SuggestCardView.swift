@@ -36,4 +36,3 @@ struct SuggestCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
-

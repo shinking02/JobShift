@@ -1,7 +1,7 @@
-import Observation
+// swiftlint:disable force_try
+
 import GoogleAPIClientForREST_Calendar
 import RealmSwift
-
 
 class Event: Object {
     @Persisted(primaryKey: true) var id: String
@@ -10,9 +10,9 @@ class Event: Object {
     @Persisted var isAllDay: Bool
     @Persisted var start: Date
     @Persisted var end: Date
-    private static var realm = try! Realm()    
     static func all() -> Results<Event> {
-        realm.objects(Event.self)
+        let realm = try! Realm()
+        return realm.objects(Event.self)
     }
 }
 
@@ -21,28 +21,21 @@ class Event: Object {
     private let appState = AppState.shared
     private init() {}
     
-    
     func addEvent(_ event: Event) {
         let realm = try! Realm()
-        do {
-            try realm.write {
-                realm.add(event)
-            }
-        } catch {
-            print("Error adding event: \(error)")
+        try! realm.write {
+            realm.add(event)
         }
     }
 
     func syncEvent(_ gtlrEvent: GTLRCalendar_Event, _ calendarId: String) {
         let realm = try! Realm()
-        // Delete existing event if any
         let existingEvent = realm.objects(Event.self).filter("id = %@", gtlrEvent.identifier!).first
         if let existingEvent = existingEvent {
             try! realm.write {
                 realm.delete(existingEvent)
             }
         }
-        // Add new event
         let newEvent = createEvent(gtlrEvent, calendarId)
         try! realm.write {
             realm.add(newEvent)
@@ -80,7 +73,6 @@ class Event: Object {
     
     // return all events that intersect with the given date
     func getEvents(_ date: Date) -> Results<Event> {
-        let realm = try! Realm()
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
         let dateStart = calendar.date(from: dateComponents)!
@@ -89,14 +81,32 @@ class Event: Object {
         let jobNames = SwiftDataSource.shared.fetchJobs().map { $0.name }
         let filterRule = {
             if appState.isShowOnlyJobEvent {
-                return "calendarId IN %@ AND (start <= %@ AND start >= %@ OR end <= %@ AND end >= %@ OR start <= %@ AND end >= %@) AND summary IN %@"
+                return """
+                    calendarId IN %@ /
+                    AND (start <= %@ AND start >= %@ OR end <= %@ AND end >= %@ OR start <= %@ AND end >= %@) /
+                    AND summary IN %@
+                """
             }
-            return "calendarId IN %@ AND (start <= %@ AND start >= %@ OR end <= %@ AND end >= %@ OR start <= %@ AND end >= %@)"
+            return """
+                calendarId IN %@ /
+                AND (start <= %@ AND start >= %@ OR end <= %@ AND end >= %@ OR start <= %@ AND end >= %@)
+            """
         }()
+        let realm = try! Realm()
         let events = realm.objects(Event.self)
-            .filter(filterRule, activeCalendarIds, dateEnd, dateStart, dateEnd, dateStart, dateStart, dateEnd, jobNames)
+            .filter(
+                filterRule,
+                activeCalendarIds,
+                dateEnd,
+                dateStart,
+                dateEnd,
+                dateStart,
+                dateStart,
+                dateEnd,
+                jobNames
+            )
             .sorted(byKeyPath: "start", ascending: true)
-        return events;
+        return events
     }
     
     func updateEvent(_ event: GTLRCalendar_Event) {
@@ -109,7 +119,11 @@ class Event: Object {
                 existingEvent.start = event.start?.date?.date ?? event.start?.dateTime?.date ?? Date.distantPast
                 existingEvent.end = {
                     if existingEvent.isAllDay {
-                        return Calendar.current.date(byAdding: .day, value: -1, to: event.end?.date?.date ?? Date.distantFuture)!
+                        return Calendar.current.date(
+                            byAdding: .day,
+                            value: -1,
+                            to: event.end?.date?.date ?? Date.distantFuture
+                            )!
                     }
                     return event.end?.dateTime?.date ?? Date.distantFuture
                 }()
@@ -142,3 +156,4 @@ class Event: Object {
       return newEvent
     }
 }
+// swiftlint:enable force_try

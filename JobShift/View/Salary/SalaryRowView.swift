@@ -36,7 +36,7 @@ struct SalaryRowView: View {
                                 includeCommuteWage: includeCommuteWage
                             ))
                         }
-                    }) {
+                    }, label: {
                         HStack {
                             Text(entry.label)
                                 .bold()
@@ -46,7 +46,7 @@ struct SalaryRowView: View {
                                 .foregroundColor(.secondary)
                                 .font(.caption)
                         }
-                    }
+                    })
                     Spacer()
                     HStack {
                         Text("\(entry.isConfirm ? entry.confirmSalary : entry.salary)")

@@ -58,13 +58,13 @@ struct EventEditView: View {
                             await viewModel.updateButtonTapped()
                             dismiss()
                         }
-                    }) {
+                    }, label: {
                         if viewModel.apiLoading {
                             ProgressView()
                         } else {
                             Text("完了")
                         }
-                    }
+                    })
                     .disabled(viewModel.dateError || viewModel.title.isEmpty)
                 }
             }

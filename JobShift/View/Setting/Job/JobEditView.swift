@@ -10,14 +10,15 @@ struct JobEditView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("削除") {viewModel.deleteButtonTapped()}
+                    Button("削除") { viewModel.deleteButtonTapped() }
                         .alert("\(viewModel.job.name)を削除しますか？", isPresented: $viewModel.showDeleteAlert) {
                         Button("キャンセル", role: .cancel) {}
                         Button("削除", role: .destructive) {
                             viewModel.jobDelete()
+                            print("JobEditView: jobDelete")
                             dismiss()
                         }
-                    }
+                        }
                     .foregroundColor(.red)
                     Spacer()
                 }

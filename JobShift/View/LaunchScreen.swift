@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import RiveRuntime
+import SwiftUI
 
 struct LaunchScreen: View {
     @Environment(\.colorScheme) var colorScheme
@@ -39,7 +39,7 @@ struct LaunchScreen: View {
                     }
                     .animation(.default, value: viewModel.appState.isLoggedIn)
                     .foregroundStyle(.secondary)
-                    .onAppear() {
+                    .onAppear {
                         Task {
                             await viewModel.setupApp()
                         }

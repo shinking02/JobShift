@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 @Observable class OTJobFormViewModel {
     var name: String = ""

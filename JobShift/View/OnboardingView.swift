@@ -35,7 +35,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack {}
         .hidden()
-        .onAppear() {
+        .onAppear {
             viewModel.onAppear()
         }
         .sheet(isPresented: $viewModel.showingOnboarding) {
@@ -71,7 +71,7 @@ struct OnboardingView: View {
                                 Spacer()
                             }
                         }
-                        .padding(.horizontal,20)
+                        .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     }
                 }
@@ -81,11 +81,11 @@ struct OnboardingView: View {
                     if let detailURL = detailURL {
                         Button(action: {
                             openURL(detailURL)
-                        }) {
+                        }, label: {
                             Text("もっとみる")
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue)
-                        }
+                        })
                         .padding()
                     }
                     ZStack {
@@ -97,7 +97,7 @@ struct OnboardingView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }
-                    .onDisappear() {
+                    .onDisappear {
                         viewModel.onDisappear()
                     }
                     .onTapGesture {
@@ -106,7 +106,7 @@ struct OnboardingView: View {
                 }
                 .padding(.top, 15)
                 .padding(.bottom, 20)
-                .padding(.horizontal,15)
+                .padding(.horizontal, 15)
             }
             .padding()
         }

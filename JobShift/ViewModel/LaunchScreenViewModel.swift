@@ -1,13 +1,18 @@
-import Observation
 import GoogleSignIn
+import Observation
 
 @Observable final class LaunchScreenViewModel {
     var appState = AppState.shared
     
     func signInButtonTapped() {
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
+        guard let presentingViewController = 
+            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else { return }
         let scopes = ["https://www.googleapis.com/auth/calendar"]
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController, hint: nil, additionalScopes: scopes) { signInResult, error in
+        GIDSignIn.sharedInstance.signIn(
+            withPresenting: presentingViewController,
+            hint: nil,
+            additionalScopes: scopes
+            ) { signInResult, error in
             if let signInResult = signInResult {
                 let profile = signInResult.user.profile
                 self.appState.user.email = profile?.email ?? ""
@@ -28,7 +33,11 @@ import GoogleSignIn
         let eventStore = EventStore.shared
         // Wait until appState.loginProcessed becomes true
         while !appState.loginRestored {
-            try! await Task.sleep(nanoseconds: 500_000_000) // Sleep for 0.5 second
+            do {
+                try await Task.sleep(nanoseconds: 500_000_000) // Sleep for 0.5 second
+            } catch {
+                fatalError("Failed to sleep")
+            }
         }
         if !appState.isLoggedIn {
             return

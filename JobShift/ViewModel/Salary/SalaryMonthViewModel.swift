@@ -19,7 +19,7 @@ import SwiftUI
             }
             jobs.forEach { job in
                 let salary = job.getMonthSalary(year: year, month: month)
-                if salary.count > 0 || salary.totalSalary > 0 || salary.confirmTotal > 0 {
+                if salary.attendanceCount != 0 || salary.totalSalary > 0 || salary.confirmTotal > 0 {
                     chartData.append(
                         ChartEntry(
                             label: job.name,
@@ -28,7 +28,7 @@ import SwiftUI
                             color: job.color.getColor(),
                             isConfirm: salary.isConfirm,
                             confirmSalary: salary.confirmTotal + (includeCommuteWage ? salary.commuteWage : 0),
-                            count: salary.count,
+                            count: salary.attendanceCount,
                             isOtJob: false,
                             job: job
                         )
@@ -39,11 +39,11 @@ import SwiftUI
                 chartData.append(
                     ChartEntry(
                         label: "単発バイト",
-                        salary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ?  $0.commuteWage : 0) }.reduce(0, +),
+                        salary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ? $0.commuteWage : 0) }.reduce(0, +),
                         minutes: 0,
                         color: .secondary,
                         isConfirm: true,
-                        confirmSalary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ?  $0.commuteWage : 0) }.reduce(0, +),
+                        confirmSalary: otJobs.map { $0.salary + (includeCommuteWage && $0.isCommuteWage ? $0.commuteWage : 0) }.reduce(0, +),
                         count: otJobs.count,
                         isOtJob: true,
                         job: nil

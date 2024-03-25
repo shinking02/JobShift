@@ -1,5 +1,5 @@
-import GoogleSignIn
 import GoogleAPIClientForREST_Calendar
+import GoogleSignIn
 import RealmSwift
 
 enum CalendarManagerError: Error {
@@ -28,9 +28,12 @@ final class CalendarManager {
             self.service.executeQuery(query) { [self] (ticket, response, error) in
                 do {
                     if let error = error {
-                        throw CalendarManagerError.errorWithText(text: "Error while executing calendar list query '\(error.localizedDescription)'")
+                        throw CalendarManagerError.errorWithText(
+                            text: "Error while executing calendar list query '\(error.localizedDescription)'"
+                        )
                     }
-                    guard let calendarList = response as? GTLRCalendar_CalendarList, let items = calendarList.items else {
+                    guard let calendarList = response as? GTLRCalendar_CalendarList,
+                          let items = calendarList.items else {
                         throw CalendarManagerError.errorWithText(text: "Error while parsing calendar list response")
                     }
                     let oldCalendars = appState.userCalendars
@@ -42,7 +45,9 @@ final class CalendarManager {
                                 calendar.append(existCal)
                                 continue
                             }
-                            calendar.append(UserCalendar(id: item.identifier!, name: item.summary ?? "", isActive: true))
+                            calendar.append(
+                                UserCalendar(id: item.identifier!, name: item.summary ?? "", isActive: true)
+                            )
                         }
                         return calendar
                     }()
@@ -93,7 +98,9 @@ final class CalendarManager {
                                 await self.syncCalendar(calendarId)
                             }
                         } else {
-                            throw CalendarManagerError.errorWithText(text: "Error while executing events list query '\(error.localizedDescription)'")
+                            throw CalendarManagerError.errorWithText(
+                                text: "Error while executing events list query '\(error.localizedDescription)'"
+                                )
                         }
                     }
                     let items = (response as? GTLRCalendar_Events)?.items ?? []
@@ -147,7 +154,9 @@ final class CalendarManager {
             self.service.executeQuery(query) { (ticket, response, error) in
                 do {
                     if let error = error {
-                        throw CalendarManagerError.errorWithText(text: "Error while executing events insert query '\(error.localizedDescription)'")
+                        throw CalendarManagerError.errorWithText(
+                            text: "Error while executing events insert query '\(error.localizedDescription)'"
+                            )
                     }
                     let gtlrEvent = response as! GTLRCalendar_Event
                     self.eventStore.syncEvent(gtlrEvent, event.calendarId)
@@ -168,8 +177,14 @@ final class CalendarManager {
             if event.isAllday {
                 let startComponent = calendar.dateComponents([.year, .month, .day], from: event.start)
                 let endComponent = calendar.dateComponents([.year, .month, .day], from: event.end)
-                return (GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 1, to: calendar.date(from: startComponent)!)!),
-                        GTLRDateTime(forAllDayWith: calendar.date(byAdding: .day, value: 2, to: calendar.date(from: endComponent)!)!))
+                return (
+                    GTLRDateTime(
+                        forAllDayWith: calendar.date(byAdding: .day, value: 1, to: calendar.date(from: startComponent)!)!
+                    ),
+                    GTLRDateTime(
+                        forAllDayWith: calendar.date(byAdding: .day, value: 2, to: calendar.date(from: endComponent)!)!
+                    )
+                )
             } else {
                 return (GTLRDateTime(date: event.start), GTLRDateTime(date: event.end))
             }
@@ -185,12 +200,18 @@ final class CalendarManager {
         gtlrEvent.start = gtlrStart
         gtlrEvent.end = gtlrEnd
         
-        let query = GTLRCalendarQuery_EventsUpdate.query(withObject: gtlrEvent, calendarId: event.calendarId, eventId: event.id)
+        let query = GTLRCalendarQuery_EventsUpdate.query(
+            withObject: gtlrEvent,
+            calendarId: event.calendarId,
+            eventId: event.id
+            )
         await withCheckedContinuation { continuation in
             self.service.executeQuery(query) { (ticket, response, error) in
                 do {
                     if let error = error {
-                        throw CalendarManagerError.errorWithText(text: "Error while executing events update query '\(error.localizedDescription)'")
+                        throw CalendarManagerError.errorWithText(
+                            text: "Error while executing events update query '\(error.localizedDescription)'"
+                        )
                     }
                     self.eventStore.updateEvent(response as! GTLRCalendar_Event)
                     continuation.resume()
@@ -209,7 +230,9 @@ final class CalendarManager {
             self.service.executeQuery(query) { (ticket, response, error) in
                 do {
                     if let error = error {
-                        throw CalendarManagerError.errorWithText(text: "Error while executing events delete query '\(error.localizedDescription)'")
+                        throw CalendarManagerError.errorWithText(
+                            text: "Error while executing events delete query '\(error.localizedDescription)'"
+                        )
                     }
                     self.eventStore.deleteEvent(event.id)
                     continuation.resume()
@@ -220,4 +243,3 @@ final class CalendarManager {
         }
     }
 }
-

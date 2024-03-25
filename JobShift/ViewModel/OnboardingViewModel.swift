@@ -19,4 +19,3 @@ import Observation
         showingOnboarding = false
     }
 }
-

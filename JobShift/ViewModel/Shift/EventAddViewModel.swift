@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 @Observable final class EventAddViewModel {
     private var event: ShiftViewEvent

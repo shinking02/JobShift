@@ -11,8 +11,10 @@ struct ViewWillDisappearHandler: UIViewControllerRepresentable {
         context.coordinator
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<ViewWillDisappearHandler>) {
-    }
+    func updateUIViewController(
+        _ uiViewController: UIViewController,
+        context: UIViewControllerRepresentableContext<ViewWillDisappearHandler>
+        ) {}
 
     typealias UIViewControllerType = UIViewController
 

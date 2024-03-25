@@ -40,9 +40,9 @@ struct EditSalaryHistoryView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     showingAddSalarySheet = true
-                }) {
+                }, label: {
                     Image(systemName: "plus")
-                }
+                })
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
@@ -50,9 +50,9 @@ struct EditSalaryHistoryView: View {
         }
         .sheet(isPresented: $showingAddSalarySheet, onDismiss: {
             viewModel.onAppear()
-        }){
+        }, content: {
             SalaryAddSheetView(viewModel: SalaryAddSheetViewModel(job: viewModel.job))
-        }
+        })
         .onAppear {
             viewModel.onAppear()
         }

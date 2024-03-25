@@ -1,5 +1,5 @@
-import Observation
 import Foundation
+import Observation
 
 @Observable final class JobSettingViewModel {
     var jobs: [Job] = []
@@ -34,4 +34,3 @@ import Foundation
         })
     }
 }
-

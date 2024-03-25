@@ -1,7 +1,7 @@
 import Foundation
+import HolidayJp
 import SwiftData
 import SwiftUI
-import HolidayJp
 
 typealias Job = JobSchemaV3.Job
 typealias OneTimeJob = JobSchemaV3.OneTimeJob
@@ -51,14 +51,14 @@ extension Job {
                 hasAdjustment: self.newEventSummaries.first { $0.eventId == event.id }?.adjustment != nil
             ))
         }
-        let confirmTotal = self.salaryHistories.first { $0.year == year && $0.month == month }?.salary ?? nil
+        let confirmTotal = self.salaryHistories.first { $0.year == year && $0.month == month }?.salary
         return Salary(
             year: year,
             month: month,
             job: self,
             totalSalary: totalSalary,
             totalMinutes: totalMinutes,
-            count: targetEvents.count,
+            attendanceCount: targetEvents.count,
             isConfirm: confirmTotal != nil || interval.end < self.startDate,
             confirmTotal: confirmTotal ?? 0,
             commuteWage: self.isCommuteWage ? details.count * self.commuteWage : 0,
@@ -88,7 +88,7 @@ extension Job {
                 }
             }()
             let endComponents = {
-                let tempEnd = DateComponents(year: year, month: month,  day: 1)
+                let tempEnd = DateComponents(year: year, month: month, day: 1)
                 let endMonthDays = currendar.daysInMonth(for: currendar.date(from: tempEnd)!)
                 if endMonthDays < self.salaryCutoffDay {
                     return DateComponents(year: year, month: month + 1, day: 0, hour: 23, minute: 59)
@@ -163,7 +163,7 @@ struct Salary: Identifiable {
     var job: Job?
     var totalSalary: Int
     var totalMinutes: Int
-    var count: Int
+    var attendanceCount: Int
     var isConfirm: Bool
     var confirmTotal: Int
     var commuteWage: Int
@@ -185,7 +185,7 @@ struct Wage: Codable, Hashable {
     var dailyWage: Int
     var start: Date
     var end: Date
-    init(hourlyWage: Int = 1200, dailyWage: Int = 10000, start: Date = Date.distantPast, end: Date = Date.distantFuture) {
+    init(hourlyWage: Int = 1_200, dailyWage: Int = 10_000, start: Date = Date.distantPast, end: Date = Date.distantFuture) {
         self.hourlyWage = hourlyWage
         self.dailyWage = dailyWage
         self.start = start
@@ -274,7 +274,6 @@ extension JobColor {
     }
 }
 
-
 enum JobSchemaV1: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
     static var models: [any PersistentModel.Type] {
@@ -305,7 +304,7 @@ enum JobSchemaV1: VersionedSchema {
             name: String = "",
             color: JobColor = JobColor.red,
             isDailyWage: Bool = false,
-            dailyWage: Int = 10000,
+            dailyWage: Int = 10_000,
             isNightWage: Bool = false,
             nightWageStartTime: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 22)) ?? Date(),
             isHolidayWage: Bool = false,
@@ -349,7 +348,7 @@ enum JobSchemaV1: VersionedSchema {
         var isCommuteWage: Bool = false
         var commuteWage: Int = 0
         
-        init(name: String = "", date: Date = Date(), salary: Int = 6000, isCommuteWage: Bool = false, commuteWage: Int = 500) {
+        init(name: String = "", date: Date = Date(), salary: Int = 6_000, isCommuteWage: Bool = false, commuteWage: Int = 500) {
             self.id = UUID()
             self.name = name
             self.date = date
@@ -391,7 +390,7 @@ enum JobSchemaV2: VersionedSchema {
             name: String = "",
             color: JobColor = JobColor.red,
             isDailyWage: Bool = false,
-            dailyWage: Int = 10000,
+            dailyWage: Int = 10_000,
             isNightWage: Bool = false,
             nightWageStartTime: Date = Calendar(identifier: .gregorian).date(from: DateComponents(hour: 22)) ?? Date(),
             isHolidayWage: Bool = false,
@@ -438,7 +437,7 @@ enum JobSchemaV2: VersionedSchema {
         var commuteWage: Int = 0
         var summary: String = ""
         
-        init(name: String = "", date: Date = Date(), salary: Int = 6000, isCommuteWage: Bool = false, commuteWage: Int = 500, summary: String = "") {
+        init(name: String = "", date: Date = Date(), salary: Int = 6_000, isCommuteWage: Bool = false, commuteWage: Int = 500, summary: String = "") {
             self.id = UUID()
             self.name = name
             self.date = date
@@ -484,7 +483,7 @@ enum JobSchemaV3: VersionedSchema {
             name: String = "",
             color: JobColor = JobColor.red,
             isDailyWage: Bool = false,
-            dailyWage: Int = 10000,
+            dailyWage: Int = 10_000,
             isNightWage: Bool = false,
             isHolidayWage: Bool = false,
             wages: [Wage] = [Wage()],
@@ -499,7 +498,7 @@ enum JobSchemaV3: VersionedSchema {
             salaryHistories: [SalaryHistory] = [],
             newEventSummaries: [EventSummary] = [],
             displayPaymentDay: Bool = true,
-            startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2020, month: 4, day: 1)) ?? Date()
+            startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2_020, month: 4, day: 1)) ?? Date()
         ) {
             self.id = UUID()
             self.name = name
@@ -533,7 +532,7 @@ enum JobSchemaV3: VersionedSchema {
         var commuteWage: Int = 0
         var summary: String = ""
         
-        init(name: String = "", date: Date = Date(), salary: Int = 6000, isCommuteWage: Bool = false, commuteWage: Int = 500, summary: String = "") {
+        init(name: String = "", date: Date = Date(), salary: Int = 6_000, isCommuteWage: Bool = false, commuteWage: Int = 500, summary: String = "") {
             self.id = UUID()
             self.name = name
             self.date = date
@@ -572,5 +571,3 @@ enum JobMigrationPlan: SchemaMigrationPlan {
         try? context.save()
     }
 }
-
-
