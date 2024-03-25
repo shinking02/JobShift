@@ -23,7 +23,7 @@ import Observation
             }
         }
     }
-    var startDate: Date = Date()
+    var startDate: Date = Calendar(identifier: .gregorian).date(from: DateComponents(year: 2_020, month: 4, day: 1)) ?? Date()
     var isCommuteWage: Bool = false
     var commuteWageString: String = ""
     var isNightWage: Bool = false

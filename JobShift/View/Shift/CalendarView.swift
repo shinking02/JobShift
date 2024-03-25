@@ -48,13 +48,22 @@ struct CalendarView: UIViewRepresentable {
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
             parent.viewModel.updateDecoration(dateComponents)
-            guard let decoration = parent.viewModel.decorationStore[dateComponents] else {
-                return nil
+            guard let decoration = parent.viewModel.decorationStore[dateComponents] else { return nil }
+            switch decoration.type {
+            case .event:
+                return .image(UIImage(systemName: "circle.fill"), color: decoration.color)
+            case .paymentDay:
+                return .image(UIImage(systemName: "yensign"), color: decoration.color)
+            case .eventAndPaymentDay:
+                guard let accentColor = decoration.accentColor else { return nil }
+                return .image(
+                    UIImage(
+                        systemName: "yensign.circle",
+                        withConfiguration: UIImage.SymbolConfiguration(paletteColors: [accentColor, decoration.color])
+                    ),
+                    size: .large
+                )
             }
-            if let image = decoration.image {
-                return .image(image, color: decoration.color, size: .large)
-            }
-            return .default(color: decoration.color)
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {

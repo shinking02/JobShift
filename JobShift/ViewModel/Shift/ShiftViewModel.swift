@@ -4,9 +4,16 @@ import RealmSwift
 import SwiftUI
 import UIKit
 
+enum DecorationType {
+    case event
+    case paymentDay
+    case eventAndPaymentDay
+}
+
 struct DecorationData: Equatable {
+    var type: DecorationType
     var color: UIColor
-    var image: UIImage?
+    var accentColor: UIColor?
 }
 
 struct ShiftViewEvent: Identifiable {
@@ -125,37 +132,73 @@ struct ShiftViewEvent: Identifiable {
     private func calculateDecoration(_ dateComponents: DateComponents) -> DecorationData? {
         let calendar = Calendar.current
         let date = dateComponents.date!
-        let paymentDayJob = jobs.first { job in
-            if !job.displayPaymentDay {
-                return false
+
+        let dateColor: UIColor? = {
+            let dateEventNames = getDateEventNames(date)
+            let dateOtJob = otJobs.first { calendar.compare(date, to: $0.date, toGranularity: .day) == .orderedSame }
+            if dateEventNames.isEmpty && dateOtJob == nil {
+                return nil
             }
-            let paymentDay = job.getSalaryPaymentDay(year: dateComponents.year!, month: dateComponents.month!)
-            return paymentDay != nil && calendar.compare(date, to: paymentDay!, toGranularity: .day) == .orderedSame
-        }
-        if let paymentDayJob = paymentDayJob {
-            let salary = paymentDayJob.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
-            if salary.attendanceCount != 0 {
-                return DecorationData(color: UIColor(paymentDayJob.color.getColor()), image: UIImage(systemName: "yensign"))
+            if let dateOtJob = dateOtJob {
+                return UIColor(.secondary)
             }
+            for job in jobs where dateEventNames.contains(job.name) {
+                return UIColor(job.color.getColor())
+            }
+            return UIColor(.secondary)
+        }()
+        let paymentColor: UIColor? = {
+            let paymentDayJob = jobs.first { job in
+                if !job.displayPaymentDay {
+                    return false
+                }
+                let salary = job.getMonthSalary(year: dateComponents.year!, month: dateComponents.month!)
+                let paymentDay = job.getSalaryPaymentDay(year: dateComponents.year!, month: dateComponents.month!)
+                return paymentDay != nil && calendar.compare(date, to: paymentDay!, toGranularity: .day) == .orderedSame && salary.attendanceCount > 0
+            }
+            guard let paymentDayJob = paymentDayJob else {
+                return nil
+            }
+            return UIColor(paymentDayJob.color.getColor())
+        }()
+        
+        if let dateColor = dateColor, let paymentColor = paymentColor {
+            return DecorationData(type: .eventAndPaymentDay, color: dateColor, accentColor: paymentColor)
         }
-        let dateEvents = getDateEvents(date)
-        if dateEvents.isEmpty {
-            return nil
+        if let dateColor = dateColor {
+            return DecorationData(type: .event, color: dateColor)
         }
-        let dayJob = jobs.first { job in
-            !getDateJobEvent(date, job).isEmpty
-        }
-        if let dayJob = dayJob {
-            return DecorationData(color: UIColor(dayJob.color.getColor()))
-        }
-        // No decorations if it is a cross day job and before 10:00 a.m. and that is the only time you are scheduled to work.
-        let jobNames = jobs.map { $0.name }
-        for event in dateEvents where !jobNames.contains(event.title) {
-            return DecorationData(color: UIColor(.secondary))
+        if let paymentColor = paymentColor {
+            return DecorationData(type: .paymentDay, color: paymentColor)
         }
         return nil
     }
     
+    // TODO: リファクタリング Decoration用にgetDateEventsより軽い関数
+    private func getDateEventNames(_ date: Date) -> [String] {
+        // swiftlint:disable:next force_try
+        let realm = try! Realm()
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        let dateStart = calendar.date(from: dateComponents)!
+        let dateEnd = calendar.date(byAdding: DateComponents(hour: 23, minute: 59, second: 59), to: dateStart)!
+        let activeCalendarIds = AppState.shared.userCalendars.filter { $0.isActive }.map { $0.id }
+        let jobNames = SwiftDataSource.shared.fetchJobs().map { $0.name }
+        let filterRule = {
+            if AppState.shared.isShowOnlyJobEvent {
+                return "calendarId IN %@ AND (start <= %@ AND start >= %@ OR end <= %@ AND end > %@ OR start <= %@ AND end >= %@) AND summary IN %@"
+            }
+            return "calendarId IN %@ AND (start <= %@ AND start >= %@ OR end <= %@ AND end > %@ OR start <= %@ AND end >= %@)"
+        }()
+        var dateEventNames: [String] = []
+        realm.objects(Event.self)
+            .filter(filterRule, activeCalendarIds, dateEnd, dateStart, dateEnd, dateStart, dateStart, dateEnd, jobNames)
+            .sorted(byKeyPath: "start", ascending: true)
+            .forEach { event in
+                dateEventNames.append(event.summary)
+            }
+        return dateEventNames
+    }
     private func getDateEvents(_ date: Date) -> [ShiftViewEvent] {
         // swiftlint:disable:next force_try
         let realm = try! Realm()

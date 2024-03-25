@@ -15,6 +15,7 @@ struct JobEditView: View {
                         Button("キャンセル", role: .cancel) {}
                         Button("削除", role: .destructive) {
                             viewModel.jobDelete()
+                            print("JobEditView: jobDelete")
                             dismiss()
                         }
                         }
