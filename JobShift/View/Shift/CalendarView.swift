@@ -53,12 +53,12 @@ struct CalendarView: UIViewRepresentable {
             case .event:
                 return .image(UIImage(systemName: "circle.fill"), color: decoration.color)
             case .paymentDay:
-                return .image(UIImage(systemName: "yensign"), color: decoration.color)
+                return .image(UIImage(systemName: "checkmark.circle"), color: decoration.color, size: .large)
             case .eventAndPaymentDay:
                 guard let accentColor = decoration.accentColor else { return nil }
                 return .image(
                     UIImage(
-                        systemName: "yensign.circle",
+                        systemName: "circle.badge.checkmark.fill",
                         withConfiguration: UIImage.SymbolConfiguration(paletteColors: [accentColor, decoration.color])
                     ),
                     size: .large
