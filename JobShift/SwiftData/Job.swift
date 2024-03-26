@@ -33,36 +33,25 @@ extension Job {
     func getMonthSalary(year: Int, month: Int) -> Salary {
         let interval = getWorkDayInterval(year: year, month: month)
         let targetEvents = EventStore.shared.getJobEvents(interval: interval, jobName: self.name)
-        
         var totalSalary = 0
         var totalMinutes = 0
         var details: [SalaryDetail] = []
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: "com.example.salarycalculation", attributes: .concurrent)
         
         targetEvents.forEach { event in
-            group.enter()
-            queue.async {
-                let (salary, minutes) = self.calculateEventSalary(event)
-                totalSalary += salary
-                totalMinutes += minutes
-                details.append(SalaryDetail(
-                    event: event,
-                    dateText: event.start.toMdEString(brackets: true),
-                    startText: event.isAllDay ? "終日" : event.start.toHmmString(),
-                    endText: event.isAllDay ? "" : event.end.toHmmString(),
-                    summary: self.newEventSummaries.first { $0.eventId == event.id }?.summary ?? "",
-                    salary: salary,
-                    hasAdjustment: self.newEventSummaries.first { $0.eventId == event.id }?.adjustment != nil
-                ))
-                group.leave()
-            }
+            let (salary, minutes) = calculateEventSalary(event)
+            totalSalary += salary
+            totalMinutes += minutes
+            details.append(SalaryDetail(
+                event: event,
+                dateText: event.start.toMdEString(brackets: true),
+                startText: event.isAllDay ? "終日" : event.start.toHmmString(),
+                endText: event.isAllDay ? "" : event.end.toHmmString(),
+                summary: self.newEventSummaries.first { $0.eventId == event.id }?.summary ?? "",
+                salary: salary,
+                hasAdjustment: self.newEventSummaries.first { $0.eventId == event.id }?.adjustment != nil
+            ))
         }
-        
-        group.wait() // すべての計算が完了するのを待つ
-        
         let confirmTotal = self.salaryHistories.first { $0.year == year && $0.month == month }?.salary
-        
         return Salary(
             year: year,
             month: month,
@@ -76,7 +65,7 @@ extension Job {
             details: details
         )
     }
-    
+
     func getYearSalary(year: Int) -> [Salary] {
         var salaries: [Salary] = []
         for month in 1...12 {
