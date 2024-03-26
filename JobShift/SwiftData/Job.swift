@@ -76,7 +76,7 @@ extension Job {
             details: details
         )
     }
-    
+
     func getYearSalary(year: Int) -> [Salary] {
         var salaries: [Salary] = []
         for month in 1...12 {
