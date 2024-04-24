@@ -26,6 +26,8 @@ class GoogleSignInManager {
                     continuation.resume(throwing: AppError.signin(.faliedSignIn))
                 } else if let user = signInResult?.user {
                     continuation.resume(returning: user)
+                    
+                    
                 } else {
                     continuation.resume(throwing: AppError.signin(.userNotFound))
                 }
