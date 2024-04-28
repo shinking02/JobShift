@@ -1,5 +1,5 @@
+import LicenseList
 import SwiftUI
-import SwiftUIIntrospect
 
 struct SettingView: View {
     @Environment(AppState.self) private var appState
@@ -14,23 +14,37 @@ struct SettingView: View {
                 }
                 Section {
                     NavigationLink {
-                        List {
-                            Text("aa")
-                        }
-                            .navigationTitle("aaa")
-                            .navigationBarTitleDisplayMode(.inline)
+                        Text("JobSettingView")
                     } label: {
-                        Label("プロフィール", systemImage: "person")
+                        Label("バイト", systemImage: "pencil.and.list.clipboard")
                     }
                     NavigationLink {
-                        Text("通知")
+                        CalendarSettingView()
+                    } label: {
+                        Label("カレンダー", systemImage: "calendar")
+                    }
+                    NavigationLink {
+                        NotificationSettingView()
                     } label: {
                         Label("通知", systemImage: "bell")
                     }
+                }
+                Section(footer:
+                    Text("© 2024 Shin Kawakami")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundStyle(.secondary)
+                ) {
                     NavigationLink {
-                        Text("アカウント")
+                        DeveloperSettingView()
                     } label: {
-                        Label("アカウント", systemImage: "key")
+                        Label("開発者向け情報", systemImage: "wrench.and.screwdriver")
+                    }
+                    NavigationLink {
+                        LicenseListView()
+                            .navigationTitle("ライセンス")
+                            .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        Label("ライセンス", systemImage: "book.and.wrench")
                     }
                 }
             }
@@ -42,7 +56,7 @@ struct SettingView: View {
             }
         }
         .sheet(isPresented: $showProfileSheet) {
-            Text("Profile Sheet")
+            ProfileSheetView()
         }
     }
 }

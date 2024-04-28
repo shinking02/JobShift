@@ -14,7 +14,7 @@ class GoogleSignInManager {
             }
         }
     }
-    
+    @MainActor
     private static func signInAsync(presentingviewcontroller: UIViewController, hint: String?, scopes: [String]) async throws -> GIDGoogleUser {
         try await withCheckedThrowingContinuation { continuation in
             GIDSignIn.sharedInstance.signIn(
@@ -26,8 +26,6 @@ class GoogleSignInManager {
                     continuation.resume(throwing: AppError.signin(.faliedSignIn))
                 } else if let user = signInResult?.user {
                     continuation.resume(returning: user)
-                    
-                    
                 } else {
                     continuation.resume(throwing: AppError.signin(.userNotFound))
                 }
@@ -58,5 +56,12 @@ class GoogleSignInManager {
         } catch {
             print("ERROR: \(error.localizedDescription)")
         }
+    }
+    
+    static func signOut() {
+        GIDSignIn.sharedInstance.signOut()
+        AppState.shared.user = nil
+        AppState.shared.isSignedIn = false
+        AppState.shared.finishFirstSyncProcess = false
     }
 }

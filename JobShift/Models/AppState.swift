@@ -10,5 +10,4 @@ final class AppState {
     var user: GIDGoogleUser?
     var finishFirstSyncProcess: Bool = false
     var finishRestoreSignInProcess: Bool = false
-    var appId: Int = 6_475_087_885
 }

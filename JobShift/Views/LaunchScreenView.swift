@@ -5,21 +5,7 @@ struct LaunchScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(AppState.self) private var appState
     @State private var finishFirstSync = false
-    
-    private func syncFromGoogleCalendar() async {
-        while !appState.finishRestoreSignInProcess {
-            do {
-                try await Task.sleep(millisecond: 200)
-            } catch {
-                print("ERROR: \(error.localizedDescription)")
-            }
-        }
-        if !appState.isSignedIn {
-            return
-        }
-        await CalendarManager.shared?.syncFromGoogleCalendar()
-        appState.finishFirstSyncProcess = true
-    }
+    private let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
     var body: some View {
         Group {
@@ -53,7 +39,7 @@ struct LaunchScreenView: View {
                                     .shadow(radius: 3)
                             }
                         }
-                        Text("Version: 0.0.0")
+                        Text("Version: \(version)")
                         Text("3chi3chihonoka")
                     }
                     .foregroundStyle(.secondary)
@@ -66,5 +52,20 @@ struct LaunchScreenView: View {
         .animation(.default, value: appState.finishFirstSyncProcess)
         .animation(.default, value: appState.isSignedIn)
         .animation(.default, value: appState.finishRestoreSignInProcess)
+    }
+    
+    private func syncFromGoogleCalendar() async {
+        while !appState.finishRestoreSignInProcess {
+            do {
+                try await Task.sleep(millisecond: 200)
+            } catch {
+                print("ERROR: \(error.localizedDescription)")
+            }
+        }
+        if !appState.isSignedIn {
+            return
+        }
+        await CalendarManager.shared.syncFromGoogleCalendar()
+        appState.finishFirstSyncProcess = true
     }
 }

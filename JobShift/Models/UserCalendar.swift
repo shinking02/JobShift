@@ -1,7 +1,7 @@
 import Observation
 
 @Observable
-final class Calendar {
+final class UserCalendar: Identifiable, Hashable {
     init(id: String, summary: String) {
         self.id = id
         self.summary = summary
@@ -13,10 +13,18 @@ final class Calendar {
         didSet {
             let disableCalendarIds = Storage.getDisableCalendarIds()
             if isActive {
-                Storage.setDisableCalendarIds(ids: disableCalendarIds.filter { $0 != id })
+                Storage.setDisableCalendarIds(disableCalendarIds.filter { $0 != id })
             } else {
-                Storage.setDisableCalendarIds(ids: disableCalendarIds + [id])
+                Storage.setDisableCalendarIds(disableCalendarIds + [id])
             }
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+        
+    static func == (lhs: UserCalendar, rhs: UserCalendar) -> Bool {
+        return lhs.id == rhs.id
     }
 }

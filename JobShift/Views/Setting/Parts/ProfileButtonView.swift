@@ -4,7 +4,6 @@ import SwiftUI
 struct ProfileButtonView: View {
     let imageURL: URL?
     let action: () -> Void
-    
     var body: some View {
         Button(action: action) {
             CachedAsyncImage(url: imageURL) { image in
@@ -14,7 +13,6 @@ struct ProfileButtonView: View {
                 ProgressView()
             }
             .frame(width: 34, height: 34)
-            .padding(.horizontal)
         }
     }
 }

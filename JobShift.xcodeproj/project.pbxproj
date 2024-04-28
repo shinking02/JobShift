@@ -14,7 +14,7 @@
 		540C937D2BD3A511009AE904 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C937C2BD3A511009AE904 /* CalendarManager.swift */; };
 		540C937F2BD3E521009AE904 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C937E2BD3E521009AE904 /* Event.swift */; };
 		540C93812BD41C86009AE904 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93802BD41C86009AE904 /* Storage.swift */; };
-		540C93832BD4E43D009AE904 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93822BD4E43D009AE904 /* Calendar.swift */; };
+		540C93832BD4E43D009AE904 /* UserCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93822BD4E43D009AE904 /* UserCalendar.swift */; };
 		540C93852BD50185009AE904 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93842BD50185009AE904 /* ContentView.swift */; };
 		540C93872BD5031A009AE904 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93862BD5031A009AE904 /* Tab.swift */; };
 		540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93882BD50339009AE904 /* ButtomSheetHelper.swift */; };
@@ -22,12 +22,20 @@
 		540C93902BD503BA009AE904 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C938F2BD503BA009AE904 /* SalaryView.swift */; };
 		540C93922BD503ED009AE904 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93912BD503ED009AE904 /* SettingView.swift */; };
 		540C93942BD508C3009AE904 /* TaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93932BD508C3009AE904 /* TaskExtension.swift */; };
-		540C939E2BD5117C009AE904 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 540C939D2BD5117C009AE904 /* SwiftUIIntrospect */; };
 		540C93A02BD5304E009AE904 /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C939F2BD5304E009AE904 /* ProfileButtonView.swift */; };
 		540C93A32BD5461F009AE904 /* CustomNavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93A22BD5461F009AE904 /* CustomNavigationTitle.swift */; };
 		540C93A82BD7F26E009AE904 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93A72BD7F26E009AE904 /* AppInfoView.swift */; };
-		540C93AC2BD7FD87009AE904 /* AppVersionMonitorSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 540C93AB2BD7FD87009AE904 /* AppVersionMonitorSwiftUI */; };
-		5423A9322B2D29FB004B88C7 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* Job.swift */; };
+		540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */; };
+		540C93B02BD9280B009AE904 /* ProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93AF2BD9280B009AE904 /* ProfileSheetView.swift */; };
+		540C93B32BD94E90009AE904 /* CalendarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93B22BD94E90009AE904 /* CalendarSettingView.swift */; };
+		540C93B82BD9D254009AE904 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93B72BD9D254009AE904 /* NotificationSettingView.swift */; };
+		540C93BB2BD9D4C1009AE904 /* NotificationPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 540C93BA2BD9D4C1009AE904 /* NotificationPermission */; };
+		540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540FA4922BDD18B100C32E7E /* JobUtils.swift */; };
+		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
+		544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */; };
+		5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */; };
+		5465E5B62BDD4BEF00626AAB /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B52BDD4BEF00626AAB /* DateExtension.swift */; };
+		5465E5BA2BDE62B100626AAB /* JobMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B92BDE62B100626AAB /* JobMigrationPlan.swift */; };
 		546D43EA2B7E00C50027D044 /* shapes.riv in Resources */ = {isa = PBXBuildFile; fileRef = 546D43E32B7E00C40027D044 /* shapes.riv */; };
 		54AFDB192BB058F9006E1B28 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDB182BB058F9006E1B28 /* RiveRuntime */; };
 		54AFDB1C2BB05AEF006E1B28 /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDB1B2BB05AEF006E1B28 /* GoogleAPIClientForRESTCore */; };
@@ -148,6 +156,9 @@
 		54AFDC062BB05D36006E1B28 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDC052BB05D36006E1B28 /* GoogleSignInSwift */; };
 		54AFDC092BB05D72006E1B28 /* HolidayJp in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDC082BB05D72006E1B28 /* HolidayJp */; };
 		54AFDC0C2BB05DC5006E1B28 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDC0B2BB05DC5006E1B28 /* Algorithms */; };
+		54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */; };
+		54B6BE762BDBD20D0099A519 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 54B6BE752BDBD20D0099A519 /* Shimmer */; };
+		54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
@@ -162,7 +173,7 @@
 		540C937C2BD3A511009AE904 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		540C937E2BD3E521009AE904 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		540C93802BD41C86009AE904 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		540C93822BD4E43D009AE904 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		540C93822BD4E43D009AE904 /* UserCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalendar.swift; sourceTree = "<group>"; };
 		540C93842BD50185009AE904 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		540C93862BD5031A009AE904 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		540C93882BD50339009AE904 /* ButtomSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSheetHelper.swift; sourceTree = "<group>"; };
@@ -173,10 +184,21 @@
 		540C939F2BD5304E009AE904 /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
 		540C93A22BD5461F009AE904 /* CustomNavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTitle.swift; sourceTree = "<group>"; };
 		540C93A72BD7F26E009AE904 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
-		5423A9312B2D29FB004B88C7 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIClient.swift; sourceTree = "<group>"; };
+		540C93AF2BD9280B009AE904 /* ProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSheetView.swift; sourceTree = "<group>"; };
+		540C93B22BD94E90009AE904 /* CalendarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingView.swift; sourceTree = "<group>"; };
+		540C93B72BD9D254009AE904 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
+		540FA4922BDD18B100C32E7E /* JobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobUtils.swift; sourceTree = "<group>"; };
+		5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV3.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBWelcomeView.swift; sourceTree = "<group>"; };
+		5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV4.swift; sourceTree = "<group>"; };
+		5465E5B52BDD4BEF00626AAB /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		5465E5B92BDE62B100626AAB /* JobMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobMigrationPlan.swift; sourceTree = "<group>"; };
 		546D43E32B7E00C40027D044 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
+		54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowStatusView.swift; sourceTree = "<group>"; };
+		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54F737882B259702004A4975 /* JobShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,7 +251,6 @@
 				54AFDBE02BB05AEF006E1B28 /* GoogleAPIClientForREST_Clouderrorreporting in Frameworks */,
 				54AFDB222BB05AEF006E1B28 /* GoogleAPIClientForREST_APIGateway in Frameworks */,
 				54AFDB862BB05AEF006E1B28 /* GoogleAPIClientForREST_ChecksService in Frameworks */,
-				540C93AC2BD7FD87009AE904 /* AppVersionMonitorSwiftUI in Frameworks */,
 				54AFDBC82BB05AEF006E1B28 /* GoogleAPIClientForREST_CloudSearch in Frameworks */,
 				54AFDB582BB05AEF006E1B28 /* GoogleAPIClientForREST_ArtifactRegistry in Frameworks */,
 				54AFDBDC2BB05AEF006E1B28 /* GoogleAPIClientForREST_Cloudbilling in Frameworks */,
@@ -254,7 +275,6 @@
 				54AFDB802BB05AEF006E1B28 /* GoogleAPIClientForREST_Calendar in Frameworks */,
 				54AFDBCE2BB05AEF006E1B28 /* GoogleAPIClientForREST_CloudSourceRepositories in Frameworks */,
 				54AFDB5E2BB05AEF006E1B28 /* GoogleAPIClientForREST_Backupdr in Frameworks */,
-				540C939E2BD5117C009AE904 /* SwiftUIIntrospect in Frameworks */,
 				54AFDB342BB05AEF006E1B28 /* GoogleAPIClientForREST_Adsense in Frameworks */,
 				54AFDB9E2BB05AEF006E1B28 /* GoogleAPIClientForREST_CloudDataplex in Frameworks */,
 				54AFDBA62BB05AEF006E1B28 /* GoogleAPIClientForREST_CloudFunctions in Frameworks */,
@@ -310,7 +330,9 @@
 				54AFDB7A2BB05AEF006E1B28 /* GoogleAPIClientForREST_Books in Frameworks */,
 				54AFDB662BB05AEF006E1B28 /* GoogleAPIClientForREST_BigLakeService in Frameworks */,
 				54AFDB7E2BB05AEF006E1B28 /* GoogleAPIClientForREST_CCAIPlatform in Frameworks */,
+				540C93BB2BD9D4C1009AE904 /* NotificationPermission in Frameworks */,
 				54AFDB8E2BB05AEF006E1B28 /* GoogleAPIClientForREST_CivicInfo in Frameworks */,
+				54B6BE762BDBD20D0099A519 /* Shimmer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +344,7 @@
 			children = (
 				540C936E2BD2998A009AE904 /* LaunchScreenView.swift */,
 				540C93842BD50185009AE904 /* ContentView.swift */,
+				544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */,
 				540C938A2BD5034E009AE904 /* Shift */,
 				540C938B2BD50356009AE904 /* Salary */,
 				540C938C2BD50364009AE904 /* Setting */,
@@ -333,6 +356,9 @@
 			isa = PBXGroup;
 			children = (
 				5442B4032B940CAE0047434B /* SwiftData */,
+				540C93762BD35646009AE904 /* AppState.swift */,
+				540C937E2BD3E521009AE904 /* Event.swift */,
+				540C93822BD4E43D009AE904 /* UserCalendar.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,6 +372,8 @@
 				540C937C2BD3A511009AE904 /* CalendarManager.swift */,
 				540C93802BD41C86009AE904 /* Storage.swift */,
 				540C93862BD5031A009AE904 /* Tab.swift */,
+				540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */,
+				5465E5B52BDD4BEF00626AAB /* DateExtension.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -373,6 +401,10 @@
 			children = (
 				540C93A62BD7F232009AE904 /* Parts */,
 				540C93912BD503ED009AE904 /* SettingView.swift */,
+				540C93AF2BD9280B009AE904 /* ProfileSheetView.swift */,
+				540C93B22BD94E90009AE904 /* CalendarSettingView.swift */,
+				540C93B72BD9D254009AE904 /* NotificationSettingView.swift */,
+				54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -398,6 +430,7 @@
 				540C939F2BD5304E009AE904 /* ProfileButtonView.swift */,
 				540C93A22BD5461F009AE904 /* CustomNavigationTitle.swift */,
 				540C93A72BD7F26E009AE904 /* AppInfoView.swift */,
+				54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -405,7 +438,10 @@
 		5442B4032B940CAE0047434B /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
-				5423A9312B2D29FB004B88C7 /* Job.swift */,
+				540FA4922BDD18B100C32E7E /* JobUtils.swift */,
+				5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */,
+				5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */,
+				5465E5B92BDE62B100626AAB /* JobMigrationPlan.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -455,9 +491,6 @@
 				540C93752BD3515D009AE904 /* Lib */,
 				540C936D2BD29958009AE904 /* Views */,
 				540C93702BD2B39C009AE904 /* Models */,
-				540C93762BD35646009AE904 /* AppState.swift */,
-				540C937E2BD3E521009AE904 /* Event.swift */,
-				540C93822BD4E43D009AE904 /* Calendar.swift */,
 				54F737932B259703004A4975 /* Preview Content */,
 			);
 			path = JobShift;
@@ -609,8 +642,8 @@
 				54AFDC052BB05D36006E1B28 /* GoogleSignInSwift */,
 				54AFDC082BB05D72006E1B28 /* HolidayJp */,
 				54AFDC0B2BB05DC5006E1B28 /* Algorithms */,
-				540C939D2BD5117C009AE904 /* SwiftUIIntrospect */,
-				540C93AB2BD7FD87009AE904 /* AppVersionMonitorSwiftUI */,
+				540C93BA2BD9D4C1009AE904 /* NotificationPermission */,
+				54B6BE752BDBD20D0099A519 /* Shimmer */,
 			);
 			productName = JobShift;
 			productReference = 54F737882B259702004A4975 /* JobShift.app */;
@@ -649,8 +682,8 @@
 				54AFDC022BB05D36006E1B28 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				54AFDC072BB05D72006E1B28 /* XCRemoteSwiftPackageReference "holiday_jp-swift" */,
 				54AFDC0A2BB05DC5006E1B28 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				540C939C2BD5117C009AE904 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				540C93AA2BD7FD86009AE904 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */,
+				540C93B92BD9D4C1009AE904 /* XCRemoteSwiftPackageReference "PermissionsKit" */,
+				54B6BE742BDBD20D0099A519 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 54F737892B259702004A4975 /* Products */;
 			projectDirPath = "";
@@ -711,7 +744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint autocorrect --format\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -721,13 +754,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				540C937F2BD3E521009AE904 /* Event.swift in Sources */,
+				5465E5B62BDD4BEF00626AAB /* DateExtension.swift in Sources */,
 				540C93852BD50185009AE904 /* ContentView.swift in Sources */,
-				5423A9322B2D29FB004B88C7 /* Job.swift in Sources */,
+				54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */,
+				5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */,
+				5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */,
+				54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */,
 				540C93A02BD5304E009AE904 /* ProfileButtonView.swift in Sources */,
 				540C93A82BD7F26E009AE904 /* AppInfoView.swift in Sources */,
 				540C93942BD508C3009AE904 /* TaskExtension.swift in Sources */,
 				540C93872BD5031A009AE904 /* Tab.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
+				540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */,
 				540C93922BD503ED009AE904 /* SettingView.swift in Sources */,
 				540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */,
 				540C937B2BD36CCF009AE904 /* GoogleSignInManager.swift in Sources */,
@@ -736,10 +774,16 @@
 				540C93792BD360FC009AE904 /* AppError.swift in Sources */,
 				540C936F2BD2998A009AE904 /* LaunchScreenView.swift in Sources */,
 				540C93A32BD5461F009AE904 /* CustomNavigationTitle.swift in Sources */,
+				540C93B82BD9D254009AE904 /* NotificationSettingView.swift in Sources */,
+				540C93B32BD94E90009AE904 /* CalendarSettingView.swift in Sources */,
 				540C938E2BD50381009AE904 /* ShiftView.swift in Sources */,
+				5465E5BA2BDE62B100626AAB /* JobMigrationPlan.swift in Sources */,
+				540C93B02BD9280B009AE904 /* ProfileSheetView.swift in Sources */,
 				540C93772BD35646009AE904 /* AppState.swift in Sources */,
 				540C93902BD503BA009AE904 /* SalaryView.swift in Sources */,
-				540C93832BD4E43D009AE904 /* Calendar.swift in Sources */,
+				540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */,
+				544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */,
+				540C93832BD4E43D009AE904 /* UserCalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,20 +1005,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		540C939C2BD5117C009AE904 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		540C93B92BD9D4C1009AE904 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			repositoryURL = "https://github.com/sparrowcode/PermissionsKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
-			};
-		};
-		540C93AA2BD7FD86009AE904 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SNQ-2001/AppVersionMonitorSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 10.0.1;
 			};
 		};
 		54AFDB172BB058F9006E1B28 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
@@ -1041,18 +1077,21 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		54B6BE742BDBD20D0099A519 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		540C939D2BD5117C009AE904 /* SwiftUIIntrospect */ = {
+		540C93BA2BD9D4C1009AE904 /* NotificationPermission */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 540C939C2BD5117C009AE904 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = SwiftUIIntrospect;
-		};
-		540C93AB2BD7FD87009AE904 /* AppVersionMonitorSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 540C93AA2BD7FD86009AE904 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */;
-			productName = AppVersionMonitorSwiftUI;
+			package = 540C93B92BD9D4C1009AE904 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = NotificationPermission;
 		};
 		54AFDB182BB058F9006E1B28 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1648,6 +1687,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54AFDC0A2BB05DC5006E1B28 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
+		};
+		54B6BE752BDBD20D0099A519 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54B6BE742BDBD20D0099A519 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

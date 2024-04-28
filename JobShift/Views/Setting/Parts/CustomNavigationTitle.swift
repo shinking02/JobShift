@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension View {
-    /// Custom navigation title with right icon
+    /// add icon to navigation title
     @ViewBuilder func customNavigationTitleWithRightIcon<Content: View>(@ViewBuilder _ rightIcon: @escaping () -> Content) -> some View {
         overlay(content: {
             CustomNavigationTitleView(rightIcon: rightIcon)
@@ -25,30 +25,36 @@ public struct CustomNavigationTitleView<RightIcon: View>: UIViewControllerRepres
     
     class ViewControllerWrapper: UIViewController {
         var rightContent: () -> RightIcon
+        var isInitial = true
                 
         init(rightContent: @escaping () -> RightIcon) {
             self.rightContent = rightContent
             super.init(nibName: nil, bundle: nil)
             // buttomSheetHelperのsheetが開いている状態では表示されないので完全に閉じるのを待つ
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.setupRightIcon(true)
+                self.isInitial = false
+                self.setRightIcon()
             }
         }
         
         override func viewWillAppear(_ animated: Bool) {
-            setupRightIcon(animated)
+            setRightIcon()
             super.viewWillAppear(animated)
         }
         
-        private func setupRightIcon(_ animated: Bool) {
+        private func setRightIcon() {
+            guard !isInitial else { return }
             guard let navigationController = self.navigationController, let navigationItem = navigationController.visibleViewController?.navigationItem else { return }
+            
             let contentView = UIHostingController(rootView: rightContent())
             contentView.view.backgroundColor = .clear
             
-            // https://github.com/sebjvidal/UINavigationItem-LargeTitleAccessoryView-Demo
-            navigationItem.perform(Selector(("_setLargeTitleAccessoryView:")), with: contentView.view)
-            navigationItem.setValue(false, forKey: "_alignLargeTitleAccessoryViewToBaseline")
-            navigationController.navigationBar.prefersLargeTitles = true
+            UIView.transition(with: navigationController.navigationBar, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                // https://github.com/sebjvidal/UINavigationItem-LargeTitleAccessoryView-Demo
+                navigationItem.perform(Selector(("_setLargeTitleAccessoryView:")), with: contentView.view)
+                navigationItem.setValue(false, forKey: "_alignLargeTitleAccessoryViewToBaseline")
+                navigationController.navigationBar.prefersLargeTitles = true
+            }, completion: nil)
         }
         
         required init?(coder: NSCoder) {
