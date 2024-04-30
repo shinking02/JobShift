@@ -4,7 +4,7 @@ import SwiftUI
 typealias Job = JobSchemaV4.Job
 typealias OneTimeJob = JobSchemaV4.OneTimeJob
 
-enum JobColor: String, Codable, CaseIterable {
+enum JobColor: Codable, CaseIterable {
     case red
     case orange
     case yellow
@@ -37,28 +37,65 @@ enum JobColor: String, Codable, CaseIterable {
             return Color.mint
         }
     }
+    
+    func toString() -> String {
+        switch self {
+        case .red:
+            return "レッド"
+        case .orange:
+            return "オレンジ"
+        case .yellow:
+            return "イエロー"
+        case .green:
+            return "グリーン"
+        case .blue:
+            return "ブルー"
+        case .purple:
+            return "パープル"
+        case .brown:
+            return "ブラウン"
+        case .pink:
+            return "ピンク"
+        case .mint:
+            return "ミント"
+        }
+    }
 }
 
-struct JobBreak {
+enum JobSalaryType: Codable, CaseIterable {
+    case daily
+    case hourly
+    
+    func toString() -> String {
+        switch self {
+        case .daily:
+            return "日給"
+        case .hourly:
+            return "時給"
+        }
+    }
+}
+
+struct JobBreak: Codable {
     var isActive: Bool = false
     var intervalMinutes: Int = 360
     var breakMinutes: Int = 45
 }
 
-struct JobWage {
+struct JobWage: Codable, Identifiable, Equatable {
+    var id: UUID = UUID()
     var start: Date = Date.distantPast
-    var end: Date = Date.distantFuture
-    var hourlyWage: Int = 1200
-    var dailyWage: Int = 8000
+    var wage: Int = 1_200
 }
 
-struct JobSalary {
-    struct History {
+struct JobSalary: Codable {
+    struct History: Codable, Identifiable {
+        var id: UUID = UUID()
         var salary: Int
         var year: Int
         var month: Int
     }
-    enum PaymentType {
+    enum PaymentType: Codable, CaseIterable {
         case sameMonth
         case nextMonth
         
@@ -74,10 +111,10 @@ struct JobSalary {
     var cutOffDay: Int = 10
     var paymentDay: Int = 25
     var paymentType: PaymentType = .sameMonth
-    var history: [History] = []
+    var histories: [History] = []
 }
 
-struct JobEventSummary {
+struct JobEventSummary: Codable {
     var eventId: String
     var summary: String
     var adjustment: Int?

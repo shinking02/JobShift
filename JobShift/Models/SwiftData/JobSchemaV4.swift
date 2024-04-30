@@ -12,14 +12,13 @@ enum JobSchemaV4: VersionedSchema {
         let id: UUID = UUID()
         var name: String = ""
         var color: JobColor = JobColor.red
-        var startDate: Date = Date(year: 2010, month: 4, day: 1)
-        var isDailyWage: Bool = false
+        var salaryType: JobSalaryType = JobSalaryType.hourly
         var isNightWage: Bool = false
         var isHolidayWage: Bool = false
         var isCommuteWage: Bool = false
         var commuteWage: Int = 500
-        var breaks: (JobBreak, JobBreak) = (JobBreak(), JobBreak())
-        var wages: [JobWage] = []
+        var breaks: [JobBreak] = [JobBreak(), JobBreak()]
+        var wages: [JobWage] = [JobWage(start: Date(year: 2010, month: 4, day: 1))]
         var salary: JobSalary = JobSalary()
         var eventSummaries: [JobEventSummary] = []
         var displayPaymentDay: Bool = true
@@ -28,14 +27,14 @@ enum JobSchemaV4: VersionedSchema {
         init(
             name: String = "",
             color: JobColor = JobColor.red,
-            startDate: Date = Date(year: 2010, month: 4, day: 1),
-            isDailyWage: Bool = false,
+            startDate: Date = Date(year: 2_010, month: 4, day: 1),
+            salaryType: JobSalaryType = JobSalaryType.hourly,
             isNightWage: Bool = false,
             isHolidayWage: Bool = false,
             isCommuteWage: Bool = false,
             commuteWage: Int = 500,
-            breaks: (JobBreak, JobBreak) = (JobBreak(), JobBreak()),
-            wages: [JobWage] = [],
+            breaks: [JobBreak] = [JobBreak(), JobBreak()],
+            wages: [JobWage] = [JobWage(start: Date(year: 2010, month: 4, day: 1))],
             salary: JobSalary = JobSalary(),
             eventSummaries: [JobEventSummary] = [],
             displayPaymentDay: Bool = true,
@@ -43,8 +42,7 @@ enum JobSchemaV4: VersionedSchema {
         ) {
             self.name = name
             self.color = color
-            self.startDate = startDate
-            self.isDailyWage = isDailyWage
+            self.salaryType = salaryType
             self.isNightWage = isNightWage
             self.isHolidayWage = isHolidayWage
             self.isCommuteWage = isCommuteWage
@@ -63,7 +61,7 @@ enum JobSchemaV4: VersionedSchema {
         let id: UUID = UUID()
         var name: String = ""
         var date: Date = Date()
-        var salary: Int = 9000
+        var salary: Int = 9_000
         var isCommuteWage: Bool = false
         var commuteWage: Int = 500
         var summary: String = ""
@@ -71,7 +69,7 @@ enum JobSchemaV4: VersionedSchema {
         init(
             name: String = "",
             date: Date = Date(),
-            salary: Int = 9000,
+            salary: Int = 9_000,
             isCommuteWage: Bool = false,
             commuteWage: Int = 500,
             summary: String = ""

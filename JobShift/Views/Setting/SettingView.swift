@@ -13,19 +13,13 @@ struct SettingView: View {
                     AppInfoView()
                 }
                 Section {
-                    NavigationLink {
-                        Text("JobSettingView")
-                    } label: {
+                    NavigationLink(destination: JobSettingView()) {
                         Label("バイト", systemImage: "pencil.and.list.clipboard")
                     }
-                    NavigationLink {
-                        CalendarSettingView()
-                    } label: {
+                    NavigationLink(destination: CalendarSettingView()) {
                         Label("カレンダー", systemImage: "calendar")
                     }
-                    NavigationLink {
-                        NotificationSettingView()
-                    } label: {
+                    NavigationLink(destination: NotificationSettingView()) {
                         Label("通知", systemImage: "bell")
                     }
                 }
@@ -34,16 +28,14 @@ struct SettingView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundStyle(.secondary)
                 ) {
-                    NavigationLink {
-                        DeveloperSettingView()
-                    } label: {
-                        Label("開発者向け情報", systemImage: "wrench.and.screwdriver")
+                    NavigationLink(destination: DeveloperSettingView()) {
+                        Label("開発者向け設定", systemImage: "wrench.and.screwdriver")
                     }
-                    NavigationLink {
-                        LicenseListView()
+                    NavigationLink(
+                        destination: LicenseListView()
                             .navigationTitle("ライセンス")
                             .navigationBarTitleDisplayMode(.inline)
-                    } label: {
+                    ) {
                         Label("ライセンス", systemImage: "book.and.wrench")
                     }
                 }

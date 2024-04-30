@@ -129,4 +129,22 @@ extension Date {
     var lastDayOfMonth: Date {
         return added(month: 1).fixed(day: 0, hour: 0, minute: 0, second: 0)
     }
+//    func toYYYYMD() -> String {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .long
+//        return formatter.string(from: self)
+//    }
+    enum FormatType {
+        case YYYYMD
+    }
+    func toString(_ type: FormatType) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = calendar.locale
+        
+        switch type {
+        case .YYYYMD:
+            formatter.dateStyle = .long
+        }
+        return formatter.string(from: self)
+    }
 }

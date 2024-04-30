@@ -1,29 +1,32 @@
 import SwiftUI
 
 struct DeveloperSettingView: View {
+    @State private var clearedLastSeenOBVersion = false
+    
     var body: some View {
-        let keyList = UserDefaults.standard.dictionaryRepresentation()
-            .filter { $0.key.starts(with: "JS_") }
-            .sorted(by: { $0.key < $1.key })
-        List {
-            ForEach(keyList, id: \.key) { key, value in
-                VStack(alignment: .leading) {
-                    Text(key)
-                    Text("\(value)")
-                        .foregroundColor(.secondary)
+        NavigationStack {
+            List {
+                Section {
+                    NavigationLink(destination: UserDefaultsView()) {
+                        Label("UserDefaults", systemImage: "externaldrive")
+                    }
                 }
-            }
-        }
-        .navigationTitle("開発者向け情報")
-        .navigationBarTitleDisplayMode(.inline)
-        .overlay {
-            if keyList.isEmpty {
-                ContentUnavailableView {
-                    Label("No Storage Data", systemImage: "externaldrive.fill.badge.exclamationmark")
-                } description: {
-                    Text("UserDefaults data starting with  JS_ does not exist")
+                Section {
+                    Button {
+                        Storage.setLastSeenOnboardingVersion("")
+                        withAnimation {
+                            clearedLastSeenOBVersion = true
+                        }
+                    } label: {
+                        Text("Clear Last Seen OB Version")
+                    }
+                    .tint(.red)
+                    .disabled(clearedLastSeenOBVersion)
                 }
+                
             }
+            .navigationTitle("開発者向け設定")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

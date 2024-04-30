@@ -6,7 +6,7 @@ struct NotificationSettingView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.scenePhase) private var scenePhase
     @State private var enableSalaryPaymentNotification = false
-    @State private var notificationPermissionStatus: Permission.Status = .notDetermined
+    @State private var notificationPermissionStatus: Permission.Status = Permission.notification.status
     
     var body: some View {
         List {

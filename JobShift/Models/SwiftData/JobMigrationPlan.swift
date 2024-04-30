@@ -28,12 +28,12 @@ enum JobMigrationPlan: SchemaMigrationPlan {
 //                v4Job.name = v3Job.name
 //                v4Job.color = v3Job.color
 //                v4Job.startDate = v3Job.startDate
-//                v4Job.isDailyWage = v3Job.isDailyWage
 //                v4Job.isNightWage = v3Job.isNightWage
 //                v4Job.isHolidayWage = v3Job.isHolidayWage
 //                v4Job.commuteWage = v3Job.commuteWage
 //                v4Job.displayPaymentDay = v3Job.displayPaymentDay
-                v4Job.breaks = (
+                v4Job.salaryType = v3Job.isDailyWage ? .daily : .hourly
+                v4Job.breaks = [
                     JobBreak(
                         isActive: v3Job.isBreak1,
                         intervalMinutes: v3Job.break1.breakIntervalMinutes,
@@ -44,20 +44,18 @@ enum JobMigrationPlan: SchemaMigrationPlan {
                         intervalMinutes: v3Job.break2.breakIntervalMinutes,
                         breakMinutes: v3Job.break2.breakMinutes
                     )
-                )
+                ]
                 v4Job.wages = v3Job.wages.map { wage in
                     return JobWage(
                         start: wage.start,
-                        end: wage.end,
-                        hourlyWage: wage.hourlyWage,
-                        dailyWage: wage.dailyWage
+                        wage: v3Job.isDailyWage ? wage.dailyWage : wage.hourlyWage
                     )
                 }
                 v4Job.salary = JobSalary(
                     cutOffDay: v3Job.salaryCutoffDay,
                     paymentDay: v3Job.salaryPaymentDay,
                     paymentType: .sameMonth,
-                    history: v3Job.salaryHistories.map { history in
+                    histories: v3Job.salaryHistories.map { history in
                         return JobSalary.History(
                             salary: history.salary,
                             year: history.year,
