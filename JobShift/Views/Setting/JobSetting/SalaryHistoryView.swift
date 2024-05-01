@@ -61,11 +61,12 @@ struct SalaryHistoryView: View {
             }
             .sheet(
                 isPresented: $salaryAddSheetPresented,
-                onDismiss: { controllDisclosureGroup() }
-            ) {
-                SalaryAddSheetView(salary: $salary)
-                    .presentationDetents([.medium])
-            }
+                onDismiss: { controllDisclosureGroup() },
+                content: {
+                    SalaryAddSheetView(salary: $salary)
+                        .presentationDetents([.medium])
+                }
+            )
             .onAppear {
                 controllDisclosureGroup()
             }

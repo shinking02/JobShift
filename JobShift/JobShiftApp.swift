@@ -4,8 +4,8 @@ import SwiftUI
 
 @main
 struct JobShiftApp: App {
-    @State var appState: AppState = .shared
-    let container: ModelContainer
+    @State private var appState: AppState = .shared
+    private let container: ModelContainer
     
     init() {
         do {

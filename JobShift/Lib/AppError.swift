@@ -4,7 +4,7 @@ enum AppError: LocalizedError {
     enum Signin: LocalizedError {
         case failedRestorePreviousSignIn
         case userNotFound
-        case faliedSignIn
+        case failedSignIn
         
         var errorDescription: String? {
             switch self {
@@ -12,7 +12,7 @@ enum AppError: LocalizedError {
                 return "Failed to restore previous sign in"
             case .userNotFound:
                 return "User is not found"
-            case .faliedSignIn:
+            case .failedSignIn:
                 return "Failed to sign in"
             }
         }

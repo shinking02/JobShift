@@ -15,7 +15,6 @@ struct WageHistoryView: View {
                         canDelete: wages.count > 1,
                         onDelete: {
                             wages.removeAll(where: { $0.id == wage.id })
-                            wages.sort(by: { $0.start < $1.start })
                         }
                     )
                 } label: {

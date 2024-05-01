@@ -3,19 +3,55 @@ import SwiftUI
 
 struct JobSettingView: View {
     @Query(sort: \Job.order) private var jobs: [Job]
-    @Query private var otJobs: [OneTimeJob]
+    @Query(sort: \OneTimeJob.date, order: .reverse) private var otJobs: [OneTimeJob]
     @State private var isJobAddSheetPresented = false
+    @State private var isOTJobAddSheetOresented = false
+    @State private var expanded: Set<Int> = []
     
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    ForEach(jobs) { job in
-                        HStack {
-                            Image(systemName: "circle.fill")
-                                .font(.caption)
-                                .foregroundStyle(job.color.toColor())
-                            Text(job.name)
+                if !jobs.isEmpty {
+                    Section(header: Text("バイト")) {
+                        ForEach(jobs) { job in
+                            NavigationLink(destination: JobEditView(job: job)) {
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .font(.caption)
+                                        .foregroundStyle(job.color.toColor())
+                                    Text(job.name)
+                                }
+                            }
+                        }
+                    }
+                }
+                if !otJobs.isEmpty {
+                    Section(header: Text("単発バイト")) {
+                        ForEach(Set(otJobs.map { $0.date.year }).sorted(by: >), id: \.self) { year in
+                            DisclosureGroup(
+                                String(year) + "年",
+                                isExpanded: Binding<Bool>(
+                                    get: { expanded.contains(year) },
+                                    set: { isExpanding in
+                                        if isExpanding {
+                                            expanded.insert(year)
+                                        } else {
+                                            expanded.remove(year)
+                                        }
+                                    }
+                                )
+                            ) {
+                                ForEach(otJobs.filter { $0.date.year == year }) { otJob in
+                                    NavigationLink(destination: OTJobEditView(otJob: otJob)) {
+                                        HStack {
+                                            Text(otJob.name)
+                                            Spacer()
+                                            Text(otJob.date.toString(.MD))
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -35,10 +71,10 @@ struct JobSettingView: View {
                         Button {
                             isJobAddSheetPresented = true
                         } label: {
-                            Label("定期バイト", systemImage: "clock.arrow.2.circlepath")
+                            Label("バイト", systemImage: "clock.arrow.2.circlepath")
                         }
                         Button {
-                            // nop
+                            isOTJobAddSheetOresented = true
                         } label: {
                             Label("単発バイト", systemImage: "clock.badge")
                         }
@@ -50,6 +86,15 @@ struct JobSettingView: View {
             }
             .sheet(isPresented: $isJobAddSheetPresented) {
                 JobAddView()
+            }
+            .sheet(isPresented: $isOTJobAddSheetOresented) {
+                OTJobAddView()
+            }
+            .onAppear {
+                let maxYear = otJobs.map { $0.date.year }.max()
+                if let year = maxYear {
+                    expanded.insert(year)
+                }
             }
         }
     }

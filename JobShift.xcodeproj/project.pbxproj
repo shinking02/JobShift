@@ -33,6 +33,8 @@
 		540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540FA4922BDD18B100C32E7E /* JobUtils.swift */; };
 		542360642BDFD97B002DDF68 /* SalaryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360632BDFD97B002DDF68 /* SalaryEditView.swift */; };
 		542360662BE13574002DDF68 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360652BE13574002DDF68 /* BindingExtension.swift */; };
+		542360682BE2004B002DDF68 /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360672BE2004B002DDF68 /* JobEditView.swift */; };
+		5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360692BE210D4002DDF68 /* OTJobAddView.swift */; };
 		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
 		544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */; };
 		5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */; };
@@ -171,6 +173,7 @@
 		54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */; };
 		54B6BE762BDBD20D0099A519 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 54B6BE752BDBD20D0099A519 /* Shimmer */; };
 		54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */; };
+		54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
@@ -203,6 +206,8 @@
 		540FA4922BDD18B100C32E7E /* JobUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobUtils.swift; sourceTree = "<group>"; };
 		542360632BDFD97B002DDF68 /* SalaryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryEditView.swift; sourceTree = "<group>"; };
 		542360652BE13574002DDF68 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
+		542360672BE2004B002DDF68 /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
+		542360692BE210D4002DDF68 /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
 		5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV3.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 		547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPicker.swift; sourceTree = "<group>"; };
 		54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowStatusView.swift; sourceTree = "<group>"; };
 		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
+		54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		54F737882B259702004A4975 /* JobShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,12 +501,15 @@
 			isa = PBXGroup;
 			children = (
 				5465E5C12BDE93C100626AAB /* JobAddView.swift */,
+				542360672BE2004B002DDF68 /* JobEditView.swift */,
 				5465E5C72BDF443700626AAB /* WageHistoryView.swift */,
 				5465E5C92BDF5CD700626AAB /* WageAddSheetView.swift */,
 				5465E5CB2BDF60CE00626AAB /* WageEditView.swift */,
 				547D8F1F2BDF8A1E00B1AF31 /* SalaryHistoryView.swift */,
 				547D8F212BDFAC5E00B1AF31 /* SalaryAddSheetView.swift */,
 				542360632BDFD97B002DDF68 /* SalaryEditView.swift */,
+				542360692BE210D4002DDF68 /* OTJobAddView.swift */,
+				54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */,
 			);
 			path = JobSetting;
 			sourceTree = "<group>";
@@ -816,6 +825,7 @@
 				5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */,
 				5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */,
 				54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */,
+				54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */,
 				540C93A02BD5304E009AE904 /* ProfileButtonView.swift in Sources */,
 				5465E5C02BDE8FB000626AAB /* UserDefaultsView.swift in Sources */,
 				547D8F202BDF8A1E00B1AF31 /* SalaryHistoryView.swift in Sources */,
@@ -824,6 +834,7 @@
 				540C93872BD5031A009AE904 /* Tab.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 				5465E5C22BDE93C100626AAB /* JobAddView.swift in Sources */,
+				5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */,
 				540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */,
 				540C93922BD503ED009AE904 /* SettingView.swift in Sources */,
 				540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */,
@@ -844,6 +855,7 @@
 				540C93B02BD9280B009AE904 /* ProfileSheetView.swift in Sources */,
 				540C93772BD35646009AE904 /* AppState.swift in Sources */,
 				5465E5C62BDF19BF00626AAB /* NumberTextField.swift in Sources */,
+				542360682BE2004B002DDF68 /* JobEditView.swift in Sources */,
 				540C93902BD503BA009AE904 /* SalaryView.swift in Sources */,
 				540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */,
 				544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */,

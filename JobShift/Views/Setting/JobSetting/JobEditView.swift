@@ -1,11 +1,12 @@
 import SwiftUI
 
-struct JobAddView: View {
-    @Environment(\.dismiss) private var dismiss
+struct JobEditView: View {
     @Environment(\.modelContext) private var context
-    @State private var job: Job = .init()
+    @Environment(\.dismiss) private var dismiss
+    @Bindable var job: Job
     @State private var paymentDayPickerPresented = false
     @State private var cutOffDayPickerPresented = false
+    @State private var showDeleteAlert = false
     
     var body: some View {
         NavigationStack {
@@ -14,7 +15,7 @@ struct JobAddView: View {
                     header: Text("名前"),
                     footer: Text("この名前を使用してGoogleカレンダーからイベントを取得します。")
                 ) {
-                    TextField("バイトA", text: $job.name)
+                    TextField("名前", text: $job.name)
                 }
                 Section {
                     HStack {
@@ -37,13 +38,14 @@ struct JobAddView: View {
                     }
                 }
                 Section(
-                    footer: Text("給与形態は追加後に変更することはできません。")
+                    footer: Text("給与形態は変更できません。")
                 ) {
                     DatePicker("入社日", selection: $job.wages.first!.start, displayedComponents: [.date])
-                    Picker("給与形態", selection: $job.salaryType) {
-                        ForEach(JobSalaryType.allCases, id: \.self) { salaryType in
-                            Text(salaryType.toString())
-                        }
+                    HStack {
+                        Text("給与形態")
+                        Spacer()
+                        Text(job.salaryType.toString())
+                            .foregroundStyle(.secondary)
                     }
                 }
                 Section {
@@ -141,28 +143,28 @@ struct JobAddView: View {
                 ) {
                     Toggle("給料日を表示", isOn: $job.displayPaymentDay)
                 }
+                Section {
+                    Button {
+                        showDeleteAlert = true
+                    } label: {
+                        Text("削除")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .tint(.red)
+                    .alert("確認", isPresented: $showDeleteAlert) {
+                        Button("キャンセル", role: .cancel) {}
+                        Button("削除", role: .destructive) {
+                            context.delete(job)
+                            dismiss()
+                        }
+                    } message: {
+                        Text("\(job.name)を削除しますか？")
+                    }
+                }
             }
-            .navigationTitle("新規バイト")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(job.name)
             .scrollDismissesKeyboard(.immediately)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("キャンセル")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        context.insert(job)
-                        dismiss()
-                    } label: {
-                        Text("追加")
-                    }
-                    .disabled(job.name.isEmpty)
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

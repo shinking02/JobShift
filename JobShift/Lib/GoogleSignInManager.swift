@@ -23,7 +23,7 @@ class GoogleSignInManager {
                 additionalScopes: scopes
             ) { signInResult, error in
                 if error != nil {
-                    continuation.resume(throwing: AppError.signin(.faliedSignIn))
+                    continuation.resume(throwing: AppError.signin(.failedSignIn))
                 } else if let user = signInResult?.user {
                     continuation.resume(returning: user)
                 } else {
