@@ -31,7 +31,7 @@ public struct CustomNavigationTitleView<RightIcon: View>: UIViewControllerRepres
             self.rightContent = rightContent
             super.init(nibName: nil, bundle: nil)
             // buttomSheetHelperのsheetが開いている状態では表示されないので完全に閉じるのを待つ
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.isInitial = false
                 self.setRightIcon()
             }
