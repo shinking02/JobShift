@@ -108,11 +108,17 @@ struct JobAddView: View {
                             }
                         }
                         .pickerStyle(.wheel)
+                        .onChange(of: job.salary.cutOffDay) {
+                            updateSalaryDay()
+                        }
                     }
                     Picker("支払い月", selection: $job.salary.paymentType) {
                         ForEach(JobSalary.PaymentType.allCases, id: \.self) { paymentType in
                             Text(paymentType.toString())
                         }
+                    }
+                    .onChange(of: job.salary.paymentType) {
+                        updateSalaryDay()
                     }
                     Button {
                         withAnimation {
@@ -129,7 +135,7 @@ struct JobAddView: View {
                     .tint(.primary)
                     if paymentDayPickerPresented {
                         Picker("", selection: $job.salary.paymentDay) {
-                            ForEach(1...31, id: \.self) { day in
+                            ForEach((job.salary.paymentType == .nextMonth ? 1 : job.salary.cutOffDay)...31, id: \.self) { day in
                                 Text("\(day)日")
                             }
                         }
@@ -163,6 +169,11 @@ struct JobAddView: View {
                     .disabled(job.name.isEmpty)
                 }
             }
+        }
+    }
+    private func updateSalaryDay() {
+        if job.salary.paymentType == .sameMonth && job.salary.cutOffDay > job.salary.paymentDay {
+            job.salary.paymentDay = job.salary.cutOffDay
         }
     }
 }

@@ -37,6 +37,11 @@
 		5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360692BE210D4002DDF68 /* OTJobAddView.swift */; };
 		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
 		543CF0A92BE47350002E5D90 /* PagedInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */; };
+		543CF0AB2BE4919B002E5D90 /* DatePickerSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */; };
+		543CF0AD2BE51D43002E5D90 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AC2BE51D43002E5D90 /* CalendarView.swift */; };
+		543CF0AF2BE52EE6002E5D90 /* ShiftSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */; };
+		543CF0B12BE60638002E5D90 /* RealmDataBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0B02BE60638002E5D90 /* RealmDataBaseView.swift */; };
+		543CF0B32BE64BBA002E5D90 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0B22BE64BBA002E5D90 /* EventRowView.swift */; };
 		544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */; };
 		5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */; };
 		5465E5B62BDD4BEF00626AAB /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B52BDD4BEF00626AAB /* DateExtension.swift */; };
@@ -52,6 +57,7 @@
 		547D8F202BDF8A1E00B1AF31 /* SalaryHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547D8F1F2BDF8A1E00B1AF31 /* SalaryHistoryView.swift */; };
 		547D8F222BDFAC5E00B1AF31 /* SalaryAddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547D8F212BDFAC5E00B1AF31 /* SalaryAddSheetView.swift */; };
 		547D8F242BDFAF0D00B1AF31 /* YearMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */; };
+		548BA6E32BE8B3D100933A64 /* JobExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548BA6E22BE8B3D100933A64 /* JobExtension.swift */; };
 		54AFDB192BB058F9006E1B28 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDB182BB058F9006E1B28 /* RiveRuntime */; };
 		54AFDB1C2BB05AEF006E1B28 /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDB1B2BB05AEF006E1B28 /* GoogleAPIClientForRESTCore */; };
 		54AFDB1E2BB05AEF006E1B28 /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = 54AFDB1D2BB05AEF006E1B28 /* GoogleAPIClientForREST_ACMEDNS */; };
@@ -215,6 +221,11 @@
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedInfiniteScrollView.swift; sourceTree = "<group>"; };
+		543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerSheetView.swift; sourceTree = "<group>"; };
+		543CF0AC2BE51D43002E5D90 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftSheetView.swift; sourceTree = "<group>"; };
+		543CF0B02BE60638002E5D90 /* RealmDataBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBaseView.swift; sourceTree = "<group>"; };
+		543CF0B22BE64BBA002E5D90 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBWelcomeView.swift; sourceTree = "<group>"; };
 		5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV4.swift; sourceTree = "<group>"; };
 		5465E5B52BDD4BEF00626AAB /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -230,6 +241,7 @@
 		547D8F1F2BDF8A1E00B1AF31 /* SalaryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryHistoryView.swift; sourceTree = "<group>"; };
 		547D8F212BDFAC5E00B1AF31 /* SalaryAddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryAddSheetView.swift; sourceTree = "<group>"; };
 		547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPicker.swift; sourceTree = "<group>"; };
+		548BA6E22BE8B3D100933A64 /* JobExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobExtension.swift; sourceTree = "<group>"; };
 		54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowStatusView.swift; sourceTree = "<group>"; };
 		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
 		54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
@@ -411,6 +423,7 @@
 				540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */,
 				5465E5B52BDD4BEF00626AAB /* DateExtension.swift */,
 				542360652BE13574002DDF68 /* BindingExtension.swift */,
+				547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -420,6 +433,7 @@
 			children = (
 				540C93A42BD7F222009AE904 /* Parts */,
 				540C938D2BD50381009AE904 /* ShiftView.swift */,
+				543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */,
 			);
 			path = Shift;
 			sourceTree = "<group>";
@@ -453,6 +467,8 @@
 			isa = PBXGroup;
 			children = (
 				540C93882BD50339009AE904 /* ButtomSheetHelper.swift */,
+				543CF0AC2BE51D43002E5D90 /* CalendarView.swift */,
+				543CF0B22BE64BBA002E5D90 /* EventRowView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -463,6 +479,7 @@
 				540C938F2BD503BA009AE904 /* NavigationTabsView.swift */,
 				54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */,
 				543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */,
+				543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -475,7 +492,6 @@
 				540C93A72BD7F26E009AE904 /* AppInfoView.swift */,
 				54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */,
 				5465E5C52BDF19BF00626AAB /* NumberTextField.swift */,
-				547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -487,6 +503,7 @@
 				5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */,
 				5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */,
 				5465E5B92BDE62B100626AAB /* JobMigrationPlan.swift */,
+				548BA6E22BE8B3D100933A64 /* JobExtension.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -502,6 +519,7 @@
 			isa = PBXGroup;
 			children = (
 				5465E5BF2BDE8FB000626AAB /* UserDefaultsView.swift */,
+				543CF0B02BE60638002E5D90 /* RealmDataBaseView.swift */,
 			);
 			path = DeveloperSetting;
 			sourceTree = "<group>";
@@ -830,18 +848,24 @@
 				5465E5BC2BDE8BB400626AAB /* JobSettingView.swift in Sources */,
 				54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */,
 				547D8F242BDFAF0D00B1AF31 /* YearMonthPicker.swift in Sources */,
+				548BA6E32BE8B3D100933A64 /* JobExtension.swift in Sources */,
 				547D8F222BDFAC5E00B1AF31 /* SalaryAddSheetView.swift in Sources */,
 				5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */,
 				5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */,
 				54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */,
 				54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */,
+				543CF0B32BE64BBA002E5D90 /* EventRowView.swift in Sources */,
 				540C93A02BD5304E009AE904 /* ProfileButtonView.swift in Sources */,
+				543CF0B12BE60638002E5D90 /* RealmDataBaseView.swift in Sources */,
 				5465E5C02BDE8FB000626AAB /* UserDefaultsView.swift in Sources */,
+				543CF0AB2BE4919B002E5D90 /* DatePickerSheetView.swift in Sources */,
 				547D8F202BDF8A1E00B1AF31 /* SalaryHistoryView.swift in Sources */,
 				540C93A82BD7F26E009AE904 /* AppInfoView.swift in Sources */,
 				540C93942BD508C3009AE904 /* TaskExtension.swift in Sources */,
 				540C93872BD5031A009AE904 /* Tab.swift in Sources */,
 				54E2C7ED2BE280D100D4184F /* SalaryView.swift in Sources */,
+				543CF0AD2BE51D43002E5D90 /* CalendarView.swift in Sources */,
+				543CF0AF2BE52EE6002E5D90 /* ShiftSheetView.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
 				54E2C7EB2BE280BB00D4184F /* CustomHeaderView.swift in Sources */,
 				5465E5C22BDE93C100626AAB /* JobAddView.swift in Sources */,

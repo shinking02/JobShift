@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class Event: Object {
+class Event: Object, Identifiable {
     @Persisted(primaryKey: true) var id: String
     @Persisted var calendarId: String
     @Persisted var summary: String

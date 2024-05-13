@@ -6,11 +6,12 @@ enum NavigationTab: String, CaseIterable {
 }
 
 struct SalaryView: View {
-    @State private var year = Date().year
-    @State private var month = Date().month
     @State private var selectedTab: NavigationTab = .month
     @State private var selectedYearMonth = YearMonth.origin
     @State private var selectedYear = Year.origin
+    @State private var includeCommuteWage = false
+    @State private var showAddSalarySheet = false
+    @State private var showDatePickerSheet = false
     
     var body: some View {
         NavigationStack {
@@ -27,10 +28,50 @@ struct SalaryView: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGroupedBackground))
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(
                 selectedTab == .month ? "\(String(selectedYearMonth.year))年\(selectedYearMonth.month)月" : "\(String(selectedYear.year))年"
             )
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(
+                        action: {
+                        showDatePickerSheet = true
+                        },
+                        label: {
+                            Image(systemName: "calendar")
+                        }
+                    )
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(
+                        action: {
+                        includeCommuteWage.toggle()
+                        },
+                        label: {
+                            Image(systemName: includeCommuteWage ? "tram.circle.fill" : "tram.circle")
+                        }
+                    )
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(
+                        action: {
+                        showAddSalarySheet = true
+                        },
+                        label: {
+                            Image(systemName: "plus")
+                        }
+                    )
+                }
+            }
+            .sheet(isPresented: $showDatePickerSheet) {
+                DatePickerSheetView(selectedTab: $selectedTab, selectedYearMonth: $selectedYearMonth, selectedYear: $selectedYear)
+                    .presentationDetents([.height(260)])
+                    .presentationDragIndicator(.visible)
+            }
+            .sheet(isPresented: $showAddSalarySheet) {
+                Text("Add Salary Sheet")
+            }
             .customHeaderView({
                 NavigationTabs(selectedTab: $selectedTab)
             }, height: 32)
@@ -52,8 +93,8 @@ struct YearMonth: Steppable, Comparable {
         }
     }
 
-    let year: Int
-    let month: Int
+    var year: Int
+    var month: Int
 
     func forward() -> YearMonth {
         let (newYear, newMonth) = month == 12
@@ -80,7 +121,7 @@ struct Year: Steppable, Comparable {
         lhs.year < rhs.year
     }
 
-    let year: Int
+    var year: Int
 
     func forward() -> Year {
         Year(year: year + 1)

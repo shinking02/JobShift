@@ -71,15 +71,13 @@ struct NotificationSettingView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
     private func checkNotificationPermission() {
-        withAnimation {
-            if Permission.notification.status == .notDetermined {
-                Permission.notification.request {
-                    notificationPermissionStatus = Permission.notification.status
-                }
-            } else {
+        if Permission.notification.status == .notDetermined {
+            Permission.notification.request {
                 notificationPermissionStatus = Permission.notification.status
             }
-            enableSalaryPaymentNotification = Storage.getEnableSalaryPaymentNotification() && notificationPermissionStatus == .authorized
+        } else {
+            notificationPermissionStatus = Permission.notification.status
         }
+        enableSalaryPaymentNotification = Storage.getEnableSalaryPaymentNotification() && notificationPermissionStatus == .authorized
     }
 }

@@ -95,7 +95,7 @@ struct JobSalary: Codable {
         var year: Int
         var month: Int
     }
-    enum PaymentType: Codable, CaseIterable {
+    enum PaymentType: Codable, CaseIterable, Equatable {
         case sameMonth
         case nextMonth
         
@@ -110,7 +110,7 @@ struct JobSalary: Codable {
     }
     var cutOffDay: Int = 10
     var paymentDay: Int = 25
-    var paymentType: PaymentType = .sameMonth
+    var paymentType: PaymentType = .nextMonth
     var histories: [History] = []
 }
 

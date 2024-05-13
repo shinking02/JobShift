@@ -131,8 +131,11 @@ extension Date {
     }
 
     enum FormatType {
-        case YYYYMD
-        case MD
+        case full
+        case normal
+        case weekday
+        case time
+        case dateTime
     }
     
     func toString(_ type: FormatType) -> String {
@@ -140,11 +143,33 @@ extension Date {
         formatter.locale = calendar.locale
         
         switch type {
-        case .YYYYMD:
+        case .full:
             formatter.dateStyle = .long
-        case .MD:
+        case .normal:
             formatter.dateFormat = "M月d日"
+        case .weekday:
+            formatter.dateFormat = "M月d日 E曜日"
+        case .time:
+            formatter.dateFormat = "H:mm"
+        case .dateTime:
+            formatter.dateFormat = "M月d日 H:mm"
         }
         return formatter.string(from: self)
+    }
+    
+    var startOfDay: Date {
+        return fixed(hour: 0, minute: 0, second: 0)
+    }
+    
+    var endOfDay: Date {
+        return fixed(hour: 23, minute: 59, second: 59)
+    }
+    
+    var daysInMonth: Int {
+        return calendar.range(of: .day, in: .month, for: self)?.count ?? 0
+    }
+    
+    func isSameDay(_ otherDate: Date) -> Bool {
+        return self.startOfDay == otherDate.startOfDay
     }
 }

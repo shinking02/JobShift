@@ -2,9 +2,9 @@ import Foundation
 
 enum UserDefaultsKeys {
 //    static let lastSyncedEmail = "LAST_SYNCED_EMAIL"
-//    static let googleSyncToken = "GOOGLE_SYNC_TOKEN"
 //    static let isDevelopperMode = "IS_DEVELOPPER_MODE"
 //    static let userCalendars = "USER_CALENDARS"
+    static let googleSyncTokens = "JS_GOOGLE_SYNC_TOKENS"
     static let lastSeenOnboardingVersion = "JS_LAST_SEEN_ONBOARDING_VERSION"
     static let defaultCalendarId = "JS_DEFAULT_CALENDAR_ID"
     static let disableCalendarIds = "JS_DISABLE_CALENDAR_IDS"
@@ -42,5 +42,19 @@ struct Storage {
     }
     static func setLastSeenOnboardingVersion(_ version: String) {
         UserDefaults.standard.set(version, forKey: UserDefaultsKeys.lastSeenOnboardingVersion)
+    }
+    private static func getGoogleSyncTokens() -> [String: String] {
+        return UserDefaults.standard.dictionary(forKey: UserDefaultsKeys.googleSyncTokens) as? [String: String] ?? [:]
+    }
+    private static func setGoogleSyncTokens(_ tokens: [String: String]) {
+        UserDefaults.standard.set(tokens, forKey: UserDefaultsKeys.googleSyncTokens)
+    }
+    static func getGoogleSyncToken(for calendarId: String) -> String {
+        return getGoogleSyncTokens()[calendarId] ?? ""
+    }
+    static func setGoogleSyncToken(for calendarId: String, token: String) {
+        var tokens = getGoogleSyncTokens()
+        tokens[calendarId] = token
+        setGoogleSyncTokens(tokens)
     }
 }

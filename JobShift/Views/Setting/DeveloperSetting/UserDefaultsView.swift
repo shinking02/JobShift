@@ -19,7 +19,7 @@ struct UserDefaultsView: View {
         .overlay {
             if keyList.isEmpty {
                 ContentUnavailableView {
-                    Label("No Storage Data", systemImage: "externaldrive.fill.badge.exclamationmark")
+                    Label("No Storage Data", image: "custom.doc.badge.exclamationmark")
                 } description: {
                     Text("UserDefaults data starting with  JS_ does not exist")
                 }

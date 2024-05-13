@@ -46,7 +46,7 @@ struct JobSettingView: View {
                                         HStack {
                                             Text(otJob.name)
                                             Spacer()
-                                            Text(otJob.date.toString(.MD))
+                                            Text(otJob.date.toString(.normal))
                                                 .foregroundStyle(.secondary)
                                         }
                                     }

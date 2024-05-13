@@ -8,7 +8,7 @@ struct ContentView: View {
     
     private func openShiftSheetForFirstTime() async {
         do {
-            try await Task.sleep(millisecond: 260)
+            try await Task.sleep(millisecond: 360)
             if selectedTab == .shift {
                 isShiftSheetPresented = true
             }
@@ -18,7 +18,7 @@ struct ContentView: View {
     }
     var body: some View {
         TabView(selection: $selectedTab) {
-            ShiftView()
+            ShiftView(isShiftSheetPresented: $isShiftSheetPresented)
                 .tag(Tab.shift)
                 .tabItem {
                     Label(Tab.shift.rawValue, systemImage: Tab.shift.symbol)
@@ -47,18 +47,6 @@ struct ContentView: View {
                 }
             }
         }
-        .sheet(isPresented: $isShiftSheetPresented) {
-            NavigationStack {
-                Text("buttom sheet")
-            }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .presentationDetents([.height(240), .large])
-                .presentationCornerRadius(18)
-                .presentationBackground(.bar)
-                .presentationBackgroundInteraction(.enabled(upThrough: .large))
-                .interactiveDismissDisabled()
-                .bottomMaskForSheet()
-        }
         .sheet(
             isPresented: $isWelcomePresented,
             onDismiss: {
@@ -67,12 +55,12 @@ struct ContentView: View {
             },
             content: {
                 OBWelcomeView(
-                    title: "ようこそサンプルアプリへ",
-                    detailText: "これはOnBoardingKitのサンプルアプリです",
+                    title: "ようこそJobShiftへ",
+                    detailText: "リファクタ、動作の改善を行いました。",
                     bulletedListItems: [
                         .init(title: "アプリの特徴1", description: "いろいろなことができます。", symbolName: "1.circle"),
                         .init(title: "アプリの特徴2", description: "いろいろなことができます。", symbolName: "2.circle"),
-                        .init(title: "アプリの特徴3", description: "いろいろなことができます。", symbolName: "3.circle"),
+                        .init(title: "アプリの特徴3", description: "いろいろなことができます。", symbolName: "3.circle")
                     ],
                     boldButtonItem: .init(title: "続ける", action: {
                         isWelcomePresented = false

@@ -2,7 +2,7 @@ import RiveRuntime
 import SwiftUI
 
 struct LaunchScreenView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(AppState.self) private var appState
     @State private var finishFirstSync = false
     private let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
@@ -55,17 +55,19 @@ struct LaunchScreenView: View {
     }
     
     private func syncFromGoogleCalendar() async {
-        while !appState.finishRestoreSignInProcess {
-            do {
-                try await Task.sleep(millisecond: 200)
-            } catch {
-                print("ERROR: \(error.localizedDescription)")
+        Task {
+            while !appState.finishRestoreSignInProcess {
+                do {
+                    try await Task.sleep(millisecond: 200)
+                } catch {
+                    print("ERROR: \(error.localizedDescription)")
+                }
             }
+            if !appState.isSignedIn {
+                return
+            }
+            await CalendarManager.shared.syncAllEvents()
+            appState.finishFirstSyncProcess = true
         }
-        if !appState.isSignedIn {
-            return
-        }
-        await CalendarManager.shared.syncFromGoogleCalendar()
-        appState.finishFirstSyncProcess = true
     }
 }

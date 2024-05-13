@@ -1,10 +1,12 @@
 import SwiftUI
 
 struct OTJobAddView: View {
+    @State var otJob: OneTimeJob = .init()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
-    @State private var otJob: OneTimeJob = .init()
     @State private var salary = ""
+    
+    
     var body: some View {
         NavigationStack {
             Form {

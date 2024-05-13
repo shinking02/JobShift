@@ -110,11 +110,17 @@ struct JobEditView: View {
                             }
                         }
                         .pickerStyle(.wheel)
+                        .onChange(of: job.salary.paymentType) {
+                            updateSalaryDay()
+                        }
                     }
                     Picker("支払い月", selection: $job.salary.paymentType) {
                         ForEach(JobSalary.PaymentType.allCases, id: \.self) { paymentType in
                             Text(paymentType.toString())
                         }
+                    }
+                    .onChange(of: job.salary.paymentType) {
+                        updateSalaryDay()
                     }
                     Button {
                         withAnimation {
@@ -165,6 +171,11 @@ struct JobEditView: View {
             .navigationTitle(job.name)
             .scrollDismissesKeyboard(.immediately)
             .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    private func updateSalaryDay() {
+        if job.salary.paymentType == .sameMonth && job.salary.cutOffDay > job.salary.paymentDay {
+            job.salary.paymentDay = job.salary.cutOffDay
         }
     }
 }

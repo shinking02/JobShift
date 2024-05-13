@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct OTJobEditView: View {
+    @Bindable var otJob: OneTimeJob
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @Bindable var otJob: OneTimeJob
     @State private var showDeleteAlert = false
     
     var body: some View {

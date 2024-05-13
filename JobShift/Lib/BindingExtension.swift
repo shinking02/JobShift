@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension Binding where Value: MutableCollection, Value: RangeReplaceableCollection, Value.Element: Identifiable {
-    func filter(_ isIncluded: @escaping (Value.Element)->Bool) -> Binding<[Value.Element]> {
+    func filter(_ isIncluded: @escaping (Value.Element) -> Bool) -> Binding<[Value.Element]> {
         return Binding<[Value.Element]>(
             get: {
                 // The binding returns a filtered subset of the original wrapped collection.

@@ -19,7 +19,7 @@ struct WageHistoryView: View {
                     )
                 } label: {
                     HStack {
-                        Text(wage.start == .distantPast ? "入社" : wage.start.toString(.YYYYMD)) + Text("〜")
+                        Text(wage.start == .distantPast ? "入社" : wage.start.toString(.full)) + Text("〜")
                         Spacer()
                         Text("\(wage.wage)円")
                             .foregroundStyle(.secondary)

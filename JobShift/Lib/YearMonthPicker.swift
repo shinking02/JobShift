@@ -7,7 +7,7 @@ struct YearMonthPicker: UIViewRepresentable {
     @Binding var selectedYear: Int
     @Binding var selectedMonth: Int
     
-    let years: [Int] = Array(1900...2100)
+    let years: [Int] = Array(1_900...2_100)
     let months: [Int] = Array(repeating: Array(1...12), count: 100).flatMap { $0 }
     
     func makeCoordinator() -> Coordinator {
@@ -18,7 +18,6 @@ struct YearMonthPicker: UIViewRepresentable {
         let pickerView = UIPickerView()
         pickerView.delegate = context.coordinator
         pickerView.dataSource = context.coordinator
-        
         
         if let yearRow = years.firstIndex(of: selectedYear), let monthRow = months.firstIndex(of: selectedMonth) {
                 
