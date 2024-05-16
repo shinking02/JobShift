@@ -41,12 +41,8 @@ struct JobEditView: View {
                     footer: Text("給与形態は変更できません。")
                 ) {
                     DatePicker("入社日", selection: $job.wages.first!.start, displayedComponents: [.date])
-                    HStack {
-                        Text("給与形態")
-                        Spacer()
-                        Text(job.salaryType.toString())
-                            .foregroundStyle(.secondary)
-                    }
+                    Text("給与形態")
+                        .badge(job.salaryType.toString())
                 }
                 Section {
                     NavigationLink {

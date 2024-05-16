@@ -1,6 +1,8 @@
+import SwiftData
 import SwiftUI
 
 struct JobAddView: View {
+    @Query private var jobs: [Job]
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     @State private var job: Job = .init()
@@ -169,6 +171,10 @@ struct JobAddView: View {
                     .disabled(job.name.isEmpty)
                 }
             }
+        }
+        .onAppear {
+            let minimumOrder = jobs.map(\.order).min() ?? 0
+            job.order = minimumOrder - 1
         }
     }
     private func updateSalaryDay() {

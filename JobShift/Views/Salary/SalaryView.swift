@@ -67,7 +67,6 @@ struct SalaryView: View {
             .sheet(isPresented: $showDatePickerSheet) {
                 DatePickerSheetView(selectedTab: $selectedTab, selectedYearMonth: $selectedYearMonth, selectedYear: $selectedYear)
                     .presentationDetents([.height(260)])
-                    .presentationDragIndicator(.visible)
             }
             .sheet(isPresented: $showAddSalarySheet) {
                 Text("Add Salary Sheet")

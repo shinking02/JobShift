@@ -10,11 +10,9 @@ struct ShiftView: View {
                 CalendarView { dateComponents in
                     selectedDate = dateComponents.date ?? Date()
                 }
-                .frame(height: 400)
+                .frame(height: 470)
                 Spacer()
             }
-            .navigationTitle("シフト")
-            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $isShiftSheetPresented) {
                 ShiftSheetView(selectedDate: $selectedDate)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

@@ -180,6 +180,7 @@
 		54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */; };
 		54B6BE762BDBD20D0099A519 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 54B6BE752BDBD20D0099A519 /* Shimmer */; };
 		54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */; };
+		54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D504EB2BF4C9210033C716 /* OTJobRowView.swift */; };
 		54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */; };
 		54E2C7EB2BE280BB00D4184F /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */; };
 		54E2C7ED2BE280D100D4184F /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7EC2BE280D100D4184F /* SalaryView.swift */; };
@@ -244,6 +245,7 @@
 		548BA6E22BE8B3D100933A64 /* JobExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobExtension.swift; sourceTree = "<group>"; };
 		54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowStatusView.swift; sourceTree = "<group>"; };
 		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
+		54D504EB2BF4C9210033C716 /* OTJobRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobRowView.swift; sourceTree = "<group>"; };
 		54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		54E2C7EC2BE280D100D4184F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				540C93882BD50339009AE904 /* ButtomSheetHelper.swift */,
 				543CF0AC2BE51D43002E5D90 /* CalendarView.swift */,
 				543CF0B22BE64BBA002E5D90 /* EventRowView.swift */,
+				54D504EB2BF4C9210033C716 /* OTJobRowView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				540C93902BD503BA009AE904 /* NavigationTabsView.swift in Sources */,
 				540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */,
 				544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */,
+				54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */,
 				540C93832BD4E43D009AE904 /* UserCalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

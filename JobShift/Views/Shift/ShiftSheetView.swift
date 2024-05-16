@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ShiftSheetView: View {
     @Binding var selectedDate: Date
+    @Query private var jobs: [Job]
     @Query private var otJobs: [OneTimeJob]
     @ObservedResults(Event.self, sortDescriptor: SortDescriptor(keyPath: "start")) private var events
     @State private var selectedEvent: Event?
@@ -11,9 +12,16 @@ struct ShiftSheetView: View {
     @State private var showOTJobAddSheet = false
     @State private var showOTJobEditSheet = false
     
-    
     private var dateEvents: Results<Event> {
-        events.where({ $0.start <= selectedDate.endOfDay && $0.end > selectedDate.startOfDay })
+        if CalendarManager.shared.isShowOnlyJobEvent {
+            return events.where({
+                $0.start <= selectedDate.endOfDay &&
+                $0.end > selectedDate.startOfDay &&
+                $0.summary.in(jobs.map { $0.name })
+            })
+        } else {
+            return events.where({ $0.start <= selectedDate.endOfDay && $0.end > selectedDate.startOfDay })
+        }
     }
     private var dateOtJobs: [OneTimeJob] {
         otJobs.filter { $0.date.isSameDay(selectedDate) }
@@ -26,8 +34,20 @@ struct ShiftSheetView: View {
                     Group {
                         Divider()
                         EventRowView(event: event, selectedDate: selectedDate)
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 selectedEvent = event
+                            }
+                    }
+                    .padding(.horizontal)
+                }
+                ForEach(dateOtJobs) { otJob in
+                    Group {
+                        Divider()
+                        OTJobRowView(otJob: otJob)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedOtJob = otJob
                             }
                     }
                     .padding(.horizontal)
@@ -68,7 +88,16 @@ struct ShiftSheetView: View {
                 }
         }
         .sheet(item: $selectedOtJob) { otJob in
-            OTJobEditView(otJob: otJob)
+            NavigationStack {
+                OTJobEditView(otJob: otJob)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("完了") {
+                                selectedOtJob = nil
+                            }
+                        }
+                    }
+            }
         }
         .sheet(isPresented: $showOTJobAddSheet) {
             OTJobAddView(otJob: OneTimeJob(date: selectedDate))

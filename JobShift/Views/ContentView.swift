@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var isShiftSheetPresented = false
     @State private var selectedTab: Tab = .shift
     @State private var isWelcomePresented = false
+    @Environment(\.openURL) private var openURL
     private let AVAIABLE_OB_VERSION = "2"
     
     private func openShiftSheetForFirstTime() async {
@@ -58,13 +59,14 @@ struct ContentView: View {
                     title: "ようこそJobShiftへ",
                     detailText: "リファクタ、動作の改善を行いました。",
                     bulletedListItems: [
-                        .init(title: "アプリの特徴1", description: "いろいろなことができます。", symbolName: "1.circle"),
-                        .init(title: "アプリの特徴2", description: "いろいろなことができます。", symbolName: "2.circle"),
-                        .init(title: "アプリの特徴3", description: "いろいろなことができます。", symbolName: "3.circle")
+                        .init(title: "給料日", description: "給料日の月を設定できるようになりました。デフォルトでは翌月になっているため確認してみてください。", symbolName: "yensign"),
+                        .init(title: "動作の安定", description: "全体的な動作の改善を行いました。不具合等あれば報告お願いします。", symbolName: "swift"),
+                        .init(title: "注意", description: "最低限の機能でリリースしています。以前のバージョンまで存在した機能は今後実装予定です。", symbolName: "hammer.fill")
                     ],
                     boldButtonItem: .init(title: "続ける", action: {
                         isWelcomePresented = false
-                    })
+                    }),
+                    linkButtonItem: .init(title: "詳細", action: { openURL(URL(string: "https://github.com/shinking02/JobShift/pull/77")!) })
                 )
             }
         )

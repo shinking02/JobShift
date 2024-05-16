@@ -5,6 +5,7 @@ struct JobSettingView: View {
     @Query(sort: \Job.order) private var jobs: [Job]
     @Query(sort: \OneTimeJob.date, order: .reverse) private var otJobs: [OneTimeJob]
     @State private var isJobAddSheetPresented = false
+    @State private var editMode: EditMode = .inactive
     @State private var isOTJobAddSheetOresented = false
     @State private var expanded: Set<Int> = []
     
@@ -20,12 +21,20 @@ struct JobSettingView: View {
                                         .font(.caption)
                                         .foregroundStyle(job.color.toColor())
                                     Text(job.name)
+                                    Spacer()
+                                    Image(systemName: "line.3.horizontal")
+                                        .foregroundStyle(.secondary)
                                 }
                             }
                         }
+                        .onMove { from, to in
+                            jobMove(from, to)
+                        }
                     }
+                    .disabled(false)
+                    .environment(\.editMode, .constant(.transient))
                 }
-                if !otJobs.isEmpty {
+                if !otJobs.isEmpty && editMode == .inactive {
                     Section(header: Text("単発バイト")) {
                         ForEach(Set(otJobs.map { $0.date.year }).sorted(by: >), id: \.self) { year in
                             DisclosureGroup(
@@ -66,7 +75,7 @@ struct JobSettingView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         Button {
                             isJobAddSheetPresented = true
@@ -96,6 +105,13 @@ struct JobSettingView: View {
                     expanded.insert(year)
                 }
             }
+        }
+    }
+    private func jobMove(_ from: IndexSet, _ to: Int) {
+        var tempJobs = self.jobs
+        tempJobs.move(fromOffsets: from, toOffset: to)
+        for i in 0..<tempJobs.count {
+            jobs.first { $0.id == tempJobs[i].id }?.order = i
         }
     }
 }

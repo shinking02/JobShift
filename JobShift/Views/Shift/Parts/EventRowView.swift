@@ -9,16 +9,12 @@ struct EventRowView: View {
         jobs.first(where: { $0.name == event.summary })?.color.toColor() ?? .secondary
     }
     private var detail: String {
-        if event.start.isSameDay(selectedDate) && event.end.isSameDay(selectedDate) {
-            if event.isAllDay {
-                return "終日"
-            }
-            return "\(event.start.toString(.time))\n\(event.end.toString(.time))"
+        let start = event.start.isSameDay(selectedDate) ? event.start.toString(.time) : nil
+        let end = event.end.isSameDay(selectedDate) ? event.end.toString(.time) : nil
+        if event.isAllDay || (start == nil && end == nil) {
+            return "終日"
         }
-        if event.isAllDay {
-            return "\(event.start.toString(.normal))\n\(event.end.toString(.normal))"
-        }
-        return "\(event.start.toString(.dateTime))\n\(event.end.toString(.dateTime))"
+        return "\(start ?? "終了")\n\(end ?? "")"
     }
     var body: some View {
         HStack(alignment: .center) {

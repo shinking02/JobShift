@@ -43,7 +43,10 @@ struct NotificationSettingView: View {
                 }
             }
             Section(footer:
-                Text("支払われる給料がある場合に通知されます")
+                Text("""
+                    支払われる給料がある場合に通知されます。
+                    通知機能は開発段階です。現時点では有効な場合でも通知は送信されません。
+                    """)
             ) {
                 Toggle(isOn: $enableSalaryPaymentNotification) {
                     Text("給料日に通知")
