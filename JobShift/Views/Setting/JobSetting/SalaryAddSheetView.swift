@@ -5,6 +5,7 @@ struct SalaryAddSheetView: View {
     @State var year = Date().year
     @State var month = Date().month
     @State private var salaryString = ""
+    @Environment(Job.self) private var job
     @Environment(\.dismiss) private var dismiss
     @State private var pickerIsPresented = false
     @State private var existError = false
@@ -33,9 +34,11 @@ struct SalaryAddSheetView: View {
                             }
                     }
                 }
+                let paymentDay = job.getPaymentDay(year: year, month: month)
+                let workInterval = job.getWorkInterval(year: year, month: month)
                 Section(
-                    header: Text("X月Y日に振り込まれた給料"),
-                    footer: Text("X月Y日からX月Y日間の勤務分の給料です。交通費を含めてください。")
+                    header: Text("\(paymentDay.month)月\(paymentDay.day)日に振り込まれた給料"),
+                    footer: Text("\(workInterval.start.month)月\(workInterval.start.day)日から\(workInterval.end.month)月\(workInterval.end.day)日間の勤務分の給料です。交通費を含めてください。")
                 ) {
                     TextField("金額", text: $salaryString)
                         .keyboardType(.numberPad)

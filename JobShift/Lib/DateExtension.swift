@@ -45,7 +45,7 @@ extension Date {
     }
     
     var isHoliday: Bool {
-        return HolidayJp.isHoliday(self) || self.weekIndex == 1 || self.weekIndex == 7
+        return HolidayJp.isHoliday(self) || self.weekIndex == 0 || self.weekIndex == 6
     }
     
     init(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, second: Int? = nil) {

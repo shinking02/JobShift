@@ -26,6 +26,12 @@ struct ShiftSheetView: View {
     private var dateOtJobs: [OneTimeJob] {
         otJobs.filter { $0.date.isSameDay(selectedDate) }
     }
+    private var paymentDayJobs: [Job] {
+        jobs.filter { job in
+            let paymentDay = job.getPaymentDay(year: selectedDate.year, month: selectedDate.month)
+            return paymentDay.isSameDay(selectedDate)
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -52,7 +58,14 @@ struct ShiftSheetView: View {
                     }
                     .padding(.horizontal)
                 }
-                if dateEvents.isEmpty && dateOtJobs.isEmpty {
+                ForEach(paymentDayJobs) { job in
+                    Group {
+                        Divider()
+                        PaymentDayRowView(job: job)
+                    }
+                    .padding(.horizontal)
+                }
+                if dateEvents.isEmpty && dateOtJobs.isEmpty && paymentDayJobs.isEmpty {
                     Divider()
                     Text("予定がありません")
                         .bold()
@@ -84,6 +97,7 @@ struct ShiftSheetView: View {
                                 Image(systemName: "plus")
                             }
                         )
+                        .disabled(true)
                     }
                 }
         }

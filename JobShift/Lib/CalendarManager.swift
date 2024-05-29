@@ -80,7 +80,6 @@ final class CalendarManager {
                 if ticket.statusCode == 410 {
                     Storage.setGoogleSyncToken(for: calendarId, token: "")
                     Task { await self.syncEvents(calendarId: calendarId) }
-                    continuation.resume()
                 }
                 let events = (response as? GTLRCalendar_Events)?.items ?? []
                 DispatchQueue.global(qos: .utility).async {

@@ -52,6 +52,7 @@ struct JobEditView: View {
                     }
                     NavigationLink {
                         SalaryHistoryView(salary: $job.salary)
+                            .environment(job)
                     } label: {
                         Text("給与実績")
                     }
