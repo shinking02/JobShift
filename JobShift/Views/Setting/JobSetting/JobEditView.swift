@@ -134,7 +134,7 @@ struct JobEditView: View {
                     .tint(.primary)
                     if paymentDayPickerPresented {
                         Picker("", selection: $job.salary.paymentDay) {
-                            ForEach(1...31, id: \.self) { day in
+                            ForEach((job.salary.paymentType == .nextMonth ? 1 : job.salary.cutOffDay)...31, id: \.self) { day in
                                 Text("\(day)日")
                             }
                         }

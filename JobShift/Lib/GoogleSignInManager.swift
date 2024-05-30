@@ -1,4 +1,5 @@
 import GoogleSignIn
+import RealmSwift
 
 class GoogleSignInManager {
     private static func restorePreviousSignInAsync() async throws -> GIDGoogleUser {
@@ -60,6 +61,13 @@ class GoogleSignInManager {
     
     static func signOut() {
         GIDSignIn.sharedInstance.signOut()
+        // swiftlint:disable force_try
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+        // swiftlint:enable force_try
+        UserDefaults.standard.set([:], forKey: UserDefaultsKeys.googleSyncTokens)
         AppState.shared.user = nil
         AppState.shared.isSignedIn = false
         AppState.shared.finishFirstSyncProcess = false

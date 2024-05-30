@@ -6,7 +6,6 @@ struct OTJobAddView: View {
     @Environment(\.modelContext) private var context
     @State private var salary = ""
     
-    
     var body: some View {
         NavigationStack {
             Form {

@@ -67,7 +67,7 @@ final class CalendarManager {
         event.isAllDay = isAllDay
         return event
     }
-    
+
     func syncEvents(calendarId: String) async {
         let syncToken = Storage.getGoogleSyncToken(for: calendarId)
         let eventsQuery = GTLRCalendarQuery_EventsList.query(withCalendarId: calendarId)
@@ -82,29 +82,37 @@ final class CalendarManager {
                     Task { await self.syncEvents(calendarId: calendarId) }
                 }
                 let events = (response as? GTLRCalendar_Events)?.items ?? []
+                let dispatchGroup = DispatchGroup()
+                
                 DispatchQueue.global(qos: .utility).async {
                     // swiftlint:disable:next force_try
                     let realm = try! Realm()
                     events.forEach { gtEvent in
+                        dispatchGroup.enter()
                         do {
                             if gtEvent.status == "cancelled" {
                                 let deleteTarget = realm.objects(Event.self).filter("id == %@", gtEvent.identifier ?? "")
                                 try realm.write {
                                     realm.delete(deleteTarget)
                                 }
+                                dispatchGroup.leave()
                                 return
                             }
                             let event = self.createRealmEvent(gtEvent: gtEvent, calendarId: calendarId)
                             try realm.write {
                                 realm.add(event, update: .modified)
                             }
+                            dispatchGroup.leave()
                         } catch {
                             print("ERROR: \(error.localizedDescription)")
+                            dispatchGroup.leave()
                         }
                     }
+                    dispatchGroup.notify(queue: .global(qos: .utility)) {
+                        Storage.setGoogleSyncToken(for: calendarId, token: (response as? GTLRCalendar_Events)?.nextSyncToken ?? "")
+                        continuation.resume()
+                    }
                 }
-                Storage.setGoogleSyncToken(for: calendarId, token: (response as? GTLRCalendar_Events)?.nextSyncToken ?? "")
-                continuation.resume()
             }
         }
     }

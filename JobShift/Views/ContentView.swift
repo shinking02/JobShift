@@ -1,25 +1,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isShiftSheetPresented = false
     @State private var selectedTab: Tab = .shift
     @State private var isWelcomePresented = false
     @Environment(\.openURL) private var openURL
     private let AVAIABLE_OB_VERSION = "2"
     
-    private func openShiftSheetForFirstTime() async {
-        do {
-            try await Task.sleep(millisecond: 360)
-            if selectedTab == .shift {
-                isShiftSheetPresented = true
-            }
-        } catch {
-            print("ERROR: \(error.localizedDescription)")
-        }
-    }
     var body: some View {
         TabView(selection: $selectedTab) {
-            ShiftView(isShiftSheetPresented: $isShiftSheetPresented)
+            ShiftView(isWelcomePresented: $isWelcomePresented)
                 .tag(Tab.shift)
                 .tabItem {
                     Label(Tab.shift.rawValue, systemImage: Tab.shift.symbol)
@@ -37,22 +26,13 @@ struct ContentView: View {
                     Label(Tab.setting.rawValue, systemImage: Tab.setting.symbol)
                 }
         }
-        .onChange(of: selectedTab) {
-            isShiftSheetPresented = selectedTab == .shift
-        }
         .onAppear {
-            Task {
-                isWelcomePresented = Storage.getLastSeenOnboardingVersion() != AVAIABLE_OB_VERSION
-                if !isWelcomePresented {
-                    await openShiftSheetForFirstTime()
-                }
-            }
+            isWelcomePresented = Storage.getLastSeenOnboardingVersion() != AVAIABLE_OB_VERSION
         }
         .sheet(
             isPresented: $isWelcomePresented,
             onDismiss: {
                 Storage.setLastSeenOnboardingVersion(AVAIABLE_OB_VERSION)
-                Task { await openShiftSheetForFirstTime() }
             },
             content: {
                 OBWelcomeView(

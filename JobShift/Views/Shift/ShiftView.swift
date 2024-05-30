@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct ShiftView: View {
-    @Binding var isShiftSheetPresented: Bool
+    @Binding var isWelcomePresented: Bool
     @State private var selectedDate = Date()
+    @State private var isSheetPresented = false
 
     var body: some View {
         NavigationStack {
@@ -13,7 +14,23 @@ struct ShiftView: View {
                 .frame(height: 470)
                 Spacer()
             }
-            .sheet(isPresented: $isShiftSheetPresented) {
+            .onAppear {
+                if !isWelcomePresented && AppState.shared.finishFirstSyncProcess {
+                    isSheetPresented = true
+                }
+            }
+            .onDisappear {
+                isSheetPresented = false
+            }
+            .onChange(of: isWelcomePresented) {
+                if !isWelcomePresented {
+                    Task {
+                        try await Task.sleep(seconds: 1)
+                        isSheetPresented = true
+                    }
+                }
+            }
+            .sheet(isPresented: $isSheetPresented) {
                 ShiftSheetView(selectedDate: $selectedDate)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .presentationDetents([.height(240), .large])
