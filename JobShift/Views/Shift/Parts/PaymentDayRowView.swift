@@ -13,7 +13,7 @@ struct PaymentDayRowView: View {
                 .bold()
                 .lineLimit(1)
             Spacer()
-            Text("130000円")
+            Text("150000円")
                 .lineLimit(2)
                 .font(.caption)
                 .foregroundStyle(.secondary)

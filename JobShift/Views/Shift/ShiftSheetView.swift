@@ -13,14 +13,20 @@ struct ShiftSheetView: View {
     @State private var showOTJobEditSheet = false
     
     private var dateEvents: Results<Event> {
+        let activeCalendarIds = CalendarManager.shared.calendars.filter { $0.isActive }.map { $0.id }
         if CalendarManager.shared.isShowOnlyJobEvent {
             return events.where({
                 $0.start <= selectedDate.endOfDay &&
                 $0.end > selectedDate.startOfDay &&
-                $0.summary.in(jobs.map { $0.name })
+                $0.summary.in(jobs.map { $0.name }) &&
+                $0.calendarId.in(activeCalendarIds)
             })
         } else {
-            return events.where({ $0.start <= selectedDate.endOfDay && $0.end > selectedDate.startOfDay })
+            return events.where({
+                $0.start <= selectedDate.endOfDay &&
+                $0.end > selectedDate.startOfDay &&
+                $0.calendarId.in(activeCalendarIds)
+            })
         }
     }
     private var dateOtJobs: [OneTimeJob] {

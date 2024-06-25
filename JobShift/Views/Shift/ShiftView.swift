@@ -1,16 +1,25 @@
+import SwiftData
 import SwiftUI
 
 struct ShiftView: View {
     @Binding var isWelcomePresented: Bool
     @State private var selectedDate = Date()
     @State private var isSheetPresented = false
+    @Query(sort: \Job.order) private var jobs: [Job]
+    @Query private var otJobs: [OneTimeJob]
 
     var body: some View {
         NavigationStack {
             VStack {
-                CalendarView { dateComponents in
-                    selectedDate = dateComponents.date ?? Date()
-                }
+                CalendarView(
+                    didSelectDate: { dateComponents in
+                        selectedDate = dateComponents.date ?? Date()
+                    },
+                    jobs: jobs,
+                    otJobs: otJobs,
+                    isShowOnlyJobEvent: CalendarManager.shared.isShowOnlyJobEvent,
+                    activeCalendars: CalendarManager.shared.calendars.compactMap({ $0.isActive ? $0 : nil })
+                )
                 .frame(height: 470)
                 Spacer()
             }

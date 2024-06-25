@@ -4,9 +4,11 @@ import SwiftUI
 
 struct CalendarView: UIViewRepresentable {
     let didSelectDate: (_ dateComponents: DateComponents) -> Void
-    @Query(sort: \Job.order) private var jobs: [Job]
-    @Query private var otJobs: [OneTimeJob]
-
+    var jobs: [Job]
+    var otJobs: [OneTimeJob]
+    var isShowOnlyJobEvent: Bool
+    var activeCalendars: [UserCalendar]
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self, didSelectDate: didSelectDate)
     }
@@ -22,6 +24,7 @@ struct CalendarView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
+        context.coordinator.parent = self
         context.coordinator.decorationCache.removeAll()
         let monthComponents = uiView.visibleDateComponents
         Task {
@@ -38,7 +41,7 @@ struct CalendarView: UIViewRepresentable {
     }
 
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
-        private let parent: CalendarView
+        var parent: CalendarView
         private let didSelectDate: (_ dateComponents: DateComponents) -> Void
         // Viewをキャッシュするとエラーになる  https://stackoverflow.com/questions/78517446/uicalendarview-nsinvalidargumentexception-error
         var decorationCache: [DateComponents: DecorationInfo] = [:]
@@ -79,13 +82,14 @@ struct CalendarView: UIViewRepresentable {
             case .circle:
                 return .default(color: info.primaryColor)
             case .payment:
-                return .image(UIImage(systemName: "circle"), color: info.primaryColor)
+                return .image(UIImage(systemName: "seal"), color: info.primaryColor)
             case .circlePayment:
                 guard let primaryColor = info.primaryColor, let secondaryColor = info.secondaryColor else { return nil }
                 return .image(
                     UIImage(
-                        systemName: "circle.inset.filled",
-                        withConfiguration: UIImage.SymbolConfiguration(paletteColors: [primaryColor, secondaryColor])
+                        named: "custom.seal.badge",
+                        in: nil,
+                        with: UIImage.SymbolConfiguration(paletteColors: [primaryColor, secondaryColor])
                     )
                 )
             }
@@ -129,7 +133,7 @@ struct CalendarView: UIViewRepresentable {
                 return DecorationInfo(type: .circle)
             }
             // 予定
-            if !dateEvents.isEmpty && !CalendarManager.shared.isShowOnlyJobEvent {
+            if !dateEvents.isEmpty {
                 return DecorationInfo(type: .circle)
             }
             return DecorationInfo(type: .none)
@@ -139,16 +143,19 @@ struct CalendarView: UIViewRepresentable {
             // swiftlint:disable:next force_try
             let realm = try! Realm()
             let events = realm.objects(Event.self)
-            if CalendarManager.shared.isShowOnlyJobEvent {
+            let activeCalendarIds = parent.activeCalendars.map { $0.id }
+            if parent.isShowOnlyJobEvent {
                 return events.where({
                     $0.start <= dateComponents.date?.endOfDay ?? Date() &&
                     $0.end > dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date() &&
-                    $0.summary.in(parent.jobs.map { $0.name })
+                    $0.summary.in(parent.jobs.map { $0.name }) &&
+                    $0.calendarId.in(activeCalendarIds)
                 })
             } else {
                 return events.where({
                     $0.start <= dateComponents.date?.endOfDay ?? Date() &&
-                    $0.end > dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date()
+                    $0.end > dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date() &&
+                    $0.calendarId.in(activeCalendarIds)
                 })
             }
         }

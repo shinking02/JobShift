@@ -1,7 +1,8 @@
+import GoogleAPIClientForREST_Calendar
 import Foundation
 import RealmSwift
-import GoogleAPIClientForREST_Calendar
 
+@Observable
 final class CalendarManager {
     static let shared: CalendarManager = .init()
 
