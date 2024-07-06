@@ -4,8 +4,8 @@ import SwiftUI
 struct JobSettingView: View {
     @Query(sort: \Job.order) private var jobs: [Job]
     @Query(sort: \OneTimeJob.date, order: .reverse) private var otJobs: [OneTimeJob]
+    @Environment(\.editMode) var editMode
     @State private var isJobAddSheetPresented = false
-    @State private var editMode: EditMode = .inactive
     @State private var isOTJobAddSheetOresented = false
     @State private var expanded: Set<Int> = []
     
@@ -22,8 +22,6 @@ struct JobSettingView: View {
                                         .foregroundStyle(job.color.toColor())
                                     Text(job.name)
                                     Spacer()
-                                    Image(systemName: "line.3.horizontal")
-                                        .foregroundStyle(.secondary)
                                 }
                             }
                         }
@@ -32,9 +30,8 @@ struct JobSettingView: View {
                         }
                     }
                     .disabled(false)
-                    .environment(\.editMode, .constant(.transient))
                 }
-                if !otJobs.isEmpty && editMode == .inactive {
+                if !otJobs.isEmpty && editMode?.wrappedValue == .inactive {
                     Section(header: Text("単発バイト")) {
                         ForEach(Set(otJobs.map { $0.date.year }).sorted(by: >), id: \.self) { year in
                             DisclosureGroup(
@@ -75,23 +72,28 @@ struct JobSettingView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Button {
-                            isJobAddSheetPresented = true
+                if editMode?.wrappedValue == .active {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            Button {
+                                isJobAddSheetPresented = true
+                            } label: {
+                                Label("バイト", systemImage: "clock.arrow.2.circlepath")
+                            }
+                            Button {
+                                isOTJobAddSheetOresented = true
+                            } label: {
+                                Label("単発バイト", systemImage: "clock.badge")
+                            }
                         } label: {
-                            Label("バイト", systemImage: "clock.arrow.2.circlepath")
+                            Image(systemName: "plus")
                         }
-                        Button {
-                            isOTJobAddSheetOresented = true
-                        } label: {
-                            Label("単発バイト", systemImage: "clock.badge")
-                        }
-                    } label: {
-                        Image(systemName: "plus")
                     }
-                    
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
+                
             }
             .sheet(isPresented: $isJobAddSheetPresented) {
                 JobAddView()

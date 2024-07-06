@@ -1,70 +1,65 @@
-import Foundation
+import SwiftUI
 import RealmSwift
 
 struct SalaryData {
-    let job: Job
-    let salary: Int
-    let count: Int
-    let commuteWage: Int
-    let minutes: Int
+    
 }
 
 class SalaryManager {
-    private var job: Job
-    private var realm: Realm
+    private var jobs: [Job]
+    private var otJobs: [OneTimeJob]
     
-    private func minutesInNightAndDay(from interval: DateInterval) -> (nightMinutes: Int, dayMinutes: Int) {
-        let calendar = Calendar.current
-        var dayMinutes = 0
-        var currentStart = interval.start
-        let end = interval.end
+    init(jobs: [Job], otJobs: [OneTimeJob]) {
+        self.jobs = jobs
+        self.otJobs = otJobs
+    }
+    
+    private func minutesInTimeRange(start: Date, end: Date) -> (daytimeMinutes: Int, nighttimeMinutes: Int) {
+        var daytimeMinutes = 0
+        var nighttimeMinutes = 0
 
-        while currentStart < end {
-            let dayStart = calendar.date(bySettingHour: 5, minute: 0, second: 0, of: currentStart)!
-            let dayEnd = calendar.date(bySettingHour: 22, minute: 0, second: 0, of: currentStart)!
-            if interval.contains(dayStart) && interval.contains(dayEnd) {
-                let fullDayInterval = DateInterval(start: dayStart, end: dayEnd)
-                dayMinutes += Int(fullDayInterval.duration / 60)
+        let calendar = Calendar(identifier: .gregorian)
+        let fiveAM = calendar.date(bySettingHour: 5, minute: 0, second: 0, of: start)!
+        let tenPM = calendar.date(bySettingHour: 22, minute: 0, second: 0, of: start)!
+
+        var current = start
+
+        while current < end {
+            let next = calendar.date(byAdding: .minute, value: 1, to: current)!
+
+            if calendar.compare(current, to: fiveAM, toGranularity: .minute) != .orderedAscending &&
+               calendar.compare(current, to: tenPM, toGranularity: .minute) == .orderedAscending {
+                daytimeMinutes += 1
             } else {
-                if interval.contains(dayStart) {
-                    let partialDayInterval = DateInterval(start: dayStart, end: min(dayEnd, end))
-                    dayMinutes += Int(partialDayInterval.duration / 60)
-                }
-                if interval.contains(dayEnd) {
-                    let partialDayInterval = DateInterval(start: max(dayStart, interval.start), end: dayEnd)
-                    dayMinutes += Int(partialDayInterval.duration / 60)
-                }
+                nighttimeMinutes += 1
             }
-            currentStart = calendar.date(byAdding: .day, value: 1, to: currentStart)!
+
+            current = next
         }
-        let totalMinutes = Int(interval.duration / 60)
-        let nightMinutes = totalMinutes - dayMinutes
-        return (nightMinutes, dayMinutes)
+
+        return (daytimeMinutes, nighttimeMinutes)
     }
     
-    private func getEventSalary(_ event: Event) -> SalaryData {
+    private func getEventsSalary(_ events: Results<Event>) -> SalaryData {
         
     }
     
-    
-    init(job: Job) {
+    private func getMonthlySalary(year: Int, month: Int) -> [SalaryData] {
+        var salaries: [SalaryData] = []
         // swiftlint:disable:next force_try
-        self.realm = try! Realm()
-        self.job = job
-    }
-    
-    func getMonthlySalary(year: Int, month: Int) -> SalaryData {
+        let realm = try! Realm()
         let events = realm.objects(Event.self)
-        let interval = job.getWorkInterval(year: year, month: month)
-        let jobEvents = events.filter({
-            $0.start >= interval.start &&
-            $0.end <= interval.end &&
-            $0.summary == self.job.name
-        })
-        let salaries = jobEvents.map { event -> SalaryData in self.getEventSalary(event) }
         
-        return salaries.reduce(SalaryData(job: job, salary: 0, count: 0, commuteWage: 0, minutes: 0)) { (result, salary) -> SalaryData in
-            return SalaryData(job: job, salary: result.salary + salary.salary, count: result.count + salary.count, commuteWage: result.commuteWage + salary.commuteWage, minutes: result.minutes + salary.minutes)
+        jobs.forEach { job in
+            let workInterval = job.getWorkInterval(year: year, month: month)
+            let jobEvents = events.where({
+                $0.start >= workInterval.start &&
+                $0.start < workInterval.start &&
+                $0.summary == job.name
+            })
+            let salary = getEventsSalary(jobEvents)
+            salaries.append(salary)
         }
+        return salaries
     }
 }

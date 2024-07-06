@@ -28,8 +28,8 @@ struct SettingView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundStyle(.secondary)
                 ) {
-                    NavigationLink(destination: DeveloperSettingView()) {
-                        Label("開発者向け設定", systemImage: "wrench.and.screwdriver")
+                    NavigationLink(destination: SubmitIssueView()) {
+                        Label("要望", systemImage: "text.bubble")
                     }
                     NavigationLink(
                         destination: LicenseListView()
@@ -37,6 +37,9 @@ struct SettingView: View {
                             .navigationBarTitleDisplayMode(.inline)
                     ) {
                         Label("ライセンス", systemImage: "book.and.wrench")
+                    }
+                    NavigationLink(destination: DeveloperSettingView()) {
+                        Label("開発者向け設定", systemImage: "wrench.and.screwdriver")
                     }
                 }
             }

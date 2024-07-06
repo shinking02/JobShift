@@ -28,7 +28,7 @@ struct ShiftView: View {
                     isSheetPresented = true
                 }
             }
-            .onDisappear {
+            .onWillDisappear {
                 isSheetPresented = false
             }
             .onChange(of: isWelcomePresented) {

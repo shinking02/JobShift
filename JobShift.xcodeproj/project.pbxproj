@@ -19,7 +19,6 @@
 		540C93872BD5031A009AE904 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93862BD5031A009AE904 /* Tab.swift */; };
 		540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93882BD50339009AE904 /* ButtomSheetHelper.swift */; };
 		540C938E2BD50381009AE904 /* ShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C938D2BD50381009AE904 /* ShiftView.swift */; };
-		540C93902BD503BA009AE904 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C938F2BD503BA009AE904 /* NavigationTabsView.swift */; };
 		540C93922BD503ED009AE904 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93912BD503ED009AE904 /* SettingView.swift */; };
 		540C93942BD508C3009AE904 /* TaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93932BD508C3009AE904 /* TaskExtension.swift */; };
 		540C93A02BD5304E009AE904 /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C939F2BD5304E009AE904 /* ProfileButtonView.swift */; };
@@ -38,6 +37,11 @@
 		542360682BE2004B002DDF68 /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360672BE2004B002DDF68 /* JobEditView.swift */; };
 		5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360692BE210D4002DDF68 /* OTJobAddView.swift */; };
 		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
+		54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDD2C2C38F4004FD448 /* WillDisappear.swift */; };
+		54397BE02C2C3A03004FD448 /* SubmitIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */; };
+		54397BE22C2C4E6C004FD448 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE12C2C4E6C004FD448 /* Env.swift */; };
+		54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE42C2C558E004FD448 /* NavigationTabsView.swift */; };
+		54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE32C2C558E004FD448 /* CustomHeaderView.swift */; };
 		543CF0A92BE47350002E5D90 /* PagedInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */; };
 		543CF0AB2BE4919B002E5D90 /* DatePickerSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */; };
 		543CF0AD2BE51D43002E5D90 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AC2BE51D43002E5D90 /* CalendarView.swift */; };
@@ -184,7 +188,6 @@
 		54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */; };
 		54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D504EB2BF4C9210033C716 /* OTJobRowView.swift */; };
 		54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */; };
-		54E2C7EB2BE280BB00D4184F /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */; };
 		54E2C7ED2BE280D100D4184F /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7EC2BE280D100D4184F /* SalaryView.swift */; };
 		54E3931F2B25A8E20002D4EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 54E3931E2B25A8E20002D4EB /* .gitignore */; };
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
@@ -205,7 +208,6 @@
 		540C93862BD5031A009AE904 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		540C93882BD50339009AE904 /* ButtomSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSheetHelper.swift; sourceTree = "<group>"; };
 		540C938D2BD50381009AE904 /* ShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftView.swift; sourceTree = "<group>"; };
-		540C938F2BD503BA009AE904 /* NavigationTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabsView.swift; sourceTree = "<group>"; };
 		540C93912BD503ED009AE904 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		540C93932BD508C3009AE904 /* TaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtension.swift; sourceTree = "<group>"; };
 		540C939F2BD5304E009AE904 /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
@@ -225,6 +227,11 @@
 		5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV3.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		54397BDD2C2C38F4004FD448 /* WillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappear.swift; sourceTree = "<group>"; };
+		54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitIssueView.swift; sourceTree = "<group>"; };
+		54397BE12C2C4E6C004FD448 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		54397BE32C2C558E004FD448 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
+		54397BE42C2C558E004FD448 /* NavigationTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabsView.swift; sourceTree = "<group>"; };
 		543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedInfiniteScrollView.swift; sourceTree = "<group>"; };
 		543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerSheetView.swift; sourceTree = "<group>"; };
 		543CF0AC2BE51D43002E5D90 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -251,7 +258,6 @@
 		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
 		54D504EB2BF4C9210033C716 /* OTJobRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobRowView.swift; sourceTree = "<group>"; };
 		54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
-		54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		54E2C7EC2BE280D100D4184F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		54E3931E2B25A8E20002D4EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		54E393232B25AD8C0002D4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -428,6 +434,7 @@
 				540C93802BD41C86009AE904 /* Storage.swift */,
 				540C93862BD5031A009AE904 /* Tab.swift */,
 				540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */,
+				54397BDD2C2C38F4004FD448 /* WillDisappear.swift */,
 				5465E5B52BDD4BEF00626AAB /* DateExtension.swift */,
 				542360652BE13574002DDF68 /* BindingExtension.swift */,
 				547D8F232BDFAF0D00B1AF31 /* YearMonthPicker.swift */,
@@ -459,9 +466,10 @@
 			children = (
 				540C93A62BD7F232009AE904 /* Parts */,
 				540C93912BD503ED009AE904 /* SettingView.swift */,
-				5465E5BB2BDE8BB400626AAB /* JobSettingView.swift */,
 				5465E5BE2BDE8F4900626AAB /* JobSetting */,
+				5465E5BB2BDE8BB400626AAB /* JobSettingView.swift */,
 				540C93AF2BD9280B009AE904 /* ProfileSheetView.swift */,
+				54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */,
 				540C93B22BD94E90009AE904 /* CalendarSettingView.swift */,
 				540C93B72BD9D254009AE904 /* NotificationSettingView.swift */,
 				54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */,
@@ -485,8 +493,8 @@
 		540C93A52BD7F22C009AE904 /* Parts */ = {
 			isa = PBXGroup;
 			children = (
-				540C938F2BD503BA009AE904 /* NavigationTabsView.swift */,
-				54E2C7EA2BE280BB00D4184F /* CustomHeaderView.swift */,
+				54397BE32C2C558E004FD448 /* CustomHeaderView.swift */,
+				54397BE42C2C558E004FD448 /* NavigationTabsView.swift */,
 				543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */,
 				543CF0AA2BE4919B002E5D90 /* DatePickerSheetView.swift */,
 			);
@@ -585,6 +593,7 @@
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
+				54397BE12C2C4E6C004FD448 /* Env.swift */,
 				540C93752BD3515D009AE904 /* Lib */,
 				540C936D2BD29958009AE904 /* Views */,
 				540C93702BD2B39C009AE904 /* Models */,
@@ -857,6 +866,7 @@
 				5465E5BC2BDE8BB400626AAB /* JobSettingView.swift in Sources */,
 				54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */,
 				547D8F242BDFAF0D00B1AF31 /* YearMonthPicker.swift in Sources */,
+				54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */,
 				548BA6E32BE8B3D100933A64 /* JobExtension.swift in Sources */,
 				547D8F222BDFAC5E00B1AF31 /* SalaryAddSheetView.swift in Sources */,
 				5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */,
@@ -876,10 +886,11 @@
 				543CF0AD2BE51D43002E5D90 /* CalendarView.swift in Sources */,
 				543CF0AF2BE52EE6002E5D90 /* ShiftSheetView.swift in Sources */,
 				54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */,
-				54E2C7EB2BE280BB00D4184F /* CustomHeaderView.swift in Sources */,
 				5465E5C22BDE93C100626AAB /* JobAddView.swift in Sources */,
 				5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */,
+				54397BE22C2C4E6C004FD448 /* Env.swift in Sources */,
 				540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */,
+				54397BE02C2C3A03004FD448 /* SubmitIssueView.swift in Sources */,
 				540DA3432C076031008A42E7 /* PaymentDayRowView.swift in Sources */,
 				540C93922BD503ED009AE904 /* SettingView.swift in Sources */,
 				540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */,
@@ -892,6 +903,8 @@
 				5465E5CC2BDF60CE00626AAB /* WageEditView.swift in Sources */,
 				540C936F2BD2998A009AE904 /* LaunchScreenView.swift in Sources */,
 				540C93A32BD5461F009AE904 /* CustomNavigationTitle.swift in Sources */,
+				54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */,
+				54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */,
 				540C93B82BD9D254009AE904 /* NotificationSettingView.swift in Sources */,
 				540C93B32BD94E90009AE904 /* CalendarSettingView.swift in Sources */,
 				540C938E2BD50381009AE904 /* ShiftView.swift in Sources */,
@@ -903,7 +916,6 @@
 				540C93772BD35646009AE904 /* AppState.swift in Sources */,
 				5465E5C62BDF19BF00626AAB /* NumberTextField.swift in Sources */,
 				542360682BE2004B002DDF68 /* JobEditView.swift in Sources */,
-				540C93902BD503BA009AE904 /* NavigationTabsView.swift in Sources */,
 				540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */,
 				544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */,
 				54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */,

@@ -13,6 +13,12 @@ struct SalaryView: View {
     @State private var showAddSalarySheet = false
     @State private var showDatePickerSheet = false
     
+    var navigationTitle: String {
+            selectedTab == .month
+                ? "\(String(selectedYearMonth.year))年\(selectedYearMonth.month)月"
+                : "\(String(selectedYear.year))年"
+        }
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -29,10 +35,9 @@ struct SalaryView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(
-                selectedTab == .month ? "\(String(selectedYearMonth.year))年\(selectedYearMonth.month)月" : "\(String(selectedYear.year))年"
-            )
+            .navigationTitle(navigationTitle)
             .toolbar {
+                // iOS18の場合、NavigationBarが消える不具合がある https://forums.developer.apple.com/forums/thread/756734
                 ToolbarItem(placement: .topBarLeading) {
                     Button(
                         action: {
