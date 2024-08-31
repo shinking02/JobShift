@@ -5,6 +5,7 @@ struct ShiftView: View {
     @Binding var isWelcomePresented: Bool
     @State private var selectedDate = Date()
     @State private var isSheetPresented = false
+    @State private var isInitial = true
     @Query(sort: \Job.order) private var jobs: [Job]
     @Query private var otJobs: [OneTimeJob]
 
@@ -24,6 +25,14 @@ struct ShiftView: View {
                 Spacer()
             }
             .onAppear {
+                if isInitial && !isWelcomePresented {
+                    isInitial = false
+                    Task {
+                        try await Task.sleep(millisecond: 400)
+                        isSheetPresented = true
+                    }
+                    return
+                }
                 if !isWelcomePresented && AppState.shared.finishFirstSyncProcess {
                     isSheetPresented = true
                 }

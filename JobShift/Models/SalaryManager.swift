@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct SalaryData {
-    
+    var hoge: String = "Hello, World!"
 }
 
 class SalaryManager {
@@ -41,7 +41,7 @@ class SalaryManager {
     }
     
     private func getEventsSalary(_ events: Results<Event>) -> SalaryData {
-        
+        return SalaryData()
     }
     
     private func getMonthlySalary(year: Int, month: Int) -> [SalaryData] {

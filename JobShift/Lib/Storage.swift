@@ -10,6 +10,8 @@ enum UserDefaultsKeys {
     static let disableCalendarIds = "JS_DISABLE_CALENDAR_IDS"
     static let isShowOnlyJobEvent = "JS_IS_SHOW_ONLY_JOBEVENT"
     static let enableSalaryPaymentNotification = "JS_ENABLE_SALARY_PAYMENT_NOTIFICATION"
+    static let isDisableEventSuggest = "JS_IS_DISABLE_EVENT_SUGGEST"
+    static let eventSuggestIntervalWeek = "JS_EVENT_SUGGEST_INTERVAL_WEEK"
 }
 
 struct Storage {
@@ -56,5 +58,17 @@ struct Storage {
         var tokens = getGoogleSyncTokens()
         tokens[calendarId] = token
         setGoogleSyncTokens(tokens)
+    }
+    static func getIsDisableEventSuggest() -> Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isDisableEventSuggest)
+    }
+    static func setIsDisableEventSuggest(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: UserDefaultsKeys.isDisableEventSuggest)
+    }
+    static func getEventSuggestIntervalWeek() -> Int {
+        return UserDefaults.standard.integer(forKey: UserDefaultsKeys.eventSuggestIntervalWeek)
+    }
+    static func setEventSuggestIntervalWeek(_ value: Int) {
+        UserDefaults.standard.set(value, forKey: UserDefaultsKeys.eventSuggestIntervalWeek)
     }
 }

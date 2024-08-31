@@ -1,5 +1,4 @@
 import RealmSwift
-import SwiftData
 import SwiftUI
 
 struct CalendarView: UIViewRepresentable {
@@ -8,11 +7,11 @@ struct CalendarView: UIViewRepresentable {
     var otJobs: [OneTimeJob]
     var isShowOnlyJobEvent: Bool
     var activeCalendars: [UserCalendar]
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self, didSelectDate: didSelectDate)
     }
-    
+
     func makeUIView(context: Context) -> some UICalendarView {
         let selection = UICalendarSelectionSingleDate(delegate: context.coordinator)
         let calendarView = UICalendarView()
@@ -22,155 +21,138 @@ struct CalendarView: UIViewRepresentable {
         calendarView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return calendarView
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
         context.coordinator.parent = self
-        context.coordinator.decorationCache.removeAll()
+        context.coordinator.observeChanges(in: uiView)
         let monthComponents = uiView.visibleDateComponents
-        Task {
+        let components = (1...31).compactMap { day -> DateComponents? in
+            guard let year = monthComponents.year, let month = monthComponents.month else {
+                return nil
+            }
+            return DateComponents(year: year, month: month, day: day)
+        }
+        
+        DispatchQueue.main.async {
+            uiView.reloadDecorations(forDateComponents: components, animated: true)
+        }
+    }
+
+    class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
+        var parent: CalendarView
+        var realm: Realm
+        var notificationToken: NotificationToken?
+
+        init(parent: CalendarView, didSelectDate: @escaping (_ dateComponents: DateComponents) -> Void) {
+            self.parent = parent
+            self.realm = try! Realm()
+        }
+
+        deinit {
+            notificationToken?.invalidate()
+        }
+
+        func observeChanges(in uiView: UICalendarView) {
+            let events = realm.objects(Event.self)
+            notificationToken = events.observe { [weak self] changes in
+                guard let self = self else { return }
+                switch changes {
+                case .initial:
+                    break
+                case .update(_, _, _, _):
+                    self.reloadCalendarDecorations(in: uiView)
+                case .error(let error):
+                    print("Error observing Realm changes: \(error)")
+                }
+            }
+        }
+
+        private func reloadCalendarDecorations(in uiView: UICalendarView) {
+            let monthComponents = uiView.visibleDateComponents
             let components = (1...31).compactMap { day -> DateComponents? in
                 guard let year = monthComponents.year, let month = monthComponents.month else {
                     return nil
                 }
                 return DateComponents(year: year, month: month, day: day)
             }
-            await MainActor.run {
+            DispatchQueue.main.async {
                 uiView.reloadDecorations(forDateComponents: components, animated: true)
             }
         }
-    }
-
-    class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
-        var parent: CalendarView
-        private let didSelectDate: (_ dateComponents: DateComponents) -> Void
-        // Viewをキャッシュするとエラーになる  https://stackoverflow.com/questions/78517446/uicalendarview-nsinvalidargumentexception-error
-        var decorationCache: [DateComponents: DecorationInfo] = [:]
-        
-        init(
-            parent: CalendarView,
-            didSelectDate: @escaping (_ dateComponents: DateComponents) -> Void
-        ) {
-            self.parent = parent
-            self.didSelectDate = didSelectDate
-        }
 
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            if let decoration = decorationCache[dateComponents] {
-                return buildDecoration(info: decoration)
+            return calculateDecoration(dateComponents: dateComponents)
+        }
+
+        func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+            guard let dateComponents = dateComponents else { return }
+            parent.didSelectDate(dateComponents)
+        }
+
+        private func calculateDecoration(dateComponents: DateComponents) -> UICalendarView.Decoration? {
+            let dateEvents = getDateEvents(dateComponents)
+            let dayOTJobs = parent.otJobs.filter { $0.date.isSameDay(dateComponents.date ?? Date()) }
+            let dayJob = parent.jobs.first { job in
+                dateEvents.contains { event in event.summary == job.name }
             }
-            Task.detached {
-                let decoration = self.caluculateDecoration(dateComponents: dateComponents)
-                await MainActor.run {
-                    self.decorationCache[dateComponents] = decoration
-                    calendarView.reloadDecorations(forDateComponents: [dateComponents], animated: false)
+            let paymentDayJob = parent.jobs.first { job in
+                let paymentDay = job.getPaymentDay(year: dateComponents.year ?? 0, month: dateComponents.month ?? 0)
+                return paymentDay.isSameDay(dateComponents.date ?? Date())
+            }
+
+            if let paymentDayJob = paymentDayJob {
+                if let dayJob = dayJob {
+                    return .image(
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(dayJob.color.toColor()), UIColor(paymentDayJob.color.toColor())]))
+                    )
                 }
+                if !dayOTJobs.isEmpty {
+                    return .image(
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())]))
+                    )
+                }
+                if !dateEvents.isEmpty && !parent.isShowOnlyJobEvent {
+                    return .image(
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())]))
+                    )
+                }
+                return .image(UIImage(systemName: "yensign"), color: UIColor(paymentDayJob.color.toColor()))
+            }
+            if let dayJob = dayJob {
+                return .default(color: UIColor(dayJob.color.toColor()))
+            }
+            if !dayOTJobs.isEmpty {
+                return .default(color: UIColor(.secondary))
+            }
+            if !dateEvents.isEmpty {
+                return .default(color: UIColor(.secondary))
             }
             return nil
         }
-        
-        func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-            guard let dateComponents = dateComponents else {
-                return
-            }
-            didSelectDate(dateComponents)
-        }
-        
-        private func buildDecoration(info: DecorationInfo) -> UICalendarView.Decoration? {
-            switch info.type {
-            case .none:
-                return nil
-            case .circle:
-                return .default(color: info.primaryColor)
-            case .payment:
-                return .image(UIImage(systemName: "seal"), color: info.primaryColor)
-            case .circlePayment:
-                guard let primaryColor = info.primaryColor, let secondaryColor = info.secondaryColor else { return nil }
-                return .image(
-                    UIImage(
-                        named: "custom.seal.badge",
-                        in: nil,
-                        with: UIImage.SymbolConfiguration(paletteColors: [primaryColor, secondaryColor])
-                    )
+
+        private func getDateEvents(_ dateComponents: DateComponents) -> Results<Event> {
+            let activeCalendarIds = parent.activeCalendars.map { $0.id }
+            let date = dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date()
+
+            let predicate: NSPredicate
+            if parent.isShowOnlyJobEvent {
+                predicate = NSPredicate(
+                    format: "start <= %@ AND end > %@ AND calendarId IN %@ AND summary IN %@",
+                    date.endOfDay as NSDate,
+                    date as NSDate,
+                    activeCalendarIds,
+                    parent.jobs.map { $0.name }
+                )
+            } else {
+                predicate = NSPredicate(
+                    format: "start <= %@ AND end > %@ AND calendarId IN %@",
+                    date.endOfDay as NSDate,
+                    date as NSDate,
+                    activeCalendarIds
                 )
             }
-        }
-        
-        private func caluculateDecoration(dateComponents: DateComponents) -> DecorationInfo {
-            let dateEvents = self.getDateEvents(dateComponents)
-            let dayOTJobs = self.parent.otJobs.filter { $0.date.isSameDay(dateComponents.date ?? Date()) }
-            let dayJob = self.parent.jobs.first(where: { job in
-                dateEvents.contains(where: { event in
-                    event.summary == job.name
-                })
-            })
-            
-            let paymentDayJob = self.parent.jobs.first(where: { job in
-                let paymentDay = job.getPaymentDay(year: dateComponents.year ?? 0, month: dateComponents.month ?? 0)
-                return paymentDay.isSameDay(dateComponents.date ?? Date())
-            })
-            // バイト + 給料日
-            if let paymentDayJob = paymentDayJob, let dayJob = dayJob {
-                return DecorationInfo(type: .circlePayment, primaryColor: UIColor(dayJob.color.toColor()), secondaryColor: UIColor(paymentDayJob.color.toColor()))
-            }
-            // 単発バイト + 給料日
-            if let paymentDayJob = paymentDayJob, !dayOTJobs.isEmpty {
-                return DecorationInfo(type: .circlePayment, primaryColor: UIColor(paymentDayJob.color.toColor()), secondaryColor: UIColor(.secondary))
-            }
-            // 予定 + 給料日
-            if let paymentDayJob = paymentDayJob, !dateEvents.isEmpty && !CalendarManager.shared.isShowOnlyJobEvent {
-                return DecorationInfo(type: .circlePayment, primaryColor: UIColor(.secondary), secondaryColor: UIColor(paymentDayJob.color.toColor()))
-            }
-            // 給料日
-            if let paymentDayJob = paymentDayJob {
-                return DecorationInfo(type: .payment, primaryColor: UIColor(paymentDayJob.color.toColor()))
-            }
-            // バイト
-            if let dayJob = dayJob {
-                return DecorationInfo(type: .circle, primaryColor: UIColor(dayJob.color.toColor()))
-            }
-            // 単発バイト
-            if !dayOTJobs.isEmpty {
-                return DecorationInfo(type: .circle)
-            }
-            // 予定
-            if !dateEvents.isEmpty {
-                return DecorationInfo(type: .circle)
-            }
-            return DecorationInfo(type: .none)
-        }
-        
-        private func getDateEvents(_ dateComponents: DateComponents) -> Results<Event> {
-            // swiftlint:disable:next force_try
-            let realm = try! Realm()
-            let events = realm.objects(Event.self)
-            let activeCalendarIds = parent.activeCalendars.map { $0.id }
-            if parent.isShowOnlyJobEvent {
-                return events.where({
-                    $0.start <= dateComponents.date?.endOfDay ?? Date() &&
-                    $0.end > dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date() &&
-                    $0.summary.in(parent.jobs.map { $0.name }) &&
-                    $0.calendarId.in(activeCalendarIds)
-                })
-            } else {
-                return events.where({
-                    $0.start <= dateComponents.date?.endOfDay ?? Date() &&
-                    $0.end > dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date() &&
-                    $0.calendarId.in(activeCalendarIds)
-                })
-            }
-        }
-    }
-}
 
-struct DecorationInfo: Identifiable {
-    enum DecorationType {
-        case none
-        case circle
-        case payment
-        case circlePayment
+            return realm.objects(Event.self).filter(predicate)
+        }
     }
-    let id = UUID()
-    let type: DecorationType
-    var primaryColor: UIColor? = UIColor(.secondary)
-    var secondaryColor: UIColor?
 }

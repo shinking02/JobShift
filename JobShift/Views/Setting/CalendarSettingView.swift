@@ -13,11 +13,15 @@ struct CalendarSettingView: View {
                         Text(calendar.summary).tag(calendar)
                     }
                 }
-                .onChange(of: selectedDefaultCalendar) { CalendarManager.shared.setDefaultCalendar(selectedDefaultCalendar) }
+                .onChange(of: selectedDefaultCalendar) {
+                    CalendarManager.shared.setDefaultCalendar(selectedDefaultCalendar)
+                }
                 Toggle(isOn: $isShowOnlyJobEvent) {
                     Text("バイト予定のみ表示")
                 }
-                .onChange(of: isShowOnlyJobEvent) { CalendarManager.shared.setIsShowOnlyJobEvent(isShowOnlyJobEvent) }
+                .onChange(of: isShowOnlyJobEvent) {
+                    CalendarManager.shared.setIsShowOnlyJobEvents(isShowOnlyJobEvent)
+                }
             }
             Section(header: Text("使用するカレンダー")) {
                 ForEach($calendars) { $calendar in
@@ -30,7 +34,6 @@ struct CalendarSettingView: View {
         .onAppear {
             calendars = CalendarManager.shared.calendars
             isShowOnlyJobEvent = Storage.getIsShowOnlyJobEvent()
-            selectedDefaultCalendar = CalendarManager.shared.defaultCalendar
         }
         .navigationTitle("カレンダー")
         .navigationBarTitleDisplayMode(.inline)

@@ -59,7 +59,7 @@ struct DeveloperSettingView: View {
                 .tint(.red)
                 
             }
-            .navigationTitle("開発者向け設定")
+            .navigationTitle("開発者向け")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

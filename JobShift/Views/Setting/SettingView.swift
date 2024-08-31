@@ -22,15 +22,15 @@ struct SettingView: View {
                     NavigationLink(destination: NotificationSettingView()) {
                         Label("通知", systemImage: "bell")
                     }
+                    NavigationLink(destination: DetailSettingView()) {
+                        Label("詳細", systemImage: "slider.horizontal.3")
+                    }
                 }
                 Section(footer:
                     Text("© 2024 Shin Kawakami")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundStyle(.secondary)
                 ) {
-                    NavigationLink(destination: SubmitIssueView()) {
-                        Label("要望", systemImage: "text.bubble")
-                    }
                     NavigationLink(
                         destination: LicenseListView()
                             .navigationTitle("ライセンス")
@@ -39,7 +39,7 @@ struct SettingView: View {
                         Label("ライセンス", systemImage: "book.and.wrench")
                     }
                     NavigationLink(destination: DeveloperSettingView()) {
-                        Label("開発者向け設定", systemImage: "wrench.and.screwdriver")
+                        Label("開発者向け", systemImage: "wrench.and.screwdriver")
                     }
                 }
             }

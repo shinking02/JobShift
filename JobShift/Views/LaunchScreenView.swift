@@ -66,7 +66,7 @@ struct LaunchScreenView: View {
             if !appState.isSignedIn {
                 return
             }
-            await CalendarManager.shared.syncAllEvents()
+            await CalendarManager.shared.syncGoogleCalendar(skipSyncCalendarList: false)
             appState.finishFirstSyncProcess = true
         }
     }

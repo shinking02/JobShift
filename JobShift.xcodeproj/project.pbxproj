@@ -14,7 +14,6 @@
 		540C937D2BD3A511009AE904 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C937C2BD3A511009AE904 /* CalendarManager.swift */; };
 		540C937F2BD3E521009AE904 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C937E2BD3E521009AE904 /* Event.swift */; };
 		540C93812BD41C86009AE904 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93802BD41C86009AE904 /* Storage.swift */; };
-		540C93832BD4E43D009AE904 /* UserCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93822BD4E43D009AE904 /* UserCalendar.swift */; };
 		540C93852BD50185009AE904 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93842BD50185009AE904 /* ContentView.swift */; };
 		540C93872BD5031A009AE904 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93862BD5031A009AE904 /* Tab.swift */; };
 		540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540C93882BD50339009AE904 /* ButtomSheetHelper.swift */; };
@@ -38,7 +37,6 @@
 		5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360692BE210D4002DDF68 /* OTJobAddView.swift */; };
 		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
 		54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDD2C2C38F4004FD448 /* WillDisappear.swift */; };
-		54397BE02C2C3A03004FD448 /* SubmitIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */; };
 		54397BE22C2C4E6C004FD448 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE12C2C4E6C004FD448 /* Env.swift */; };
 		54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE42C2C558E004FD448 /* NavigationTabsView.swift */; };
 		54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE32C2C558E004FD448 /* CustomHeaderView.swift */; };
@@ -48,6 +46,8 @@
 		543CF0AF2BE52EE6002E5D90 /* ShiftSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */; };
 		543CF0B12BE60638002E5D90 /* RealmDataBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0B02BE60638002E5D90 /* RealmDataBaseView.swift */; };
 		543CF0B32BE64BBA002E5D90 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0B22BE64BBA002E5D90 /* EventRowView.swift */; };
+		5442B19B2C83039800699895 /* SuggestEventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B19A2C83039800699895 /* SuggestEventRowView.swift */; };
+		5442B19D2C83178100699895 /* DetailSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B19C2C83178000699895 /* DetailSettingView.swift */; };
 		544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */; };
 		5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */; };
 		5465E5B62BDD4BEF00626AAB /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465E5B52BDD4BEF00626AAB /* DateExtension.swift */; };
@@ -186,6 +186,7 @@
 		54B6BE712BDAB08D0099A519 /* AllowStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */; };
 		54B6BE762BDBD20D0099A519 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 54B6BE752BDBD20D0099A519 /* Shimmer */; };
 		54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */; };
+		54D1691D2C82EB54003989F0 /* EventAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D1691C2C82EB54003989F0 /* EventAddView.swift */; };
 		54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D504EB2BF4C9210033C716 /* OTJobRowView.swift */; };
 		54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */; };
 		54E2C7ED2BE280D100D4184F /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2C7EC2BE280D100D4184F /* SalaryView.swift */; };
@@ -193,6 +194,8 @@
 		54F7378C2B259702004A4975 /* JobShiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F7378B2B259702004A4975 /* JobShiftApp.swift */; };
 		54F737922B259703004A4975 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737912B259703004A4975 /* Assets.xcassets */; };
 		54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F737942B259703004A4975 /* Preview Assets.xcassets */; };
+		54FF2B852C829CD400901E60 /* EventEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FF2B842C829CD400901E60 /* EventEditView.swift */; };
+		54FF2B872C82B09C00901E60 /* UserCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FF2B862C82B09C00901E60 /* UserCalendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,7 +206,6 @@
 		540C937C2BD3A511009AE904 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		540C937E2BD3E521009AE904 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		540C93802BD41C86009AE904 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		540C93822BD4E43D009AE904 /* UserCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalendar.swift; sourceTree = "<group>"; };
 		540C93842BD50185009AE904 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		540C93862BD5031A009AE904 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		540C93882BD50339009AE904 /* ButtomSheetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomSheetHelper.swift; sourceTree = "<group>"; };
@@ -228,7 +230,6 @@
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		54397BDD2C2C38F4004FD448 /* WillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappear.swift; sourceTree = "<group>"; };
-		54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitIssueView.swift; sourceTree = "<group>"; };
 		54397BE12C2C4E6C004FD448 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		54397BE32C2C558E004FD448 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		54397BE42C2C558E004FD448 /* NavigationTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabsView.swift; sourceTree = "<group>"; };
@@ -238,6 +239,8 @@
 		543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftSheetView.swift; sourceTree = "<group>"; };
 		543CF0B02BE60638002E5D90 /* RealmDataBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBaseView.swift; sourceTree = "<group>"; };
 		543CF0B22BE64BBA002E5D90 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
+		5442B19A2C83039800699895 /* SuggestEventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestEventRowView.swift; sourceTree = "<group>"; };
+		5442B19C2C83178000699895 /* DetailSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingView.swift; sourceTree = "<group>"; };
 		544B3F6D2BDD08D300EFBD4B /* OBWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBWelcomeView.swift; sourceTree = "<group>"; };
 		5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV4.swift; sourceTree = "<group>"; };
 		5465E5B52BDD4BEF00626AAB /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -256,6 +259,7 @@
 		548BA6E22BE8B3D100933A64 /* JobExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobExtension.swift; sourceTree = "<group>"; };
 		54B6BE702BDAB08C0099A519 /* AllowStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowStatusView.swift; sourceTree = "<group>"; };
 		54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperSettingView.swift; sourceTree = "<group>"; };
+		54D1691C2C82EB54003989F0 /* EventAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddView.swift; sourceTree = "<group>"; };
 		54D504EB2BF4C9210033C716 /* OTJobRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobRowView.swift; sourceTree = "<group>"; };
 		54E2C7E82BE2397B00D4184F /* OTJobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobEditView.swift; sourceTree = "<group>"; };
 		54E2C7EC2BE280D100D4184F /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 		54F7378B2B259702004A4975 /* JobShiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobShiftApp.swift; sourceTree = "<group>"; };
 		54F737912B259703004A4975 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F737942B259703004A4975 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		54FF2B842C829CD400901E60 /* EventEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditView.swift; sourceTree = "<group>"; };
+		54FF2B862C82B09C00901E60 /* UserCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,7 +426,7 @@
 				541762B52C206C3F00FA0DB9 /* SalaryManager.swift */,
 				540C937C2BD3A511009AE904 /* CalendarManager.swift */,
 				540C937E2BD3E521009AE904 /* Event.swift */,
-				540C93822BD4E43D009AE904 /* UserCalendar.swift */,
+				54FF2B862C82B09C00901E60 /* UserCalendar.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -447,6 +453,8 @@
 			children = (
 				540C93A42BD7F222009AE904 /* Parts */,
 				540C938D2BD50381009AE904 /* ShiftView.swift */,
+				54FF2B842C829CD400901E60 /* EventEditView.swift */,
+				54D1691C2C82EB54003989F0 /* EventAddView.swift */,
 				543CF0AE2BE52EE6002E5D90 /* ShiftSheetView.swift */,
 			);
 			path = Shift;
@@ -469,9 +477,9 @@
 				5465E5BE2BDE8F4900626AAB /* JobSetting */,
 				5465E5BB2BDE8BB400626AAB /* JobSettingView.swift */,
 				540C93AF2BD9280B009AE904 /* ProfileSheetView.swift */,
-				54397BDF2C2C3A03004FD448 /* SubmitIssueView.swift */,
 				540C93B22BD94E90009AE904 /* CalendarSettingView.swift */,
 				540C93B72BD9D254009AE904 /* NotificationSettingView.swift */,
+				5442B19C2C83178000699895 /* DetailSettingView.swift */,
 				54B6BE772BDBE8DB0099A519 /* DeveloperSettingView.swift */,
 				5465E5BD2BDE8F3F00626AAB /* DeveloperSetting */,
 			);
@@ -484,6 +492,7 @@
 				540C93882BD50339009AE904 /* ButtomSheetHelper.swift */,
 				543CF0AC2BE51D43002E5D90 /* CalendarView.swift */,
 				543CF0B22BE64BBA002E5D90 /* EventRowView.swift */,
+				5442B19A2C83039800699895 /* SuggestEventRowView.swift */,
 				540DA3422C076031008A42E7 /* PaymentDayRowView.swift */,
 				54D504EB2BF4C9210033C716 /* OTJobRowView.swift */,
 			);
@@ -890,8 +899,8 @@
 				5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */,
 				54397BE22C2C4E6C004FD448 /* Env.swift in Sources */,
 				540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */,
-				54397BE02C2C3A03004FD448 /* SubmitIssueView.swift in Sources */,
 				540DA3432C076031008A42E7 /* PaymentDayRowView.swift in Sources */,
+				5442B19B2C83039800699895 /* SuggestEventRowView.swift in Sources */,
 				540C93922BD503ED009AE904 /* SettingView.swift in Sources */,
 				540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */,
 				541762B62C206C3F00FA0DB9 /* SalaryManager.swift in Sources */,
@@ -903,6 +912,7 @@
 				5465E5CC2BDF60CE00626AAB /* WageEditView.swift in Sources */,
 				540C936F2BD2998A009AE904 /* LaunchScreenView.swift in Sources */,
 				540C93A32BD5461F009AE904 /* CustomNavigationTitle.swift in Sources */,
+				54FF2B872C82B09C00901E60 /* UserCalendar.swift in Sources */,
 				54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */,
 				54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */,
 				540C93B82BD9D254009AE904 /* NotificationSettingView.swift in Sources */,
@@ -916,10 +926,12 @@
 				540C93772BD35646009AE904 /* AppState.swift in Sources */,
 				5465E5C62BDF19BF00626AAB /* NumberTextField.swift in Sources */,
 				542360682BE2004B002DDF68 /* JobEditView.swift in Sources */,
+				54D1691D2C82EB54003989F0 /* EventAddView.swift in Sources */,
 				540FA4932BDD18B100C32E7E /* JobUtils.swift in Sources */,
 				544B3F6E2BDD08D300EFBD4B /* OBWelcomeView.swift in Sources */,
 				54D504EC2BF4C9210033C716 /* OTJobRowView.swift in Sources */,
-				540C93832BD4E43D009AE904 /* UserCalendar.swift in Sources */,
+				5442B19D2C83178100699895 /* DetailSettingView.swift in Sources */,
+				54FF2B852C829CD400901E60 /* EventEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
