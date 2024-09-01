@@ -16,6 +16,7 @@ public extension View {
         })
     }
 }
+
 public struct CustomNavigationTitleView<RightIcon: View>: UIViewControllerRepresentable {
     @ViewBuilder public var rightIcon: () -> RightIcon
     
@@ -33,23 +34,23 @@ public struct CustomNavigationTitleView<RightIcon: View>: UIViewControllerRepres
             // buttomSheetHelperのsheetが開いている状態では表示されないので完全に閉じるのを待つ
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.isInitial = false
-                self.setRightIcon()
+                self.setRightIcon(animation: true)
             }
         }
         
         override func viewWillAppear(_ animated: Bool) {
-            setRightIcon()
+            setRightIcon(animation: false)
             super.viewWillAppear(animated)
         }
         
-        private func setRightIcon() {
+        private func setRightIcon(animation: Bool) {
             guard !isInitial else { return }
             guard let navigationController = self.navigationController, let navigationItem = navigationController.visibleViewController?.navigationItem else { return }
             
             let contentView = UIHostingController(rootView: rightContent())
             contentView.view.backgroundColor = .clear
             
-            UIView.transition(with: navigationController.navigationBar, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            UIView.transition(with: navigationController.navigationBar, duration: animation ? 0.3 : 0, options: .transitionCrossDissolve, animations: {
                 // https://github.com/sebjvidal/UINavigationItem-LargeTitleAccessoryView-Demo
                 navigationItem.perform(Selector(("_setLargeTitleAccessoryView:")), with: contentView.view)
                 navigationItem.setValue(false, forKey: "_alignLargeTitleAccessoryViewToBaseline")

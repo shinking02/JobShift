@@ -48,7 +48,7 @@ struct EventAddView: View {
                         }
                         dismiss()
                     }
-                    .disabled(start >= end)
+                    .disabled(isAllDay ? !start.isSameDay(end) && start >= end : start >= end)
                 }
             }
         }

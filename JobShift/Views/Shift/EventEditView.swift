@@ -73,7 +73,7 @@ struct EventEditView: View {
                         }
                         dismiss()
                     }
-                    .disabled(start >= end || summary.isEmpty)
+                    .disabled((isAllDay ? !start.isSameDay(end) && start >= end : start >= end) || summary.isEmpty)
                 }
             }
             .onAppear {

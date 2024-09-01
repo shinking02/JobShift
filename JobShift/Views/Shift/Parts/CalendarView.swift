@@ -103,20 +103,20 @@ struct CalendarView: UIViewRepresentable {
             if let paymentDayJob = paymentDayJob {
                 if let dayJob = dayJob {
                     return .image(
-                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(dayJob.color.toColor()), UIColor(paymentDayJob.color.toColor())]))
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(dayJob.color.toColor()), UIColor(paymentDayJob.color.toColor())])), size: .large
                     )
                 }
                 if !dayOTJobs.isEmpty {
                     return .image(
-                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())]))
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())])), size: .large
                     )
                 }
                 if !dateEvents.isEmpty && !parent.isShowOnlyJobEvent {
                     return .image(
-                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())]))
+                        UIImage(named: "custom.yensign.badge", in: nil, with: UIImage.SymbolConfiguration(paletteColors: [UIColor(.secondary), UIColor(paymentDayJob.color.toColor())])), size: .large
                     )
                 }
-                return .image(UIImage(systemName: "yensign"), color: UIColor(paymentDayJob.color.toColor()))
+                return .image(UIImage(systemName: "yensign"), color: UIColor(paymentDayJob.color.toColor()), size: .large)
             }
             if let dayJob = dayJob {
                 return .default(color: UIColor(dayJob.color.toColor()))
@@ -133,20 +133,33 @@ struct CalendarView: UIViewRepresentable {
         private func getDateEvents(_ dateComponents: DateComponents) -> Results<Event> {
             let activeCalendarIds = parent.activeCalendars.map { $0.id }
             let date = dateComponents.date?.fixed(hour: 9, minute: 0) ?? Date()
-
+            let startOfDay = date.startOfDay
+            let endOfDay = date.endOfDay
+            
             let predicate: NSPredicate
             if parent.isShowOnlyJobEvent {
                 predicate = NSPredicate(
-                    format: "start <= %@ AND end > %@ AND calendarId IN %@ AND summary IN %@",
-                    date.endOfDay as NSDate,
+                    format: "(start <= %@ AND end > %@ AND calendarId IN %@ AND summary IN %@) OR " +
+                            "(start >= %@ AND end <= %@ AND start <= %@ AND calendarId IN %@ AND summary IN %@)",
+                    endOfDay as NSDate,
+                    date as NSDate,
+                    activeCalendarIds,
+                    parent.jobs.map { $0.name },
+                    startOfDay as NSDate,
+                    date as NSDate,
                     date as NSDate,
                     activeCalendarIds,
                     parent.jobs.map { $0.name }
                 )
             } else {
                 predicate = NSPredicate(
-                    format: "start <= %@ AND end > %@ AND calendarId IN %@",
-                    date.endOfDay as NSDate,
+                    format: "(start <= %@ AND end > %@ AND calendarId IN %@) OR " +
+                            "(start >= %@ AND end <= %@ AND start <= %@ AND calendarId IN %@)",
+                    endOfDay as NSDate,
+                    date as NSDate,
+                    activeCalendarIds,
+                    startOfDay as NSDate,
+                    date as NSDate,
                     date as NSDate,
                     activeCalendarIds
                 )
@@ -154,5 +167,6 @@ struct CalendarView: UIViewRepresentable {
 
             return realm.objects(Event.self).filter(predicate)
         }
+
     }
 }

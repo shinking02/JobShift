@@ -18,7 +18,7 @@ struct SuggestEventRowView: View {
             Image(systemName: "brain.filled.head.profile")
                 .symbolEffect(.bounce.up.byLayer, value: appear)
                 .foregroundStyle(
-                    LinearGradient(colors: [.pink, .purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    LinearGradient(colors: [.orange, .pink, .purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
                 )
             Text(job.name)
                 .bold()
@@ -30,7 +30,7 @@ struct SuggestEventRowView: View {
                     .font(.caption)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(
-                        LinearGradient(colors: [.pink, .purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        LinearGradient(colors: [.orange, .pink, .purple, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
                     )
             }
         }

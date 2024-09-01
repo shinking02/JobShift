@@ -83,8 +83,8 @@ final class CalendarManager {
                                 realmEvent.summary = googleEvent.summary ?? ""
                                 realmEvent.calendarId = calendarId
                                 realmEvent.isAllDay = isAllDay
-                                realmEvent.start = googleEvent.start?.dateTime?.date ?? googleEvent.start?.date?.date ?? Date()
-                                realmEvent.end = googleEvent.end?.dateTime?.date ?? googleEvent.end?.date?.date ?? Date()
+                                realmEvent.start = googleEvent.start?.dateTime?.date ?? googleEvent.start?.date?.date.startOfDay ?? Date()
+                                realmEvent.end = googleEvent.end?.dateTime?.date ?? googleEvent.end?.date?.date.added(day: -1).endOfDay ?? Date() // For all-day events, the end date is one day later.
                                 
                                 try realm.write {
                                     realm.add(realmEvent, update: .modified)
@@ -134,8 +134,8 @@ final class CalendarManager {
     
     func addEvent(summary: String, startDate: Date, endDate: Date, isAllDay: Bool, calendarId: String) async {
         let googleEvent = GTLRCalendar_Event()
-        let gtlrStart = isAllDay ? GTLRDateTime(forAllDayWith: startDate) : GTLRDateTime(date: startDate)
-        let gtlrEnd = isAllDay ? GTLRDateTime(forAllDayWith: endDate) : GTLRDateTime(date: endDate)
+        let gtlrStart = isAllDay ? GTLRDateTime(forAllDayWith: startDate.fixed(hour: 12, minute: 0, second: 0)) : GTLRDateTime(date: startDate)
+        let gtlrEnd = isAllDay ? GTLRDateTime(forAllDayWith: endDate.fixed(hour: 12, minute: 0, second: 0).added(day: 1)) : GTLRDateTime(date: endDate) // For all-day events, the end date must be one day later.
         let eventStart = GTLRCalendar_EventDateTime()
         let eventEnd = GTLRCalendar_EventDateTime()
         
@@ -165,8 +165,8 @@ final class CalendarManager {
     
     func editEvent(event: Event, beforeCalendarId: String) async {
         let googleEvent = GTLRCalendar_Event()
-        let gtlrStart = event.isAllDay ? GTLRDateTime(forAllDayWith: event.start) : GTLRDateTime(date: event.start)
-        let gtlrEnd = event.isAllDay ? GTLRDateTime(forAllDayWith: event.end) : GTLRDateTime(date: event.end)
+        let gtlrStart = event.isAllDay ? GTLRDateTime(forAllDayWith: event.start.fixed(hour: 12, minute: 0, second: 0)) : GTLRDateTime(date: event.start)
+        let gtlrEnd = event.isAllDay ? GTLRDateTime(forAllDayWith: event.end.fixed(hour: 12, minute: 0, second: 0).added(day: 1)) : GTLRDateTime(date: event.end) // For all-day events, the end date must be one day later.
         let eventStart = GTLRCalendar_EventDateTime()
         let eventEnd = GTLRCalendar_EventDateTime()
         
