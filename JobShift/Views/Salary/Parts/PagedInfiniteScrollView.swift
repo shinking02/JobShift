@@ -113,7 +113,7 @@ public struct PagedInfiniteScrollView<Content: View, ChangeIndex>: UIViewControl
     /// If the boolean is false (no need to animate), the direction of the animation won't be used.
     ///
     /// In most of the cases you won't want to animate if the two values are equals because it would animate barely everytime during the app use.
-    public let shouldAnimateBetween: (ChangeIndex, ChangeIndex) -> (Bool, UIPageViewController.NavigationDirection)
+    public let shouldAnimateBetween: (ChangeIndex, ChangeIndex) -> (Bool, UIPageViewController.NavigationDirection?)
     
     /// The style for transitions between pages.
     public let transitionStyle: UIPageViewController.TransitionStyle
@@ -135,7 +135,7 @@ public struct PagedInfiniteScrollView<Content: View, ChangeIndex>: UIViewControl
         content: @escaping (ChangeIndex) -> Content,
         increaseIndexAction: @escaping (ChangeIndex) -> ChangeIndex?,
         decreaseIndexAction: @escaping (ChangeIndex) -> ChangeIndex?,
-        shouldAnimateBetween: @escaping (ChangeIndex, ChangeIndex) -> (Bool, UIPageViewController.NavigationDirection),
+        shouldAnimateBetween: @escaping (ChangeIndex, ChangeIndex) -> (Bool, UIPageViewController.NavigationDirection?),
         transitionStyle: UIPageViewController.TransitionStyle,
         navigationOrientation: UIPageViewController.NavigationOrientation
     ) {
@@ -151,14 +151,14 @@ public struct PagedInfiniteScrollView<Content: View, ChangeIndex>: UIViewControl
     public func makeUIViewController(context: Context) -> UIPageViewController {
         /// Creates the main view and set it in the ``UIPageViewController``.
         let convertedClosure: (ChangeIndex) -> UIViewController = { changeIndex in
-            return UIHostingController(rootView: content(changeIndex))
+            return UIHostingController(rootView: content(changeIndex).navigationBarHidden(false))
         }
         let changeIndexNotification: (ChangeIndex) -> () = { changeIndex in
             self.changeIndex.wrappedValue = changeIndex
         }
         let pageViewController = UIPagedInfiniteScrollView(content: convertedClosure, changeIndex: changeIndex.wrappedValue, changeIndexNotification: changeIndexNotification, increaseIndexAction: increaseIndexAction, decreaseIndexAction: decreaseIndexAction, transitionStyle: transitionStyle, navigationOrientation: navigationOrientation)
         
-        let initialViewController = UIHostingController(rootView: content(changeIndex.wrappedValue))
+        let initialViewController = UIHostingController(rootView: content(changeIndex.wrappedValue).navigationBarHidden(false))
         initialViewController.storedChangeIndex = changeIndex.wrappedValue
         pageViewController.setViewControllers([initialViewController], direction: .forward, animated: false, completion: nil)
         
@@ -171,11 +171,15 @@ public struct PagedInfiniteScrollView<Content: View, ChangeIndex>: UIViewControl
             return
         }
         
-        let shouldAnimate: (Bool, UIPageViewController.NavigationDirection) = shouldAnimateBetween(changeIndex.wrappedValue, currentIndex)
+        let shouldAnimate: (Bool, UIPageViewController.NavigationDirection?) = shouldAnimateBetween(changeIndex.wrappedValue, currentIndex)
         
-        let initialViewController = UIHostingController(rootView: content(changeIndex.wrappedValue))
+        guard let direction = shouldAnimate.1 else {
+            return
+        }
+        
+        let initialViewController = UIHostingController(rootView: content(changeIndex.wrappedValue).navigationBarHidden(false))
         initialViewController.storedChangeIndex = changeIndex.wrappedValue
-        uiViewController.setViewControllers([initialViewController], direction: shouldAnimate.1, animated: shouldAnimate.0, completion: nil)
+        uiViewController.setViewControllers([initialViewController], direction: direction, animated: shouldAnimate.0, completion: nil)
     }
 }
 

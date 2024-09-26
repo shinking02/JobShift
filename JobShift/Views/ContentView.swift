@@ -37,11 +37,10 @@ struct ContentView: View {
             content: {
                 OBWelcomeView(
                     title: "ようこそJobShiftへ",
-                    detailText: "リファクタ、動作の改善を行いました。",
+                    detailText: "全体的な動作の改善を行いました。",
                     bulletedListItems: [
-                        .init(title: "給料日", description: "給料日の月を設定できるようになりました。デフォルトでは翌月になっているため確認してみてください。", symbolName: "yensign"),
-                        .init(title: "動作の安定", description: "全体的な動作の改善を行いました。不具合等あれば報告お願いします。", symbolName: "swift"),
-                        .init(title: "注意", description: "最低限の機能でリリースしています。以前のバージョンまで存在した機能は今後実装予定です。", symbolName: "hammer.fill")
+                        .init(title: "給料日", description: "給料日の月を設定できるようになりました。デフォルトでは翌月になっています。", symbolName: "yensign"),
+                        .init(title: "パフォーマンス", description: "処理速度, 消費電力, Googleとの同期の安定性が向上しました。", symbolName: "swift"),
                     ],
                     boldButtonItem: .init(title: "続ける", action: {
                         isWelcomePresented = false

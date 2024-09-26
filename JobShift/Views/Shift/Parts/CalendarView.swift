@@ -32,17 +32,24 @@ struct CalendarView: UIViewRepresentable {
             }
             uiView.reloadDecorations(forDateComponents: components, animated: true)
         }
+        
+        if context.coordinator.reloadWorkItem != nil {
+            DispatchQueue.main.async {
+                context.coordinator.clearAllCaches()
+                context.coordinator.reloadCalendarDecorations(in: uiView)
+            }
+        }
     }
 
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
         var parent: CalendarView
         var realm: Realm
         var notificationToken: NotificationToken?
+        var reloadWorkItem: DispatchWorkItem?
         
         private var lastIsShowOnlyJobEvent: Bool
         private var eventCache = [DateComponents: Results<Event>]()
         private var decorationCache = [DateComponents: UICalendarView.Decoration?]()
-        private var reloadWorkItem: DispatchWorkItem?
 
         init(parent: CalendarView, didSelectDate: @escaping (_ dateComponents: DateComponents) -> Void) {
             self.parent = parent
@@ -74,12 +81,12 @@ struct CalendarView: UIViewRepresentable {
             }
         }
 
-        private func clearAllCaches() {
+        func clearAllCaches() {
             eventCache.removeAll()
             decorationCache.removeAll()
         }
 
-        private func reloadCalendarDecorations(in uiView: UICalendarView) {
+        func reloadCalendarDecorations(in uiView: UICalendarView) {
             reloadWorkItem?.cancel()
             reloadWorkItem = DispatchWorkItem {
                 DispatchQueue.main.async {
@@ -117,7 +124,7 @@ struct CalendarView: UIViewRepresentable {
             let dateEvents = getDateEvents(dateComponents)
             let dayOTJobs = parent.otJobs.filter { $0.date.isSameDay(dateComponents.date ?? Date()) }
             let dayJob = parent.jobs.first { job in dateEvents.contains { $0.summary == job.name } }
-            let paymentDayJob = parent.jobs.first { $0.getPaymentDay(year: dateComponents.year ?? 0, month: dateComponents.month ?? 0).isSameDay(dateComponents.date ?? Date()) }
+            let paymentDayJob = parent.jobs.first { $0.getPaymentDay(year: dateComponents.year ?? 0, month: dateComponents.month ?? 0).isSameDay(dateComponents.date ?? Date()) && $0.displayPaymentDay }
 
             if let paymentDayJob = paymentDayJob {
                 return createCustomDecoration(dayJob: dayJob, dayOTJobs: dayOTJobs, paymentDayJob: paymentDayJob, dateEvents: dateEvents)

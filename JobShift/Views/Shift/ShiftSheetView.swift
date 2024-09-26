@@ -38,7 +38,7 @@ struct ShiftSheetView: View {
     private var paymentDayJobs: [Job] {
         jobs.filter { job in
             let paymentDay = job.getPaymentDay(year: selectedDate.year, month: selectedDate.month)
-            return paymentDay.isSameDay(selectedDate)
+            return paymentDay.isSameDay(selectedDate) && job.displayPaymentDay
         }
     }
     
