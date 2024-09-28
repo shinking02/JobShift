@@ -1,21 +1,40 @@
 import SwiftUI
+import SwiftData
 
-struct SalaryAddSheetView: View {
-    @Binding var salary: JobSalary
-    @State var year = Date().year
-    @State var month = Date().month
-    @State private var salaryString = ""
-    @Environment(Job.self) private var job
+struct SelectableSalaryAddSheetView: View {
+    var date: Date;
+    @State var selectedJob: Job
+    @Query(sort: \Job.order) private var jobs: [Job]
     @Environment(\.dismiss) private var dismiss
+    @State private var year = Date().year
+    @State private var month = Date().month
+    @State private var salaryString = ""
     @State private var pickerIsPresented = false
     @State private var errorMessage = ""
     
     var body: some View {
-        let paymentDay = job.getPaymentDay(year: year, month: month)
-        let workInterval = job.getWorkInterval(year: year, month: month)
+        let paymentDay = selectedJob.getPaymentDay(year: year, month: month)
+        let workInterval = selectedJob.getWorkInterval(year: year, month: month)
         
         NavigationStack {
             Form {
+                Section {
+                    Picker("バイト", selection: $selectedJob) {
+                        ForEach(jobs, id: \.self) { job in
+                            Text(job.name)
+                        }
+                    }
+                    .onChange(of: selectedJob) {
+                        if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                            errorMessage = "入社日より前の給料は設定できません。"
+                        } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
+                            errorMessage = "この月の給与実績は既に追加されています。"
+                        } else {
+                            errorMessage = ""
+                        }
+                    }
+                }
+                
                 Section(
                     footer: Text(errorMessage).foregroundStyle(.red)
                 ) {
@@ -33,9 +52,9 @@ struct SalaryAddSheetView: View {
                     if pickerIsPresented {
                         YearMonthPicker(selectedYear: $year, selectedMonth: $month)
                             .onChange(of: [month, year]) {
-                                if job.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                                if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                                     errorMessage = "入社日より前の給料は設定できません。"
-                                } else if salary.histories.contains(where: { $0.year == year && $0.month == month }) {
+                                } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                                     errorMessage = "この月の給与実績は既に追加されています。"
                                 } else {
                                     errorMessage = ""
@@ -53,15 +72,6 @@ struct SalaryAddSheetView: View {
             }
             .navigationTitle("給与実績を追加")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                if job.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
-                    errorMessage = "入社日より前の給料は設定できません。"
-                } else if job.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
-                    errorMessage = "この月の給与実績は既に追加されています。"
-                } else {
-                    errorMessage = ""
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -72,7 +82,7 @@ struct SalaryAddSheetView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        salary.histories.append(
+                        selectedJob.salary.histories.append(
                             JobSalary.History(
                                 salary: Int(salaryString) ?? 0,
                                 year: year,
@@ -85,6 +95,21 @@ struct SalaryAddSheetView: View {
                     }
                     .disabled(salaryString.isEmpty || !errorMessage.isEmpty)
                 }
+            }
+        }
+        .onAppear {
+            year = date.year
+            month = date.month
+            let target = jobs.first { !$0.salary.histories.contains(where: { $0.year == date.year && $0.month == date.month }) }
+            if let target = target {
+                selectedJob = target
+            }
+            if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                errorMessage = "入社日より前の給料は設定できません。"
+            } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
+                errorMessage = "この月の給与実績は既に追加されています。"
+            } else {
+                errorMessage = ""
             }
         }
     }

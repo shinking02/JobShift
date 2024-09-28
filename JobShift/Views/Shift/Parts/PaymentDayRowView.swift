@@ -3,6 +3,8 @@ import SwiftUI
 
 struct PaymentDayRowView: View {
     let job: Job
+    let date: Date
+    @State private var salary = 0
     var body: some View {
         HStack(alignment: .center) {
             Rectangle()
@@ -13,11 +15,15 @@ struct PaymentDayRowView: View {
                 .bold()
                 .lineLimit(1)
             Spacer()
-            Text("150000円")
+            Text("\(salary)円")
                 .lineLimit(2)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
+        }
+        .onAppear {
+            let salaryData = SalaryManager.shared.getSalaryData(date: date, jobs: [job], dateMode: .month).first!
+            salary = salaryData.isConfirmed ? salaryData.confirmedSalary : salaryData.forecastSalary
         }
     }
 }

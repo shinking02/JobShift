@@ -1,20 +1,53 @@
 import Foundation
 import RealmSwift
 
-struct JobEvent: Identifiable {
+struct JobEvent: Identifiable, Hashable {
     var id = UUID()
     var event: Event
     var salary: Int
     var minutes: Int
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(event)
+        hasher.combine(salary)
+        hasher.combine(minutes)
+    }
+
+    static func == (lhs: JobEvent, rhs: JobEvent) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.event == rhs.event &&
+               lhs.salary == rhs.salary &&
+               lhs.minutes == rhs.minutes
+    }
 }
 
-struct JobSalaryData: Identifiable {
+
+struct JobSalaryData: Identifiable, Hashable {
     var id = UUID()
     var job: Job
     var events: [JobEvent]
+    var forecastSalary: Int
     var confirmedSalary: Int
     var isConfirmed: Bool
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(job)
+        hasher.combine(events)
+        hasher.combine(confirmedSalary)
+        hasher.combine(isConfirmed)
+    }
+
+    static func == (lhs: JobSalaryData, rhs: JobSalaryData) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.job == rhs.job &&
+               lhs.events == rhs.events &&
+               lhs.confirmedSalary == rhs.confirmedSalary &&
+               lhs.isConfirmed == rhs.isConfirmed
+    }
 }
+
 
 final class SalaryManager {
     static let shared: SalaryManager = .init()
@@ -147,9 +180,41 @@ final class SalaryManager {
     
     func getSalaryData(date: Date, jobs: [Job], dateMode: DateMode) -> [JobSalaryData] {
         let jobSalaryData: [JobSalaryData] = jobs.map { job in
-            let jobWorkInterval = job.getWorkInterval(year: date.year, month: dateMode == .month ? date.month : nil)
-            let events: [JobEvent] = getJobEvents(interval: jobWorkInterval, job: job)
-            return JobSalaryData(job: job, events: events, confirmedSalary: 0, isConfirmed: false)
+            if dateMode == .month {
+                let jobWorkInterval = job.getWorkInterval(year: date.year, month: dateMode == .month ? date.month : nil)
+                let jobStartDate = job.wages.sorted(by: { $0.start < $1.start }).first!.start
+                if jobStartDate > jobWorkInterval.end {
+                    return JobSalaryData(job: job, events: [], forecastSalary: 0, confirmedSalary: 0, isConfirmed: true)
+                }
+                
+                let events: [JobEvent] = getJobEvents(interval: jobWorkInterval, job: job)
+                let history = job.salary.histories.first { $0.year == date.year && $0.month == date.month }
+                let isConfirmed = history != nil
+                let confirmedSalary = max((history?.salary ?? 0) - (job.isCommuteWage ? job.commuteWage * events.count : 0), 0)
+                let forecastSalary = events.map(\.salary).reduce(0, +)
+                return JobSalaryData(job: job, events: events, forecastSalary: forecastSalary, confirmedSalary: confirmedSalary, isConfirmed: isConfirmed)
+            } else {
+                var totalConfirmedSalary = 0
+                var totalForecastSalary = 0
+                var allMonthsConfirmed = true
+                var allEvents: [JobEvent] = []
+                
+                for month in 1...12 {
+                    let jobWorkInterval = job.getWorkInterval(year: date.year, month: month)
+                    let events: [JobEvent] = getJobEvents(interval: jobWorkInterval, job: job)
+                    let history = job.salary.histories.first { $0.year == date.year && $0.month == month }
+                    
+                    totalForecastSalary += history != nil ? history!.salary : events.map(\.salary).reduce(0, +)
+                    let jobStartDate = job.wages.sorted(by: { $0.start < $1.start }).first!.start
+                    if let confirmedSalary = history?.salary {
+                        totalConfirmedSalary += confirmedSalary
+                    } else if jobStartDate < jobWorkInterval.end {
+                        allMonthsConfirmed = false
+                    }
+                    allEvents.append(contentsOf: events)
+                }
+                return JobSalaryData(job: job, events: allEvents, forecastSalary: totalForecastSalary, confirmedSalary: totalConfirmedSalary, isConfirmed: allMonthsConfirmed)
+            }
         }
         return jobSalaryData
     }

@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 enum DateMode: CaseIterable {
     case month
@@ -6,6 +7,7 @@ enum DateMode: CaseIterable {
 }
 
 struct SalaryView: View {
+    @Query private var jobs: [Job]
     @State private var dateMode: DateMode = .month
     @State private var includeCommuteWage = false
     @State private var showAddSalarySheet = false
@@ -26,7 +28,7 @@ struct SalaryView: View {
                     PagedInfiniteScrollView(
                         changeIndex: $selectedMonthDate,
                         content: { date in
-                            return SalaryContentView(date: date, dateMode: $dateMode, includeCommuteWage: $includeCommuteWage)
+                            return SalaryContentView(date: date, dateMode: dateMode, addSheetIsPresented: $showAddSalarySheet, includeCommuteWage: $includeCommuteWage)
                         },
                         increaseIndexAction: { date in
                             return date.added(month: 1)
@@ -46,7 +48,7 @@ struct SalaryView: View {
                     PagedInfiniteScrollView(
                         changeIndex: $selectedYearDate,
                         content: { date in
-                            return SalaryContentView(date: date, dateMode: $dateMode, includeCommuteWage: $includeCommuteWage)
+                            return SalaryContentView(date: date, dateMode: dateMode, addSheetIsPresented: $showAddSalarySheet, includeCommuteWage: $includeCommuteWage)
                         },
                         increaseIndexAction: { date in
                             return date.added(year: 1)
@@ -71,7 +73,7 @@ struct SalaryView: View {
                     .presentationDetents([.height(260)])
             }
             .sheet(isPresented: $showAddSalarySheet) {
-                Text("Add Salary Sheet")
+                SelectableSalaryAddSheetView(date: dateMode == .month ? selectedMonthDate : selectedYearDate, selectedJob: jobs.first!)
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(navigationTitle)
@@ -89,7 +91,9 @@ struct SalaryView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(
                         action: {
-                        includeCommuteWage.toggle()
+                            withAnimation {
+                                includeCommuteWage.toggle()
+                            }
                         },
                         label: {
                             Image(systemName: includeCommuteWage ? "tram.circle.fill" : "tram.circle")

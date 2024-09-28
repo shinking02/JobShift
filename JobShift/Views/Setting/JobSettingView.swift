@@ -31,7 +31,7 @@ struct JobSettingView: View {
                     }
                     .disabled(false)
                 }
-                if !otJobs.isEmpty && editMode?.wrappedValue == .inactive {
+                if !otJobs.isEmpty {
                     Section(header: Text("単発バイト")) {
                         ForEach(Set(otJobs.map { $0.date.year }).sorted(by: >), id: \.self) { year in
                             DisclosureGroup(

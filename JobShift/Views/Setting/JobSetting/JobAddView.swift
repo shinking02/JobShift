@@ -76,6 +76,18 @@ struct JobAddView: View {
                         Toggle("深夜手当", isOn: $job.isNightWage)
                     }
                 }
+                if job.salaryType == .hourly {
+                    Section {
+                        Toggle("休憩1", isOn: $job.breaks[0].isActive)
+                        if job.breaks[0].isActive {
+                            BreakPicker(jobBreak: $job.breaks[0])
+                        }
+                        Toggle("休憩2", isOn: $job.breaks[1].isActive)
+                        if job.breaks[1].isActive {
+                            BreakPicker(jobBreak: $job.breaks[1])
+                        }
+                    }
+                }
                 Section(
                     footer: Text(
                         job.salaryType == .hourly

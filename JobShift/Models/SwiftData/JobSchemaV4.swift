@@ -27,7 +27,6 @@ enum JobSchemaV4: VersionedSchema {
         init(
             name: String = "",
             color: JobColor = JobColor.red,
-            startDate: Date = Date(year: 2_010, month: 4, day: 1),
             salaryType: JobSalaryType = JobSalaryType.hourly,
             isNightWage: Bool = false,
             isHolidayWage: Bool = false,

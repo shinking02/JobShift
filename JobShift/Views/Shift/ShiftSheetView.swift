@@ -69,7 +69,7 @@ struct ShiftSheetView: View {
                 ForEach(paymentDayJobs) { job in
                     Group {
                         Divider()
-                        PaymentDayRowView(job: job)
+                        PaymentDayRowView(job: job, date: selectedDate)
                     }
                     .padding(.horizontal)
                 }
