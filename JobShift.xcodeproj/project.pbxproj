@@ -544,6 +544,13 @@
 			path = Parts;
 			sourceTree = "<group>";
 		};
+		542C0A3D2CA9370E0017BF4A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		5442B4032B940CAE0047434B /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +627,7 @@
 		54F7378A2B259702004A4975 /* JobShift */ = {
 			isa = PBXGroup;
 			children = (
+				542C0A3D2CA9370E0017BF4A /* Config */,
 				54F737912B259703004A4975 /* Assets.xcassets */,
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
