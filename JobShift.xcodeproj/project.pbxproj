@@ -42,6 +42,8 @@
 		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
 		542C0A272CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A262CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift */; };
 		542C0A292CA8004C0017BF4A /* SalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */; };
+		542C0A2B2CA8DE880017BF4A /* OTSalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */; };
+		542C0A2D2CA8F3300017BF4A /* OTSalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */; };
 		54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDD2C2C38F4004FD448 /* WillDisappear.swift */; };
 		54397BE22C2C4E6C004FD448 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE12C2C4E6C004FD448 /* Env.swift */; };
 		54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE42C2C558E004FD448 /* NavigationTabsView.swift */; };
@@ -239,6 +241,8 @@
 		5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV3.swift; sourceTree = "<group>"; };
 		542C0A262CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableSalaryAddSheetView.swift; sourceTree = "<group>"; };
 		542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailView.swift; sourceTree = "<group>"; };
+		542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSalaryRowView.swift; sourceTree = "<group>"; };
+		542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OTSalaryDetailView.swift; path = JobShift/Views/Salary/OTSalaryDetailView.swift; sourceTree = SOURCE_ROOT; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		54397BDD2C2C38F4004FD448 /* WillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappear.swift; sourceTree = "<group>"; };
@@ -477,6 +481,7 @@
 			children = (
 				540C93A52BD7F22C009AE904 /* Parts */,
 				54E2C7EC2BE280D100D4184F /* SalaryView.swift */,
+				542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */,
 				542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */,
 				540EE04E2CA159E200161080 /* SalaryContentView.swift */,
 			);
@@ -518,6 +523,7 @@
 			children = (
 				54397BE32C2C558E004FD448 /* CustomHeaderView.swift */,
 				540EE0562CA7A1F400161080 /* SalaryRowView.swift */,
+				542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */,
 				54397BE42C2C558E004FD448 /* NavigationTabsView.swift */,
 				540EE0582CA7A25A00161080 /* ConfirmChip.swift */,
 				543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */,
@@ -886,6 +892,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				542C0A2D2CA8F3300017BF4A /* OTSalaryDetailView.swift in Sources */,
 				540C937F2BD3E521009AE904 /* Event.swift in Sources */,
 				5465E5B62BDD4BEF00626AAB /* DateExtension.swift in Sources */,
 				540C93852BD50185009AE904 /* ContentView.swift in Sources */,
@@ -909,6 +916,7 @@
 				540C93A82BD7F26E009AE904 /* AppInfoView.swift in Sources */,
 				540EE0532CA19B6300161080 /* SalaryManager.swift in Sources */,
 				540EE0572CA7A1F400161080 /* SalaryRowView.swift in Sources */,
+				542C0A2B2CA8DE880017BF4A /* OTSalaryRowView.swift in Sources */,
 				540C93942BD508C3009AE904 /* TaskExtension.swift in Sources */,
 				540C93872BD5031A009AE904 /* Tab.swift in Sources */,
 				54E2C7ED2BE280D100D4184F /* SalaryView.swift in Sources */,
