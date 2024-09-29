@@ -43,4 +43,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-*.xcconfig
+JobShift/Config/*.xcconfig
