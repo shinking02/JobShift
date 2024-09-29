@@ -1,4 +1,5 @@
 {
+  "originHash" : "3d09fa2a0eca4837eb16eb9c3c1e9e12de1a1116263093ca82b95a37c169a509",
   "pins" : [
     {
       "identity" : "appauth-ios",
@@ -12,10 +13,10 @@
     {
       "identity" : "google-api-objectivec-client-for-rest",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/google/google-api-objectivec-client-for-rest",
+      "location" : "https://github.com/google/google-api-objectivec-client-for-rest.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3c73d07e416eb7ee5695b4218cb60276e924a365"
+        "revision" : "11941123a0d9c2641197fa83d57e6ff9f088b907"
       }
     },
     {
@@ -64,12 +65,21 @@
       }
     },
     {
+      "identity" : "permissionskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparrowcode/PermissionsKit",
+      "state" : {
+        "revision" : "8d6b3d6db7d0654a4e4fe31bbf6556dec6fc3d13",
+        "version" : "10.0.1"
+      }
+    },
+    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "374dd672af357732dccc135fecc905406fec3223",
-        "version" : "14.4.1"
+        "revision" : "4d815c6e6883bfdcb67cf755d0f0f29a4b399ea7",
+        "version" : "14.5.2"
       }
     },
     {
@@ -78,7 +88,7 @@
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "4de5a714ab44bf158afc3f5b7a4436f8bb8e7ddd"
+        "revision" : "3a9586b62042a4e010f3d3439b67a4779017fe07"
       }
     },
     {
@@ -116,7 +126,16 @@
         "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
         "version" : "2.1.1"
       }
+    },
+    {
+      "identity" : "swiftui-shimmer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/markiv/SwiftUI-Shimmer",
+      "state" : {
+        "revision" : "0226e21f9bf355d40e07e5f5e1c33679d50e167f",
+        "version" : "1.5.1"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
