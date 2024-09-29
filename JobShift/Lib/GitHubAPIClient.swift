@@ -8,7 +8,6 @@ struct Commit: Codable {
 class GitHubAPIClient {
     static let shared: GitHubAPIClient = .init()
     private let githubRepositoryURL = "https://api.github.com/repos/shinking02/JobShift"
-    private let env = try! LoadEnv()
     private init() {}
     
     func fetchLatestCommitHash(short: Bool) async -> String? {
@@ -35,7 +34,7 @@ class GitHubAPIClient {
         let url = URL(string: "\(githubRepositoryURL)/issues")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("token \(env.value("GITHUB_API_KEY") ?? "")", forHTTPHeaderField: "Authorization")
+        request.setValue("token \(ProcessInfo.processInfo.environment["API_KEY"] ?? "")", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let issue = [
