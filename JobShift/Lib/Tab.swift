@@ -15,16 +15,4 @@ enum Tab: String, CaseIterable {
             "gear"
         }
     }
-    
-    @ViewBuilder
-    var view: some View {
-        switch self {
-        case .shift:
-            ShiftView()
-        case .salary:
-            SalaryView()
-        case .setting:
-            SettingView()
-        }
-    }
 }
