@@ -44,7 +44,6 @@
 		542C0A292CA8004C0017BF4A /* SalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */; };
 		542C0A2B2CA8DE880017BF4A /* OTSalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */; };
 		542C0A2D2CA8F3300017BF4A /* OTSalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */; };
-		542C0A332CA929C70017BF4A /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 542C0A322CA929C20017BF4A /* .env */; };
 		54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDD2C2C38F4004FD448 /* WillDisappear.swift */; };
 		54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE42C2C558E004FD448 /* NavigationTabsView.swift */; };
 		54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE32C2C558E004FD448 /* CustomHeaderView.swift */; };
@@ -243,7 +242,6 @@
 		542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailView.swift; sourceTree = "<group>"; };
 		542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSalaryRowView.swift; sourceTree = "<group>"; };
 		542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OTSalaryDetailView.swift; path = JobShift/Views/Salary/OTSalaryDetailView.swift; sourceTree = SOURCE_ROOT; };
-		542C0A322CA929C20017BF4A /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		54397BDD2C2C38F4004FD448 /* WillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappear.swift; sourceTree = "<group>"; };
@@ -622,7 +620,6 @@
 		54F7378A2B259702004A4975 /* JobShift */ = {
 			isa = PBXGroup;
 			children = (
-				542C0A322CA929C20017BF4A /* .env */,
 				54F737912B259703004A4975 /* Assets.xcassets */,
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
@@ -840,7 +837,6 @@
 			files = (
 				54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */,
 				54E3931F2B25A8E20002D4EB /* .gitignore in Resources */,
-				542C0A332CA929C70017BF4A /* .env in Resources */,
 				54F737922B259703004A4975 /* Assets.xcassets in Resources */,
 				546D43EA2B7E00C50027D044 /* shapes.riv in Resources */,
 			);
