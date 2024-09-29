@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>APIKeys</key>
-	<dict>
-		<key>GITHUB_API_KEY</key>
-		<string>${GITHUB_API_KEY}</string>
-	</dict>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ja</string>
