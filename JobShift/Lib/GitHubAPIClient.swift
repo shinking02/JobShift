@@ -34,7 +34,7 @@ class GitHubAPIClient {
         let url = URL(string: "\(githubRepositoryURL)/issues")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("token \(Bundle.main.object(forInfoDictionaryKey: "GITHUB_API_KEY") as? String ?? "")", forHTTPHeaderField: "Authorization")
+        request.setValue("token \(ProcessInfo.processInfo.environment["API_KEY"] ?? "")", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let issue = [
