@@ -4,14 +4,32 @@ import SwiftData
 enum JobMigrationPlan: SchemaMigrationPlan {
     static var schemas: [VersionedSchema.Type] {
         [
+            JobSchemaV1.self,
+            JobSchemaV2.self,
             JobSchemaV3.self,
             JobSchemaV4.self
         ]
     }
     static var stages: [MigrationStage] {
         [
+            migrateV1toV2,
+            migrateV2toV3,
             migrateV3toV4
         ]
+    }
+    
+    static let migrateV1toV2 = MigrationStage.lightweight(fromVersion: JobSchemaV1.self, toVersion: JobSchemaV2.self)
+    
+    static let migrateV2toV3 = MigrationStage.custom(
+        fromVersion: JobSchemaV2.self,
+        toVersion: JobSchemaV3.self,
+        willMigrate: nil
+    ) { context in
+        let jobs = try? context.fetch(FetchDescriptor<JobSchemaV3.Job>())
+        jobs?.forEach { job in
+            job.newEventSummaries = job.eventSummaries.map { EventSummary(eventId: $0.key, summary: $0.value) }
+        }
+        try? context.save()
     }
     
     static var v3Jobs: [JobSchemaV3.Job] = []
@@ -25,13 +43,6 @@ enum JobMigrationPlan: SchemaMigrationPlan {
             let v4Jobs = try? context.fetch(FetchDescriptor<JobSchemaV4.Job>())
             v4Jobs?.forEach { v4Job in
                 guard let v3Job = v3Jobs.first(where: { $0.id == v4Job.id }) else { return }
-//                v4Job.name = v3Job.name
-//                v4Job.color = v3Job.color
-//                v4Job.startDate = v3Job.startDate
-//                v4Job.isNightWage = v3Job.isNightWage
-//                v4Job.isHolidayWage = v3Job.isHolidayWage
-//                v4Job.commuteWage = v3Job.commuteWage
-//                v4Job.displayPaymentDay = v3Job.displayPaymentDay
                 v4Job.salaryType = v3Job.isDailyWage ? .daily : .hourly
                 v4Job.breaks = [
                     JobBreak(
@@ -54,7 +65,7 @@ enum JobMigrationPlan: SchemaMigrationPlan {
                 v4Job.salary = JobSalary(
                     cutOffDay: v3Job.salaryCutoffDay,
                     paymentDay: v3Job.salaryPaymentDay,
-                    paymentType: .sameMonth,
+                    paymentType: .nextMonth,
                     histories: v3Job.salaryHistories.map { history in
                         return JobSalary.History(
                             salary: history.salary,
