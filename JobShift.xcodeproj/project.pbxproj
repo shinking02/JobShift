@@ -44,8 +44,9 @@
 		542C0A292CA8004C0017BF4A /* SalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */; };
 		542C0A2B2CA8DE880017BF4A /* OTSalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */; };
 		542C0A2D2CA8F3300017BF4A /* OTSalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */; };
+		542C0A2F2CA904100017BF4A /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 542C0A2E2CA904040017BF4A /* Config.xcconfig */; };
+		542C0A312CA9050F0017BF4A /* APIKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A302CA9050F0017BF4A /* APIKeyManager.swift */; };
 		54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BDD2C2C38F4004FD448 /* WillDisappear.swift */; };
-		54397BE22C2C4E6C004FD448 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE12C2C4E6C004FD448 /* Env.swift */; };
 		54397BE52C2C558E004FD448 /* NavigationTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE42C2C558E004FD448 /* NavigationTabsView.swift */; };
 		54397BE62C2C558E004FD448 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54397BE32C2C558E004FD448 /* CustomHeaderView.swift */; };
 		543CF0A92BE47350002E5D90 /* PagedInfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */; };
@@ -243,10 +244,11 @@
 		542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailView.swift; sourceTree = "<group>"; };
 		542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSalaryRowView.swift; sourceTree = "<group>"; };
 		542C0A2C2CA8F3300017BF4A /* OTSalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OTSalaryDetailView.swift; path = JobShift/Views/Salary/OTSalaryDetailView.swift; sourceTree = SOURCE_ROOT; };
+		542C0A2E2CA904040017BF4A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		542C0A302CA9050F0017BF4A /* APIKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyManager.swift; sourceTree = "<group>"; };
 		543340EE2B3D83B7002C302A /* JobShift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobShift.entitlements; sourceTree = "<group>"; };
 		543340EF2B3DD725002C302A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		54397BDD2C2C38F4004FD448 /* WillDisappear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappear.swift; sourceTree = "<group>"; };
-		54397BE12C2C4E6C004FD448 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		54397BE32C2C558E004FD448 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		54397BE42C2C558E004FD448 /* NavigationTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabsView.swift; sourceTree = "<group>"; };
 		543CF0A82BE47350002E5D90 /* PagedInfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedInfiniteScrollView.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				540C93782BD360FC009AE904 /* AppError.swift */,
 				540C937A2BD36CCF009AE904 /* GoogleSignInManager.swift */,
 				540C93932BD508C3009AE904 /* TaskExtension.swift */,
+				542C0A302CA9050F0017BF4A /* APIKeyManager.swift */,
 				540C93802BD41C86009AE904 /* Storage.swift */,
 				540C93862BD5031A009AE904 /* Tab.swift */,
 				540C93AD2BD8C092009AE904 /* GitHubAPIClient.swift */,
@@ -602,6 +605,7 @@
 		54F7377F2B259701004A4975 = {
 			isa = PBXGroup;
 			children = (
+				542C0A2E2CA904040017BF4A /* Config.xcconfig */,
 				543340EF2B3DD725002C302A /* README.md */,
 				54E3931E2B25A8E20002D4EB /* .gitignore */,
 				54F7378A2B259702004A4975 /* JobShift */,
@@ -626,7 +630,6 @@
 				543340EE2B3D83B7002C302A /* JobShift.entitlements */,
 				54E393232B25AD8C0002D4EB /* Info.plist */,
 				54F7378B2B259702004A4975 /* JobShiftApp.swift */,
-				54397BE12C2C4E6C004FD448 /* Env.swift */,
 				540C93752BD3515D009AE904 /* Lib */,
 				540C936D2BD29958009AE904 /* Views */,
 				540C93702BD2B39C009AE904 /* Models */,
@@ -839,6 +842,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54F737952B259703004A4975 /* Preview Assets.xcassets in Resources */,
+				542C0A2F2CA904100017BF4A /* Config.xcconfig in Resources */,
 				54E3931F2B25A8E20002D4EB /* .gitignore in Resources */,
 				54F737922B259703004A4975 /* Assets.xcassets in Resources */,
 				546D43EA2B7E00C50027D044 /* shapes.riv in Resources */,
@@ -926,9 +930,9 @@
 				5465E5C22BDE93C100626AAB /* JobAddView.swift in Sources */,
 				540EE04F2CA159E200161080 /* SalaryContentView.swift in Sources */,
 				5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */,
-				54397BE22C2C4E6C004FD448 /* Env.swift in Sources */,
 				540C93AE2BD8C092009AE904 /* GitHubAPIClient.swift in Sources */,
 				540DA3432C076031008A42E7 /* PaymentDayRowView.swift in Sources */,
+				542C0A312CA9050F0017BF4A /* APIKeyManager.swift in Sources */,
 				5442B19B2C83039800699895 /* SuggestEventRowView.swift in Sources */,
 				540C93922BD503ED009AE904 /* SettingView.swift in Sources */,
 				540C93892BD50339009AE904 /* ButtomSheetHelper.swift in Sources */,
