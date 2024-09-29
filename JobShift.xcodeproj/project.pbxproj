@@ -39,7 +39,7 @@
 		542360662BE13574002DDF68 /* BindingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360652BE13574002DDF68 /* BindingExtension.swift */; };
 		542360682BE2004B002DDF68 /* JobEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360672BE2004B002DDF68 /* JobEditView.swift */; };
 		5423606A2BE210D4002DDF68 /* OTJobAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542360692BE210D4002DDF68 /* OTJobAddView.swift */; };
-		5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */; };
+		5423A9322B2D29FB004B88C7 /* JobSchemaOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5423A9312B2D29FB004B88C7 /* JobSchemaOld.swift */; };
 		542C0A272CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A262CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift */; };
 		542C0A292CA8004C0017BF4A /* SalaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */; };
 		542C0A2B2CA8DE880017BF4A /* OTSalaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */; };
@@ -237,7 +237,7 @@
 		542360652BE13574002DDF68 /* BindingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtension.swift; sourceTree = "<group>"; };
 		542360672BE2004B002DDF68 /* JobEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobEditView.swift; sourceTree = "<group>"; };
 		542360692BE210D4002DDF68 /* OTJobAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTJobAddView.swift; sourceTree = "<group>"; };
-		5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaV3.swift; sourceTree = "<group>"; };
+		5423A9312B2D29FB004B88C7 /* JobSchemaOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchemaOld.swift; sourceTree = "<group>"; };
 		542C0A262CA7AE950017BF4A /* SelectableSalaryAddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableSalaryAddSheetView.swift; sourceTree = "<group>"; };
 		542C0A282CA8004C0017BF4A /* SalaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDetailView.swift; sourceTree = "<group>"; };
 		542C0A2A2CA8DE880017BF4A /* OTSalaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSalaryRowView.swift; sourceTree = "<group>"; };
@@ -548,7 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				540FA4922BDD18B100C32E7E /* JobUtils.swift */,
-				5423A9312B2D29FB004B88C7 /* JobSchemaV3.swift */,
+				5423A9312B2D29FB004B88C7 /* JobSchemaOld.swift */,
 				5465E5B32BDD376F00626AAB /* JobSchemaV4.swift */,
 				5465E5B92BDE62B100626AAB /* JobMigrationPlan.swift */,
 				548BA6E22BE8B3D100933A64 /* JobExtension.swift */,
@@ -900,7 +900,7 @@
 				54397BDE2C2C38F4004FD448 /* WillDisappear.swift in Sources */,
 				548BA6E32BE8B3D100933A64 /* JobExtension.swift in Sources */,
 				547D8F222BDFAC5E00B1AF31 /* SalaryAddSheetView.swift in Sources */,
-				5423A9322B2D29FB004B88C7 /* JobSchemaV3.swift in Sources */,
+				5423A9322B2D29FB004B88C7 /* JobSchemaOld.swift in Sources */,
 				5465E5B42BDD376F00626AAB /* JobSchemaV4.swift in Sources */,
 				54B6BE782BDBE8DB0099A519 /* DeveloperSettingView.swift in Sources */,
 				54E2C7E92BE2397B00D4184F /* OTJobEditView.swift in Sources */,

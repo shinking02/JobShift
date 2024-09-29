@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 enum JobSchemaV4: VersionedSchema {
-    static var versionIdentifier = Schema.Version(2, 0, 0)
+    static var versionIdentifier = Schema.Version(1, 0, 4)
     static var models: [any PersistentModel.Type] {
         [Job.self, OneTimeJob.self]
     }
