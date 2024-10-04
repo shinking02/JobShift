@@ -62,7 +62,7 @@ final class SalaryManager {
             $0.summary == job.name
         }).compactMap { event in
             // Get the wage that started closest to the event's start but not after it
-            let applicableWage = job.wages
+            let applicableWage = job.jobWages
                 .filter { $0.start <= event.start }
                 .sorted { $0.start > $1.start }
                 .first
@@ -182,7 +182,7 @@ final class SalaryManager {
         let jobSalaryData: [JobSalaryData] = jobs.map { job in
             if dateMode == .month {
                 let jobWorkInterval = job.getWorkInterval(year: date.year, month: dateMode == .month ? date.month : nil)
-                let jobStartDate = job.wages.sorted(by: { $0.start < $1.start }).first!.start
+                let jobStartDate = job.jobWages.sorted(by: { $0.start < $1.start }).first!.start
                 if jobStartDate > jobWorkInterval.end {
                     return JobSalaryData(job: job, events: [], forecastSalary: 0, confirmedSalary: 0, isConfirmed: true)
                 }
@@ -205,7 +205,7 @@ final class SalaryManager {
                     let history = job.salary.histories.first { $0.year == date.year && $0.month == month }
                     
                     totalForecastSalary += history != nil ? history!.salary : events.map(\.salary).reduce(0, +)
-                    let jobStartDate = job.wages.sorted(by: { $0.start < $1.start }).first!.start
+                    let jobStartDate = job.jobWages.sorted(by: { $0.start < $1.start }).first!.start
                     if let confirmedSalary = history?.salary {
                         totalConfirmedSalary += confirmedSalary
                     } else if jobStartDate < jobWorkInterval.end {

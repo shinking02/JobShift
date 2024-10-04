@@ -40,13 +40,13 @@ struct JobEditView: View {
                 Section(
                     footer: Text("給与形態は変更できません。")
                 ) {
-                    DatePicker("入社日", selection: $job.wages.first!.start, displayedComponents: [.date])
+                    DatePicker("入社日", selection: $job.jobWages.first!.start, displayedComponents: [.date])
                     Text("給与形態")
                         .badge(job.salaryType.toString())
                 }
                 Section {
                     NavigationLink {
-                        WageHistoryView(wages: $job.wages)
+                        WageHistoryView(wages: $job.jobWages)
                     } label: {
                         Text("基本給")
                     }
