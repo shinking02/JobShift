@@ -33,7 +33,7 @@ enum JobSchemaV4: VersionedSchema {
             isCommuteWage: Bool = false,
             commuteWage: Int = 500,
             breaks: [JobBreak] = [JobBreak(), JobBreak()],
-            jovWages: [JobWage] = [JobWage(start: Date(year: 2_010, month: 4, day: 1))],
+            jobWages: [JobWage] = [JobWage(start: Date(year: 2_010, month: 4, day: 1))],
             salary: JobSalary = JobSalary(),
             eventSummaries: [JobEventSummary] = [],
             displayPaymentDay: Bool = true,
