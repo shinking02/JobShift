@@ -33,7 +33,7 @@ struct SalaryAddSheetView: View {
                     if pickerIsPresented {
                         YearMonthPicker(selectedYear: $year, selectedMonth: $month)
                             .onChange(of: [month, year]) {
-                                if job.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                                if job.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                                     errorMessage = "入社日より前の給料は設定できません。"
                                 } else if salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                                     errorMessage = "この月の給与実績は既に追加されています。"
@@ -54,7 +54,7 @@ struct SalaryAddSheetView: View {
             .navigationTitle("給与実績を追加")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                if job.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                if job.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                     errorMessage = "入社日より前の給料は設定できません。"
                 } else if job.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                     errorMessage = "この月の給与実績は既に追加されています。"

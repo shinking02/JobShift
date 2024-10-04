@@ -41,7 +41,7 @@ struct JobAddView: View {
                 Section(
                     footer: Text("給与形態は追加後に変更することはできません。")
                 ) {
-                    DatePicker("入社日", selection: $job.wages.first!.start, displayedComponents: [.date])
+                    DatePicker("入社日", selection: $job.jobWages.first!.start, displayedComponents: [.date])
                     Picker("給与形態", selection: $job.salaryType) {
                         ForEach(JobSalaryType.allCases, id: \.self) { salaryType in
                             Text(salaryType.toString())
@@ -50,7 +50,7 @@ struct JobAddView: View {
                 }
                 Section {
                     NavigationLink {
-                        WageHistoryView(wages: $job.wages)
+                        WageHistoryView(wages: $job.jobWages)
                     } label: {
                         Text("基本給")
                     }

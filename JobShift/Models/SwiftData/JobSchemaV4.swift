@@ -18,7 +18,7 @@ enum JobSchemaV4: VersionedSchema {
         var isCommuteWage: Bool = false
         var commuteWage: Int = 500
         var breaks: [JobBreak] = [JobBreak(), JobBreak()]
-        var wages: [JobWage] = [JobWage(start: Date(year: 2010, month: 4, day: 1))]
+        var jobWages: [JobWage] = [JobWage(start: Date(year: 2010, month: 4, day: 1))]
         var salary: JobSalary = JobSalary()
         var eventSummaries: [JobEventSummary] = []
         var displayPaymentDay: Bool = true
@@ -33,7 +33,7 @@ enum JobSchemaV4: VersionedSchema {
             isCommuteWage: Bool = false,
             commuteWage: Int = 500,
             breaks: [JobBreak] = [JobBreak(), JobBreak()],
-            wages: [JobWage] = [JobWage(start: Date(year: 2_010, month: 4, day: 1))],
+            jovWages: [JobWage] = [JobWage(start: Date(year: 2_010, month: 4, day: 1))],
             salary: JobSalary = JobSalary(),
             eventSummaries: [JobEventSummary] = [],
             displayPaymentDay: Bool = true,
@@ -47,7 +47,7 @@ enum JobSchemaV4: VersionedSchema {
             self.isCommuteWage = isCommuteWage
             self.commuteWage = commuteWage
             self.breaks = breaks
-            self.wages = wages
+            self.jobWages = jobWages
             self.salary = salary
             self.eventSummaries = eventSummaries
             self.displayPaymentDay = displayPaymentDay

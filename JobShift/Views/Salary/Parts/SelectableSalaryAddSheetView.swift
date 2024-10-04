@@ -25,7 +25,7 @@ struct SelectableSalaryAddSheetView: View {
                         }
                     }
                     .onChange(of: selectedJob) {
-                        if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                        if selectedJob.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                             errorMessage = "入社日より前の給料は設定できません。"
                         } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                             errorMessage = "この月の給与実績は既に追加されています。"
@@ -52,7 +52,7 @@ struct SelectableSalaryAddSheetView: View {
                     if pickerIsPresented {
                         YearMonthPicker(selectedYear: $year, selectedMonth: $month)
                             .onChange(of: [month, year]) {
-                                if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+                                if selectedJob.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                                     errorMessage = "入社日より前の給料は設定できません。"
                                 } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                                     errorMessage = "この月の給与実績は既に追加されています。"
@@ -104,7 +104,7 @@ struct SelectableSalaryAddSheetView: View {
             if let target = target {
                 selectedJob = target
             }
-            if selectedJob.wages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
+            if selectedJob.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                 errorMessage = "入社日より前の給料は設定できません。"
             } else if selectedJob.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
                 errorMessage = "この月の給与実績は既に追加されています。"

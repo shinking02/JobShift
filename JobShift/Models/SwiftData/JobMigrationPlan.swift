@@ -56,7 +56,7 @@ enum JobMigrationPlan: SchemaMigrationPlan {
                         breakMinutes: v3Job.break2.breakMinutes
                     )
                 ]
-                v4Job.wages = v3Job.wages.map { wage in
+                v4Job.jobWages = v3Job.wages.map { wage in
                     return JobWage(
                         start: wage.start,
                         wage: v3Job.isDailyWage ? wage.dailyWage : wage.hourlyWage
