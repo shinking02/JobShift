@@ -29,7 +29,7 @@ final class SwiftDataSource {
 
     func fetchJobs() -> [Job] {
         do {
-            return try modelContext.fetch(FetchDescriptor<Job>(sortBy: [.init(\.recentlySalary, order: .reverse)]))
+            return try modelContext.fetch(FetchDescriptor<Job>())
         } catch {
             fatalError(error.localizedDescription)
         }

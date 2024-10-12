@@ -17,28 +17,10 @@ struct JobShiftApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            LaunchScreen()
-                .onOpenURL { url in
-                    GIDSignIn.sharedInstance.handle(url)
-                }
-                .onAppear {
-                    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-                        withAnimation {
-                            if let user = user {
-                                appState.user.email = user.profile?.email ?? ""
-                                appState.user.imageUrl = user.profile?.imageURL(withDimension: 50)?.absoluteString ?? ""
-                                appState.user.name = user.profile?.name ?? ""
-                                appState.isLoggedIn = true
-                                CalendarManager.shared.setUser(user)
-                            } else {
-                                appState.isLoggedIn = false
-                            }
-                            appState.loginRestored = true
-                        }
-                        
-                    }
-                }
-                .modelContainer(container)
+            List {
+                Text("Job Schema Test")
+            }
+            .modelContainer(container)  
         }
     }
 }
