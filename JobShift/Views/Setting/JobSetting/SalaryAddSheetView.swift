@@ -73,7 +73,7 @@ struct SalaryAddSheetView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         salary.histories.append(
-                            JobSalary.History(
+                            JobSalaryHistory(
                                 salary: Int(salaryString) ?? 0,
                                 year: year,
                                 month: month

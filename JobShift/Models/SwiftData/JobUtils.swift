@@ -4,7 +4,7 @@ import SwiftUI
 typealias Job = JobSchemaV4.Job
 typealias OneTimeJob = JobSchemaV4.OneTimeJob
 
-enum JobColor: Codable, CaseIterable {
+enum JobColor: String, Codable, CaseIterable {
     case red
     case orange
     case yellow
@@ -14,7 +14,9 @@ enum JobColor: Codable, CaseIterable {
     case brown
     case pink
     case mint
-    
+}
+
+extension JobColor {
     func toColor() -> Color {
         switch self {
         case .red:
@@ -88,30 +90,32 @@ struct JobWage: Codable, Identifiable, Equatable {
     var wage: Int = 1_200
 }
 
-struct JobSalary: Codable {
-    struct History: Codable, Identifiable {
-        var id: UUID = UUID()
-        var salary: Int
-        var year: Int
-        var month: Int
-    }
-    enum PaymentType: Codable, CaseIterable, Equatable {
-        case sameMonth
-        case nextMonth
-        
-        func toString() -> String {
-            switch self {
-            case .sameMonth:
-                "当月"
-            case .nextMonth:
-                "翌月"
-            }
+struct JobSalaryHistory: Codable, Identifiable {
+    var id: UUID = UUID()
+    var salary: Int
+    var year: Int
+    var month: Int
+}
+
+enum SalaryPaymentType: Codable, CaseIterable, Equatable {
+    case sameMonth
+    case nextMonth
+    
+    func toString() -> String {
+        switch self {
+        case .sameMonth:
+            "当月"
+        case .nextMonth:
+            "翌月"
         }
     }
+}
+
+struct JobSalary: Codable {
     var cutOffDay: Int = 10
     var paymentDay: Int = 25
-    var paymentType: PaymentType = .nextMonth
-    var histories: [History] = []
+    var paymentType: SalaryPaymentType = .nextMonth
+    var histories: [JobSalaryHistory] = []
 }
 
 struct JobEventSummary: Codable {

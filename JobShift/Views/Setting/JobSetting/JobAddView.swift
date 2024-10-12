@@ -128,7 +128,7 @@ struct JobAddView: View {
                         }
                     }
                     Picker("支払い月", selection: $job.salary.paymentType) {
-                        ForEach(JobSalary.PaymentType.allCases, id: \.self) { paymentType in
+                        ForEach(SalaryPaymentType.allCases, id: \.self) { paymentType in
                             Text(paymentType.toString())
                         }
                     }

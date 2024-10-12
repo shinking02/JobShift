@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SalaryEditView: View {
-    @Binding var history: JobSalary.History
+    @Binding var history: JobSalaryHistory
     let title: String
     let onDelete: () -> Void
     @Environment(\.dismiss) private var dismiss
