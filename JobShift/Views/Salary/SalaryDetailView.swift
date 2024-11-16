@@ -25,7 +25,7 @@ struct SalaryDetailView: View {
                         ConfirmChip(isConfirmed: false)
                     }
                     NavigationLink {
-                        SalaryHistoryView(salary: $job.salary)
+                        SalaryHistoryView(salaryHistoriesV2: $job.salaryHistoriesV2)
                             .environment(job)
                         EmptyView()
                     } label: {
