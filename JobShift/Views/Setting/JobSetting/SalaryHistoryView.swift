@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct SalaryHistoryView: View {
-    @Binding var salary: JobSalary
+    @Binding var salaryHistoriesV2: [JobSalaryHistory]
     @State private var expanded: Set<Int> = []
     @State private var salaryAddSheetPresented = false
     
     var body: some View {
         NavigationStack {
-            List(Set(salary.histories.map { $0.year }).sorted(by: >), id: \.self) { year in
+            List(Set(salaryHistoriesV2.map { $0.year }).sorted(by: >), id: \.self) { year in
                 DisclosureGroup(
                     String(year) + "年",
                     isExpanded: Binding<Bool>(
@@ -21,13 +21,13 @@ struct SalaryHistoryView: View {
                         }
                     )
                 ) {
-                    ForEach($salary.histories.filter { $0.year == year }.sorted { $l, $r in l.month < r.month }) { $history in
+                    ForEach($salaryHistoriesV2.filter { $0.year == year }.sorted { $l, $r in l.month < r.month }) { $history in
                         NavigationLink {
                             SalaryEditView(
                                 history: $history,
                                 title: String(history.year) + "年" + String(history.month) + "月",
                                 onDelete: {
-                                    salary.histories.removeAll { $0.id == history.id }
+                                    salaryHistoriesV2.removeAll { $0.id == history.id }
                                 }
                             )
                         } label: {
@@ -44,7 +44,7 @@ struct SalaryHistoryView: View {
             .navigationTitle("給与実績")
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
-                if salary.histories.isEmpty {
+                if salaryHistoriesV2.isEmpty {
                     ContentUnavailableView {
                         Label("給与実績がありません", systemImage: "clock.badge.exclamationmark")
                     }
@@ -63,7 +63,7 @@ struct SalaryHistoryView: View {
                 isPresented: $salaryAddSheetPresented,
                 onDismiss: { controllDisclosureGroup() },
                 content: {
-                    SalaryAddSheetView(salary: $salary)
+                    SalaryAddSheetView(salaryHistoriesV2: $salaryHistoriesV2)
                         .presentationDetents([.medium])
                 }
             )
@@ -73,7 +73,7 @@ struct SalaryHistoryView: View {
         }
     }
     private func controllDisclosureGroup() {
-        let maxYear = salary.histories.map { $0.year }.max()
+        let maxYear = salaryHistoriesV2.map { $0.year }.max()
         if let year = maxYear {
             expanded.insert(year)
         }

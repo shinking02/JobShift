@@ -55,7 +55,7 @@ struct JobAddView: View {
                         Text("基本給")
                     }
                     NavigationLink {
-                        SalaryHistoryView(salary: $job.salary)
+                        SalaryHistoryView(salaryHistoriesV2: $job.salaryHistoriesV2)
                             .environment(job)
                     } label: {
                         Text("給与実績")
@@ -111,28 +111,28 @@ struct JobAddView: View {
                         HStack {
                             Text("給料締め日")
                             Spacer()
-                            Text("\(job.salary.cutOffDay)日")
+                            Text("\(job.salaryCutOffDay)日")
                                 .foregroundColor(.secondary)
                         }
                     }
                     .tint(.primary)
                     if cutOffDayPickerPresented {
-                        Picker("", selection: $job.salary.cutOffDay) {
+                        Picker("", selection: $job.salaryCutOffDay) {
                             ForEach(1...31, id: \.self) { day in
                                 Text("\(day)日")
                             }
                         }
                         .pickerStyle(.wheel)
-                        .onChange(of: job.salary.cutOffDay) {
+                        .onChange(of: job.salaryCutOffDay) {
                             updateSalaryDay()
                         }
                     }
-                    Picker("支払い月", selection: $job.salary.paymentType) {
-                        ForEach(JobSalary.PaymentType.allCases, id: \.self) { paymentType in
+                    Picker("支払い月", selection: $job.salaryPaymentType) {
+                        ForEach(SalaryPaymentType.allCases, id: \.self) { paymentType in
                             Text(paymentType.toString())
                         }
                     }
-                    .onChange(of: job.salary.paymentType) {
+                    .onChange(of: job.salaryPaymentType) {
                         updateSalaryDay()
                     }
                     Button {
@@ -143,14 +143,14 @@ struct JobAddView: View {
                         HStack {
                             Text("給料日")
                             Spacer()
-                            Text("\(job.salary.paymentDay)日")
+                            Text("\(job.salaryPaymentDay)日")
                                 .foregroundColor(.secondary)
                         }
                     }
                     .tint(.primary)
                     if paymentDayPickerPresented {
-                        Picker("", selection: $job.salary.paymentDay) {
-                            ForEach((job.salary.paymentType == .nextMonth ? 1 : job.salary.cutOffDay)...31, id: \.self) { day in
+                        Picker("", selection: $job.salaryPaymentDay) {
+                            ForEach((job.salaryPaymentType == .nextMonth ? 1 : job.salaryCutOffDay)...31, id: \.self) { day in
                                 Text("\(day)日")
                             }
                         }
@@ -191,8 +191,8 @@ struct JobAddView: View {
         }
     }
     private func updateSalaryDay() {
-        if job.salary.paymentType == .sameMonth && job.salary.cutOffDay > job.salary.paymentDay {
-            job.salary.paymentDay = job.salary.cutOffDay
+        if job.salaryPaymentType == .sameMonth && job.salaryCutOffDay > job.salaryPaymentDay {
+            job.salaryPaymentDay = job.salaryCutOffDay
         }
     }
 }
