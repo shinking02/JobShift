@@ -19,7 +19,10 @@ enum JobSchemaV4: VersionedSchema {
         var commuteWage: Int = 500
         var breaks: [JobBreak] = [JobBreak(), JobBreak()]
         var jobWages: [JobWage] = [JobWage(start: Date(year: 2010, month: 4, day: 1))]
-        var salary: JobSalary = JobSalary()
+        var salaryCutOffDay: Int = 10
+        var salaryPaymentDay: Int = 25
+        var salaryPaymentType: SalaryPaymentType = SalaryPaymentType.nextMonth
+        var salaryHistoriesV2: [JobSalaryHistory] = []
         var eventSummaries: [JobEventSummary] = []
         var displayPaymentDay: Bool = true
         var order: Int = 0
@@ -34,7 +37,10 @@ enum JobSchemaV4: VersionedSchema {
             commuteWage: Int = 500,
             breaks: [JobBreak] = [JobBreak(), JobBreak()],
             jobWages: [JobWage] = [JobWage(start: Date(year: 2_010, month: 4, day: 1))],
-            salary: JobSalary = JobSalary(),
+            salaryCutOffDay: Int = 10,
+            salaryPaymentDay: Int = 25,
+            salaryPaymentType: SalaryPaymentType = SalaryPaymentType.nextMonth,
+            salaryHistoriesV2: [JobSalaryHistory] = [],
             eventSummaries: [JobEventSummary] = [],
             displayPaymentDay: Bool = true,
             order: Int = 0
@@ -48,7 +54,10 @@ enum JobSchemaV4: VersionedSchema {
             self.commuteWage = commuteWage
             self.breaks = breaks
             self.jobWages = jobWages
-            self.salary = salary
+            self.salaryCutOffDay = salaryCutOffDay
+            self.salaryPaymentDay = salaryPaymentDay
+            self.salaryPaymentType = salaryPaymentType
+            self.salaryHistoriesV2 = salaryHistoriesV2
             self.eventSummaries = eventSummaries
             self.displayPaymentDay = displayPaymentDay
             self.order = order

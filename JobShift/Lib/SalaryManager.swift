@@ -188,7 +188,7 @@ final class SalaryManager {
                 }
                 
                 let events: [JobEvent] = getJobEvents(interval: jobWorkInterval, job: job)
-                let history = job.salary.histories.first { $0.year == date.year && $0.month == date.month }
+                let history = job.salaryHistoriesV2.first { $0.year == date.year && $0.month == date.month }
                 let isConfirmed = history != nil
                 let confirmedSalary = max((history?.salary ?? 0) - (job.isCommuteWage ? job.commuteWage * events.count : 0), 0)
                 let forecastSalary = events.map(\.salary).reduce(0, +)
@@ -202,7 +202,7 @@ final class SalaryManager {
                 for month in 1...12 {
                     let jobWorkInterval = job.getWorkInterval(year: date.year, month: month)
                     let events: [JobEvent] = getJobEvents(interval: jobWorkInterval, job: job)
-                    let history = job.salary.histories.first { $0.year == date.year && $0.month == month }
+                    let history = job.salaryHistoriesV2.first { $0.year == date.year && $0.month == month }
                     
                     totalForecastSalary += history != nil ? history!.salary : events.map(\.salary).reduce(0, +)
                     let jobStartDate = job.jobWages.sorted(by: { $0.start < $1.start }).first!.start

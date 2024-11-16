@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SalaryAddSheetView: View {
-    @Binding var salary: JobSalary
+    @Binding var salaryHistoriesV2: [JobSalaryHistory]
     @State var year = Date().year
     @State var month = Date().month
     @State private var salaryString = ""
@@ -35,7 +35,7 @@ struct SalaryAddSheetView: View {
                             .onChange(of: [month, year]) {
                                 if job.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                                     errorMessage = "入社日より前の給料は設定できません。"
-                                } else if salary.histories.contains(where: { $0.year == year && $0.month == month }) {
+                                } else if salaryHistoriesV2.contains(where: { $0.year == year && $0.month == month }) {
                                     errorMessage = "この月の給与実績は既に追加されています。"
                                 } else {
                                     errorMessage = ""
@@ -56,7 +56,7 @@ struct SalaryAddSheetView: View {
             .onAppear {
                 if job.jobWages.sorted(by: { $0.start < $1.start }).first!.start > workInterval.end {
                     errorMessage = "入社日より前の給料は設定できません。"
-                } else if job.salary.histories.contains(where: { $0.year == year && $0.month == month }) {
+                } else if job.salaryHistoriesV2.contains(where: { $0.year == year && $0.month == month }) {
                     errorMessage = "この月の給与実績は既に追加されています。"
                 } else {
                     errorMessage = ""
@@ -72,7 +72,7 @@ struct SalaryAddSheetView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        salary.histories.append(
+                        salaryHistoriesV2.append(
                             JobSalaryHistory(
                                 salary: Int(salaryString) ?? 0,
                                 year: year,

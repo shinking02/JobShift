@@ -111,13 +111,6 @@ enum SalaryPaymentType: Codable, CaseIterable, Equatable {
     }
 }
 
-struct JobSalary: Codable {
-    var cutOffDay: Int = 10
-    var paymentDay: Int = 25
-    var paymentType: SalaryPaymentType = .nextMonth
-    var histories: [JobSalaryHistory] = []
-}
-
 struct JobEventSummary: Codable {
     var eventId: String
     var summary: String
